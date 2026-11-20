@@ -1,45 +1,36 @@
 # Lunex AFK — UI Prototype v0.1 (фактическая реализация)
 
-Статус: локальный клиентский прототип Godot 4.7.2. **Онлайн-режим не готов.** Сервер не реализован. Данные демо локальные.
+Статус (аудит 2026-11-20): Godot 4.7.2 клиент на `main`.  
+**Онлайн:** guest → CORE-01 (`ApiClient`) для summon / AFK / shop / mail / battle claim; иначе DEMO.  
+**Не прод:** нет живой Lunex PG БД, HTTPS CDN, бинарного арта. Полный email-auth не реализован.
 
 ## Что работает
 
-- Bootstrap: Splash → Version → AssetBootstrap → Auth (гость / локальный email без хранения пароля) → WorldSelect → GameShell
-- GameShell: TopBar, BottomNavigation (Карта / Герои / Главная / Битва), ScreenRouter, ModalManager, NotificationManager, UIStateManager, AssetLoader, ThemeManager
-- Главный хаб: вертикальный 2.5D-скролл, параллакс, 8 зданий, быстрые кнопки
-- Карта мира → глава → компактная карточка этапа → подготовка
-- Герои: коллекция, фильтры/сортировка, карточка, автоэкипировка, менеджер отрядов (5 слотов, пресеты)
-- Битва: карта PvE/PvP входов → единая подготовка → локальный автобой 5v5 → результат
+- Bootstrap: Splash → Version → AssetBootstrap → Auth (гость → API / локальный email DEMO) → WorldSelect → GameShell
+- GameShell: TopBar, BottomNavigation (**4 вкладки:** Карта / Герои / Главная / Битва), ScreenRouter, ModalManager, NotificationManager, UIStateManager, AssetLoader, ThemeManager, **ApiClient**
+- Главный хаб: вертикальный 2.5D-скролл, параллакс, здания, быстрые кнопки
+- Карта мира → глава → карточка этапа → подготовка
+- Герои: коллекция, фильтры, карточка, автоэкипировка, отряд (локальный DemoData; server collection ещё не sync)
+- Битва: карта входов → подготовка → **локальный** автобой 5v5 → результат; при online победе — серверный start/claim (целевой H6: server timeline → playback — ещё не внедрён)
+- Контент: пакеты `0.1.0`…`0.9.0`, OTA hot-reload (dev CDN Studio)
 - Графика: пресеты Низкая / Средняя / Высокая / Ультра
-- Звук: музыка / эффекты (слайдеры; аудиофайлы ещё не подключены)
-- Back: модалка → оверлей → вкладка → подтверждение выхода
-- Все экраны реестра UI-14 доступны навигацией (часть — оформленные демо)
+- Back: модалка → оверлей → вкладка → выход
 
-## Демонстрационное (не сервер)
+## DEMO / PARTIAL
 
-Призыв, AFK-сбор, задания, магазин/VIP/пропуск, гильдия, соцфункции, PvP, рейтинги, почта, награды — UI с локальными данными и явной пометкой «Демо».
+| Область | Режим |
+|---|---|
+| Summon / AFK / shop / mail | ONLINE при guest API, иначе DEMO |
+| Battle rewards online | PARTIAL (desync с локальной симуляцией; H6 в TECH_DEBT) |
+| Heroes / campaign sync | DEMO локально |
+| Guild / PvE modes / quests / events / VIP / BP / social / PvP | DEMO или stub |
 
-## Контент-пакеты + Admin Studio
+## Не считать готовым
 
-Клиент читает только `content/packages/{version}/` (указатель `active.json`) через `ContentPackageLoader` → `DemoData` / экраны. Редактирование — `admin-studio/` (React/TS), см. `docs/ADMIN_STUDIO.md`. Прогресс игрока в пакет не пишется.
+- Production PostgreSQL / изолированный деплой Lunex
+- OTA-2 HTTPS CDN
+- ART-05 бинарные ассеты
+- Email register/login/refresh
+- Атомарные TX economy end-to-end на PG
 
-Проверка: `tools/validate_content_package.sh`.
-
-## Запуск
-
-```bash
-godot --path .          # редактор / игра
-godot --headless --path . --quit-after 300
-```
-
-Smoke: создать `user://run_smoke.flag` и запустить headless.
-
-## Android
-
-См. `docs/ANDROID_BUILD.md`. Debug APK собирается при наличии export templates 4.7.2 и Android SDK.
-
-## Ограничения
-
-- Нет фиктивного сервера и платёжных интеграций
-- Не публиковать на домен без отдельного разрешения
-- Не коммитить keystore / секреты
+См. `docs/STATUS.md`, `docs/AUDIT_REPORT.md`.

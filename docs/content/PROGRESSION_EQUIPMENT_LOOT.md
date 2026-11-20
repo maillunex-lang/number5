@@ -1,6 +1,10 @@
 # Lunex AFK: Башкортостан: Разлом эпох
 # RPG-LOOT-01 · Развитие героев, экипировка, дроп и связь с шестью главами
 
+> **Статус внедрения (аудит 2026-11-20):** Канон утверждён · данные в 0.9.0 · UI DEMO thin · inventory API NOT_STARTED.  
+> Сюжетные числа, ID, награды и баланс в этом файле — **утверждённый канон**; не менять без согласования.  
+> Источник факта реализации: `docs/STATUS.md`, `docs/CONTENT_IMPLEMENTATION.md`, пакет `0.9.0`.
+
 **Формат:** полное проектное ТЗ для Cursor / Godot 4.7.2 / Go + PostgreSQL / Lunex Admin Studio  
 **Статус:** предложение на утверждение и реализацию, **не считать уже внедрённым**.  
 **Исходные документы:** `LUNEX_AFK_BASHKORTOSTAN_RAZLOM_EPOH_6_CHAPTERS_CURSOR.md`, `LUNEX_AFK_RAZLOM_EPOH_FACTIONS_45_HEROES_CURSOR.md`, `LUNEX_AFK_RAZLOM_EPOH_BESTIARY_6_CHAPTERS_CURSOR.md`, `LUNEX_AFK_RAZLOM_EPOH_MONETIZATION_VIP_SUBSCRIPTIONS_CURSOR.md`.  
