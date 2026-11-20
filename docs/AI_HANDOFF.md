@@ -1,13 +1,13 @@
-# Передача · mail ClaimAll atomic (+ пока H6 device)
+# Передача · AUTH-04 prep (+ H6 device parallel)
 
-Срез 20 ноября 2026. Ветка: `cursor/mail-claim-all-atomic-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/auth-04-prep-d5fe`.
 
-**Сейчас:** владелец тестирует H6 на устройстве (`docs/H6_DEVICE_VERIFY.md`).
+**Параллельно:** владелец тестирует H6 на устройстве (`docs/H6_DEVICE_VERIFY.md`).
 
-**Сделано параллельно:** `mail.ClaimAll` — ledger затем SaveMail в одной `RunAtomic` TX (больше нет «claimed без награды»).
+**Сделано:** AUTH-04 prep — credentials на Memory (CI) + Postgres; `POST /auth/logout`; client `link_guest` → me/sync/save; settings «Привязать»; auth API tests; `docs/AUTH_04_DEVICE_VERIFY.md`; `tools/auth_04_verify_api.sh`.
 
 ## Next
 
-1. Ждать **H6 device OK** → закрыть пункт в STATUS.
-2. **AUTH-04** — email register / bind guest / session expiry (код в `server/internal/modules/auth`, UI auth scene); device verify на Android.
+1. Ждать **H6 device OK** → закрыть H6 в STATUS.
+2. После merge AUTH-04 + новый APK → **AUTH-04 device OK** по чеклисту.
 3. ART-05; visual wave3.

@@ -35,6 +35,7 @@ func (s *Store) RegisterAccount(email, password string) (domain.Account, domain.
 		return domain.Account{}, domain.Session{}, err
 	}
 	acc.IsGuest = false
+	acc.Email = email
 	return acc, sess, nil
 }
 
@@ -42,7 +43,8 @@ func (s *Store) LoginAccount(email, password string) (domain.Account, domain.Ses
 	var id, hash, status string
 	var created time.Time
 	ctx := context.Background()
-	err := s.pool.QueryRow(ctx, `SELECT id::text,password_hash,status,created_at FROM accounts WHERE lower(email)=lower($1) AND is_guest=false`, strings.TrimSpace(email)).Scan(&id, &hash, &status, &created)
+	norm := strings.ToLower(strings.TrimSpace(email))
+	err := s.pool.QueryRow(ctx, `SELECT id::text,password_hash,status,created_at FROM accounts WHERE lower(email)=lower($1) AND is_guest=false`, norm).Scan(&id, &hash, &status, &created)
 	if err != nil || status != "active" || bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)) != nil {
 		return domain.Account{}, domain.Session{}, store.ErrUnauthorized
 	}
@@ -52,7 +54,13 @@ func (s *Store) LoginAccount(email, password string) (domain.Account, domain.Ses
 	if err != nil {
 		return domain.Account{}, domain.Session{}, err
 	}
-	return domain.Account{ID: domain.AccountID(id), Status: status, CreatedAt: created, IsGuest: false}, domain.Session{Token: token, AccountID: domain.AccountID(id), ExpiresAt: exp}, nil
+	return domain.Account{ID: domain.AccountID(id), Email: norm, Status: status, CreatedAt: created, IsGuest: false}, domain.Session{Token: token, AccountID: domain.AccountID(id), ExpiresAt: exp}, nil
+}
+
+func (s *Store) RevokeSession(token string) error {
+	_, err := s.pool.Exec(context.Background(),
+		`UPDATE sessions SET revoked_at=now() WHERE refresh_hash=$1 AND revoked_at IS NULL`, token)
+	return err
 }
 
 func (s *Store) LinkGuest(accountID domain.AccountID, email, password string) error {

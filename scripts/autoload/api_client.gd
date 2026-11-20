@@ -195,7 +195,25 @@ func credentials_login(email: String, password: String, register_new: bool = fal
 
 func link_guest(email: String, password: String) -> bool:
 	var res := await _authed("POST", "/api/v1/auth/link", {"email": email, "password": password})
-	return res.get("ok", false)
+	if not res.get("ok", false):
+		return false
+	# AUTH-04 / UI-SYNC-HEROES: after bind, refresh identity + server player state.
+	var me := await _authed("GET", "/api/v1/auth/me")
+	if not me.get("ok", false):
+		return false
+	_apply_account_identity(me.get("data", {}))
+	player_loaded = await sync_player()
+	if not player_loaded:
+		return false
+	_save_session()
+	return true
+
+## Revoke server session then clear local state (settings logout).
+func logout_remote() -> void:
+	if access_token != "":
+		await _authed("POST", "/api/v1/auth/logout", {})
+	clear_session()
+	forget_saved_session()
 
 func _apply_account_identity(data: Dictionary) -> void:
 	AppState.is_guest = bool(data.get("is_guest", true))

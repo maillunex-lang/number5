@@ -11,6 +11,7 @@
 | UI visual-edit | Theme + компоненты; HubBuilding/BattleUnit/HeroCard/MailItem/ShopOfferCard; DemoScreenBuilder на GamePanel; preview F6 | Formation/settings/map nodes ещё частично code; см. `docs/UI_VISUAL_AUDIT.md` |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |
+| AUTH-04 | Memory+PG register/login/link; logout revoke; link_guest sync heroes; settings bind; Go tests + device checklist | Device verify: `docs/AUTH_04_DEVICE_VERIFY.md` — ждём владельца |
 | Инфраструктура | Nginx, Go API в prod и отдельный PostgreSQL. Health подтверждал соединение с БД | Чистый запуск и перезапуск проверены на отдельной PostgreSQL 16 |
 | Контент | 27 файлов из манифеста совпали с копией на VPS. Проверены HTTPS CDN, загрузка диалогов и активация OTA-кэша | Новый код, сцены и встроенные пиктограммы распространяются в APK |
 

@@ -7,7 +7,7 @@
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
 | P1 | H6 — device verify | Чеклист `docs/H6_DEVICE_VERIFY.md` на свежем APK; API-контракт уже зелёный. Закрыть после «H6 device OK» от владельца |
-| P1 | AUTH-04 и UI-SYNC-HEROES | На Android проверить email-регистрацию, привязку гостя, истечение сессии, смену аккаунта и восстановление после обрыва сети |
+| P1 | AUTH-04 и UI-SYNC-HEROES | Код: Memory+PG register/login/link/logout, link_guest sync, settings bind; API tests + `docs/AUTH_04_DEVICE_VERIFY.md`. Закрыть после «AUTH-04 device OK» |
 | P1 | ART-05 | Проверить реальные портреты, атласы и анимации героев в боевой сцене на целевом устройстве |
 
 ## Закрыто в этом срезе
