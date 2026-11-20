@@ -24,6 +24,23 @@ var shell: Dictionary = {}
 var strings: Dictionary = {}
 var motion: Dictionary = {}
 var assets: Dictionary = {}
+var enemies_pack: Dictionary = {}
+var economy: Dictionary = {}
+var progression: Dictionary = {}
+var equipment: Dictionary = {}
+var loot_tables: Dictionary = {}
+var gacha: Dictionary = {}
+var liveops: Dictionary = {}
+var pve_modes: Dictionary = {}
+var guilds: Dictionary = {}
+var mail_pack: Dictionary = {}
+var login_calendars: Dictionary = {}
+var profile_pack: Dictionary = {}
+var achievements_pack: Dictionary = {}
+var daily_stories: Dictionary = {}
+var live_events: Dictionary = {}
+var skills_pack: Dictionary = {}
+var dialogs_pack: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -87,6 +104,23 @@ func _load_docs(base: String) -> void:
 	strings = _read_json("%s/strings.json" % base)
 	motion = _read_json("%s/motion.json" % base)
 	assets = _read_json("%s/assets.json" % base)
+	enemies_pack = _read_json("%s/enemies.json" % base)
+	economy = _read_json("%s/economy.json" % base)
+	progression = _read_json("%s/progression.json" % base)
+	equipment = _read_json("%s/equipment.json" % base)
+	loot_tables = _read_json("%s/loot_tables.json" % base)
+	gacha = _read_json("%s/gacha.json" % base)
+	liveops = _read_json("%s/liveops.json" % base)
+	pve_modes = _read_json("%s/pve_modes.json" % base)
+	guilds = _read_json("%s/guilds.json" % base)
+	mail_pack = _read_json("%s/mail.json" % base)
+	login_calendars = _read_json("%s/login_calendars.json" % base)
+	profile_pack = _read_json("%s/profile.json" % base)
+	achievements_pack = _read_json("%s/achievements.json" % base)
+	daily_stories = _read_json("%s/daily_stories.json" % base)
+	live_events = _read_json("%s/live_events.json" % base)
+	skills_pack = _read_json("%s/skills.json" % base)
+	dialogs_pack = _read_json("%s/dialogs.json" % base)
 
 func reload() -> bool:
 	return load_active_package()
@@ -148,3 +182,21 @@ func get_shell_tabs() -> Array:
 func get_asset_binding(key: String) -> String:
 	var bindings: Dictionary = assets.get("bindings", {})
 	return str(bindings.get(key, ""))
+
+func get_asset_item(asset_id: String) -> Dictionary:
+	if asset_id == "":
+		return {}
+	for it in assets.get("items", []):
+		if str(it.get("id", "")) == asset_id:
+			return it
+	return {}
+
+func resolve_asset(binding_key: String) -> Dictionary:
+	## binding key → item dict (may be empty / placeholder).
+	return get_asset_item(get_asset_binding(binding_key))
+
+func hero_art(hero_id: String) -> Dictionary:
+	for h in heroes_pack.get("heroes", []):
+		if str(h.get("id", "")) == hero_id:
+			return h.get("art", {})
+	return {}

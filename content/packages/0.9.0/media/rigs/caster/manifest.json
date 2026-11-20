@@ -1,0 +1,12 @@
+{
+  "rig_id": "RIG-CASTER",
+  "name": "Заклинатель",
+  "role": "caster",
+  "assets": {
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "skin_a": "skin_a.webp",
+    "skin_b": "skin_b.webp"
+  },
+  "status": "placeholder"
+}

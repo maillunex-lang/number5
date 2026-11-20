@@ -1,0 +1,33 @@
+{
+  "rig_id": "RIG-BEAST",
+  "pivot": "feet",
+  "facing": "left",
+  "clips": [
+    {
+      "id": "idle",
+      "frames": 1,
+      "duration_hint_sec": 1.5
+    },
+    {
+      "id": "attack",
+      "frames": 1,
+      "duration_hint_sec": 0.65
+    },
+    {
+      "id": "hit",
+      "frames": 1,
+      "duration_hint_sec": 0.28
+    },
+    {
+      "id": "death",
+      "frames": 1,
+      "duration_hint_sec": 0.9
+    }
+  ],
+  "skins": [
+    "skin_a",
+    "skin_b"
+  ],
+  "status": "planned",
+  "note": "C6 · 1 atlas + shader tint; no duplicate atlases per skin"
+}

@@ -1,4 +1,6 @@
-# Реестр ассетов — Lunex AFK UI Prototype v0.1
+# Реестр ассетов — Lunex AFK
+
+## UI / оболочка (вшито в клиент)
 
 | ID | Путь / источник | Тип | Лицензия | Статус |
 |---|---|---|---|---|
@@ -8,9 +10,24 @@
 | ICO-01 | `assets/ui/icon.svg` | Иконка приложения | Собственная (прототип) | Временная |
 | TEX-01 | `AssetLoader.make_gradient_texture` | Процедурный фон | Собственная | Временная |
 | TEX-02 | `AssetLoader.make_radial_glow` | Процедурное свечение | Собственная | Временная |
-| VIS-01 | Стилизованные портреты героев (`UIFactory.hero_portrait`) | Placeholder 2.5D | Собственная | Временная |
+| VIS-01 | Стилизованные портреты героев (`UIFactory.hero_portrait`) | Placeholder 2.5D | Собственная | Временная · слоты в C6 |
 | VIS-02 | Панели/рамки `UIFactory.panel_style` | UI chrome | Собственная | База UI Kit |
 | REF-01 | Идеи godot-ui-template (код не импортирован) | Референс | CC BY 4.0 | Атрибуция в THIRD_PARTY_LICENSES.md |
 
-Все временные ресурсы помечены для замены контент-пакетами после этапа ART.
+## Игровой контент (C6 · пакет `0.9.0`)
+
+Источник истины: `content/packages/0.9.0/assets.json` (+ `media/**/*.json` descriptors).
+
+| Категория | Кол-во слотов | Статус |
+|---|---:|---|
+| Герои H01–H45 (portrait/atlas/animations/ultimate_vfx) | 180 | placeholder / planned |
+| Риги RIG-* (atlas + animations + skin_a/b) | 6×4 | placeholder |
+| Портреты боссов B* | 18 | placeholder |
+| Арт-пакеты глав (map + 6×bg/mid/fg + 3 arenas) | 6 пакетов | placeholder |
+| Общие VFX / SFX | 12 + 12 | placeholder |
+
+Bindings: `hero.H*.portrait`, `rig.RIG-*.atlas`, `enemy.E*|B*.visual`, `chapter.CHxx.map`, …  
+UI: маршрут `ART-01` · карточка героя → вкладка «Арт».  
+Бинарь (webp/ogg/атласы) подставляет **ART-05** без смены ID.
+
 Чужие защищённые игровые изображения не используются.

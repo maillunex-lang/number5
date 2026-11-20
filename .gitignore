@@ -41,4 +41,8 @@ admin-studio/node_modules/
 admin-studio/dist/
 *.log
 content/packages/publish_history.json
-content/packages/*/media/
+# Binary art under packages (ART-05); JSON descriptors in media/ are tracked
+content/packages/*/media/**/*.{webp,png,jpg,jpeg,ogg,wav,glb,gltf,bin}
+
+__pycache__/
+*.pyc

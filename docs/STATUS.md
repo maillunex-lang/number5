@@ -1,28 +1,27 @@
-# Lunex AFK — текущий статус репозитория
+# Lunex AFK — статус
 
-Дата: 2026-11-20 · ветка истины: **`main`** @ `34c99cf`
+Дата: **2026-11-20** · ветка истины: **`main`** · пакет: **`0.9.0`**
 
-## Сейчас есть
+## Есть
 
-- Godot **4.7.2** UI-прототип (локальные демо-данные).
-- Пакеты schema 2: hub / campaign / heroes / battle / features / **theme / shell / strings / motion / assets**.
-- Admin Studio-комбайн: Theme, Shell, Strings, Motion, Assets, Hub Editor 2.0 (9:16), кампания/герои/битва, publish / diff / rollback.
-- **OTA:** Save → Publish → CDN `/cdn` → `ContentUpdateService` → `user://content_cache` без новой APK (`docs/CONTENT_OTA.md`).
-- CI валидации пакета + сборки Studio.
+- Контент **C0–C6** (пакеты `0.2.0`…`0.9.0`): кампания 180, skills/dialogs, арт-реестр, E/P/G/meta.
+- Godot UI Prototype v0.1 + Admin Studio (`/economy`, `/meta`, `/catalog`).
+- OTA hot-reload (dev).
+- **TZ-A** + **CORE-01 memory**: auth, wallet, heroes, campaign, battle, summon, afk, mail, store VIRTUAL_FREE.
+- Клиент `ApiClient` → `127.0.0.1:8080` (иначе офлайн-демо).
+- SQL-каркас: `server/migrations/0001_init.sql`.
 
-## Сейчас нет (ожидаемо)
+## Блокеры
 
-- Утверждённый CONTENT-02+ (фракции, ростер, 30 этапов, экономика).
-- HTTPS CDN / VPS для OTA на телефонах (`127.0.0.1` только для ПК).
-- Go API / PostgreSQL / серверный бой / прогресс / платежи.
-- Боевой арт-пайплайн и release-подпись APK.
-
-## Запуск
+| Что | Нужно |
+|---|---|
+| Postgres adapter | Docker / VPS |
+| OTA-2 | HTTPS-хост |
+| ART-05 | Бинарные webp/атласы (слоты уже в `0.9.0`) |
 
 ```bash
-godot --path .
-cd admin-studio && npm install && npm run dev   # UI :5173 · API/CDN :8787
-tools/validate_content_package.sh
+tools/validate_content_package.sh 0.9.0
+cd server && go test ./... && go run ./cmd/api
 ```
 
-Дорожная карта: `docs/ROADMAP.md`. Что утвердить дальше: `docs/CONTENT_HANDOFF.md`.
+Подробности: `docs/ROADMAP.md`.

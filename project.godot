@@ -15,6 +15,7 @@ config/icon="res://assets/ui/icon.svg"
 [autoload]
 
 AppState="*res://scripts/autoload/app_state.gd"
+ApiClient="*res://scripts/autoload/api_client.gd"
 ContentPackageLoader="*res://scripts/autoload/content_package_loader.gd"
 ContentUpdateService="*res://scripts/autoload/content_update_service.gd"
 DemoData="*res://scripts/autoload/demo_data.gd"

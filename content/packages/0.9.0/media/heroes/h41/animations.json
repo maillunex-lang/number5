@@ -1,0 +1,49 @@
+{
+  "hero_id": "H41",
+  "pivot": "feet",
+  "facing": "right",
+  "clips": [
+    {
+      "id": "idle",
+      "frames": 1,
+      "duration_hint_sec": 1.5
+    },
+    {
+      "id": "attack",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "skill_1",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "skill_2",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "ultimate",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "hit",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "death",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    },
+    {
+      "id": "victory",
+      "frames": 1,
+      "duration_hint_sec": 0.8
+    }
+  ],
+  "status": "planned",
+  "note": "C6 descriptor · ART-05 fills atlas frames"
+}

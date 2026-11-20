@@ -30,11 +30,41 @@ func _ready() -> void:
 	else:
 		cmp.text = "Сила отряда %d < %d — будет сложно" % [squad_p, rec]
 		cmp.add_theme_color_override("font_color", LunexColors.AMBER)
+	var before := _dialog_for(str(_stage.id), "before")
+	if not before.is_empty():
+		var dlg := UIFactory.fantasy_button("Сюжет до боя")
+		dlg.pressed.connect(func():
+			ScreenRouter.go("DIALOG-01", {
+				"dialog_id": str(before.get("id", "")),
+				"stage_id": str(_stage.id),
+				"timing": "before",
+				"next_route": "MAP-02",
+				"next_payload": {"stage_id": str(_stage.id)},
+			})
+		)
+		box.add_child(dlg)
+
+func _dialog_for(stage_id: String, timing: String) -> Dictionary:
+	for d in ContentPackageLoader.dialogs_pack.get("dialogs", []):
+		if str(d.get("stage_id", "")) == stage_id and str(d.get("timing", "")) == timing:
+			return d
+	return {}
 
 func _to_prep() -> void:
+	var before := _dialog_for(str(_stage.id), "before")
+	var combat_payload := {"stage_id": _stage.id, "mode": "campaign"}
 	UIStateManager.set_combat_context({
 		"mode": "campaign",
 		"stage_id": _stage.id,
 		"return_route": "MAP-01",
 	})
-	ScreenRouter.go("COMBAT-01", {"stage_id": _stage.id, "mode": "campaign"})
+	if not before.is_empty() and not bool(_payload.get("skip_dialog", false)):
+		ScreenRouter.go("DIALOG-01", {
+			"dialog_id": str(before.get("id", "")),
+			"stage_id": str(_stage.id),
+			"timing": "before",
+			"next_route": "COMBAT-01",
+			"next_payload": combat_payload,
+		})
+		return
+	ScreenRouter.go("COMBAT-01", combat_payload)

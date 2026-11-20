@@ -26,13 +26,14 @@ func _run() -> void:
 	await create_timer(0.4).timeout
 	ScreenRouter.go("MAP-01")
 	await create_timer(0.4).timeout
-	ScreenRouter.go("MAP-02", {"stage_id": "s1_3"})
+	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
+	ScreenRouter.go("MAP-02", {"stage_id": stage_id})
 	await create_timer(0.4).timeout
-	ScreenRouter.go("COMBAT-01", {"stage_id": "s1_3", "mode": "campaign"})
+	ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})
 	await create_timer(0.4).timeout
-	ScreenRouter.go("COMBAT-02", {"stage_id": "s1_3", "mode": "campaign"})
+	ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
 	await create_timer(2.5).timeout
-	print("SMOKE: battle running/finished")
+	print("SMOKE: battle running/finished stage=", stage_id, " package=", ContentPackageLoader.version)
 	ScreenRouter.go("SETTINGS-01")
 	await create_timer(0.3).timeout
 	ThemeManager.apply_preset("low")

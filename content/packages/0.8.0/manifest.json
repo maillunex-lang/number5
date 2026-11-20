@@ -1,0 +1,126 @@
+{
+  "id": "lunex-core",
+  "version": "0.8.0",
+  "schema": 9,
+  "client_min": "0.1.0",
+  "title": "Razlom Epoh · C5 skills + dialogs",
+  "locale": "ru",
+  "created_at": "2026-11-20T09:19:19Z",
+  "updated_at": "2026-11-20T09:19:19Z",
+  "notes": "C5: 45×5 skill cards + story dialog beats. Battle still DEMO.",
+  "files": {
+    "achievements.json": {
+      "role": "achievements"
+    },
+    "assets.json": {
+      "role": "assets"
+    },
+    "battle_modes.json": {
+      "role": "battle_modes"
+    },
+    "campaign.json": {
+      "role": "campaign"
+    },
+    "daily_stories.json": {
+      "role": "daily_stories"
+    },
+    "dialogs.json": {
+      "role": "dialogs"
+    },
+    "economy.json": {
+      "role": "economy"
+    },
+    "enemies.json": {
+      "role": "enemies"
+    },
+    "equipment.json": {
+      "role": "equipment"
+    },
+    "features.json": {
+      "role": "features"
+    },
+    "gacha.json": {
+      "role": "gacha"
+    },
+    "guilds.json": {
+      "role": "guilds"
+    },
+    "heroes.json": {
+      "role": "heroes"
+    },
+    "hub.json": {
+      "role": "hub"
+    },
+    "live_events.json": {
+      "role": "live_events"
+    },
+    "liveops.json": {
+      "role": "liveops"
+    },
+    "login_calendars.json": {
+      "role": "login_calendars"
+    },
+    "loot_tables.json": {
+      "role": "loot_tables"
+    },
+    "mail.json": {
+      "role": "mail"
+    },
+    "motion.json": {
+      "role": "motion"
+    },
+    "profile.json": {
+      "role": "profile"
+    },
+    "progression.json": {
+      "role": "progression"
+    },
+    "pve_modes.json": {
+      "role": "pve_modes"
+    },
+    "shell.json": {
+      "role": "shell"
+    },
+    "skills.json": {
+      "role": "skills"
+    },
+    "strings.json": {
+      "role": "strings"
+    },
+    "theme.json": {
+      "role": "theme"
+    }
+  },
+  "integrity": {
+    "algo": "sha256",
+    "hashes": {
+      "achievements.json": "73c17515e8e295d2437a239064196e8545cfa8833e5a54e7cf2d76d5c3e65544",
+      "assets.json": "95b2eb879f3884e8b7bc6d917813c86487b9467d461178aa35ee38c694cc5ce9",
+      "battle_modes.json": "f03381b395a4fa0ee00d25be3f854f564427273dd3338ed21e30e2304aa4b00e",
+      "campaign.json": "b2c852704ec77b4dc188c4c415955c4b49115c95f5644d6a4e35ad62e60d48a3",
+      "daily_stories.json": "f8cbaeddab305ad4c9c0f69ce9db3997aa5a09588c98b2eaa7cce934e3a0c259",
+      "dialogs.json": "7357bbeab468f48dac2b46d7453fe9489ceac88d3bd8e1e5c1cbe6119167a5f2",
+      "economy.json": "a804b37e770dea0259f8e7faf9edf3285af31ee6a64d32722b348e29d02ab496",
+      "enemies.json": "14eb613bbe5a93bfa467b347627f1a0fe45785ebdecb999a51ceb1812162b9d3",
+      "equipment.json": "193afbaa4a1ab03b3674dadda068384e89b51b1e58c87b87821477adaf597145",
+      "features.json": "3d4ce9c50267f598dac7e772b45df7546583583e40adfbacd4da85997d567375",
+      "gacha.json": "856e0ae2a75245deb7529a0e0ec35dd35cf4e24f108aa652d400b294d55d2d72",
+      "guilds.json": "13c273a8cd5463f3390aec40a3d360cb8663d78583c2be8d8a63787e6cd832cc",
+      "heroes.json": "c36732e6942afec0d8873e482823901d5de2b0574ea84195cbc953b41a1f0fa5",
+      "hub.json": "cb7be0927fdcd0c001ad19b96a1003c4a4e27e2a55c3b02567999998d9f7bc3c",
+      "live_events.json": "f9158643419818f49f4b9ac334ad607210a1ce6d096fb56fb08589c5dbd4b34d",
+      "liveops.json": "5fea958703d8cb2094dabb0f5def46924ceabea5b42bba1ba8302fad6cc2ae66",
+      "login_calendars.json": "e8ee0b369747f081d265a5a6f6691344aa3cbfb683dce3ed84de4e5a0325ebf7",
+      "loot_tables.json": "2bcc554cfeec50af016a4aba39981050afb729aeb036772bd51b97f7c1386617",
+      "mail.json": "895da6490cdb543eb86940483afda7dcaeeb1053049802ed36afb702f962eec6",
+      "motion.json": "cbd90ad7bd3ac090ffe5d5d61176abf3ffbe7bb04691940deee05dc322659eaf",
+      "profile.json": "fabd089c9882cadca0b4a1b4b2e9ba5b9aaaf511bcb6442fc850618358f786ad",
+      "progression.json": "6b671cea94620bbe00cad16dc4a9ab780d367e6193fed719003f7ff962aa9668",
+      "pve_modes.json": "08871cfbb54aeac19f1fa105bf2c6d3bd8e74bcbd58e441de7143081d00ac988",
+      "shell.json": "f879d4da1f60e717b89f8f30be6daedae9b1d282fd0658c5be6e0d127553b8c0",
+      "skills.json": "f729f56e45b878d4a97e0bed57478f2d9eb447627c3b44a9171d4a31614dc75c",
+      "strings.json": "64fb8fe117f4c9f32f3f3b0a5068c3a3c957404a08d513a4da376cd969983723",
+      "theme.json": "44a5e985fe4564e976119811241b8431ff839291cfcfc8df1cdaec54439bcdd2"
+    }
+  }
+}

@@ -11,8 +11,8 @@ const BUILD_LABEL := "UI Prototype v0.1 (локальное демо)"
 var is_guest: bool = true
 var display_name: String = "Странник"
 var email_hint: String = "" # never store real passwords
-var world_id: String = "eliorian-1"
-var world_name: String = "Элиориан"
+var world_id: String = "bashkortostan-razlom-1"
+var world_name: String = "Башкортостан: Разлом эпох"
 
 var level: int = 12
 var vip_level: int = 0

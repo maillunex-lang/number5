@@ -21,9 +21,34 @@ func _animate_in() -> void:
 	tw.tween_property($Safe/Card, "position:y", $Safe/Card.position.y - 40, 0.45).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func _on_guest() -> void:
+	_status.text = "Подключение к CORE-01…"
+	var ok := await ApiClient.guest_login()
 	AppState.enter_as_guest()
-	NotificationManager.success("Гостевой вход (локально)")
+	if ok:
+		_status.text = "Онлайн: guest · %s" % ApiClient.base_url
+		NotificationManager.success("Гостевой вход (CORE-01)")
+		var wallet := await ApiClient.get_wallet()
+		if wallet.get("ok", false):
+			_sync_wallet(wallet.get("data", {}))
+	else:
+		_status.text = "Офлайн-демо (API недоступен)"
+		NotificationManager.info("Гостевой вход (локально)")
 	get_tree().change_scene_to_file("res://scenes/bootstrap/world_select.tscn")
+
+func _sync_wallet(data: Variant) -> void:
+	if typeof(data) != TYPE_DICTIONARY:
+		return
+	var balances: Array = data.get("balances", [])
+	for b in balances:
+		if typeof(b) != TYPE_DICTIONARY:
+			continue
+		var rid := str(b.get("resource_id", ""))
+		var amt := int(b.get("amount", 0))
+		if rid == "gold":
+			AppState.gold = amt
+		elif rid == "diamonds":
+			AppState.diamonds = amt
+	AppState.currencies_changed.emit()
 
 func _on_login() -> void:
 	var email := _email.text.strip_edges()

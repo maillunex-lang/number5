@@ -1,0 +1,11 @@
+{
+  "hero_id": "H17",
+  "name": "Эрмид",
+  "assets": {
+    "portrait": "portrait.webp",
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "ultimate_vfx": "ultimate_vfx.webp"
+  },
+  "status": "placeholder"
+}

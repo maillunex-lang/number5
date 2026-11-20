@@ -1,46 +1,45 @@
 # Lunex AFK
 
-Мобильная онлайн AFK/Idle RPG. Репозиторий: клиентский **UI Prototype v0.1** на Godot 4.7.2.
+Мобильная онлайн AFK/Idle RPG. Репозиторий: Godot **4.7.2** UI Prototype v0.1, контент-пакеты, Admin Studio, CORE-01 API (memory).
 
 ## Статус
 
-Локальный игровой прототип интерфейса. **Онлайн-режим не реализован.** Данные демо хранятся локально и не выдаются за серверные.
+Активный пакет **`0.9.0`**. Локальный UI + memory API; прод-онлайн ждёт Postgres/VPS и HTTPS.
 
-Документы: `docs/STATUS.md` (срез), `docs/ROADMAP.md`, `docs/CONTENT_OTA.md`, `docs/ADMIN_STUDIO.md`, `docs/CONTENT_HANDOFF.md` (что утвердить дальше), `docs/STRUCTURE.md`.
+Документы: [`docs/STATUS.md`](docs/STATUS.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md) · [`docs/TZ_A_FOUNDATION.md`](docs/TZ_A_FOUNDATION.md).
 
-## Запуск клиента
+## Клиент
 
 ```bash
 godot --path .
+tools/validate_content_package.sh
+python3 tools/check_repo_refs.py
 ```
 
-Требуется Godot **4.7.2**. Портрет 1080×1920 (9:16).
+Портрет 1080×1920. Гостевой вход пробует CORE-01 (`ApiClient` / `LUNEX_API_BASE`), иначе офлайн-демо.
 
-Контент читается из `content/packages/{version}/` или OTA-кеша `user://content_cache` (после Publish в Studio CDN). Клиент рисует UI; прогресс сессии локальный. Подробности: `docs/CONTENT_OTA.md`.
-
-## Lunex Admin Studio
-
-Визуальный редактор пакетов (React/TS + локальный Express API):
+## Admin Studio
 
 ```bash
-cd admin-studio
-npm install
-npm run dev
+cd admin-studio && npm install && npm run dev
 ```
 
-UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — см. `docs/ADMIN_STUDIO.md`.
+UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — `docs/ADMIN_STUDIO.md`.
 
-## Что включено в v0.1
+## CORE-01
 
-- GameShell: TopBar, 4 вкладки (Карта / Герои / Главная / Битва), Router, модалки, тосты
-- 2.5D-хаб с 8 зданиями и параллаксом (данные из пакета)
-- Карта → глава → этап → подготовка → автобой 5v5 → результат
-- Коллекция героев, отряды, пресеты
-- Демо-экраны реестра UI-14 (магазин/квесты/AFK/почта/события из `features.json`)
-- Версионные контент-пакеты + Admin Studio
-- Пресеты графики Low/Med/High/Ultra
-- Android debug APK (см. `docs/ANDROID_BUILD.md`)
+```bash
+cd server && go test ./... && go run ./cmd/api
+```
 
-## Лицензии сторонних материалов
+Memory: guest → wallet → battle → summon → afk → mail → store. Postgres — после Docker/VPS (`migrations/0001_init.sql`).
 
-См. `THIRD_PARTY_LICENSES.md` и `docs/ASSETS_REGISTRY.md`.
+## Включено
+
+- GameShell, хаб / кампания / герои / DEMO-бой
+- Пакеты `0.1.0`…`0.9.0` + Studio economy/meta/catalog
+- TZ-A + CORE-01 memory + `ApiClient`
+
+## Лицензии
+
+`THIRD_PARTY_LICENSES.md` · `docs/ASSETS_REGISTRY.md`.

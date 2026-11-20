@@ -1,0 +1,41 @@
+{
+  "id": "lunex-default",
+  "title": "Lunex Anime Fantasy",
+  "radius": { "sm": 10, "md": 14, "lg": 18, "xl": 22 },
+  "spacing": { "xs": 6, "sm": 10, "md": 16, "lg": 24 },
+  "fonts": {
+    "display": "res://fonts/Cinzel-Bold.ttf",
+    "ui": "res://fonts/OpenSans-SemiBold.ttf",
+    "body": "res://fonts/OpenSans-Regular.ttf"
+  },
+  "palette": {
+    "bg_deep": "#0B1220",
+    "bg_mid": "#132038",
+    "bg_panel": "#1A2A45",
+    "bg_panel_alt": "#243552",
+    "gold": "#E8C56A",
+    "gold_dim": "#A8893E",
+    "gold_bright": "#FFE29A",
+    "cyan": "#5EC8E8",
+    "teal": "#2A9B8F",
+    "crimson": "#C4454A",
+    "emerald": "#3DBE7A",
+    "amber": "#E09A3E",
+    "text_primary": "#F4F0E6",
+    "text_secondary": "#B8C0D0",
+    "text_muted": "#7A8499",
+    "frame_outer": "#3A4A68",
+    "frame_inner": "#C9A84C",
+    "button_normal": "#1E334F",
+    "button_hover": "#2A4568",
+    "button_pressed": "#15263C",
+    "nav_active": "#E8C56A",
+    "nav_idle": "#8A94A8"
+  },
+  "components": {
+    "button_height": 64,
+    "gold_button_height": 72,
+    "panel_border": 2,
+    "shadow_size": 6
+  }
+}

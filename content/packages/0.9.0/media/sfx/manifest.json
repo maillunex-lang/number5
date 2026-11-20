@@ -1,0 +1,18 @@
+{
+  "items": [
+    "hit_light",
+    "hit_heavy",
+    "cast",
+    "shield",
+    "heal",
+    "explosion",
+    "whoosh",
+    "crit",
+    "death",
+    "ui_confirm",
+    "ui_back",
+    "rift_pulse"
+  ],
+  "status": "placeholder",
+  "count": 12
+}

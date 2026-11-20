@@ -1,0 +1,806 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · прогресс/claim серверные после CORE-01; незабранное → MAIL_ACHIEVEMENT",
+  "combat_bonus": false,
+  "mail_rollover_template": "MAIL_ACHIEVEMENT",
+  "achievements": [
+    {
+      "id": "ACH_STORY_01",
+      "name": "Первый шаг",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_02",
+      "name": "Десять решений",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_03",
+      "name": "Тридцать дорог",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 30,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_04",
+      "name": "Шестьдесят испытаний",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 60,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_05",
+      "name": "Девяносто битв",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 90,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_06",
+      "name": "Сто двадцать этапов",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 120,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_07",
+      "name": "Сто пятьдесят этапов",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 150,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_STORY_08",
+      "name": "Разлом закрыт",
+      "category": "story",
+      "metric": "campaign_unique_clears",
+      "threshold": 180,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_01",
+      "name": "Первый герой",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_02",
+      "name": "Пятеро в строю",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 5,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_03",
+      "name": "Десять имён",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_04",
+      "name": "Пятнадцать героев",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 15,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_05",
+      "name": "Двадцать героев",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 20,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_06",
+      "name": "Тридцать героев",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 30,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_07",
+      "name": "Сорок героев",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 40,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_HERO_08",
+      "name": "Все сорок пять",
+      "category": "heroes",
+      "metric": "unique_owned_heroes",
+      "threshold": 45,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_01",
+      "name": "Первый призыв",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_02",
+      "name": "Десять зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_03",
+      "name": "Пятьдесят зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 50,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_04",
+      "name": "Сто зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 100,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_05",
+      "name": "Двести зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 200,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_06",
+      "name": "Пятьсот зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 500,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_07",
+      "name": "Тысяча зовов",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 1000,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_SUMMON_08",
+      "name": "Мастер призыва",
+      "category": "summon",
+      "metric": "summon_results",
+      "threshold": 2000,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_01",
+      "name": "Башня: 10",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_02",
+      "name": "Башня: 20",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 20,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_03",
+      "name": "Башня: 40",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 40,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_04",
+      "name": "Башня: 60",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 60,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_05",
+      "name": "Башня: 80",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 80,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_06",
+      "name": "Башня: 100",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 100,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_07",
+      "name": "Башня: 110",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 110,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_PVE_08",
+      "name": "Башня: 120",
+      "category": "pve",
+      "metric": "tower_highest_floor",
+      "threshold": 120,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_01",
+      "name": "Первый сбор",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_02",
+      "name": "Пять сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 5,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_03",
+      "name": "Десять сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_04",
+      "name": "Двадцать сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 20,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_05",
+      "name": "Пятьдесят сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 50,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_06",
+      "name": "Сто сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 100,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_07",
+      "name": "Двести сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 200,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_AFK_08",
+      "name": "Пятьсот сборов",
+      "category": "afk",
+      "metric": "afk_claim_count",
+      "threshold": 500,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_01",
+      "name": "Первое вступление",
+      "category": "guild",
+      "metric": "guild_joins",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_02",
+      "name": "Три поручения",
+      "category": "guild",
+      "metric": "guild_quests_claimed",
+      "threshold": 3,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 75
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_03",
+      "name": "Десять поручений",
+      "category": "guild",
+      "metric": "guild_quests_claimed",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_04",
+      "name": "Первый рейд",
+      "category": "guild",
+      "metric": "guild_raid_participations",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 125
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_05",
+      "name": "Пять рейдов",
+      "category": "guild",
+      "metric": "guild_raid_participations",
+      "threshold": 5,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_06",
+      "name": "Десять рейдов",
+      "category": "guild",
+      "metric": "guild_raid_participations",
+      "threshold": 10,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 175
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_07",
+      "name": "Пятьдесят поручений",
+      "category": "guild",
+      "metric": "guild_quests_claimed",
+      "threshold": 50,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ],
+      "hidden": false
+    },
+    {
+      "id": "ACH_GUILD_08",
+      "name": "Сто поручений",
+      "category": "guild",
+      "metric": "guild_quests_claimed",
+      "threshold": 100,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ],
+      "hidden": false
+    }
+  ],
+  "secrets": [
+    {
+      "id": "ACH_SECRET_01",
+      "name": "???",
+      "category": "secret",
+      "metric": "stage_no_hp_loss",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "title_untouched",
+          "amount": 1
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Без царапины"
+    },
+    {
+      "id": "ACH_SECRET_02",
+      "name": "???",
+      "category": "secret",
+      "metric": "boss_one_survivor",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "cosmetic_token",
+          "amount": 100
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Один на ногах"
+    },
+    {
+      "id": "ACH_SECRET_03",
+      "name": "???",
+      "category": "secret",
+      "metric": "tower_five_n",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "frame_unlikely",
+          "amount": 1
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Невероятный состав"
+    },
+    {
+      "id": "ACH_SECRET_04",
+      "name": "???",
+      "category": "secret",
+      "metric": "daily_quests_distinct",
+      "threshold": 7,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Полный день"
+    },
+    {
+      "id": "ACH_SECRET_05",
+      "name": "???",
+      "category": "secret",
+      "metric": "raid_min_nonzero",
+      "threshold": 1,
+      "rewards": [
+        {
+          "resource_id": "title_last_spark",
+          "amount": 1
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Последняя искра"
+    },
+    {
+      "id": "ACH_SECRET_06",
+      "name": "???",
+      "category": "secret",
+      "metric": "chapters_cleared",
+      "threshold": 6,
+      "rewards": [
+        {
+          "resource_id": "profile_rift",
+          "amount": 1
+        }
+      ],
+      "hidden": true,
+      "reveal_name": "Все главы"
+    }
+  ],
+  "demo_progress": {
+    "ACH_STORY_01": {
+      "progress": 12,
+      "status": "claimed"
+    },
+    "ACH_STORY_02": {
+      "progress": 12,
+      "status": "completed_unclaimed"
+    },
+    "ACH_HERO_01": {
+      "progress": 8,
+      "status": "claimed"
+    },
+    "ACH_HERO_02": {
+      "progress": 8,
+      "status": "completed_unclaimed"
+    },
+    "ACH_SUMMON_01": {
+      "progress": 3,
+      "status": "claimed"
+    },
+    "ACH_PVE_01": {
+      "progress": 12,
+      "status": "completed_unclaimed"
+    },
+    "ACH_AFK_01": {
+      "progress": 4,
+      "status": "claimed"
+    },
+    "ACH_GUILD_01": {
+      "progress": 1,
+      "status": "claimed"
+    }
+  }
+}

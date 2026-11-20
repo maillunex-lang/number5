@@ -12,7 +12,7 @@ Godot: 4.7.2.stable.official
 | GameShell / Router / модалки | Отсутствовал | **Есть** |
 | Bootstrap | Отсутствовал | **Есть** |
 | Хаб / карта / герои / бой | Отсутствовал | **Есть** (данные из пакета) |
-| UI-14 экраны | Отсутствовали | **Есть** (часть — демо из `features.json`) |
+| UI-14 экраны | Отсутствовали | **Есть** (демо из пакета: `features.json` + mail/calendar/profile/…) |
 | Android debug APK | Нет | Собирался; бинарь не в git |
 | Контент-пакеты + Admin Studio | Нет | **Есть** (`content/`, `admin-studio/`) |
 

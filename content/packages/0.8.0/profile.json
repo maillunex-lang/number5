@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · публичная карточка без email/VIP/платежей",
+  "nickname": {
+    "min": 3,
+    "max": 18,
+    "free_renames_period_days": 30,
+    "first_free": true,
+    "paid_rename_mvp": false
+  },
+  "privacy_defaults": {
+    "show_campaign_progress": true,
+    "show_hero_showcase": false,
+    "show_collection_summary": false,
+    "show_pve_records": false,
+    "show_guild": true
+  },
+  "cosmetics": {
+    "avatars": [
+      {
+        "id": "avatar_f01",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_f02",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_f03",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_f04",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_f05",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_f06",
+        "kind": "emblem"
+      },
+      {
+        "id": "avatar_ch01",
+        "kind": "chapter"
+      },
+      {
+        "id": "avatar_ch02",
+        "kind": "chapter"
+      },
+      {
+        "id": "avatar_ch03",
+        "kind": "chapter"
+      },
+      {
+        "id": "avatar_ch04",
+        "kind": "chapter"
+      },
+      {
+        "id": "avatar_ch05",
+        "kind": "chapter"
+      },
+      {
+        "id": "avatar_ch06",
+        "kind": "chapter"
+      }
+    ],
+    "frames": [
+      {
+        "id": "frame_start_a",
+        "source": "campaign",
+        "unlock": "CH01-01"
+      },
+      {
+        "id": "frame_start_b",
+        "source": "campaign",
+        "unlock": "CH01-01"
+      },
+      {
+        "id": "frame_story_a",
+        "source": "campaign",
+        "unlock": "CH01-30"
+      },
+      {
+        "id": "frame_story_b",
+        "source": "campaign",
+        "unlock": "CH03-30"
+      },
+      {
+        "id": "frame_tower_a",
+        "source": "tower",
+        "unlock": "floor_40"
+      },
+      {
+        "id": "frame_tower_b",
+        "source": "tower",
+        "unlock": "floor_100"
+      },
+      {
+        "id": "frame_guild",
+        "source": "guild",
+        "unlock": "guild_level_5"
+      },
+      {
+        "id": "frame_event",
+        "source": "event",
+        "unlock": "EVT_001"
+      },
+      {
+        "id": "frame_unlikely",
+        "source": "secret",
+        "unlock": "ACH_SECRET_03"
+      }
+    ],
+    "titles": [
+      {
+        "id": "title_ch01_a",
+        "chapter": 1,
+        "name": "Глава 1 · след"
+      },
+      {
+        "id": "title_ch01_b",
+        "chapter": 1,
+        "name": "Глава 1 · печать"
+      },
+      {
+        "id": "title_ch02_a",
+        "chapter": 2,
+        "name": "Глава 2 · след"
+      },
+      {
+        "id": "title_ch02_b",
+        "chapter": 2,
+        "name": "Глава 2 · печать"
+      },
+      {
+        "id": "title_ch03_a",
+        "chapter": 3,
+        "name": "Глава 3 · след"
+      },
+      {
+        "id": "title_ch03_b",
+        "chapter": 3,
+        "name": "Глава 3 · печать"
+      },
+      {
+        "id": "title_ch04_a",
+        "chapter": 4,
+        "name": "Глава 4 · след"
+      },
+      {
+        "id": "title_ch04_b",
+        "chapter": 4,
+        "name": "Глава 4 · печать"
+      },
+      {
+        "id": "title_ch05_a",
+        "chapter": 5,
+        "name": "Глава 5 · след"
+      },
+      {
+        "id": "title_ch05_b",
+        "chapter": 5,
+        "name": "Глава 5 · печать"
+      },
+      {
+        "id": "title_ch06_a",
+        "chapter": 6,
+        "name": "Глава 6 · след"
+      },
+      {
+        "id": "title_ch06_b",
+        "chapter": 6,
+        "name": "Глава 6 · печать"
+      },
+      {
+        "id": "title_untouched",
+        "chapter": 0,
+        "name": "Нетронутый",
+        "secret": true
+      },
+      {
+        "id": "title_last_spark",
+        "chapter": 0,
+        "name": "Последняя искра",
+        "secret": true
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "bg_ch01",
+        "chapter": 1,
+        "unlock_stage": "CH01-30"
+      },
+      {
+        "id": "bg_ch02",
+        "chapter": 2,
+        "unlock_stage": "CH02-30"
+      },
+      {
+        "id": "bg_ch03",
+        "chapter": 3,
+        "unlock_stage": "CH03-30"
+      },
+      {
+        "id": "bg_ch04",
+        "chapter": 4,
+        "unlock_stage": "CH04-30"
+      },
+      {
+        "id": "bg_ch05",
+        "chapter": 5,
+        "unlock_stage": "CH05-30"
+      },
+      {
+        "id": "bg_ch06",
+        "chapter": 6,
+        "unlock_stage": "CH06-30"
+      },
+      {
+        "id": "profile_rift",
+        "chapter": 6,
+        "unlock_stage": "CH06-30",
+        "secret": true
+      }
+    ]
+  },
+  "demo": {
+    "public_player_id": "LX-7F3K9Q",
+    "nickname": "Командир Уфы",
+    "avatar_id": "avatar_f01",
+    "frame_id": "frame_start_a",
+    "title_id": "title_ch01_a",
+    "background_id": "bg_ch01",
+    "favorite_hero_id": "H01",
+    "max_stage": "CH01-12",
+    "owned_heroes": 8,
+    "tower_floor": 12,
+    "guild_tag": "UFA"
+  }
+}

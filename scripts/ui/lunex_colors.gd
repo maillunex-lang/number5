@@ -41,6 +41,7 @@ const RARITY_COMMON := Color("9AA3B2")
 const RARITY_RARE := Color("4A9BE8")
 const RARITY_EPIC := Color("B06AE8")
 const RARITY_LEGENDARY := Color("E8A84A")
+const RARITY_MYTHIC := Color("E85A6A")
 
 static func rarity(r: String) -> Color:
 	match r:
@@ -50,5 +51,7 @@ static func rarity(r: String) -> Color:
 			return RARITY_EPIC
 		"legendary":
 			return RARITY_LEGENDARY
+		"mythic":
+			return RARITY_MYTHIC
 		_:
 			return RARITY_COMMON

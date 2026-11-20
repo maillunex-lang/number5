@@ -1,0 +1,6530 @@
+{
+  "schema": 2,
+  "disclaimer": "C6 DEMO · реестр слотов без бинарного арта; ART-05 подставляет webp/атласы",
+  "production_budget": {
+    "rigs": 6,
+    "enemy_skins": 12,
+    "story_bosses": 18,
+    "common_vfx": 12,
+    "boss_arenas": 6,
+    "common_sfx": 12,
+    "hero_sets_planned": 45,
+    "note": "Бюджет BESTIARY §1 · не 54 уникальных комплекта анимаций"
+  },
+  "summary": {
+    "heroes": 45,
+    "hero_asset_slots": 180,
+    "rigs": 6,
+    "rig_skins": 12,
+    "boss_portraits": 18,
+    "chapter_packs": 6,
+    "zone_layers": 108,
+    "arenas": 18,
+    "vfx": 12,
+    "sfx": 12,
+    "items_total": 382,
+    "bindings_total": 489
+  },
+  "animation_slots": {
+    "hero": [
+      "idle",
+      "attack",
+      "skill_1",
+      "skill_2",
+      "ultimate",
+      "hit",
+      "death",
+      "victory"
+    ],
+    "rig_default": [
+      "idle",
+      "attack",
+      "cast",
+      "hit",
+      "death"
+    ],
+    "rig_beast": [
+      "idle",
+      "attack",
+      "hit",
+      "death"
+    ]
+  },
+  "items": [
+    {
+      "id": "icon_app",
+      "path": "res://assets/ui/icon.svg",
+      "role": "app_icon",
+      "tags": [
+        "ui",
+        "brand"
+      ],
+      "status": "ready",
+      "note": "Иконка приложения"
+    },
+    {
+      "id": "font_display",
+      "path": "res://fonts/Cinzel-Bold.ttf",
+      "role": "font_display",
+      "tags": [
+        "font"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "font_ui",
+      "path": "res://fonts/OpenSans-SemiBold.ttf",
+      "role": "font_ui",
+      "tags": [
+        "font"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "placeholder_building",
+      "path": "",
+      "role": "building_art",
+      "tags": [
+        "hub",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "note": "Слот арта здания — PNG/WebP через Studio / ART-05"
+    },
+    {
+      "id": "hero_h01_portrait",
+      "path": "media/heroes/h01/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H01",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h01_atlas",
+      "path": "media/heroes/h01/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H01"
+      }
+    },
+    {
+      "id": "hero_h01_animations",
+      "path": "media/heroes/h01/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H01",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h01_ultimate_vfx",
+      "path": "media/heroes/h01/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H01"
+      }
+    },
+    {
+      "id": "hero_h02_portrait",
+      "path": "media/heroes/h02/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H02",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h02_atlas",
+      "path": "media/heroes/h02/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H02"
+      }
+    },
+    {
+      "id": "hero_h02_animations",
+      "path": "media/heroes/h02/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H02",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h02_ultimate_vfx",
+      "path": "media/heroes/h02/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H02"
+      }
+    },
+    {
+      "id": "hero_h03_portrait",
+      "path": "media/heroes/h03/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H03",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h03_atlas",
+      "path": "media/heroes/h03/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H03"
+      }
+    },
+    {
+      "id": "hero_h03_animations",
+      "path": "media/heroes/h03/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H03",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h03_ultimate_vfx",
+      "path": "media/heroes/h03/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H03"
+      }
+    },
+    {
+      "id": "hero_h04_portrait",
+      "path": "media/heroes/h04/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H04",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h04_atlas",
+      "path": "media/heroes/h04/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H04"
+      }
+    },
+    {
+      "id": "hero_h04_animations",
+      "path": "media/heroes/h04/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H04",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h04_ultimate_vfx",
+      "path": "media/heroes/h04/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H04"
+      }
+    },
+    {
+      "id": "hero_h05_portrait",
+      "path": "media/heroes/h05/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H05",
+        "tint": "#FFE29A"
+      }
+    },
+    {
+      "id": "hero_h05_atlas",
+      "path": "media/heroes/h05/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H05"
+      }
+    },
+    {
+      "id": "hero_h05_animations",
+      "path": "media/heroes/h05/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H05",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h05_ultimate_vfx",
+      "path": "media/heroes/h05/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H05"
+      }
+    },
+    {
+      "id": "hero_h06_portrait",
+      "path": "media/heroes/h06/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H06",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h06_atlas",
+      "path": "media/heroes/h06/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H06"
+      }
+    },
+    {
+      "id": "hero_h06_animations",
+      "path": "media/heroes/h06/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H06",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h06_ultimate_vfx",
+      "path": "media/heroes/h06/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H06"
+      }
+    },
+    {
+      "id": "hero_h07_portrait",
+      "path": "media/heroes/h07/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H07",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h07_atlas",
+      "path": "media/heroes/h07/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H07"
+      }
+    },
+    {
+      "id": "hero_h07_animations",
+      "path": "media/heroes/h07/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H07",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h07_ultimate_vfx",
+      "path": "media/heroes/h07/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H07"
+      }
+    },
+    {
+      "id": "hero_h08_portrait",
+      "path": "media/heroes/h08/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H08",
+        "tint": "#2A9B8F"
+      }
+    },
+    {
+      "id": "hero_h08_atlas",
+      "path": "media/heroes/h08/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H08"
+      }
+    },
+    {
+      "id": "hero_h08_animations",
+      "path": "media/heroes/h08/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H08",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h08_ultimate_vfx",
+      "path": "media/heroes/h08/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H08"
+      }
+    },
+    {
+      "id": "hero_h09_portrait",
+      "path": "media/heroes/h09/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H09",
+        "tint": "#FFE29A"
+      }
+    },
+    {
+      "id": "hero_h09_atlas",
+      "path": "media/heroes/h09/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H09"
+      }
+    },
+    {
+      "id": "hero_h09_animations",
+      "path": "media/heroes/h09/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H09",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h09_ultimate_vfx",
+      "path": "media/heroes/h09/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H09"
+      }
+    },
+    {
+      "id": "hero_h10_portrait",
+      "path": "media/heroes/h10/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H10",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h10_atlas",
+      "path": "media/heroes/h10/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H10"
+      }
+    },
+    {
+      "id": "hero_h10_animations",
+      "path": "media/heroes/h10/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H10",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h10_ultimate_vfx",
+      "path": "media/heroes/h10/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H10"
+      }
+    },
+    {
+      "id": "hero_h11_portrait",
+      "path": "media/heroes/h11/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H11",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h11_atlas",
+      "path": "media/heroes/h11/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H11"
+      }
+    },
+    {
+      "id": "hero_h11_animations",
+      "path": "media/heroes/h11/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H11",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h11_ultimate_vfx",
+      "path": "media/heroes/h11/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H11"
+      }
+    },
+    {
+      "id": "hero_h12_portrait",
+      "path": "media/heroes/h12/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H12",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h12_atlas",
+      "path": "media/heroes/h12/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H12"
+      }
+    },
+    {
+      "id": "hero_h12_animations",
+      "path": "media/heroes/h12/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H12",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h12_ultimate_vfx",
+      "path": "media/heroes/h12/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H12"
+      }
+    },
+    {
+      "id": "hero_h13_portrait",
+      "path": "media/heroes/h13/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H13",
+        "tint": "#2A9B8F"
+      }
+    },
+    {
+      "id": "hero_h13_atlas",
+      "path": "media/heroes/h13/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H13"
+      }
+    },
+    {
+      "id": "hero_h13_animations",
+      "path": "media/heroes/h13/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H13",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h13_ultimate_vfx",
+      "path": "media/heroes/h13/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H13"
+      }
+    },
+    {
+      "id": "hero_h14_portrait",
+      "path": "media/heroes/h14/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H14",
+        "tint": "#FFE29A"
+      }
+    },
+    {
+      "id": "hero_h14_atlas",
+      "path": "media/heroes/h14/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H14"
+      }
+    },
+    {
+      "id": "hero_h14_animations",
+      "path": "media/heroes/h14/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H14",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h14_ultimate_vfx",
+      "path": "media/heroes/h14/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H14"
+      }
+    },
+    {
+      "id": "hero_h15_portrait",
+      "path": "media/heroes/h15/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H15",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h15_atlas",
+      "path": "media/heroes/h15/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H15"
+      }
+    },
+    {
+      "id": "hero_h15_animations",
+      "path": "media/heroes/h15/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H15",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h15_ultimate_vfx",
+      "path": "media/heroes/h15/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H15"
+      }
+    },
+    {
+      "id": "hero_h16_portrait",
+      "path": "media/heroes/h16/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H16",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h16_atlas",
+      "path": "media/heroes/h16/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H16"
+      }
+    },
+    {
+      "id": "hero_h16_animations",
+      "path": "media/heroes/h16/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H16",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h16_ultimate_vfx",
+      "path": "media/heroes/h16/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H16"
+      }
+    },
+    {
+      "id": "hero_h17_portrait",
+      "path": "media/heroes/h17/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H17",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h17_atlas",
+      "path": "media/heroes/h17/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H17"
+      }
+    },
+    {
+      "id": "hero_h17_animations",
+      "path": "media/heroes/h17/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H17",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h17_ultimate_vfx",
+      "path": "media/heroes/h17/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H17"
+      }
+    },
+    {
+      "id": "hero_h18_portrait",
+      "path": "media/heroes/h18/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H18",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h18_atlas",
+      "path": "media/heroes/h18/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H18"
+      }
+    },
+    {
+      "id": "hero_h18_animations",
+      "path": "media/heroes/h18/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H18",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h18_ultimate_vfx",
+      "path": "media/heroes/h18/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H18"
+      }
+    },
+    {
+      "id": "hero_h19_portrait",
+      "path": "media/heroes/h19/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H19",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h19_atlas",
+      "path": "media/heroes/h19/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H19"
+      }
+    },
+    {
+      "id": "hero_h19_animations",
+      "path": "media/heroes/h19/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H19",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h19_ultimate_vfx",
+      "path": "media/heroes/h19/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H19"
+      }
+    },
+    {
+      "id": "hero_h20_portrait",
+      "path": "media/heroes/h20/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H20",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h20_atlas",
+      "path": "media/heroes/h20/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H20"
+      }
+    },
+    {
+      "id": "hero_h20_animations",
+      "path": "media/heroes/h20/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H20",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h20_ultimate_vfx",
+      "path": "media/heroes/h20/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H20"
+      }
+    },
+    {
+      "id": "hero_h21_portrait",
+      "path": "media/heroes/h21/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H21",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h21_atlas",
+      "path": "media/heroes/h21/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H21"
+      }
+    },
+    {
+      "id": "hero_h21_animations",
+      "path": "media/heroes/h21/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H21",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h21_ultimate_vfx",
+      "path": "media/heroes/h21/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H21"
+      }
+    },
+    {
+      "id": "hero_h22_portrait",
+      "path": "media/heroes/h22/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H22",
+        "tint": "#5EC8E8"
+      }
+    },
+    {
+      "id": "hero_h22_atlas",
+      "path": "media/heroes/h22/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H22"
+      }
+    },
+    {
+      "id": "hero_h22_animations",
+      "path": "media/heroes/h22/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H22",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h22_ultimate_vfx",
+      "path": "media/heroes/h22/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H22"
+      }
+    },
+    {
+      "id": "hero_h23_portrait",
+      "path": "media/heroes/h23/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H23",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h23_atlas",
+      "path": "media/heroes/h23/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H23"
+      }
+    },
+    {
+      "id": "hero_h23_animations",
+      "path": "media/heroes/h23/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H23",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h23_ultimate_vfx",
+      "path": "media/heroes/h23/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H23"
+      }
+    },
+    {
+      "id": "hero_h24_portrait",
+      "path": "media/heroes/h24/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H24",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h24_atlas",
+      "path": "media/heroes/h24/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H24"
+      }
+    },
+    {
+      "id": "hero_h24_animations",
+      "path": "media/heroes/h24/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H24",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h24_ultimate_vfx",
+      "path": "media/heroes/h24/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H24"
+      }
+    },
+    {
+      "id": "hero_h25_portrait",
+      "path": "media/heroes/h25/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H25",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h25_atlas",
+      "path": "media/heroes/h25/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H25"
+      }
+    },
+    {
+      "id": "hero_h25_animations",
+      "path": "media/heroes/h25/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H25",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h25_ultimate_vfx",
+      "path": "media/heroes/h25/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H25"
+      }
+    },
+    {
+      "id": "hero_h26_portrait",
+      "path": "media/heroes/h26/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H26",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h26_atlas",
+      "path": "media/heroes/h26/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H26"
+      }
+    },
+    {
+      "id": "hero_h26_animations",
+      "path": "media/heroes/h26/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H26",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h26_ultimate_vfx",
+      "path": "media/heroes/h26/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H26"
+      }
+    },
+    {
+      "id": "hero_h27_portrait",
+      "path": "media/heroes/h27/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H27",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h27_atlas",
+      "path": "media/heroes/h27/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H27"
+      }
+    },
+    {
+      "id": "hero_h27_animations",
+      "path": "media/heroes/h27/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H27",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h27_ultimate_vfx",
+      "path": "media/heroes/h27/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H27"
+      }
+    },
+    {
+      "id": "hero_h28_portrait",
+      "path": "media/heroes/h28/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H28",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h28_atlas",
+      "path": "media/heroes/h28/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H28"
+      }
+    },
+    {
+      "id": "hero_h28_animations",
+      "path": "media/heroes/h28/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H28",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h28_ultimate_vfx",
+      "path": "media/heroes/h28/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H28"
+      }
+    },
+    {
+      "id": "hero_h29_portrait",
+      "path": "media/heroes/h29/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H29",
+        "tint": "#3DBE7A"
+      }
+    },
+    {
+      "id": "hero_h29_atlas",
+      "path": "media/heroes/h29/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H29"
+      }
+    },
+    {
+      "id": "hero_h29_animations",
+      "path": "media/heroes/h29/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H29",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h29_ultimate_vfx",
+      "path": "media/heroes/h29/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H29"
+      }
+    },
+    {
+      "id": "hero_h30_portrait",
+      "path": "media/heroes/h30/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H30",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h30_atlas",
+      "path": "media/heroes/h30/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H30"
+      }
+    },
+    {
+      "id": "hero_h30_animations",
+      "path": "media/heroes/h30/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H30",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h30_ultimate_vfx",
+      "path": "media/heroes/h30/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H30"
+      }
+    },
+    {
+      "id": "hero_h31_portrait",
+      "path": "media/heroes/h31/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H31",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h31_atlas",
+      "path": "media/heroes/h31/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H31"
+      }
+    },
+    {
+      "id": "hero_h31_animations",
+      "path": "media/heroes/h31/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H31",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h31_ultimate_vfx",
+      "path": "media/heroes/h31/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H31"
+      }
+    },
+    {
+      "id": "hero_h32_portrait",
+      "path": "media/heroes/h32/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H32",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h32_atlas",
+      "path": "media/heroes/h32/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H32"
+      }
+    },
+    {
+      "id": "hero_h32_animations",
+      "path": "media/heroes/h32/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H32",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h32_ultimate_vfx",
+      "path": "media/heroes/h32/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H32"
+      }
+    },
+    {
+      "id": "hero_h33_portrait",
+      "path": "media/heroes/h33/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H33",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h33_atlas",
+      "path": "media/heroes/h33/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H33"
+      }
+    },
+    {
+      "id": "hero_h33_animations",
+      "path": "media/heroes/h33/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H33",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h33_ultimate_vfx",
+      "path": "media/heroes/h33/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H33"
+      }
+    },
+    {
+      "id": "hero_h34_portrait",
+      "path": "media/heroes/h34/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H34",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h34_atlas",
+      "path": "media/heroes/h34/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H34"
+      }
+    },
+    {
+      "id": "hero_h34_animations",
+      "path": "media/heroes/h34/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H34",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h34_ultimate_vfx",
+      "path": "media/heroes/h34/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H34"
+      }
+    },
+    {
+      "id": "hero_h35_portrait",
+      "path": "media/heroes/h35/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H35",
+        "tint": "#A889E8"
+      }
+    },
+    {
+      "id": "hero_h35_atlas",
+      "path": "media/heroes/h35/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H35"
+      }
+    },
+    {
+      "id": "hero_h35_animations",
+      "path": "media/heroes/h35/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H35",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h35_ultimate_vfx",
+      "path": "media/heroes/h35/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H35"
+      }
+    },
+    {
+      "id": "hero_h36_portrait",
+      "path": "media/heroes/h36/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H36",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h36_atlas",
+      "path": "media/heroes/h36/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H36"
+      }
+    },
+    {
+      "id": "hero_h36_animations",
+      "path": "media/heroes/h36/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H36",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h36_ultimate_vfx",
+      "path": "media/heroes/h36/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H36"
+      }
+    },
+    {
+      "id": "hero_h37_portrait",
+      "path": "media/heroes/h37/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H37",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h37_atlas",
+      "path": "media/heroes/h37/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H37"
+      }
+    },
+    {
+      "id": "hero_h37_animations",
+      "path": "media/heroes/h37/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H37",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h37_ultimate_vfx",
+      "path": "media/heroes/h37/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H37"
+      }
+    },
+    {
+      "id": "hero_h38_portrait",
+      "path": "media/heroes/h38/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H38",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h38_atlas",
+      "path": "media/heroes/h38/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H38"
+      }
+    },
+    {
+      "id": "hero_h38_animations",
+      "path": "media/heroes/h38/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H38",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h38_ultimate_vfx",
+      "path": "media/heroes/h38/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H38"
+      }
+    },
+    {
+      "id": "hero_h39_portrait",
+      "path": "media/heroes/h39/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H39",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h39_atlas",
+      "path": "media/heroes/h39/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H39"
+      }
+    },
+    {
+      "id": "hero_h39_animations",
+      "path": "media/heroes/h39/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H39",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h39_ultimate_vfx",
+      "path": "media/heroes/h39/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H39"
+      }
+    },
+    {
+      "id": "hero_h40_portrait",
+      "path": "media/heroes/h40/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H40",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h40_atlas",
+      "path": "media/heroes/h40/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H40"
+      }
+    },
+    {
+      "id": "hero_h40_animations",
+      "path": "media/heroes/h40/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H40",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h40_ultimate_vfx",
+      "path": "media/heroes/h40/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H40"
+      }
+    },
+    {
+      "id": "hero_h41_portrait",
+      "path": "media/heroes/h41/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H41",
+        "tint": "#E09A3E"
+      }
+    },
+    {
+      "id": "hero_h41_atlas",
+      "path": "media/heroes/h41/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H41"
+      }
+    },
+    {
+      "id": "hero_h41_animations",
+      "path": "media/heroes/h41/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H41",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h41_ultimate_vfx",
+      "path": "media/heroes/h41/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H41"
+      }
+    },
+    {
+      "id": "hero_h42_portrait",
+      "path": "media/heroes/h42/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H42",
+        "tint": "#2A9B8F"
+      }
+    },
+    {
+      "id": "hero_h42_atlas",
+      "path": "media/heroes/h42/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H42"
+      }
+    },
+    {
+      "id": "hero_h42_animations",
+      "path": "media/heroes/h42/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H42",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h42_ultimate_vfx",
+      "path": "media/heroes/h42/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H42"
+      }
+    },
+    {
+      "id": "hero_h43_portrait",
+      "path": "media/heroes/h43/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H43",
+        "tint": "#2A9B8F"
+      }
+    },
+    {
+      "id": "hero_h43_atlas",
+      "path": "media/heroes/h43/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H43"
+      }
+    },
+    {
+      "id": "hero_h43_animations",
+      "path": "media/heroes/h43/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H43",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h43_ultimate_vfx",
+      "path": "media/heroes/h43/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H43"
+      }
+    },
+    {
+      "id": "hero_h44_portrait",
+      "path": "media/heroes/h44/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H44",
+        "tint": "#2A9B8F"
+      }
+    },
+    {
+      "id": "hero_h44_atlas",
+      "path": "media/heroes/h44/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H44"
+      }
+    },
+    {
+      "id": "hero_h44_animations",
+      "path": "media/heroes/h44/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H44",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h44_ultimate_vfx",
+      "path": "media/heroes/h44/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H44"
+      }
+    },
+    {
+      "id": "hero_h45_portrait",
+      "path": "media/heroes/h45/portrait.webp",
+      "role": "hero_portrait",
+      "tags": [
+        "hero",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H45",
+        "tint": "#FFE29A"
+      }
+    },
+    {
+      "id": "hero_h45_atlas",
+      "path": "media/heroes/h45/atlas.webp",
+      "role": "hero_atlas",
+      "tags": [
+        "hero",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H45"
+      }
+    },
+    {
+      "id": "hero_h45_animations",
+      "path": "media/heroes/h45/animations.json",
+      "role": "hero_animations",
+      "tags": [
+        "hero",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "hero_id": "H45",
+        "clips": [
+          "idle",
+          "attack",
+          "skill_1",
+          "skill_2",
+          "ultimate",
+          "hit",
+          "death",
+          "victory"
+        ]
+      }
+    },
+    {
+      "id": "hero_h45_ultimate_vfx",
+      "path": "media/heroes/h45/ultimate_vfx.webp",
+      "role": "hero_ultimate_vfx",
+      "tags": [
+        "hero",
+        "vfx",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "hero_id": "H45"
+      }
+    },
+    {
+      "id": "rig_guard_atlas",
+      "path": "media/rigs/guard/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-GUARD",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_guard_animations",
+      "path": "media/rigs/guard/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-GUARD",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_guard_skin_a",
+      "path": "media/rigs/guard/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-GUARD",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_guard_skin_b",
+      "path": "media/rigs/guard/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-GUARD",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "rig_striker_atlas",
+      "path": "media/rigs/striker/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-STRIKER",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_striker_animations",
+      "path": "media/rigs/striker/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-STRIKER",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_striker_skin_a",
+      "path": "media/rigs/striker/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-STRIKER",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_striker_skin_b",
+      "path": "media/rigs/striker/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-STRIKER",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "rig_caster_atlas",
+      "path": "media/rigs/caster/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CASTER",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_caster_animations",
+      "path": "media/rigs/caster/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-CASTER",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_caster_skin_a",
+      "path": "media/rigs/caster/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CASTER",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_caster_skin_b",
+      "path": "media/rigs/caster/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CASTER",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "rig_construct_atlas",
+      "path": "media/rigs/construct/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CONSTRUCT",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_construct_animations",
+      "path": "media/rigs/construct/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-CONSTRUCT",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_construct_skin_a",
+      "path": "media/rigs/construct/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CONSTRUCT",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_construct_skin_b",
+      "path": "media/rigs/construct/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-CONSTRUCT",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "rig_beast_atlas",
+      "path": "media/rigs/beast/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-BEAST",
+        "clips": [
+          "idle",
+          "attack",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_beast_animations",
+      "path": "media/rigs/beast/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-BEAST",
+        "clips": [
+          "idle",
+          "attack",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_beast_skin_a",
+      "path": "media/rigs/beast/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-BEAST",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_beast_skin_b",
+      "path": "media/rigs/beast/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-BEAST",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "rig_wisp_atlas",
+      "path": "media/rigs/wisp/atlas.webp",
+      "role": "rig_atlas",
+      "tags": [
+        "rig",
+        "atlas",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-WISP",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ]
+      }
+    },
+    {
+      "id": "rig_wisp_animations",
+      "path": "media/rigs/wisp/animations.json",
+      "role": "rig_animations",
+      "tags": [
+        "rig",
+        "animations"
+      ],
+      "status": "planned",
+      "meta": {
+        "rig_id": "RIG-WISP",
+        "clips": [
+          "idle",
+          "attack",
+          "cast",
+          "hit",
+          "death"
+        ],
+        "pivot": "feet"
+      }
+    },
+    {
+      "id": "rig_wisp_skin_a",
+      "path": "media/rigs/wisp/skin_a.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-WISP",
+        "skin_id": "skin_a",
+        "palette": "ancient_nature"
+      }
+    },
+    {
+      "id": "rig_wisp_skin_b",
+      "path": "media/rigs/wisp/skin_b.webp",
+      "role": "rig_skin",
+      "tags": [
+        "rig",
+        "skin",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "rig_id": "RIG-WISP",
+        "skin_id": "skin_b",
+        "palette": "tech_rift"
+      }
+    },
+    {
+      "id": "boss_b01_01_portrait",
+      "path": "media/bosses/b01-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B01-01",
+        "rig_id": "RIG-GUARD",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b01_02_portrait",
+      "path": "media/bosses/b01-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B01-02",
+        "rig_id": "RIG-STRIKER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b01_03_portrait",
+      "path": "media/bosses/b01-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B01-03",
+        "rig_id": "RIG-CASTER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b02_01_portrait",
+      "path": "media/bosses/b02-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B02-01",
+        "rig_id": "RIG-CONSTRUCT",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b02_02_portrait",
+      "path": "media/bosses/b02-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B02-02",
+        "rig_id": "RIG-BEAST",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b02_03_portrait",
+      "path": "media/bosses/b02-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B02-03",
+        "rig_id": "RIG-WISP",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b03_01_portrait",
+      "path": "media/bosses/b03-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B03-01",
+        "rig_id": "RIG-GUARD",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b03_02_portrait",
+      "path": "media/bosses/b03-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B03-02",
+        "rig_id": "RIG-STRIKER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b03_03_portrait",
+      "path": "media/bosses/b03-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B03-03",
+        "rig_id": "RIG-CASTER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b04_01_portrait",
+      "path": "media/bosses/b04-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B04-01",
+        "rig_id": "RIG-CONSTRUCT",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b04_02_portrait",
+      "path": "media/bosses/b04-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B04-02",
+        "rig_id": "RIG-BEAST",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b04_03_portrait",
+      "path": "media/bosses/b04-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B04-03",
+        "rig_id": "RIG-WISP",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b05_01_portrait",
+      "path": "media/bosses/b05-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B05-01",
+        "rig_id": "RIG-GUARD",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b05_02_portrait",
+      "path": "media/bosses/b05-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B05-02",
+        "rig_id": "RIG-STRIKER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b05_03_portrait",
+      "path": "media/bosses/b05-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B05-03",
+        "rig_id": "RIG-CASTER",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b06_01_portrait",
+      "path": "media/bosses/b06-01/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B06-01",
+        "rig_id": "RIG-CONSTRUCT",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b06_02_portrait",
+      "path": "media/bosses/b06-02/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B06-02",
+        "rig_id": "RIG-BEAST",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "boss_b06_03_portrait",
+      "path": "media/bosses/b06-03/portrait.webp",
+      "role": "boss_portrait",
+      "tags": [
+        "boss",
+        "portrait",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "boss_id": "B06-03",
+        "rig_id": "RIG-WISP",
+        "scale": 1.35
+      }
+    },
+    {
+      "id": "ch01_map",
+      "path": "media/chapters/ch01/ch01_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "name": "Уфа"
+      }
+    },
+    {
+      "id": "ch01_z01_bg",
+      "path": "media/chapters/ch01/ch01_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch01_z01_mid",
+      "path": "media/chapters/ch01/ch01_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch01_z01_fg",
+      "path": "media/chapters/ch01/ch01_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch01_z02_bg",
+      "path": "media/chapters/ch01/ch01_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch01_z02_mid",
+      "path": "media/chapters/ch01/ch01_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch01_z02_fg",
+      "path": "media/chapters/ch01/ch01_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch01_z03_bg",
+      "path": "media/chapters/ch01/ch01_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch01_z03_mid",
+      "path": "media/chapters/ch01/ch01_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch01_z03_fg",
+      "path": "media/chapters/ch01/ch01_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch01_z04_bg",
+      "path": "media/chapters/ch01/ch01_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch01_z04_mid",
+      "path": "media/chapters/ch01/ch01_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch01_z04_fg",
+      "path": "media/chapters/ch01/ch01_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch01_z05_bg",
+      "path": "media/chapters/ch01/ch01_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch01_z05_mid",
+      "path": "media/chapters/ch01/ch01_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch01_z05_fg",
+      "path": "media/chapters/ch01/ch01_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch01_z06_bg",
+      "path": "media/chapters/ch01/ch01_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch01_z06_mid",
+      "path": "media/chapters/ch01/ch01_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch01_z06_fg",
+      "path": "media/chapters/ch01/ch01_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch01_arena_01",
+      "path": "media/chapters/ch01/ch01_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch01_arena_02",
+      "path": "media/chapters/ch01/ch01_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch01_arena_03",
+      "path": "media/chapters/ch01/ch01_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 1,
+        "arena": 3
+      }
+    },
+    {
+      "id": "ch02_map",
+      "path": "media/chapters/ch02/ch02_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "name": "Шиханы"
+      }
+    },
+    {
+      "id": "ch02_z01_bg",
+      "path": "media/chapters/ch02/ch02_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch02_z01_mid",
+      "path": "media/chapters/ch02/ch02_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch02_z01_fg",
+      "path": "media/chapters/ch02/ch02_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch02_z02_bg",
+      "path": "media/chapters/ch02/ch02_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch02_z02_mid",
+      "path": "media/chapters/ch02/ch02_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch02_z02_fg",
+      "path": "media/chapters/ch02/ch02_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch02_z03_bg",
+      "path": "media/chapters/ch02/ch02_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch02_z03_mid",
+      "path": "media/chapters/ch02/ch02_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch02_z03_fg",
+      "path": "media/chapters/ch02/ch02_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch02_z04_bg",
+      "path": "media/chapters/ch02/ch02_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch02_z04_mid",
+      "path": "media/chapters/ch02/ch02_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch02_z04_fg",
+      "path": "media/chapters/ch02/ch02_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch02_z05_bg",
+      "path": "media/chapters/ch02/ch02_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch02_z05_mid",
+      "path": "media/chapters/ch02/ch02_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch02_z05_fg",
+      "path": "media/chapters/ch02/ch02_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch02_z06_bg",
+      "path": "media/chapters/ch02/ch02_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch02_z06_mid",
+      "path": "media/chapters/ch02/ch02_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch02_z06_fg",
+      "path": "media/chapters/ch02/ch02_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch02_arena_01",
+      "path": "media/chapters/ch02/ch02_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch02_arena_02",
+      "path": "media/chapters/ch02/ch02_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch02_arena_03",
+      "path": "media/chapters/ch02/ch02_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 2,
+        "arena": 3
+      }
+    },
+    {
+      "id": "ch03_map",
+      "path": "media/chapters/ch03/ch03_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "name": "Белорецк"
+      }
+    },
+    {
+      "id": "ch03_z01_bg",
+      "path": "media/chapters/ch03/ch03_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch03_z01_mid",
+      "path": "media/chapters/ch03/ch03_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch03_z01_fg",
+      "path": "media/chapters/ch03/ch03_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch03_z02_bg",
+      "path": "media/chapters/ch03/ch03_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch03_z02_mid",
+      "path": "media/chapters/ch03/ch03_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch03_z02_fg",
+      "path": "media/chapters/ch03/ch03_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch03_z03_bg",
+      "path": "media/chapters/ch03/ch03_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch03_z03_mid",
+      "path": "media/chapters/ch03/ch03_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch03_z03_fg",
+      "path": "media/chapters/ch03/ch03_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch03_z04_bg",
+      "path": "media/chapters/ch03/ch03_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch03_z04_mid",
+      "path": "media/chapters/ch03/ch03_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch03_z04_fg",
+      "path": "media/chapters/ch03/ch03_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch03_z05_bg",
+      "path": "media/chapters/ch03/ch03_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch03_z05_mid",
+      "path": "media/chapters/ch03/ch03_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch03_z05_fg",
+      "path": "media/chapters/ch03/ch03_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch03_z06_bg",
+      "path": "media/chapters/ch03/ch03_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch03_z06_mid",
+      "path": "media/chapters/ch03/ch03_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch03_z06_fg",
+      "path": "media/chapters/ch03/ch03_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch03_arena_01",
+      "path": "media/chapters/ch03/ch03_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch03_arena_02",
+      "path": "media/chapters/ch03/ch03_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch03_arena_03",
+      "path": "media/chapters/ch03/ch03_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 3,
+        "arena": 3
+      }
+    },
+    {
+      "id": "ch04_map",
+      "path": "media/chapters/ch04/ch04_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "name": "Стерлитамак 2050"
+      }
+    },
+    {
+      "id": "ch04_z01_bg",
+      "path": "media/chapters/ch04/ch04_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch04_z01_mid",
+      "path": "media/chapters/ch04/ch04_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch04_z01_fg",
+      "path": "media/chapters/ch04/ch04_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch04_z02_bg",
+      "path": "media/chapters/ch04/ch04_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch04_z02_mid",
+      "path": "media/chapters/ch04/ch04_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch04_z02_fg",
+      "path": "media/chapters/ch04/ch04_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch04_z03_bg",
+      "path": "media/chapters/ch04/ch04_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch04_z03_mid",
+      "path": "media/chapters/ch04/ch04_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch04_z03_fg",
+      "path": "media/chapters/ch04/ch04_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch04_z04_bg",
+      "path": "media/chapters/ch04/ch04_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch04_z04_mid",
+      "path": "media/chapters/ch04/ch04_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch04_z04_fg",
+      "path": "media/chapters/ch04/ch04_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch04_z05_bg",
+      "path": "media/chapters/ch04/ch04_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch04_z05_mid",
+      "path": "media/chapters/ch04/ch04_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch04_z05_fg",
+      "path": "media/chapters/ch04/ch04_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch04_z06_bg",
+      "path": "media/chapters/ch04/ch04_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch04_z06_mid",
+      "path": "media/chapters/ch04/ch04_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch04_z06_fg",
+      "path": "media/chapters/ch04/ch04_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch04_arena_01",
+      "path": "media/chapters/ch04/ch04_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch04_arena_02",
+      "path": "media/chapters/ch04/ch04_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch04_arena_03",
+      "path": "media/chapters/ch04/ch04_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 4,
+        "arena": 3
+      }
+    },
+    {
+      "id": "ch05_map",
+      "path": "media/chapters/ch05/ch05_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "name": "Иремель"
+      }
+    },
+    {
+      "id": "ch05_z01_bg",
+      "path": "media/chapters/ch05/ch05_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch05_z01_mid",
+      "path": "media/chapters/ch05/ch05_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch05_z01_fg",
+      "path": "media/chapters/ch05/ch05_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch05_z02_bg",
+      "path": "media/chapters/ch05/ch05_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch05_z02_mid",
+      "path": "media/chapters/ch05/ch05_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch05_z02_fg",
+      "path": "media/chapters/ch05/ch05_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch05_z03_bg",
+      "path": "media/chapters/ch05/ch05_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch05_z03_mid",
+      "path": "media/chapters/ch05/ch05_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch05_z03_fg",
+      "path": "media/chapters/ch05/ch05_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch05_z04_bg",
+      "path": "media/chapters/ch05/ch05_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch05_z04_mid",
+      "path": "media/chapters/ch05/ch05_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch05_z04_fg",
+      "path": "media/chapters/ch05/ch05_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch05_z05_bg",
+      "path": "media/chapters/ch05/ch05_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch05_z05_mid",
+      "path": "media/chapters/ch05/ch05_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch05_z05_fg",
+      "path": "media/chapters/ch05/ch05_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch05_z06_bg",
+      "path": "media/chapters/ch05/ch05_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch05_z06_mid",
+      "path": "media/chapters/ch05/ch05_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch05_z06_fg",
+      "path": "media/chapters/ch05/ch05_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch05_arena_01",
+      "path": "media/chapters/ch05/ch05_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch05_arena_02",
+      "path": "media/chapters/ch05/ch05_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch05_arena_03",
+      "path": "media/chapters/ch05/ch05_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 5,
+        "arena": 3
+      }
+    },
+    {
+      "id": "ch06_map",
+      "path": "media/chapters/ch06/ch06_map.webp",
+      "role": "chapter_map",
+      "tags": [
+        "chapter",
+        "map",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "name": "Сердце Разлома"
+      }
+    },
+    {
+      "id": "ch06_z01_bg",
+      "path": "media/chapters/ch06/ch06_z01_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch06_z01_mid",
+      "path": "media/chapters/ch06/ch06_z01_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch06_z01_fg",
+      "path": "media/chapters/ch06/ch06_z01_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 1
+      }
+    },
+    {
+      "id": "ch06_z02_bg",
+      "path": "media/chapters/ch06/ch06_z02_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch06_z02_mid",
+      "path": "media/chapters/ch06/ch06_z02_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch06_z02_fg",
+      "path": "media/chapters/ch06/ch06_z02_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 2
+      }
+    },
+    {
+      "id": "ch06_z03_bg",
+      "path": "media/chapters/ch06/ch06_z03_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch06_z03_mid",
+      "path": "media/chapters/ch06/ch06_z03_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch06_z03_fg",
+      "path": "media/chapters/ch06/ch06_z03_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 3
+      }
+    },
+    {
+      "id": "ch06_z04_bg",
+      "path": "media/chapters/ch06/ch06_z04_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch06_z04_mid",
+      "path": "media/chapters/ch06/ch06_z04_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch06_z04_fg",
+      "path": "media/chapters/ch06/ch06_z04_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 4
+      }
+    },
+    {
+      "id": "ch06_z05_bg",
+      "path": "media/chapters/ch06/ch06_z05_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch06_z05_mid",
+      "path": "media/chapters/ch06/ch06_z05_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch06_z05_fg",
+      "path": "media/chapters/ch06/ch06_z05_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 5
+      }
+    },
+    {
+      "id": "ch06_z06_bg",
+      "path": "media/chapters/ch06/ch06_z06_bg.webp",
+      "role": "zone_bg",
+      "tags": [
+        "chapter",
+        "zone",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch06_z06_mid",
+      "path": "media/chapters/ch06/ch06_z06_mid.webp",
+      "role": "zone_mid",
+      "tags": [
+        "chapter",
+        "parallax",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch06_z06_fg",
+      "path": "media/chapters/ch06/ch06_z06_fg.webp",
+      "role": "zone_fg",
+      "tags": [
+        "chapter",
+        "foreground",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "zone": 6
+      }
+    },
+    {
+      "id": "ch06_arena_01",
+      "path": "media/chapters/ch06/ch06_arena_01.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "arena": 1
+      }
+    },
+    {
+      "id": "ch06_arena_02",
+      "path": "media/chapters/ch06/ch06_arena_02.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "arena": 2
+      }
+    },
+    {
+      "id": "ch06_arena_03",
+      "path": "media/chapters/ch06/ch06_arena_03.webp",
+      "role": "boss_arena",
+      "tags": [
+        "chapter",
+        "arena",
+        "placeholder"
+      ],
+      "status": "placeholder",
+      "meta": {
+        "chapter": 6,
+        "arena": 3
+      }
+    },
+    {
+      "id": "vfx_shield",
+      "path": "media/vfx/shield.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_strike",
+      "path": "media/vfx/strike.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_beam",
+      "path": "media/vfx/beam.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_slow",
+      "path": "media/vfx/slow.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_mark",
+      "path": "media/vfx/mark.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_heal",
+      "path": "media/vfx/heal.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_explosion",
+      "path": "media/vfx/explosion.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_teleport",
+      "path": "media/vfx/teleport.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_runes",
+      "path": "media/vfx/runes.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_fire",
+      "path": "media/vfx/fire.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_ice",
+      "path": "media/vfx/ice.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "vfx_rift",
+      "path": "media/vfx/rift.webp",
+      "role": "common_vfx",
+      "tags": [
+        "vfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_hit_light",
+      "path": "media/sfx/hit_light.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_hit_heavy",
+      "path": "media/sfx/hit_heavy.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_cast",
+      "path": "media/sfx/cast.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_shield",
+      "path": "media/sfx/shield.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_heal",
+      "path": "media/sfx/heal.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_explosion",
+      "path": "media/sfx/explosion.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_whoosh",
+      "path": "media/sfx/whoosh.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_crit",
+      "path": "media/sfx/crit.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_death",
+      "path": "media/sfx/death.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_ui_confirm",
+      "path": "media/sfx/ui_confirm.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_ui_back",
+      "path": "media/sfx/ui_back.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    },
+    {
+      "id": "sfx_rift_pulse",
+      "path": "media/sfx/rift_pulse.ogg",
+      "role": "common_sfx",
+      "tags": [
+        "sfx",
+        "shared",
+        "placeholder"
+      ],
+      "status": "placeholder"
+    }
+  ],
+  "bindings": {
+    "hub.building.summon": "placeholder_building",
+    "hub.building.guild": "placeholder_building",
+    "shell.brand": "icon_app",
+    "hero.H01.portrait": "hero_h01_portrait",
+    "hero.H01.atlas": "hero_h01_atlas",
+    "hero.H01.animations": "hero_h01_animations",
+    "hero.H01.ultimate_vfx": "hero_h01_ultimate_vfx",
+    "hero.H02.portrait": "hero_h02_portrait",
+    "hero.H02.atlas": "hero_h02_atlas",
+    "hero.H02.animations": "hero_h02_animations",
+    "hero.H02.ultimate_vfx": "hero_h02_ultimate_vfx",
+    "hero.H03.portrait": "hero_h03_portrait",
+    "hero.H03.atlas": "hero_h03_atlas",
+    "hero.H03.animations": "hero_h03_animations",
+    "hero.H03.ultimate_vfx": "hero_h03_ultimate_vfx",
+    "hero.H04.portrait": "hero_h04_portrait",
+    "hero.H04.atlas": "hero_h04_atlas",
+    "hero.H04.animations": "hero_h04_animations",
+    "hero.H04.ultimate_vfx": "hero_h04_ultimate_vfx",
+    "hero.H05.portrait": "hero_h05_portrait",
+    "hero.H05.atlas": "hero_h05_atlas",
+    "hero.H05.animations": "hero_h05_animations",
+    "hero.H05.ultimate_vfx": "hero_h05_ultimate_vfx",
+    "hero.H06.portrait": "hero_h06_portrait",
+    "hero.H06.atlas": "hero_h06_atlas",
+    "hero.H06.animations": "hero_h06_animations",
+    "hero.H06.ultimate_vfx": "hero_h06_ultimate_vfx",
+    "hero.H07.portrait": "hero_h07_portrait",
+    "hero.H07.atlas": "hero_h07_atlas",
+    "hero.H07.animations": "hero_h07_animations",
+    "hero.H07.ultimate_vfx": "hero_h07_ultimate_vfx",
+    "hero.H08.portrait": "hero_h08_portrait",
+    "hero.H08.atlas": "hero_h08_atlas",
+    "hero.H08.animations": "hero_h08_animations",
+    "hero.H08.ultimate_vfx": "hero_h08_ultimate_vfx",
+    "hero.H09.portrait": "hero_h09_portrait",
+    "hero.H09.atlas": "hero_h09_atlas",
+    "hero.H09.animations": "hero_h09_animations",
+    "hero.H09.ultimate_vfx": "hero_h09_ultimate_vfx",
+    "hero.H10.portrait": "hero_h10_portrait",
+    "hero.H10.atlas": "hero_h10_atlas",
+    "hero.H10.animations": "hero_h10_animations",
+    "hero.H10.ultimate_vfx": "hero_h10_ultimate_vfx",
+    "hero.H11.portrait": "hero_h11_portrait",
+    "hero.H11.atlas": "hero_h11_atlas",
+    "hero.H11.animations": "hero_h11_animations",
+    "hero.H11.ultimate_vfx": "hero_h11_ultimate_vfx",
+    "hero.H12.portrait": "hero_h12_portrait",
+    "hero.H12.atlas": "hero_h12_atlas",
+    "hero.H12.animations": "hero_h12_animations",
+    "hero.H12.ultimate_vfx": "hero_h12_ultimate_vfx",
+    "hero.H13.portrait": "hero_h13_portrait",
+    "hero.H13.atlas": "hero_h13_atlas",
+    "hero.H13.animations": "hero_h13_animations",
+    "hero.H13.ultimate_vfx": "hero_h13_ultimate_vfx",
+    "hero.H14.portrait": "hero_h14_portrait",
+    "hero.H14.atlas": "hero_h14_atlas",
+    "hero.H14.animations": "hero_h14_animations",
+    "hero.H14.ultimate_vfx": "hero_h14_ultimate_vfx",
+    "hero.H15.portrait": "hero_h15_portrait",
+    "hero.H15.atlas": "hero_h15_atlas",
+    "hero.H15.animations": "hero_h15_animations",
+    "hero.H15.ultimate_vfx": "hero_h15_ultimate_vfx",
+    "hero.H16.portrait": "hero_h16_portrait",
+    "hero.H16.atlas": "hero_h16_atlas",
+    "hero.H16.animations": "hero_h16_animations",
+    "hero.H16.ultimate_vfx": "hero_h16_ultimate_vfx",
+    "hero.H17.portrait": "hero_h17_portrait",
+    "hero.H17.atlas": "hero_h17_atlas",
+    "hero.H17.animations": "hero_h17_animations",
+    "hero.H17.ultimate_vfx": "hero_h17_ultimate_vfx",
+    "hero.H18.portrait": "hero_h18_portrait",
+    "hero.H18.atlas": "hero_h18_atlas",
+    "hero.H18.animations": "hero_h18_animations",
+    "hero.H18.ultimate_vfx": "hero_h18_ultimate_vfx",
+    "hero.H19.portrait": "hero_h19_portrait",
+    "hero.H19.atlas": "hero_h19_atlas",
+    "hero.H19.animations": "hero_h19_animations",
+    "hero.H19.ultimate_vfx": "hero_h19_ultimate_vfx",
+    "hero.H20.portrait": "hero_h20_portrait",
+    "hero.H20.atlas": "hero_h20_atlas",
+    "hero.H20.animations": "hero_h20_animations",
+    "hero.H20.ultimate_vfx": "hero_h20_ultimate_vfx",
+    "hero.H21.portrait": "hero_h21_portrait",
+    "hero.H21.atlas": "hero_h21_atlas",
+    "hero.H21.animations": "hero_h21_animations",
+    "hero.H21.ultimate_vfx": "hero_h21_ultimate_vfx",
+    "hero.H22.portrait": "hero_h22_portrait",
+    "hero.H22.atlas": "hero_h22_atlas",
+    "hero.H22.animations": "hero_h22_animations",
+    "hero.H22.ultimate_vfx": "hero_h22_ultimate_vfx",
+    "hero.H23.portrait": "hero_h23_portrait",
+    "hero.H23.atlas": "hero_h23_atlas",
+    "hero.H23.animations": "hero_h23_animations",
+    "hero.H23.ultimate_vfx": "hero_h23_ultimate_vfx",
+    "hero.H24.portrait": "hero_h24_portrait",
+    "hero.H24.atlas": "hero_h24_atlas",
+    "hero.H24.animations": "hero_h24_animations",
+    "hero.H24.ultimate_vfx": "hero_h24_ultimate_vfx",
+    "hero.H25.portrait": "hero_h25_portrait",
+    "hero.H25.atlas": "hero_h25_atlas",
+    "hero.H25.animations": "hero_h25_animations",
+    "hero.H25.ultimate_vfx": "hero_h25_ultimate_vfx",
+    "hero.H26.portrait": "hero_h26_portrait",
+    "hero.H26.atlas": "hero_h26_atlas",
+    "hero.H26.animations": "hero_h26_animations",
+    "hero.H26.ultimate_vfx": "hero_h26_ultimate_vfx",
+    "hero.H27.portrait": "hero_h27_portrait",
+    "hero.H27.atlas": "hero_h27_atlas",
+    "hero.H27.animations": "hero_h27_animations",
+    "hero.H27.ultimate_vfx": "hero_h27_ultimate_vfx",
+    "hero.H28.portrait": "hero_h28_portrait",
+    "hero.H28.atlas": "hero_h28_atlas",
+    "hero.H28.animations": "hero_h28_animations",
+    "hero.H28.ultimate_vfx": "hero_h28_ultimate_vfx",
+    "hero.H29.portrait": "hero_h29_portrait",
+    "hero.H29.atlas": "hero_h29_atlas",
+    "hero.H29.animations": "hero_h29_animations",
+    "hero.H29.ultimate_vfx": "hero_h29_ultimate_vfx",
+    "hero.H30.portrait": "hero_h30_portrait",
+    "hero.H30.atlas": "hero_h30_atlas",
+    "hero.H30.animations": "hero_h30_animations",
+    "hero.H30.ultimate_vfx": "hero_h30_ultimate_vfx",
+    "hero.H31.portrait": "hero_h31_portrait",
+    "hero.H31.atlas": "hero_h31_atlas",
+    "hero.H31.animations": "hero_h31_animations",
+    "hero.H31.ultimate_vfx": "hero_h31_ultimate_vfx",
+    "hero.H32.portrait": "hero_h32_portrait",
+    "hero.H32.atlas": "hero_h32_atlas",
+    "hero.H32.animations": "hero_h32_animations",
+    "hero.H32.ultimate_vfx": "hero_h32_ultimate_vfx",
+    "hero.H33.portrait": "hero_h33_portrait",
+    "hero.H33.atlas": "hero_h33_atlas",
+    "hero.H33.animations": "hero_h33_animations",
+    "hero.H33.ultimate_vfx": "hero_h33_ultimate_vfx",
+    "hero.H34.portrait": "hero_h34_portrait",
+    "hero.H34.atlas": "hero_h34_atlas",
+    "hero.H34.animations": "hero_h34_animations",
+    "hero.H34.ultimate_vfx": "hero_h34_ultimate_vfx",
+    "hero.H35.portrait": "hero_h35_portrait",
+    "hero.H35.atlas": "hero_h35_atlas",
+    "hero.H35.animations": "hero_h35_animations",
+    "hero.H35.ultimate_vfx": "hero_h35_ultimate_vfx",
+    "hero.H36.portrait": "hero_h36_portrait",
+    "hero.H36.atlas": "hero_h36_atlas",
+    "hero.H36.animations": "hero_h36_animations",
+    "hero.H36.ultimate_vfx": "hero_h36_ultimate_vfx",
+    "hero.H37.portrait": "hero_h37_portrait",
+    "hero.H37.atlas": "hero_h37_atlas",
+    "hero.H37.animations": "hero_h37_animations",
+    "hero.H37.ultimate_vfx": "hero_h37_ultimate_vfx",
+    "hero.H38.portrait": "hero_h38_portrait",
+    "hero.H38.atlas": "hero_h38_atlas",
+    "hero.H38.animations": "hero_h38_animations",
+    "hero.H38.ultimate_vfx": "hero_h38_ultimate_vfx",
+    "hero.H39.portrait": "hero_h39_portrait",
+    "hero.H39.atlas": "hero_h39_atlas",
+    "hero.H39.animations": "hero_h39_animations",
+    "hero.H39.ultimate_vfx": "hero_h39_ultimate_vfx",
+    "hero.H40.portrait": "hero_h40_portrait",
+    "hero.H40.atlas": "hero_h40_atlas",
+    "hero.H40.animations": "hero_h40_animations",
+    "hero.H40.ultimate_vfx": "hero_h40_ultimate_vfx",
+    "hero.H41.portrait": "hero_h41_portrait",
+    "hero.H41.atlas": "hero_h41_atlas",
+    "hero.H41.animations": "hero_h41_animations",
+    "hero.H41.ultimate_vfx": "hero_h41_ultimate_vfx",
+    "hero.H42.portrait": "hero_h42_portrait",
+    "hero.H42.atlas": "hero_h42_atlas",
+    "hero.H42.animations": "hero_h42_animations",
+    "hero.H42.ultimate_vfx": "hero_h42_ultimate_vfx",
+    "hero.H43.portrait": "hero_h43_portrait",
+    "hero.H43.atlas": "hero_h43_atlas",
+    "hero.H43.animations": "hero_h43_animations",
+    "hero.H43.ultimate_vfx": "hero_h43_ultimate_vfx",
+    "hero.H44.portrait": "hero_h44_portrait",
+    "hero.H44.atlas": "hero_h44_atlas",
+    "hero.H44.animations": "hero_h44_animations",
+    "hero.H44.ultimate_vfx": "hero_h44_ultimate_vfx",
+    "hero.H45.portrait": "hero_h45_portrait",
+    "hero.H45.atlas": "hero_h45_atlas",
+    "hero.H45.animations": "hero_h45_animations",
+    "hero.H45.ultimate_vfx": "hero_h45_ultimate_vfx",
+    "rig.RIG-GUARD.atlas": "rig_guard_atlas",
+    "rig.RIG-GUARD.animations": "rig_guard_animations",
+    "rig.RIG-GUARD.skin_a": "rig_guard_skin_a",
+    "rig.RIG-GUARD.skin_b": "rig_guard_skin_b",
+    "rig.RIG-STRIKER.atlas": "rig_striker_atlas",
+    "rig.RIG-STRIKER.animations": "rig_striker_animations",
+    "rig.RIG-STRIKER.skin_a": "rig_striker_skin_a",
+    "rig.RIG-STRIKER.skin_b": "rig_striker_skin_b",
+    "rig.RIG-CASTER.atlas": "rig_caster_atlas",
+    "rig.RIG-CASTER.animations": "rig_caster_animations",
+    "rig.RIG-CASTER.skin_a": "rig_caster_skin_a",
+    "rig.RIG-CASTER.skin_b": "rig_caster_skin_b",
+    "rig.RIG-CONSTRUCT.atlas": "rig_construct_atlas",
+    "rig.RIG-CONSTRUCT.animations": "rig_construct_animations",
+    "rig.RIG-CONSTRUCT.skin_a": "rig_construct_skin_a",
+    "rig.RIG-CONSTRUCT.skin_b": "rig_construct_skin_b",
+    "rig.RIG-BEAST.atlas": "rig_beast_atlas",
+    "rig.RIG-BEAST.animations": "rig_beast_animations",
+    "rig.RIG-BEAST.skin_a": "rig_beast_skin_a",
+    "rig.RIG-BEAST.skin_b": "rig_beast_skin_b",
+    "rig.RIG-WISP.atlas": "rig_wisp_atlas",
+    "rig.RIG-WISP.animations": "rig_wisp_animations",
+    "rig.RIG-WISP.skin_a": "rig_wisp_skin_a",
+    "rig.RIG-WISP.skin_b": "rig_wisp_skin_b",
+    "enemy.E01-01.visual": "rig_guard_skin_b",
+    "enemy.E01-01.rig": "RIG-GUARD",
+    "enemy.E01-02.visual": "rig_striker_skin_b",
+    "enemy.E01-02.rig": "RIG-STRIKER",
+    "enemy.E01-03.visual": "rig_caster_skin_b",
+    "enemy.E01-03.rig": "RIG-CASTER",
+    "enemy.E01-04.visual": "rig_construct_skin_b",
+    "enemy.E01-04.rig": "RIG-CONSTRUCT",
+    "enemy.E01-05.visual": "rig_beast_skin_b",
+    "enemy.E01-05.rig": "RIG-BEAST",
+    "enemy.E01-06.visual": "rig_wisp_skin_b",
+    "enemy.E01-06.rig": "RIG-WISP",
+    "enemy.E02-01.visual": "rig_guard_skin_a",
+    "enemy.E02-01.rig": "RIG-GUARD",
+    "enemy.E02-02.visual": "rig_striker_skin_a",
+    "enemy.E02-02.rig": "RIG-STRIKER",
+    "enemy.E02-03.visual": "rig_caster_skin_a",
+    "enemy.E02-03.rig": "RIG-CASTER",
+    "enemy.E02-04.visual": "rig_construct_skin_a",
+    "enemy.E02-04.rig": "RIG-CONSTRUCT",
+    "enemy.E02-05.visual": "rig_beast_skin_a",
+    "enemy.E02-05.rig": "RIG-BEAST",
+    "enemy.E02-06.visual": "rig_wisp_skin_a",
+    "enemy.E02-06.rig": "RIG-WISP",
+    "enemy.E03-01.visual": "rig_guard_skin_a",
+    "enemy.E03-01.rig": "RIG-GUARD",
+    "enemy.E03-02.visual": "rig_striker_skin_a",
+    "enemy.E03-02.rig": "RIG-STRIKER",
+    "enemy.E03-03.visual": "rig_caster_skin_a",
+    "enemy.E03-03.rig": "RIG-CASTER",
+    "enemy.E03-04.visual": "rig_construct_skin_a",
+    "enemy.E03-04.rig": "RIG-CONSTRUCT",
+    "enemy.E03-05.visual": "rig_beast_skin_a",
+    "enemy.E03-05.rig": "RIG-BEAST",
+    "enemy.E03-06.visual": "rig_wisp_skin_a",
+    "enemy.E03-06.rig": "RIG-WISP",
+    "enemy.E04-01.visual": "rig_guard_skin_b",
+    "enemy.E04-01.rig": "RIG-GUARD",
+    "enemy.E04-02.visual": "rig_striker_skin_b",
+    "enemy.E04-02.rig": "RIG-STRIKER",
+    "enemy.E04-03.visual": "rig_caster_skin_b",
+    "enemy.E04-03.rig": "RIG-CASTER",
+    "enemy.E04-04.visual": "rig_construct_skin_b",
+    "enemy.E04-04.rig": "RIG-CONSTRUCT",
+    "enemy.E04-05.visual": "rig_beast_skin_b",
+    "enemy.E04-05.rig": "RIG-BEAST",
+    "enemy.E04-06.visual": "rig_wisp_skin_b",
+    "enemy.E04-06.rig": "RIG-WISP",
+    "enemy.E05-01.visual": "rig_guard_skin_a",
+    "enemy.E05-01.rig": "RIG-GUARD",
+    "enemy.E05-02.visual": "rig_striker_skin_a",
+    "enemy.E05-02.rig": "RIG-STRIKER",
+    "enemy.E05-03.visual": "rig_caster_skin_a",
+    "enemy.E05-03.rig": "RIG-CASTER",
+    "enemy.E05-04.visual": "rig_construct_skin_a",
+    "enemy.E05-04.rig": "RIG-CONSTRUCT",
+    "enemy.E05-05.visual": "rig_beast_skin_a",
+    "enemy.E05-05.rig": "RIG-BEAST",
+    "enemy.E05-06.visual": "rig_wisp_skin_a",
+    "enemy.E05-06.rig": "RIG-WISP",
+    "enemy.E06-01.visual": "rig_guard_skin_b",
+    "enemy.E06-01.rig": "RIG-GUARD",
+    "enemy.E06-02.visual": "rig_striker_skin_b",
+    "enemy.E06-02.rig": "RIG-STRIKER",
+    "enemy.E06-03.visual": "rig_caster_skin_b",
+    "enemy.E06-03.rig": "RIG-CASTER",
+    "enemy.E06-04.visual": "rig_construct_skin_b",
+    "enemy.E06-04.rig": "RIG-CONSTRUCT",
+    "enemy.E06-05.visual": "rig_beast_skin_b",
+    "enemy.E06-05.rig": "RIG-BEAST",
+    "enemy.E06-06.visual": "rig_wisp_skin_b",
+    "enemy.E06-06.rig": "RIG-WISP",
+    "enemy.B01-01.visual": "rig_guard_skin_b",
+    "enemy.B01-01.rig": "RIG-GUARD",
+    "enemy.B01-01.portrait": "boss_b01_01_portrait",
+    "enemy.B01-02.visual": "rig_striker_skin_b",
+    "enemy.B01-02.rig": "RIG-STRIKER",
+    "enemy.B01-02.portrait": "boss_b01_02_portrait",
+    "enemy.B01-03.visual": "rig_caster_skin_b",
+    "enemy.B01-03.rig": "RIG-CASTER",
+    "enemy.B01-03.portrait": "boss_b01_03_portrait",
+    "enemy.B02-01.visual": "rig_construct_skin_a",
+    "enemy.B02-01.rig": "RIG-CONSTRUCT",
+    "enemy.B02-01.portrait": "boss_b02_01_portrait",
+    "enemy.B02-02.visual": "rig_beast_skin_a",
+    "enemy.B02-02.rig": "RIG-BEAST",
+    "enemy.B02-02.portrait": "boss_b02_02_portrait",
+    "enemy.B02-03.visual": "rig_wisp_skin_a",
+    "enemy.B02-03.rig": "RIG-WISP",
+    "enemy.B02-03.portrait": "boss_b02_03_portrait",
+    "enemy.B03-01.visual": "rig_guard_skin_b",
+    "enemy.B03-01.rig": "RIG-GUARD",
+    "enemy.B03-01.portrait": "boss_b03_01_portrait",
+    "enemy.B03-02.visual": "rig_striker_skin_b",
+    "enemy.B03-02.rig": "RIG-STRIKER",
+    "enemy.B03-02.portrait": "boss_b03_02_portrait",
+    "enemy.B03-03.visual": "rig_caster_skin_b",
+    "enemy.B03-03.rig": "RIG-CASTER",
+    "enemy.B03-03.portrait": "boss_b03_03_portrait",
+    "enemy.B04-01.visual": "rig_construct_skin_a",
+    "enemy.B04-01.rig": "RIG-CONSTRUCT",
+    "enemy.B04-01.portrait": "boss_b04_01_portrait",
+    "enemy.B04-02.visual": "rig_beast_skin_a",
+    "enemy.B04-02.rig": "RIG-BEAST",
+    "enemy.B04-02.portrait": "boss_b04_02_portrait",
+    "enemy.B04-03.visual": "rig_wisp_skin_a",
+    "enemy.B04-03.rig": "RIG-WISP",
+    "enemy.B04-03.portrait": "boss_b04_03_portrait",
+    "enemy.B05-01.visual": "rig_guard_skin_b",
+    "enemy.B05-01.rig": "RIG-GUARD",
+    "enemy.B05-01.portrait": "boss_b05_01_portrait",
+    "enemy.B05-02.visual": "rig_striker_skin_b",
+    "enemy.B05-02.rig": "RIG-STRIKER",
+    "enemy.B05-02.portrait": "boss_b05_02_portrait",
+    "enemy.B05-03.visual": "rig_caster_skin_b",
+    "enemy.B05-03.rig": "RIG-CASTER",
+    "enemy.B05-03.portrait": "boss_b05_03_portrait",
+    "enemy.B06-01.visual": "rig_construct_skin_a",
+    "enemy.B06-01.rig": "RIG-CONSTRUCT",
+    "enemy.B06-01.portrait": "boss_b06_01_portrait",
+    "enemy.B06-02.visual": "rig_beast_skin_a",
+    "enemy.B06-02.rig": "RIG-BEAST",
+    "enemy.B06-02.portrait": "boss_b06_02_portrait",
+    "enemy.B06-03.visual": "rig_wisp_skin_a",
+    "enemy.B06-03.rig": "RIG-WISP",
+    "enemy.B06-03.portrait": "boss_b06_03_portrait",
+    "chapter.CH01.map": "ch01_map",
+    "chapter.CH01.zone.1.bg": "ch01_z01_bg",
+    "chapter.CH01.zone.1.mid": "ch01_z01_mid",
+    "chapter.CH01.zone.1.fg": "ch01_z01_fg",
+    "chapter.CH01.zone.2.bg": "ch01_z02_bg",
+    "chapter.CH01.zone.2.mid": "ch01_z02_mid",
+    "chapter.CH01.zone.2.fg": "ch01_z02_fg",
+    "chapter.CH01.zone.3.bg": "ch01_z03_bg",
+    "chapter.CH01.zone.3.mid": "ch01_z03_mid",
+    "chapter.CH01.zone.3.fg": "ch01_z03_fg",
+    "chapter.CH01.zone.4.bg": "ch01_z04_bg",
+    "chapter.CH01.zone.4.mid": "ch01_z04_mid",
+    "chapter.CH01.zone.4.fg": "ch01_z04_fg",
+    "chapter.CH01.zone.5.bg": "ch01_z05_bg",
+    "chapter.CH01.zone.5.mid": "ch01_z05_mid",
+    "chapter.CH01.zone.5.fg": "ch01_z05_fg",
+    "chapter.CH01.zone.6.bg": "ch01_z06_bg",
+    "chapter.CH01.zone.6.mid": "ch01_z06_mid",
+    "chapter.CH01.zone.6.fg": "ch01_z06_fg",
+    "chapter.CH01.arena.1": "ch01_arena_01",
+    "chapter.CH01.arena.2": "ch01_arena_02",
+    "chapter.CH01.arena.3": "ch01_arena_03",
+    "chapter.CH02.map": "ch02_map",
+    "chapter.CH02.zone.1.bg": "ch02_z01_bg",
+    "chapter.CH02.zone.1.mid": "ch02_z01_mid",
+    "chapter.CH02.zone.1.fg": "ch02_z01_fg",
+    "chapter.CH02.zone.2.bg": "ch02_z02_bg",
+    "chapter.CH02.zone.2.mid": "ch02_z02_mid",
+    "chapter.CH02.zone.2.fg": "ch02_z02_fg",
+    "chapter.CH02.zone.3.bg": "ch02_z03_bg",
+    "chapter.CH02.zone.3.mid": "ch02_z03_mid",
+    "chapter.CH02.zone.3.fg": "ch02_z03_fg",
+    "chapter.CH02.zone.4.bg": "ch02_z04_bg",
+    "chapter.CH02.zone.4.mid": "ch02_z04_mid",
+    "chapter.CH02.zone.4.fg": "ch02_z04_fg",
+    "chapter.CH02.zone.5.bg": "ch02_z05_bg",
+    "chapter.CH02.zone.5.mid": "ch02_z05_mid",
+    "chapter.CH02.zone.5.fg": "ch02_z05_fg",
+    "chapter.CH02.zone.6.bg": "ch02_z06_bg",
+    "chapter.CH02.zone.6.mid": "ch02_z06_mid",
+    "chapter.CH02.zone.6.fg": "ch02_z06_fg",
+    "chapter.CH02.arena.1": "ch02_arena_01",
+    "chapter.CH02.arena.2": "ch02_arena_02",
+    "chapter.CH02.arena.3": "ch02_arena_03",
+    "chapter.CH03.map": "ch03_map",
+    "chapter.CH03.zone.1.bg": "ch03_z01_bg",
+    "chapter.CH03.zone.1.mid": "ch03_z01_mid",
+    "chapter.CH03.zone.1.fg": "ch03_z01_fg",
+    "chapter.CH03.zone.2.bg": "ch03_z02_bg",
+    "chapter.CH03.zone.2.mid": "ch03_z02_mid",
+    "chapter.CH03.zone.2.fg": "ch03_z02_fg",
+    "chapter.CH03.zone.3.bg": "ch03_z03_bg",
+    "chapter.CH03.zone.3.mid": "ch03_z03_mid",
+    "chapter.CH03.zone.3.fg": "ch03_z03_fg",
+    "chapter.CH03.zone.4.bg": "ch03_z04_bg",
+    "chapter.CH03.zone.4.mid": "ch03_z04_mid",
+    "chapter.CH03.zone.4.fg": "ch03_z04_fg",
+    "chapter.CH03.zone.5.bg": "ch03_z05_bg",
+    "chapter.CH03.zone.5.mid": "ch03_z05_mid",
+    "chapter.CH03.zone.5.fg": "ch03_z05_fg",
+    "chapter.CH03.zone.6.bg": "ch03_z06_bg",
+    "chapter.CH03.zone.6.mid": "ch03_z06_mid",
+    "chapter.CH03.zone.6.fg": "ch03_z06_fg",
+    "chapter.CH03.arena.1": "ch03_arena_01",
+    "chapter.CH03.arena.2": "ch03_arena_02",
+    "chapter.CH03.arena.3": "ch03_arena_03",
+    "chapter.CH04.map": "ch04_map",
+    "chapter.CH04.zone.1.bg": "ch04_z01_bg",
+    "chapter.CH04.zone.1.mid": "ch04_z01_mid",
+    "chapter.CH04.zone.1.fg": "ch04_z01_fg",
+    "chapter.CH04.zone.2.bg": "ch04_z02_bg",
+    "chapter.CH04.zone.2.mid": "ch04_z02_mid",
+    "chapter.CH04.zone.2.fg": "ch04_z02_fg",
+    "chapter.CH04.zone.3.bg": "ch04_z03_bg",
+    "chapter.CH04.zone.3.mid": "ch04_z03_mid",
+    "chapter.CH04.zone.3.fg": "ch04_z03_fg",
+    "chapter.CH04.zone.4.bg": "ch04_z04_bg",
+    "chapter.CH04.zone.4.mid": "ch04_z04_mid",
+    "chapter.CH04.zone.4.fg": "ch04_z04_fg",
+    "chapter.CH04.zone.5.bg": "ch04_z05_bg",
+    "chapter.CH04.zone.5.mid": "ch04_z05_mid",
+    "chapter.CH04.zone.5.fg": "ch04_z05_fg",
+    "chapter.CH04.zone.6.bg": "ch04_z06_bg",
+    "chapter.CH04.zone.6.mid": "ch04_z06_mid",
+    "chapter.CH04.zone.6.fg": "ch04_z06_fg",
+    "chapter.CH04.arena.1": "ch04_arena_01",
+    "chapter.CH04.arena.2": "ch04_arena_02",
+    "chapter.CH04.arena.3": "ch04_arena_03",
+    "chapter.CH05.map": "ch05_map",
+    "chapter.CH05.zone.1.bg": "ch05_z01_bg",
+    "chapter.CH05.zone.1.mid": "ch05_z01_mid",
+    "chapter.CH05.zone.1.fg": "ch05_z01_fg",
+    "chapter.CH05.zone.2.bg": "ch05_z02_bg",
+    "chapter.CH05.zone.2.mid": "ch05_z02_mid",
+    "chapter.CH05.zone.2.fg": "ch05_z02_fg",
+    "chapter.CH05.zone.3.bg": "ch05_z03_bg",
+    "chapter.CH05.zone.3.mid": "ch05_z03_mid",
+    "chapter.CH05.zone.3.fg": "ch05_z03_fg",
+    "chapter.CH05.zone.4.bg": "ch05_z04_bg",
+    "chapter.CH05.zone.4.mid": "ch05_z04_mid",
+    "chapter.CH05.zone.4.fg": "ch05_z04_fg",
+    "chapter.CH05.zone.5.bg": "ch05_z05_bg",
+    "chapter.CH05.zone.5.mid": "ch05_z05_mid",
+    "chapter.CH05.zone.5.fg": "ch05_z05_fg",
+    "chapter.CH05.zone.6.bg": "ch05_z06_bg",
+    "chapter.CH05.zone.6.mid": "ch05_z06_mid",
+    "chapter.CH05.zone.6.fg": "ch05_z06_fg",
+    "chapter.CH05.arena.1": "ch05_arena_01",
+    "chapter.CH05.arena.2": "ch05_arena_02",
+    "chapter.CH05.arena.3": "ch05_arena_03",
+    "chapter.CH06.map": "ch06_map",
+    "chapter.CH06.zone.1.bg": "ch06_z01_bg",
+    "chapter.CH06.zone.1.mid": "ch06_z01_mid",
+    "chapter.CH06.zone.1.fg": "ch06_z01_fg",
+    "chapter.CH06.zone.2.bg": "ch06_z02_bg",
+    "chapter.CH06.zone.2.mid": "ch06_z02_mid",
+    "chapter.CH06.zone.2.fg": "ch06_z02_fg",
+    "chapter.CH06.zone.3.bg": "ch06_z03_bg",
+    "chapter.CH06.zone.3.mid": "ch06_z03_mid",
+    "chapter.CH06.zone.3.fg": "ch06_z03_fg",
+    "chapter.CH06.zone.4.bg": "ch06_z04_bg",
+    "chapter.CH06.zone.4.mid": "ch06_z04_mid",
+    "chapter.CH06.zone.4.fg": "ch06_z04_fg",
+    "chapter.CH06.zone.5.bg": "ch06_z05_bg",
+    "chapter.CH06.zone.5.mid": "ch06_z05_mid",
+    "chapter.CH06.zone.5.fg": "ch06_z05_fg",
+    "chapter.CH06.zone.6.bg": "ch06_z06_bg",
+    "chapter.CH06.zone.6.mid": "ch06_z06_mid",
+    "chapter.CH06.zone.6.fg": "ch06_z06_fg",
+    "chapter.CH06.arena.1": "ch06_arena_01",
+    "chapter.CH06.arena.2": "ch06_arena_02",
+    "chapter.CH06.arena.3": "ch06_arena_03",
+    "vfx.shield": "vfx_shield",
+    "vfx.strike": "vfx_strike",
+    "vfx.beam": "vfx_beam",
+    "vfx.slow": "vfx_slow",
+    "vfx.mark": "vfx_mark",
+    "vfx.heal": "vfx_heal",
+    "vfx.explosion": "vfx_explosion",
+    "vfx.teleport": "vfx_teleport",
+    "vfx.runes": "vfx_runes",
+    "vfx.fire": "vfx_fire",
+    "vfx.ice": "vfx_ice",
+    "vfx.rift": "vfx_rift",
+    "sfx.hit_light": "sfx_hit_light",
+    "sfx.hit_heavy": "sfx_hit_heavy",
+    "sfx.cast": "sfx_cast",
+    "sfx.shield": "sfx_shield",
+    "sfx.heal": "sfx_heal",
+    "sfx.explosion": "sfx_explosion",
+    "sfx.whoosh": "sfx_whoosh",
+    "sfx.crit": "sfx_crit",
+    "sfx.death": "sfx_death",
+    "sfx.ui_confirm": "sfx_ui_confirm",
+    "sfx.ui_back": "sfx_ui_back",
+    "sfx.rift_pulse": "sfx_rift_pulse"
+  }
+}

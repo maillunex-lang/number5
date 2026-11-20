@@ -1,0 +1,11 @@
+{
+  "hero_id": "H28",
+  "name": "Тарисса",
+  "assets": {
+    "portrait": "portrait.webp",
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "ultimate_vfx": "ultimate_vfx.webp"
+  },
+  "status": "placeholder"
+}

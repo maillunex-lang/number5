@@ -13,6 +13,10 @@ const CACHE_ACTIVE := "user://content_cache/active.json"
 const DOC_FILES := [
 	"manifest.json", "hub.json", "campaign.json", "heroes.json", "battle_modes.json",
 	"features.json", "theme.json", "shell.json", "motion.json", "strings.json", "assets.json",
+	"enemies.json", "economy.json", "progression.json", "equipment.json", "loot_tables.json",
+	"gacha.json", "liveops.json", "pve_modes.json", "guilds.json",
+	"mail.json", "login_calendars.json", "profile.json", "achievements.json",
+	"daily_stories.json", "live_events.json", "skills.json", "dialogs.json",
 ]
 
 var enabled: bool = true
@@ -134,12 +138,27 @@ func _pump() -> void:
 func _on_request_completed(result: int, code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if not busy:
 		return
+	var kind := str(_current.get("kind", ""))
+	var optional := bool(_current.get("optional", false))
 	if result != HTTPRequest.RESULT_SUCCESS or code < 200 or code >= 300:
+		if optional and kind == "file":
+			# Старые пакеты без schema 3/4 файлов — пустой объект, загрузчик терпит.
+			var opt_name := str(_current.get("file", "optional.json"))
+			_write_text(
+				"user://content_cache/packages/%s/%s" % [_pending_version, opt_name],
+				"{}\n"
+			)
+			_done += 1
+			update_progress.emit(_done, _total, opt_name)
+			_pump()
+			return
 		_fail("CDN недоступен (%s/%s). Укажите доступный cdn_base. Сейчас: %s" % [str(result), str(code), cdn_base])
 		return
-	var kind := str(_current.get("kind", ""))
 	if kind == "active":
 		_handle_active(body)
+		return
+	if kind == "manifest":
+		_handle_manifest(body)
 		return
 	if kind == "file":
 		_handle_file(body)
@@ -167,13 +186,54 @@ func _handle_active(body: PackedByteArray) -> void:
 		return
 	_ensure_dir("user://content_cache/packages/%s" % remote_version)
 	_pending_version = remote_version
+	# Сначала manifest — из него список файлов (schema 2/3, в т.ч. enemies.json).
 	_done = 0
-	_total = DOC_FILES.size()
-	for fname in DOC_FILES:
+	_total = 1
+	_queue.append({
+		"kind": "manifest",
+		"file": "manifest.json",
+		"url": "%s/packages/%s/manifest.json" % [cdn_base, remote_version],
+	})
+	_pump()
+
+func _handle_manifest(body: PackedByteArray) -> void:
+	var raw := body.get_string_from_utf8().strip_edges()
+	if not raw.begins_with("{"):
+		_fail("CDN manifest.json не JSON")
+		return
+	var data = JSON.parse_string(raw)
+	if typeof(data) != TYPE_DICTIONARY:
+		_fail("Некорректный manifest с CDN")
+		return
+	_write_text("user://content_cache/packages/%s/manifest.json" % _pending_version, raw + "\n")
+	var files: Array = DOC_FILES.duplicate()
+	var listed: Dictionary = data.get("files", {})
+	for key in listed.keys():
+		var fname := str(key)
+		if not fname.ends_with(".json"):
+			fname = "%s.json" % fname
+		if fname not in files:
+			files.append(fname)
+	# integrity.hashes — полный список документов пакета
+	var hashes: Dictionary = data.get("integrity", {}).get("hashes", {})
+	for key in hashes.keys():
+		var fname := str(key)
+		if fname not in files:
+			files.append(fname)
+	files.erase("manifest.json")
+	_done = 1
+	_total = files.size() + 1
+	for fname in files:
 		_queue.append({
 			"kind": "file",
 			"file": fname,
 			"url": "%s/packages/%s/%s" % [cdn_base, remote_version, fname],
+			"optional": fname in [
+				"enemies.json", "economy.json", "progression.json", "equipment.json",
+				"loot_tables.json", "gacha.json", "liveops.json", "pve_modes.json", "guilds.json",
+				"mail.json", "login_calendars.json", "profile.json", "achievements.json",
+				"daily_stories.json", "live_events.json", "skills.json", "dialogs.json",
+			],
 		})
 	_pump()
 
@@ -246,3 +306,8 @@ func _write_json(path: String, data: Dictionary) -> void:
 	var f := FileAccess.open(path, FileAccess.WRITE)
 	if f:
 		f.store_string(JSON.stringify(data, "  ") + "\n")
+
+func _write_text(path: String, text: String) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f:
+		f.store_string(text)

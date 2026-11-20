@@ -88,6 +88,11 @@ export type MotionDoc = {
 };
 
 export type AssetsDoc = {
+  schema?: number;
+  disclaimer?: string;
+  production_budget?: Record<string, unknown>;
+  summary?: Record<string, number | string>;
+  animation_slots?: Record<string, string[]>;
   items: Array<{
     id: string;
     path: string;
@@ -96,6 +101,8 @@ export type AssetsDoc = {
     note?: string;
     mime?: string;
     bytes?: number;
+    status?: string;
+    meta?: Record<string, unknown>;
   }>;
   bindings: Record<string, string>;
 };
@@ -170,6 +177,24 @@ export type PackageBundle = {
   strings?: StringsDoc;
   motion?: MotionDoc;
   assets?: AssetsDoc;
+  /** Optional CONTENT-C docs (loaded when present in package). */
+  enemies?: Record<string, unknown>;
+  economy?: Record<string, unknown>;
+  progression?: Record<string, unknown>;
+  equipment?: Record<string, unknown>;
+  loot_tables?: Record<string, unknown>;
+  gacha?: Record<string, unknown>;
+  liveops?: Record<string, unknown>;
+  pve_modes?: Record<string, unknown>;
+  guilds?: Record<string, unknown>;
+  mail?: Record<string, unknown>;
+  login_calendars?: Record<string, unknown>;
+  profile?: Record<string, unknown>;
+  achievements?: Record<string, unknown>;
+  daily_stories?: Record<string, unknown>;
+  live_events?: Record<string, unknown>;
+  skills?: Record<string, unknown>;
+  dialogs?: Record<string, unknown>;
 };
 
 export const DEFAULT_HUB_LOOK: HubLook = {
@@ -202,4 +227,18 @@ export const DOC_LABELS: Record<string, string> = {
   heroes: "Герои",
   battle_modes: "Режимы битвы",
   features: "Фичи",
+  economy: "Экономика",
+  mail: "Почта",
+  login_calendars: "Календари",
+  profile: "Профиль",
+  achievements: "Достижения",
+  daily_stories: "Сюжеты дня",
+  live_events: "Live-ивенты",
+  gacha: "Гача",
+  liveops: "AFK / квесты",
+  pve_modes: "PvE",
+  guilds: "Гильдии",
+  skills: "Навыки",
+  dialogs: "Диалоги",
+  enemies: "Бестиарий",
 };

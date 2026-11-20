@@ -1,50 +1,74 @@
-# CONTENT-C — что нужно утвердить дальше
+# CONTENT-C — статус передачи
 
-Статус: чеклист решений. Пока пункты не отмечены пользователем, **не** считать лор/баланс утверждённым и не подменять CONTENT.md выдуманным финалом.
+Канон **«Башкортостан: Разлом эпох»** принят в репозиторий. Рабочее имя «Элиориан» из CONTENT-01 больше **не** используется в активном пакете.
 
-Уже утверждено в `CONTENT.md` / GDD: гибридный мир Элиориан (рабочее имя), тон, ORIGIN/THREAT/STORY-ROLE/HUMOR, автобой 5v5, 4 вкладки, MVP-объём.
+**Активный пакет:** `content/packages/active.json` → **`0.9.0`**.
 
-## Блок 1 — Фракции (CONTENT-02)
+## Источники (канон)
 
-Нужно выбрать / прислать:
+| Файл | Содержание |
+|---|---|
+| `docs/content/STORY_6_CHAPTERS.md` | 6 глав, зоны, 30 этапов/глава, сюжет |
+| `docs/STORY_CAMPAIGN.md` | Указатель на канон сюжета |
+| `docs/STORY_IDS.md` | Реестр префиксов ID |
+| `docs/content/FACTIONS_45_HEROES.md` | F01–F06, H01–H45, статы L1, навыки |
+| `docs/content/BESTIARY_6_CHAPTERS.md` | 6 ригов, E**/B**, encounters |
+| `docs/content/MONETIZATION_VIP.md` | Магазин VIRTUAL_FREE, VIP, BP |
+| `docs/content/PROGRESSION_EQUIPMENT_LOOT.md` | Уровни, сеты, дроп |
+| `docs/content/GACHA_45_HEROES.md` | 4 баннера, pity |
+| `docs/content/AFK_DAILY_QUESTS_EXPEDITIONS.md` | AFK, квесты, 18 миссий |
+| `docs/content/PVE_MODES.md` | Башня, охота, врата, подземелья |
+| `docs/content/GUILDS_COOP_RAIDS.md` | Гильдии, асинхр. рейды, жетоны |
+| `docs/content/GAME_MAIL.md` | Почта / вложения |
+| `docs/content/LOGIN_CALENDAR.md` | Календари 7/14/30 |
+| `docs/content/PLAYER_PROFILE.md` | Профиль / косметика |
+| `docs/content/ACHIEVEMENTS_48.md` | 48+6 достижений |
+| `docs/content/DAILY_STORY_EVENTS_30.md` | 30 сюжетных дней |
+| `docs/content/LIVE_EVENTS_6.md` | 6 live-событий |
+| `docs/CONTENT_IMPLEMENTATION.md` | Фазы C/E/P/G/M…V и инварианты ID |
+| `docs/ASSETS_REGISTRY.md` | UI-шрифты/иконки + указатель на C6 пакет |
 
-1. Число фракций (предложение в CONTENT.md: 6 направлений — ок / меньше / больше?).
-2. Финальные названия и краткие идеологии (1–2 предложения каждая).
-3. Есть ли жёсткое противостояние фракций в бою (бонусы/штрафы) или только лор/фильтры.
-4. Связь фракция ↔ класс героя (свободная / жёсткая / гибрид).
+## Что уже в игре
 
-## Блок 2 — Герои MVP (10–15)
+| Пакет | Содержание | Статус |
+|---|---|---|
+| `0.2.0`…`0.6.0` | spine → E → P → G → meta | Сохранены |
+| `0.7.0` | C4: 180 этапов | Сохранён |
+| `0.8.0` | C5: skills + dialogs | Сохранён |
+| **`0.9.0`** | **C6: арт-реестр + media/** | **Активный** |
 
-На каждого героя минимум:
+Клиент: `ContentPackageLoader` читает optional JSON; UI DEMO без серверного claim.
 
-- id, имя, фракция, класс/роль, редкость
-- 1–2 предложения характера
-- 3 навыка (имя + 1 строка эффекта; автокаст)
-- целевые анимации: Idle / Attack / Skill / Hit / Death (есть ассет? / нужен заказ?)
+## Что ещё нужно решить / доделать
 
-Можно таблицей (Sheets/CSV) или списком в чате.
+| Блок | Статус | Комментарий |
+|---|---|---|
+| Фракции (6) | **В данных** | Бонусы 2/3/5 — проект, не в бою |
+| 45 героев | **Реестр + skills + art slots** | Бинарный арт → ART-05 |
+| Кампания | **180 этапов** | C6 ✓ · дальше ART-05 / C7 OTA |
+| Бестиарий | **36+18 ID + 6 ригов** | Слоты анимаций в `0.9.0` |
+| ТЗ фундамента (TZ-A) | **Готово** | `docs/TZ_A_FOUNDATION.md` |
+| Сервер claim/wallet | **Memory ✓** (auth…store) | Postgres — Docker/VPS |
+| Доступы CORE-01 PG | Открыто | Docker/VPS |
 
-## Блок 3 — Кампания (30 этапов)
+## Пересборка
 
-1. Название главы 1 и 2–3 регионов.
-2. Список 30 этапов: id, имя, тип (main/side/secret), рекомендуемая сила (черновик), 1 строка награды.
-3. 5–10 типов врагов (имя + роль) для первой главы.
-4. Сюжетный бит главы (абзац) — можно черновик.
+Исторические пакеты (не двигают `active.json`):
 
-## Блок 4 — Экономика и призыв (черновик)
+```bash
+python3 tools/generate_razlom_package.py           # 0.2.0
+python3 tools/generate_economy_package.py          # 0.3.0
+python3 tools/generate_pve_package.py              # 0.4.0
+python3 tools/generate_guilds_package.py           # 0.5.0
+python3 tools/generate_meta_package.py             # 0.6.0
+python3 tools/generate_campaign_c4_package.py      # 0.7.0
+python3 tools/generate_skills_dialogs_package.py   # 0.8.0
+```
 
-1. Валюты MVP и источники дохода.
-2. Стоимость призыва ×1/×10 и веса редкостей (можно оставить демо из `features.json` как старт).
-3. AFK: кап времени, базовый золотой/час (черновик).
-4. Что **точно не трогаем** до v0.1 (полный VIP, весь магазин и т.д. — уже в MVP.md).
+Активный пакет:
 
-## Блок 5 — Доступы для CORE-01 (когда будете готовы к серверу)
-
-1. Можно ли поднять локальный Docker Compose в этом репо без VPS?
-2. Если нужен VPS/домен — хост, SSH/доступ, домен, разрешение на Caddy.
-3. Email-провайдер для AUTH (или «только гость на первом шаге»).
-4. Android keystore для **release** (debug уже был) — не присылать в чат; через секреты CI/Cursor.
-
-## Как передавать
-
-Достаточно ответов по блокам 1–4 в любом порядке. После утверждения контент попадёт в пакеты через Admin Studio и в `CONTENT.md` как утверждённые записи.
+```bash
+python3 tools/generate_assets_c6_package.py        # 0.9.0 + active.json
+tools/validate_content_package.sh 0.9.0
+python3 tools/check_repo_refs.py
+```

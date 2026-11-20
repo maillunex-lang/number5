@@ -21,6 +21,23 @@ const DOC_FILES = [
   "strings",
   "motion",
   "assets",
+  "enemies",
+  "economy",
+  "progression",
+  "equipment",
+  "loot_tables",
+  "gacha",
+  "liveops",
+  "pve_modes",
+  "guilds",
+  "mail",
+  "login_calendars",
+  "profile",
+  "achievements",
+  "daily_stories",
+  "live_events",
+  "skills",
+  "dialogs",
 ] as const;
 
 const app = express();

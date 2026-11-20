@@ -56,21 +56,36 @@ func _load_heroes() -> void:
 		var level := int(h.get("level", 1))
 		var stars := int(h.get("stars", 1))
 		var tint := Color(str(h.get("tint", "#888888")))
+		var base: Dictionary = h.get("base_stats", {})
+		var hp := int(base.get("hp", 1000 + level * 80 + stars * 200))
+		var atk := int(base.get("atk", 120 + level * 12 + stars * 30))
+		var defense := int(base.get("def", 80 + level * 8))
+		# Масштаб L1 → текущий уровень (формулы канона, предварительные).
+		if base.has("hp"):
+			hp = int(round(float(base["hp"]) * (1.0 + 0.075 * float(level - 1))))
+			atk = int(round(float(base["atk"]) * (1.0 + 0.060 * float(level - 1))))
+			defense = int(round(float(base["def"]) * (1.0 + 0.055 * float(level - 1))))
 		heroes.append({
 			"id": str(h.get("id", "")),
 			"name": str(h.get("name", "")),
 			"class": str(h.get("class", "")),
+			"role": str(h.get("role", "")),
 			"faction": str(h.get("faction", "")),
+			"faction_id": str(h.get("faction_id", "")),
 			"rarity": str(h.get("rarity", "common")),
 			"tint": tint,
 			"level": level,
 			"stars": stars,
 			"power": int(h.get("power", 1000)),
-			"hp": 1000 + level * 80 + stars * 200,
-			"atk": 120 + level * 12 + stars * 30,
-			"def": 80 + level * 8,
+			"hp": hp,
+			"atk": atk,
+			"def": defense,
+			"spd": int(base.get("spd", 80)),
+			"energy": int(base.get("energy", 0)),
 			"favorite": bool(h.get("favorite", false)),
 			"skills": h.get("skills", []),
+			"quote": str(h.get("quote", "")),
+			"personality": str(h.get("personality", "")),
 			"equip": {"weapon": "", "armor": "", "acc": ""},
 		})
 
@@ -91,11 +106,21 @@ func _load_features_defaults() -> void:
 	var afk: Dictionary = ContentPackageLoader.features.get("afk", {})
 	if afk.has("seconds_default"):
 		afk_seconds_accumulated = int(afk["seconds_default"])
-	var mail: Array = ContentPackageLoader.features.get("mail", [])
 	mail_unread = 0
-	for m in mail:
-		if bool(m.get("unread", false)):
-			mail_unread += 1
+	var mail_pack: Dictionary = ContentPackageLoader.mail_pack
+	if not mail_pack.is_empty():
+		for m_raw in mail_pack.get("demo_inbox", []):
+			var m: Dictionary = m_raw
+			if str(m.get("status", "")) == "unread":
+				mail_unread += 1
+	else:
+		var mail_feat = ContentPackageLoader.features.get("mail", [])
+		if typeof(mail_feat) == TYPE_ARRAY:
+			for m in mail_feat:
+				if bool(m.get("unread", false)):
+					mail_unread += 1
+		elif typeof(mail_feat) == TYPE_DICTIONARY:
+			mail_unread = int(mail_feat.get("unread_demo", 0))
 	quest_ready = 0
 	var quests: Dictionary = ContentPackageLoader.features.get("quests", {})
 	for key in quests.keys():
@@ -143,6 +168,7 @@ func get_filtered_heroes(faction: String = "", rarity: String = "", hero_class: 
 
 func _rarity_rank(r: String) -> int:
 	match r:
+		"mythic": return 5
 		"legendary": return 4
 		"epic": return 3
 		"rare": return 2
@@ -199,19 +225,68 @@ func get_stage(stage_id: String) -> Dictionary:
 func enemy_squad_for_stage(stage_id: String) -> Array[Dictionary]:
 	var stage := get_stage(stage_id)
 	var base_power := int(stage.get("power", 10000))
-	var names := ["Страж осколка", "Тень разлома", "Голем пепла", "Стрелок руин", "Аколит"]
-	var tints := [Color("8A7060"), Color("5A4A70"), Color("706050"), Color("4A6050"), Color("604050")]
 	var out: Array[Dictionary] = []
-	for i in 5:
+	var enc := _encounter_for_stage(stage_id)
+	var slots: Array = enc.get("slots", [])
+	var tint_by_rig := {
+		"RIG-GUARD": Color("5A7A8A"),
+		"RIG-STRIKER": Color("8A4A5A"),
+		"RIG-CASTER": Color("6A5A8A"),
+		"RIG-CONSTRUCT": Color("7A6A4A"),
+		"RIG-BEAST": Color("4A7A5A"),
+		"RIG-WISP": Color("4A6A7A"),
+	}
+	if slots.is_empty():
+		for i in 5:
+			out.append({
+				"id": "e_%s_%d" % [stage_id, i],
+				"name": "Враг разлома",
+				"tint": Color("6A5A50"),
+				"hp": 800 + base_power / 12 + i * 40,
+				"atk": 90 + base_power / 100 + i * 8,
+				"power": base_power / 5 + i * 200,
+			})
+		return out
+	for i in slots.size():
+		var slot: Dictionary = slots[i]
+		var eid := str(slot.get("enemy_id", ""))
+		var meta := _enemy_meta(eid)
+		var level := int(slot.get("level", 5))
+		var tier := str(slot.get("tier", "normal"))
+		var mult := 1.0
+		match tier:
+			"elite":
+				mult = 1.35
+			"boss":
+				mult = 2.2
+		var tint: Color = tint_by_rig.get(str(meta.get("rig_id", "")), Color("6A5A50"))
 		out.append({
-			"id": "e_%s_%d" % [stage_id, i],
-			"name": names[i],
-			"tint": tints[i],
-			"hp": 800 + base_power / 12 + i * 40,
-			"atk": 90 + base_power / 100 + i * 8,
-			"power": base_power / 5 + i * 200,
+			"id": "%s_%d" % [eid, i],
+			"enemy_id": eid,
+			"name": str(meta.get("name", eid)),
+			"tint": tint,
+			"rig_id": str(meta.get("rig_id", "")),
+			"tier": tier,
+			"hp": int((900 + base_power / 14 + level * 35) * mult),
+			"atk": int((95 + base_power / 110 + level * 6) * mult),
+			"power": int((base_power / 5 + level * 40) * mult),
 		})
 	return out
+
+func _encounter_for_stage(stage_id: String) -> Dictionary:
+	for enc in ContentPackageLoader.enemies_pack.get("encounters", []):
+		if str(enc.get("stage_id", "")) == stage_id:
+			return enc
+	return {}
+
+func _enemy_meta(enemy_id: String) -> Dictionary:
+	for e in ContentPackageLoader.enemies_pack.get("enemies", []):
+		if str(e.get("id", "")) == enemy_id:
+			return e
+	for b in ContentPackageLoader.enemies_pack.get("bosses", []):
+		if str(b.get("id", "")) == enemy_id:
+			return b
+	return {"id": enemy_id, "name": enemy_id, "rig_id": "RIG-GUARD"}
 
 func ally_battle_units() -> Array[Dictionary]:
 	var out: Array[Dictionary] = []

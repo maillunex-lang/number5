@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: lunex
+      POSTGRES_PASSWORD: lunex
+      POSTGRES_DB: lunex
+    ports:
+      - "5432:5432"
+    volumes:
+      - lunex_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lunex -d lunex"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  lunex_pg:

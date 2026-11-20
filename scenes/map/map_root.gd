@@ -7,7 +7,7 @@ extends Control
 var _float_tweens: Array[Tween] = []
 
 func _ready() -> void:
-	_title.text = ContentPackageLoader.tr_key("map.title", "Карта мира · Элиориан")
+	_title.text = ContentPackageLoader.tr_key("map.title", "Карта мира · Разлом эпох")
 	_build()
 	$Header/ContinueBtn.pressed.connect(_on_continue)
 	$Header/BackHint.text = "%s · выберите регион или «Продолжить»" % ContentPackageLoader.package_label()
@@ -55,4 +55,5 @@ func _build() -> void:
 			_float_tweens.append(tw)
 
 func _on_continue() -> void:
-	ScreenRouter.go("MAP-01", {"region_id": "r1", "focus_current": true})
+	var ch := str(DemoData.campaign_progress.get("chapter_id", "CH01"))
+	ScreenRouter.go("MAP-01", {"region_id": ch, "focus_current": true})

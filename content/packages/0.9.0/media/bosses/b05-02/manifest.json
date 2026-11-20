@@ -1,0 +1,11 @@
+{
+  "boss_id": "B05-02",
+  "rig_id": "RIG-STRIKER",
+  "skin_id": "skin_b",
+  "scale": 1.35,
+  "assets": {
+    "portrait": "portrait.webp"
+  },
+  "status": "placeholder",
+  "note": "Boss reuses rig animations; unique portrait + overlays"
+}

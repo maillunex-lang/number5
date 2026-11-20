@@ -62,6 +62,18 @@ export default function Dashboard() {
             <li>
               <Link to="/features">Фичи</Link>
             </li>
+          </ul>
+          <h3 style={{ color: "var(--gold)" }}>CONTENT-C</h3>
+          <ul>
+            <li>
+              <Link to="/economy">Экономика (валюты / SKU / VIP)</Link>
+            </li>
+            <li>
+              <Link to="/meta">Meta M→V (почта…ивенты)</Link>
+            </li>
+            <li>
+              <Link to="/catalog">Каталог (гача / PvE / навыки…)</Link>
+            </li>
             <li>
               <Link to="/packages">Пакеты · diff / publish / rollback</Link>
             </li>
@@ -77,6 +89,9 @@ export default function Dashboard() {
               <li>Тема: {data.theme?.title ?? "—"}</li>
               <li>Строк: {Object.keys(data.strings?.entries || {}).length}</li>
               <li>Ассетов: {data.assets?.items?.length ?? 0}</li>
+              <li>Валюты: {(data.economy?.currencies as unknown[] | undefined)?.length ?? 0}</li>
+              <li>Навыки: {(data.skills?.cards as unknown[] | undefined)?.length ?? 0}</li>
+              <li>Достижения: {(data.achievements?.achievements as unknown[] | undefined)?.length ?? 0}</li>
             </ul>
           ) : (
             <p className="muted">Загрузка…</p>

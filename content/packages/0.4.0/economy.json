@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "mode": "VIRTUAL_FREE",
+  "timezone": "Europe/Moscow",
+  "disclaimer": "Тестовый магазин · Бесплатно · Реальные деньги не списываются",
+  "currencies": [
+    {
+      "id": "gold",
+      "name": "Золото",
+      "premium": false
+    },
+    {
+      "id": "diamonds",
+      "name": "Алмазы",
+      "premium": true
+    },
+    {
+      "id": "hero_xp",
+      "name": "Опыт героя",
+      "premium": false
+    },
+    {
+      "id": "essence",
+      "name": "Эссенция",
+      "premium": false
+    },
+    {
+      "id": "summon_scroll",
+      "name": "Свиток призыва",
+      "premium": false
+    },
+    {
+      "id": "faction_scroll",
+      "name": "Фракционный свиток",
+      "premium": false
+    },
+    {
+      "id": "time_shard",
+      "name": "Осколок времени",
+      "premium": false
+    },
+    {
+      "id": "arena_token",
+      "name": "Знак арены",
+      "premium": false
+    },
+    {
+      "id": "cosmetic_token",
+      "name": "Печать облика",
+      "premium": false
+    },
+    {
+      "id": "afk_hour",
+      "name": "Купон AFK",
+      "premium": false
+    },
+    {
+      "id": "vip_xp",
+      "name": "Очки VIP",
+      "premium": false,
+      "spendable": false
+    },
+    {
+      "id": "ore",
+      "name": "Руда",
+      "premium": false
+    },
+    {
+      "id": "class_seal",
+      "name": "Знак класса",
+      "premium": false
+    },
+    {
+      "id": "skill_book",
+      "name": "Книга умений",
+      "premium": false
+    },
+    {
+      "id": "boss_core",
+      "name": "Ядро босса",
+      "premium": false
+    },
+    {
+      "id": "set_pattern",
+      "name": "Чертёж сета",
+      "premium": false
+    },
+    {
+      "id": "reforge_stone",
+      "name": "Камень перековки",
+      "premium": false
+    },
+    {
+      "id": "artifact_fragment",
+      "name": "Фрагмент артефакта",
+      "premium": false
+    }
+  ],
+  "offers": [
+    {
+      "sku": "diamond_s",
+      "title": "Малый запас алмазов",
+      "nominal_price_rub": 59,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 300
+        }
+      ],
+      "vip_xp": 0,
+      "limits": {
+        "per_day": 3
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "diamond_m",
+      "title": "Шкатулка алмазов",
+      "nominal_price_rub": 149,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 850
+        }
+      ],
+      "vip_xp": 0,
+      "limits": {
+        "per_day": 2
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "diamond_l",
+      "title": "Сундук алмазов",
+      "nominal_price_rub": 299,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 1900
+        }
+      ],
+      "vip_xp": 0,
+      "limits": {
+        "per_day": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "diamond_xl",
+      "title": "Хранилище алмазов",
+      "nominal_price_rub": 599,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 4300
+        }
+      ],
+      "vip_xp": 0,
+      "limits": {
+        "per_week": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "starter_ufa",
+      "title": "Набор первопроходца Уфы",
+      "nominal_price_rub": 199,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 600
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 10
+        },
+        {
+          "resource_id": "gold",
+          "amount": 100000
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 20000
+        }
+      ],
+      "vip_xp": 100,
+      "limits": {
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_1",
+      "title": "Комплект Разлома: Уфа",
+      "nominal_price_rub": 149,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 400
+        },
+        {
+          "resource_id": "essence",
+          "amount": 1200
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 5
+        }
+      ],
+      "vip_xp": 80,
+      "limits": {
+        "after_stage": "CH01-10"
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "daily_supplies",
+      "title": "Ежедневные припасы",
+      "nominal_price_rub": 49,
+      "payable_price_rub": 0,
+      "type": "daily",
+      "grants": [
+        {
+          "resource_id": "gold",
+          "amount": 50000
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 12000
+        },
+        {
+          "resource_id": "essence",
+          "amount": 400
+        }
+      ],
+      "vip_xp": 10,
+      "limits": {
+        "per_day": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "weekly_expedition",
+      "title": "Недельная экспедиция",
+      "nominal_price_rub": 199,
+      "payable_price_rub": 0,
+      "type": "weekly",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 500
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 6
+        },
+        {
+          "resource_id": "afk_hour",
+          "amount": 4
+        }
+      ],
+      "vip_xp": 60,
+      "limits": {
+        "per_week": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "monthly_archive",
+      "title": "Архив Хранителя",
+      "nominal_price_rub": 499,
+      "payable_price_rub": 0,
+      "type": "monthly",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 1200
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 10
+        },
+        {
+          "resource_id": "essence",
+          "amount": 2500
+        }
+      ],
+      "vip_xp": 150,
+      "limits": {
+        "per_30d": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "summon_10",
+      "title": "Десять свитков",
+      "nominal_price_rub": 199,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 10
+        }
+      ],
+      "vip_xp": 30,
+      "limits": {
+        "per_week": 2
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "faction_5",
+      "title": "Пять фракционных свитков",
+      "nominal_price_rub": 249,
+      "payable_price_rub": 0,
+      "type": "repeatable",
+      "grants": [
+        {
+          "resource_id": "faction_scroll",
+          "amount": 5
+        }
+      ],
+      "vip_xp": 40,
+      "limits": {
+        "per_week": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "cosmetic_frame_ufa",
+      "title": "Рамка «Ночная Уфа»",
+      "nominal_price_rub": 99,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "cosmetic_frame",
+          "amount": 1,
+          "item_id": "ufa_night"
+        }
+      ],
+      "vip_xp": 0,
+      "limits": {
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "battlepass_premium_s01",
+      "title": "Премиум «Хроники Разлома»",
+      "nominal_price_rub": 499,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "battlepass_premium",
+          "amount": 1,
+          "season": "s01"
+        }
+      ],
+      "vip_xp": 100,
+      "limits": {
+        "per_season": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_2",
+      "title": "Каменные свидетели",
+      "nominal_price_rub": 199,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 500
+        },
+        {
+          "resource_id": "essence",
+          "amount": 1600
+        }
+      ],
+      "vip_xp": 90,
+      "limits": {
+        "after_stage": "CH02-10",
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_3",
+      "title": "Железное сердце",
+      "nominal_price_rub": 249,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 600
+        },
+        {
+          "resource_id": "essence",
+          "amount": 2200
+        }
+      ],
+      "vip_xp": 110,
+      "limits": {
+        "after_stage": "CH03-10",
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_4",
+      "title": "Стерлитамак 2050",
+      "nominal_price_rub": 299,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 700
+        },
+        {
+          "resource_id": "essence",
+          "amount": 2800
+        }
+      ],
+      "vip_xp": 130,
+      "limits": {
+        "after_stage": "CH04-10",
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_5",
+      "title": "Тени Иремеля",
+      "nominal_price_rub": 349,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 800
+        },
+        {
+          "resource_id": "essence",
+          "amount": 3500
+        }
+      ],
+      "vip_xp": 150,
+      "limits": {
+        "after_stage": "CH05-10",
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "sku": "chapter_6",
+      "title": "Сердце Разлома",
+      "nominal_price_rub": 399,
+      "payable_price_rub": 0,
+      "type": "once",
+      "grants": [
+        {
+          "resource_id": "diamonds",
+          "amount": 1000
+        },
+        {
+          "resource_id": "faction_scroll",
+          "amount": 8
+        },
+        {
+          "resource_id": "cosmetic_token",
+          "amount": 100
+        }
+      ],
+      "vip_xp": 180,
+      "limits": {
+        "after_stage": "CH06-10",
+        "lifetime": 1
+      },
+      "enabled": true,
+      "cta": "Получить бесплатно (тест)"
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub_moon",
+      "name": "Лунный пропуск",
+      "days": 30,
+      "nominal_rub": 299,
+      "grant_now": [
+        {
+          "resource_id": "diamonds",
+          "amount": 300
+        }
+      ],
+      "daily": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ],
+      "perks": [
+        "afk_expedition_slot_+1",
+        "cosmetic_badge_moon"
+      ]
+    },
+    {
+      "id": "sub_guardian",
+      "name": "Клятва Хранителя",
+      "days": 30,
+      "nominal_rub": 599,
+      "grant_now": [
+        {
+          "resource_id": "diamonds",
+          "amount": 650
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 5
+        }
+      ],
+      "daily": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        },
+        {
+          "resource_id": "afk_hour",
+          "amount": 1
+        }
+      ],
+      "perks": [
+        "squad_preset_+2",
+        "frame_guardian"
+      ]
+    },
+    {
+      "id": "sub_archivist",
+      "name": "Архивариус эпох",
+      "days": 30,
+      "nominal_rub": 899,
+      "grant_now": [
+        {
+          "resource_id": "diamonds",
+          "amount": 1000
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 8
+        }
+      ],
+      "daily": [
+        {
+          "resource_id": "diamonds",
+          "amount": 200
+        },
+        {
+          "resource_id": "cosmetic_token",
+          "amount": 100
+        }
+      ],
+      "perks": [
+        "history_extended",
+        "title_archivist"
+      ]
+    }
+  ],
+  "vip_levels": [
+    {
+      "level": 0,
+      "threshold_xp": 0,
+      "perk": "Базовый доступ",
+      "milestone_rewards": []
+    },
+    {
+      "level": 1,
+      "threshold_xp": 100,
+      "perk": "Рамка профиля I",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "threshold_xp": 300,
+      "perk": "+1 пресет отряда",
+      "milestone_rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "threshold_xp": 650,
+      "perk": "Уникальная иконка профиля",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "threshold_xp": 1100,
+      "perk": "+1 пресет отряда",
+      "milestone_rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 3
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "threshold_xp": 1700,
+      "perk": "Рамка профиля II",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "threshold_xp": 2500,
+      "perk": "+1 сохранённый фильтр коллекции",
+      "milestone_rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "threshold_xp": 3500,
+      "perk": "Косметический титул",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "threshold_xp": 4800,
+      "perk": "Рамка профиля III",
+      "milestone_rewards": [
+        {
+          "resource_id": "faction_scroll",
+          "amount": 5
+        }
+      ]
+    },
+    {
+      "level": 9,
+      "threshold_xp": 6500,
+      "perk": "+1 слот пресета отряда",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "level": 10,
+      "threshold_xp": 8500,
+      "perk": "Анимированный аватар",
+      "milestone_rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 8
+        }
+      ]
+    },
+    {
+      "level": 11,
+      "threshold_xp": 11000,
+      "perk": "Рамка Хранителя эпох",
+      "milestone_rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 500
+        },
+        {
+          "resource_id": "cosmetic_token",
+          "amount": 100
+        }
+      ]
+    }
+  ],
+  "battle_pass": {
+    "id": "s01",
+    "name": "Хроники Разлома",
+    "duration_days": 28,
+    "xp_per_level": 100,
+    "max_level": 30,
+    "sku_premium": "battlepass_premium_s01",
+    "levels": [
+      {
+        "level": 1,
+        "xp_required": 100,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 12500
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 90
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "xp_required": 200,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 2800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "xp_required": 300,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 145
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 35
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "xp_required": 400,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "xp_required": 500,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 55
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 150
+          }
+        ]
+      },
+      {
+        "level": 6,
+        "xp_required": 600,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 25000
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 140
+          }
+        ]
+      },
+      {
+        "level": 7,
+        "xp_required": 700,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 4800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "level": 8,
+        "xp_required": 800,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 220
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 60
+          }
+        ]
+      },
+      {
+        "level": 9,
+        "xp_required": 900,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "xp_required": 1000,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 80
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 200
+          }
+        ]
+      },
+      {
+        "level": 11,
+        "xp_required": 1100,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 37500
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 190
+          }
+        ]
+      },
+      {
+        "level": 12,
+        "xp_required": 1200,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 6800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "level": 13,
+        "xp_required": 1300,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 295
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 85
+          }
+        ]
+      },
+      {
+        "level": 14,
+        "xp_required": 1400,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "xp_required": 1500,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 105
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 250
+          }
+        ]
+      },
+      {
+        "level": 16,
+        "xp_required": 1600,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 50000
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 240
+          }
+        ]
+      },
+      {
+        "level": 17,
+        "xp_required": 1700,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 8800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "level": 18,
+        "xp_required": 1800,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 370
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 110
+          }
+        ]
+      },
+      {
+        "level": 19,
+        "xp_required": 1900,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "xp_required": 2000,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 130
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 300
+          }
+        ]
+      },
+      {
+        "level": 21,
+        "xp_required": 2100,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 62500
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 290
+          }
+        ]
+      },
+      {
+        "level": 22,
+        "xp_required": 2200,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 10800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "level": 23,
+        "xp_required": 2300,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 445
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 135
+          }
+        ]
+      },
+      {
+        "level": 24,
+        "xp_required": 2400,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 3
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "xp_required": 2500,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 155
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 350
+          }
+        ]
+      },
+      {
+        "level": 26,
+        "xp_required": 2600,
+        "free": [
+          {
+            "resource_id": "gold",
+            "amount": 75000
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "diamonds",
+            "amount": 340
+          }
+        ]
+      },
+      {
+        "level": 27,
+        "xp_required": 2700,
+        "free": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 12800
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 4
+          }
+        ]
+      },
+      {
+        "level": 28,
+        "xp_required": 2800,
+        "free": [
+          {
+            "resource_id": "essence",
+            "amount": 520
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 160
+          }
+        ]
+      },
+      {
+        "level": 29,
+        "xp_required": 2900,
+        "free": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 3
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "xp_required": 3000,
+        "free": [
+          {
+            "resource_id": "diamonds",
+            "amount": 180
+          }
+        ],
+        "premium": [
+          {
+            "resource_id": "skin",
+            "amount": 1,
+            "item_id": "season_rift_s01"
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 500
+          }
+        ]
+      }
+    ],
+    "pass_xp_sources": {
+      "daily_login": 20,
+      "daily_campaign": 30,
+      "daily_afk": 20,
+      "daily_upgrade": 20,
+      "weekly_campaign": 120,
+      "weekly_boss": 100,
+      "weekly_summon": 80,
+      "season_story": 250
+    }
+  },
+  "categories": [
+    "Рекомендуем",
+    "Алмазы",
+    "Наборы",
+    "Подписки",
+    "VIP",
+    "Пропуск",
+    "Косметика",
+    "История"
+  ]
+}

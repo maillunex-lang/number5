@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "id": "icon_app",
+      "path": "res://assets/ui/icon.svg",
+      "role": "app_icon",
+      "tags": ["ui", "brand"],
+      "note": "Иконка приложения"
+    },
+    {
+      "id": "font_display",
+      "path": "res://fonts/Cinzel-Bold.ttf",
+      "role": "font_display",
+      "tags": ["font"]
+    },
+    {
+      "id": "font_ui",
+      "path": "res://fonts/OpenSans-SemiBold.ttf",
+      "role": "font_ui",
+      "tags": ["font"]
+    },
+    {
+      "id": "placeholder_building",
+      "path": "",
+      "role": "building_art",
+      "tags": ["hub", "placeholder"],
+      "note": "Слот арта здания — назначьте PNG/WebP через Studio"
+    }
+  ],
+  "bindings": {
+    "hub.building.summon": "placeholder_building",
+    "hub.building.guild": "placeholder_building",
+    "shell.brand": "icon_app"
+  }
+}

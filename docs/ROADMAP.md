@@ -1,83 +1,101 @@
-# Lunex AFK - Roadmap
+# Lunex AFK — Roadmap
 
-Статус: **живая карта**. Обновлено 2026-11-20 · истина: **`main`** (`34c99cf`).
+Обновлено: **2026-11-20** · истина: ветка **`main`** · пакет **`0.9.0`**.
 
-Последовательность проектирования: **D** (документы) → **C** (контент) → **A** (ТЗ фундамента) → онлайн-реализация.  
-Локальный UI + Admin Studio + OTA-пакеты **не заменяют** CORE-01 и серверный игровой цикл MVP.
+Порядок: **D** (доки) → **C** (контент) → **A** (ТЗ) → **CORE-01** (онлайн).  
+UI + Studio + OTA (dev) **не** заменяют сервер.
 
-## Фактический прогресс (репозиторий)
+---
 
-| Артефакт | Состояние | Где |
+## Срез репозитория
+
+| Артефакт | Статус | Где |
 |---|---|---|
-| Документы D (GDD / MVP / STRUCTURE / ARCHITECTURE / CONTENT-01) | Утверждены / зафиксированы | `docs/` |
-| UI Prototype v0.1 (Godot 4.7.2) | **Готово** | `project.godot`, `scenes/`, smoke |
-| Версионные пакеты schema 2 (клиент только читает) | **Готово** (`0.1.0`) | `content/packages/` |
-| Admin Studio комбайн (Theme / Shell / Strings / Motion / Assets / Hub 2.0) | **Готово** (локальный файловый API) | `admin-studio/` |
-| OTA контента без переустановки APK | **Готово** (локальный CDN; прод — HTTPS-хост) | `/cdn`, `ContentUpdateService`, `docs/CONTENT_OTA.md` |
-| Android debug APK | Собирался ранее (не в git) | `docs/ANDROID_BUILD.md` |
-| CONTENT-02+ (фракции, 10–15 героев, 30 этапов, экономика) | **Не утверждено** | `docs/CONTENT_HANDOFF.md` |
-| HTTPS CDN / VPS для OTA на устройствах | **Не развёрнуто** | нужен хост + `cdn_base` |
-| CORE-01 (Go API + PostgreSQL + CI) | **Не начато** | этап A / доступы |
-| Серверный бой / прогресс / платежи | **Не начато** | после AUTH/BATTLE |
+| Документы D | **Готово** | `docs/` |
+| UI Prototype v0.1 (Godot 4.7.2) | **Готово** | `project.godot`, `scenes/` |
+| Пакеты `0.1.0`…`0.9.0` (active=`0.9.0`) | **Готово** | `content/packages/` |
+| Admin Studio | **Готово** | `admin-studio/` |
+| OTA hot-reload (dev) | **Готово** | `docs/CONTENT_OTA.md` |
+| CONTENT-C канон + данные C0–C6, E/P/G, M→V | **Готово** | `docs/content/`, пакет `0.9.0` |
+| TZ-A | **Готово** | `docs/TZ_A_FOUNDATION.md` |
+| CORE-01 memory (auth…store) | **Готово** | `server/` |
+| Клиент → API (`ApiClient`) | **Готово** (fallback офлайн) | `scripts/autoload/api_client.gd` |
+| CORE-01 Postgres | **Блокер** Docker/VPS | `migrations/0001_init.sql` готов |
+| OTA-2 HTTPS CDN | **Блокер** хост | — |
+| ART-05 бинарный арт | **Блокер** ассеты | слоты в `0.9.0` |
 
-## Этапы реализации и зависимости
+---
 
-| ID | Этап | Статус | Зависимости | Критерий завершения |
-|---|---|---|---|---|
-| DOC-D | Документы и STRUCTURE | **Готово** | — | GDD/MVP/STRUCTURE согласованы |
-| UI-PROTO | Локальный UI-клиент v0.1 | **Готово** | DOC-D | Smoke PASS, UI-14 навигируется |
-| PKG-PROTO | Пакеты + Studio | **Готово** | UI-PROTO | Publish → клиент рисует из пакета |
-| STUDIO-2 | Visual Editor 2.0 + комбайн дизайна | **Готово** | PKG-PROTO | Theme/Shell/Hub 9:16, diff/rollback |
-| OTA-1 | Hot-reload контента | **Готово (dev CDN)** | PKG-PROTO | Save→Publish→клиент обновляется без новой APK |
-| OTA-2 | Прод CDN (HTTPS) | Ожидает | OTA-1, хост | Телефоны качают пакеты с публичного URL |
-| CONTENT-C | Игровой контент C | **Следующий блокер** | DOC-D | Фракции, герои, 30 этапов, враги, экономика |
-| TZ-A | Детальное ТЗ фундамента | Ожидает | CONTENT-C | API/БД/протокол боя |
-| CORE-01 | Go + Postgres + CI | Ожидает | TZ-A, доступы | Сервисы поднимаются изолированно |
-| UI-02 | UI Kit на реальных API | Частично (прототип) | CORE-01 | Экраны на серверных данных |
-| APK-03 | Подписанный тестовый APK | Частично (debug) | CORE-01, UI-02 | Установка на целевом Android |
-| AUTH-04 | Email/пароль, гость, профиль | Ожидает | CORE-01 | Повторный вход сохраняет прогресс |
-| ART-05 | GLB/спрайты, атласы | Ожидает | CONTENT-C, ассеты | Idle/Attack/Skill/Hit/Death |
-| BATTLE-06 | Авторитетный автобой 5v5 | Ожидает | AUTH-04 | Серверный результат без подмены |
-| RPG-07 | Коллекция, развитие, призыв | Ожидает | AUTH-04, BATTLE-06 | Улучшения влияют на бой |
-| WORLD-08 | Кампания 30 этапов, AFK | Ожидает | BATTLE-06, RPG-07, CONTENT-C | Полный цикл |
-| PVE-09 | Башня/боссы/подземелья… | Ожидает | BATTLE-06, RPG-07 | Правила и награды MVP |
-| ADMIN-10 | Админка (прод) | Studio+OTA готовы; Go admin API — нет | CORE-01 | Контент без прямой правки БД, HTTPS publish |
-| OPT-11 | Качество, кеш, CI/CD | Частично | игровой цикл | Android + iPhone/PWA |
-| ALPHA-12 | Закрытая альфа | Ожидает | обязательный MVP | Нет блокер/крит дефектов |
+## Фазы контента (сводка)
 
-## Контрольные версии
+Детали: `docs/CONTENT_IMPLEMENTATION.md`.
 
-| Версия | План | Факт на `main` |
+| Линия | Готово | Дальше |
 |---|---|---|
-| v0.0.1 | Каркас, UI, первый APK | **Да:** UI shell + debug APK + пакеты |
-| v0.0.2 | Auth, хаб | Хаб UI + пакет; **серверная auth — нет** |
-| v0.0.3 | Арт героев, тестовый бой | Локальный демо-бой; **арт-пайплайн — нет** |
-| v0.0.4 | Серверный бой, развитие | Не начато |
-| v0.0.5 | Кампания, награды, AFK | UI + пакет; **серверная выдача — нет** |
-| v0.0.6 | Призыв, PvE | UI-демо |
-| v0.0.7 | Админка, пакеты, оптимизация | **По сути достигнуто локально:** комбайн Studio + OTA CDN; прод HTTPS/Go admin — впереди |
-| v0.1 Alpha | Расширенный MVP | Блокер: **CONTENT-C** → TZ-A → CORE-01 |
-| v0.2 Beta | Соц/PvP | После альфы |
-| v1.0 | Публичный релиз | Отдельное утверждение |
+| **C** сюжет/пакеты | C0–C6 | C7 = OTA-2 publish |
+| **E** экономика | E0–E4 данные+UI; **E5 memory** (wallet/summon/store) | E5 PG · E6 Studio publish |
+| **P** PvE | P0–P2 каталог+UI; **P3 memory** (campaign battle) | P3 PG · P4 Studio |
+| **G** гильдии | G0–G2 каталог+UI | G3+ сервер (после PG) |
+| **Meta** M→V | M0–V2 каталог+UI; mail claim memory | M3+/… сервер TTL (после PG) |
 
-## Ближайший рабочий порядок
+---
 
-1. **CONTENT-C** — решения по фракциям / героям / 30 этапам / экономике (`docs/CONTENT_HANDOFF.md`).
-2. **OTA-2** — выложить CDN на HTTPS и прописать `cdn_base` для APK на устройствах (нужен хост/домен).
-3. **TZ-A** — ТЗ API/БД/боя после CONTENT-C.
-4. **CORE-01** — Go + PostgreSQL (+ явное ОК на локальный Docker или VPS).
-5. Подключить клиент к реальному API; `DemoData` → серверный прогресс.
+## Этапы продукта
 
-Параллельно без лор-уточнений можно только укреплять пайплайн (CI, Godot pixel-preview, медиа в OTA) — **не** выдумывать утверждённый контент.
+| ID | Этап | Статус | Критерий |
+|---|---|---|---|
+| DOC-D | Документы | **Готово** | GDD/MVP/STRUCTURE |
+| UI-PROTO | UI v0.1 | **Готово** | Smoke PASS |
+| PKG-PROTO | Пакеты + Studio | **Готово** | Publish → клиент |
+| STUDIO-2 | Visual Editor + комбайн | **Готово** | Theme/Shell/Hub 9:16 |
+| OTA-1 | Hot-reload (dev) | **Готово** | Save→Publish→клиент |
+| CONTENT-C | Данные C0–C6 | **Готово** | active `0.9.0` |
+| TZ-A | ТЗ фундамента | **Готово** | `TZ_A_FOUNDATION.md` |
+| CORE-01 | Go API MVP | **Memory ✓** | auth…store + CI; **PG next** |
+| UI-02 | UI на реальных API | Частично | `ApiClient` guest/wallet; полный UI kit позже |
+| OTA-2 | Прод CDN HTTPS | Блокер хост | Публичный `cdn_base` |
+| ART-05 | GLB/спрайты/атласы | Блокер ассеты | Idle/Attack/Skill/Hit/Death |
+| AUTH-04 | Email + upgrade guest | После PG | Сохранение прогресса |
+| BATTLE-06 | Автобой 5v5 (прод) | Memory ✓ · PG next | Авторитетный claim |
+| RPG-07 | Развитие / призыв (прод) | Memory ✓ · PG next | Звёзды/pity на PG |
+| WORLD-08 | Кампания + AFK (прод) | Memory ✓ · PG next | Полный цикл на PG |
+| PVE-09 | Башня/боссы/данжи | Каталог ✓ · сервер later | После PG battle |
+| ADMIN-10 | Прод-админка | Studio ✓ | HTTPS publish |
+| OPT-11 | CI/CD / качество | Частично | Android + iPhone/PWA |
+| ALPHA-12 | Закрытая альфа | Ожидает | Нет блокер-дефектов |
+
+---
+
+## Контрольные пакеты
+
+| Версия | Содержание | Факт |
+|---|---|---|
+| `0.1.0` | Демо Eliorian | Rollback |
+| `0.2.0` | Разлом · гл.1 spine | Rollback |
+| `0.3.0` | E0–E4 | Rollback |
+| `0.4.0` | PvE P0–P2 | Rollback |
+| `0.5.0` | Гильдии G0–G2 | Rollback |
+| `0.6.0` | Meta M→V | Rollback |
+| `0.7.0` | C4: 180 этапов | Rollback |
+| `0.8.0` | C5: skills + dialogs | Rollback |
+| **`0.9.0`** | C6: art registry | **Активный** |
+
+---
+
+## Ближайший порядок
+
+1. **Postgres adapter** для CORE-01 (**блокер:** Docker/VPS).
+2. **ART-05** — бинарные webp/атласы в слоты `0.9.0`.
+3. **OTA-2** — HTTPS CDN (**блокер:** хост).
+
+---
 
 ## Тестовые ворота
 
-1. Smoke: запуск, навигация — **PASS**
-2. Functional: бой/награды/призыв — только демо
-3. Graphics / Performance / Network / Server / Release — впереди
-4. Content packages: `tools/validate_content_package.sh` — **PASS**
-5. OTA: Publish → `/cdn` → `user://content_cache` hot-reload — **PASS** (локально)
+1. Smoke навигации — после смены пакета  
+2. `tools/validate_content_package.sh 0.9.0`  
+3. `python3 tools/check_repo_refs.py`  
+4. `cd server && go test ./...`  
+5. OTA Publish → `/cdn` → hot-reload (локально)
 
-## Управление изменениями
-
-Новые решения фиксируются в коде/доках и согласованно обновляют GDD, архитектуру, MVP и эту карту. Полные гильдии / межсервер / монетизация не обязательны для v0.1 Alpha, если не в `MVP.md`.
+Канон — в `docs/content/`. Активный пакет пишет `tools/generate_assets_c6_package.py`. Старые версии пакетов не rewrite на месте.

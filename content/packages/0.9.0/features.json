@@ -1,0 +1,218 @@
+{
+  "shop_offers": [
+    {
+      "id": "diamond_s",
+      "name": "Малый запас алмазов",
+      "desc": "diamonds×300 · 0 ₽ тест",
+      "limit": "{'per_day': 3}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "diamond_m",
+      "name": "Шкатулка алмазов",
+      "desc": "diamonds×850 · 0 ₽ тест",
+      "limit": "{'per_day': 2}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "diamond_l",
+      "name": "Сундук алмазов",
+      "desc": "diamonds×1900 · 0 ₽ тест",
+      "limit": "{'per_day': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "diamond_xl",
+      "name": "Хранилище алмазов",
+      "desc": "diamonds×4300 · 0 ₽ тест",
+      "limit": "{'per_week': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "starter_ufa",
+      "name": "Набор первопроходца Уфы",
+      "desc": "diamonds×600, summon_scroll×10, gold×100000, hero_xp×20000 · 0 ₽ тест",
+      "limit": "{'lifetime': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "chapter_1",
+      "name": "Комплект Разлома: Уфа",
+      "desc": "diamonds×400, essence×1200, summon_scroll×5 · 0 ₽ тест",
+      "limit": "{'after_stage': 'CH01-10'}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "daily_supplies",
+      "name": "Ежедневные припасы",
+      "desc": "gold×50000, hero_xp×12000, essence×400 · 0 ₽ тест",
+      "limit": "{'per_day': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "weekly_expedition",
+      "name": "Недельная экспедиция",
+      "desc": "diamonds×500, summon_scroll×6, afk_hour×4 · 0 ₽ тест",
+      "limit": "{'per_week': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "monthly_archive",
+      "name": "Архив Хранителя",
+      "desc": "diamonds×1200, summon_scroll×10, essence×2500 · 0 ₽ тест",
+      "limit": "{'per_30d': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "summon_10",
+      "name": "Десять свитков",
+      "desc": "summon_scroll×10 · 0 ₽ тест",
+      "limit": "{'per_week': 2}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "faction_5",
+      "name": "Пять фракционных свитков",
+      "desc": "faction_scroll×5 · 0 ₽ тест",
+      "limit": "{'per_week': 1}",
+      "cta": "Получить бесплатно (тест)"
+    },
+    {
+      "id": "cosmetic_frame_ufa",
+      "name": "Рамка «Ночная Уфа»",
+      "desc": "cosmetic_frame×1 · 0 ₽ тест",
+      "limit": "{'lifetime': 1}",
+      "cta": "Получить бесплатно (тест)"
+    }
+  ],
+  "events": [
+    {
+      "id": "EVT_001",
+      "name": "Неделя исчезнувших минут",
+      "timer": "до конца недели",
+      "state": "active",
+      "goto": "HUB-04"
+    }
+  ],
+  "quests": {
+    "daily": [
+      {
+        "id": "dq_login",
+        "title": "Первый свет Уфы",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "dq_campaign_3",
+        "title": "Три шага через Разлом",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "dq_campaign_5",
+        "title": "Дорога не кончается",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "dq_afk",
+        "title": "Сбор без суеты",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "dq_upgrade_hero",
+        "title": "Герой растёт",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "dq_upgrade_gear",
+        "title": "Пыль кузницы",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      }
+    ],
+    "weekly": [
+      {
+        "id": "wq_battles_20",
+        "title": "wq_battles_20",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "wq_boss_3",
+        "title": "wq_boss_3",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "wq_summon_5",
+        "title": "wq_summon_5",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      },
+      {
+        "id": "wq_afk_24h",
+        "title": "wq_afk_24h",
+        "progress": "0/1",
+        "goto": "HUB-03"
+      }
+    ],
+    "story": [
+      {
+        "id": "qs_ch01",
+        "title": "Уфа: пройти CH01-10",
+        "progress": "в процессе",
+        "goto": "MAP-01"
+      }
+    ],
+    "special": [
+      {
+        "id": "qsp_exp",
+        "title": "Экспедиция Уфимские архивы",
+        "progress": "после CH01-10",
+        "goto": "HUB-02"
+      }
+    ]
+  },
+  "mail": {
+    "note": "Каталог писем — mail.json; этот ключ оставлен для совместимости UI badge",
+    "unread_demo": 2
+  },
+  "vip": {
+    "level": 0,
+    "progress": 0,
+    "next": 100
+  },
+  "battle_pass": {
+    "season": "Хроники Разлома",
+    "level": 1,
+    "free_ready": 0,
+    "premium_ready": 0
+  },
+  "afk": {
+    "seconds_default": 11220,
+    "gold_per_hour": 1800,
+    "hero_xp_per_hour": 700,
+    "essence_per_hour": 30,
+    "cap_hours": 12,
+    "unlock_stage": "CH01-03",
+    "gold_per_10s": 5,
+    "cap_gold": 21600
+  },
+  "summon": {
+    "banner": "Врата Уфы",
+    "banner_id": "standard",
+    "cost_resource": "summon_scroll",
+    "cost_x1": 1,
+    "cost_x10": 8,
+    "weights": {
+      "common": 50,
+      "rare": 35,
+      "epic": 12,
+      "legendary": 3
+    },
+    "disclaimer": "Локальная демо-симуляция. Авторитетный RNG — только на сервере."
+  }
+}

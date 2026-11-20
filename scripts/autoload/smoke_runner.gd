@@ -1,10 +1,16 @@
 extends Node
 ## Включается только если существует user://run_smoke.flag
 
+var _shots: bool = false
+
 func _ready() -> void:
-	if not FileAccess.file_exists("user://run_smoke.flag"):
+	_shots = FileAccess.file_exists("user://run_shots.flag")
+	if _shots:
+		DirAccess.remove_absolute("user://run_shots.flag")
+	if not FileAccess.file_exists("user://run_smoke.flag") and not _shots:
 		return
-	DirAccess.remove_absolute("user://run_smoke.flag")
+	if FileAccess.file_exists("user://run_smoke.flag"):
+		DirAccess.remove_absolute("user://run_smoke.flag")
 	call_deferred("_run")
 
 func _run() -> void:
@@ -24,10 +30,13 @@ func _run() -> void:
 	get_tree().change_scene_to_file("res://scenes/shell/game_shell.tscn")
 	await get_tree().create_timer(1.2).timeout
 	print("SMOKE: shell")
+	await _maybe_shot("01_hub")
 	ScreenRouter.switch_tab("map")
 	await get_tree().create_timer(0.3).timeout
+	await _maybe_shot("02_map")
 	ScreenRouter.switch_tab("heroes")
 	await get_tree().create_timer(0.3).timeout
+	await _maybe_shot("03_heroes")
 	ScreenRouter.switch_tab("battle")
 	await get_tree().create_timer(0.3).timeout
 	ScreenRouter.switch_tab("hub")
@@ -40,11 +49,29 @@ func _run() -> void:
 	await get_tree().create_timer(0.4).timeout
 	ScreenRouter.handle_back()
 	await get_tree().create_timer(0.4).timeout
-	await ScreenRouter.go("COMBAT-01", {"stage_id": "s1_3", "mode": "campaign"})
+	await ScreenRouter.go("ART-01")
 	await get_tree().create_timer(0.4).timeout
-	await ScreenRouter.go("COMBAT-02", {"stage_id": "s1_3", "mode": "campaign"})
+	ScreenRouter.handle_back()
+	await get_tree().create_timer(0.35).timeout
+	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
+	var foes := DemoData.enemy_squad_for_stage(stage_id)
+	print("SMOKE: stage ", stage_id, " foes=", foes.size(), " first=", (foes[0]["name"] if foes.size() else "?"))
+	await ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})
+	await get_tree().create_timer(0.4).timeout
+	await _maybe_shot("04_battle_prep")
+	await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(4.0).timeout
 	ThemeManager.apply_preset("low")
 	ThemeManager.apply_preset("high")
-	print("SMOKE: PASS")
+	print("SMOKE: PASS package=", ContentPackageLoader.version, " heroes=", DemoData.heroes.size())
 	get_tree().quit(0)
+
+func _maybe_shot(name: String) -> void:
+	if not _shots:
+		return
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var img := get_viewport().get_texture().get_image()
+	var path := "/opt/cursor/artifacts/razlom_%s.png" % name
+	img.save_png(path)
+	print("SMOKE: shot ", path)

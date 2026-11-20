@@ -1,0 +1,11 @@
+{
+  "boss_id": "B03-01",
+  "rig_id": "RIG-GUARD",
+  "skin_id": "skin_b",
+  "scale": 1.35,
+  "assets": {
+    "portrait": "portrait.webp"
+  },
+  "status": "placeholder",
+  "note": "Boss reuses rig animations; unique portrait + overlays"
+}

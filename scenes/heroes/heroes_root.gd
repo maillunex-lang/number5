@@ -29,7 +29,11 @@ func _build_filters() -> void:
 			_refresh()
 		)
 		_filters.add_child(b)
-	var factions := ["", "Империя Порядка", "Сумрачные", "Лесные", "Клановые кузнецы", "Арканисты", "Вольные города"]
+	var factions: Array = [""]
+	for f in ContentPackageLoader.heroes_pack.get("factions", []):
+		factions.append(str(f.get("name", "")))
+	if factions.size() == 1:
+		factions.append_array(["Стражи Клятвы", "Вольные Тропы", "Архив Предела", "Каменные Кузни", "Межвременные Тени", "Расколотые Хранители"])
 	var opt := OptionButton.new()
 	opt.custom_minimum_size = Vector2(260, 44)
 	for f in factions:
