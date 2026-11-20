@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://lunexmaproot01"]
+[gd_scene load_steps=3 format=3 uid="uid://lunexmaproot01"]
 
 [ext_resource type="Script" path="res://scenes/map/map_root.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/login/background.webp" id="2"]
 
 [node name="MapRoot" type="Control"]
 layout_mode = 3
@@ -21,7 +22,10 @@ mouse_filter = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 160.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 180.0
 theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Header"]
@@ -35,12 +39,14 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.722, 0.753, 0.816, 1)
 theme_override_font_sizes/font_size = 22
-text = ""
+text = "Выберите регион для просмотра этапов"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="ContinueBtn" type="Button" parent="Header"]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
+theme_type_variation = &"GoldButton"
 text = "Продолжить"
 
 [node name="Scroll" type="ScrollContainer" parent="."]
@@ -48,7 +54,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 160.0
+offset_top = 188.0
 horizontal_scroll_mode = 0
 
 [node name="World" type="Control" parent="Scroll"]
@@ -61,6 +67,17 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+
+[node name="Landscape" type="TextureRect" parent="Scroll/World/Parallax"]
+modulate = Color(0.42, 0.52, 0.56, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Regions" type="Control" parent="Scroll/World"]
 layout_mode = 1

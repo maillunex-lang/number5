@@ -43,17 +43,17 @@
 | Top bar | `shell/top_bar.tscn` | 11 | низкая | wallet | MED | кнопки, отступы, подписи | тексты валют, стили из пакета | hit area |
 | Bottom nav | `shell/bottom_nav.tscn` | 7 | низкая | shell.json | MED | 4 вкладки, высота | иконки/лейблы из пакета | hit area ≥ |
 | Hub | `hub/hub_root.tscn` | 10 | высокая | hub.json | LOW* | SideRail, Scroll/World | здания через `HubBuilding` + JSON позиции | WORLD 1080×2400 |
-| Map root | `map/map_root.tscn` | 10 | средняя | campaign | LOW | фон/скролл | регионы | средний |
-| Chapter map | `map/chapter_map.tscn` | 10 | средняя | campaign | LOW | контейнеры | узлы этапов | средний |
-| Stage card | `map/stage_card.tscn` | 12 | низкая | stage | MED | карточка layout | тексты/кнопки боя | низкий |
+| Map root | `map/map_root.tscn` | ~12 | средняя | campaign | MED* | Header, Landscape, Scroll | регионы через `MapRegionButton` | средний |
+| Chapter map | `map/chapter_map.tscn` | ~12 | средняя | campaign | MED* | Header/Continue/Back | список через `StageListItem` | средний |
+| Stage card | `map/stage_card.tscn` | ~14 | низкая | stage | HIGH* | Card/Pad/кнопки Theme | DialogHost опционально | низкий |
 | Heroes root | `heroes/heroes_root.tscn` | 12 | высокая | heroes | MED* | фильтры/хост | сетка через `HeroCard` | списки |
 | Hero details | `heroes/hero_details.tscn` | 5 | высокая | hero | CODE_HEAVY | Safe/Scroll | весь контент | средний |
 | Squad | `heroes/squad_manager.tscn` | 5 | высокая | formation | CODE_HEAVY | скелет | слоты | средний |
 | Battle modes | `battle/battle_modes_root.tscn` | 7 | средняя | — | LOW | список режимов-хост | кнопки режимов | низкий |
-| Formation | `battle/formation.tscn` | 5 | высокая | battle API | CODE_HEAVY | Safe/Scroll | отряд, старт | средний |
+| Formation | `battle/formation.tscn` | ~20 | средняя | battle API | MED* | labels, 5×FormationSlot, Start/Edit/Back | PresetsHost + battle_start | средний |
 | Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | MED* | Field/HUD/Controls | юниты через `BattleUnit` + timeline | полный экран |
 | Result | `battle/battle_result.tscn` | 4 | высокая | claim | CODE_HEAVY | BG/Safe | title+nav кодом → миграция | низкий |
-| Settings | `features/settings.tscn` | 8 | высокая | local | CODE_HEAVY | Header/Tabs/Scroll | содержимое вкладок | средний |
+| Settings | `features/settings.tscn` | ~18 | средняя | local | MED* | Title/Close/5 Tabs/ContentPanel | DynamicHost вкладок | средний |
 | Shop / Summon / AFK / Mail / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки/кнопки | списки |
 | VIP / Chat / Friends / Rankings / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
 | PvE / Guild / Events / Profile | `features/*` | 5 | высокая | пакет | CODE_HEAVY | скелет | карточки/рейды | средний |
@@ -89,6 +89,8 @@
 | C | FeatureScreen + DemoScreenBuilder на компоненты; Result/TopBar/Settings chrome |
 | D | `ui_preview_root` без сервера; проверка адаптивности; тесты |
 | E | HOW_TO + RULES + AGENTS.md |
+| Wave2 | HubBuilding, BattleUnit, HeroCard, MailItem, ShopOfferCard |
+| Wave3 | Formation chrome+slots; Settings tabs; Map landscape+MapRegionButton; StageListItem; stage_card Theme |
 
 ## 7. Критерии «экран модернизирован»
 

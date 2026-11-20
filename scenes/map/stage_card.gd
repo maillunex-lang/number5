@@ -1,8 +1,11 @@
 extends Control
-## MAP-02: компактная карточка этапа (STAGE-UI-001 A)
+## MAP-02: компактная карточка этапа. Chrome в .tscn; DialogHost — опциональный сюжет.
 
 var _payload: Dictionary = {}
 var _stage: Dictionary = {}
+
+@onready var _box: VBoxContainer = $Safe/Card/Pad/VBox
+@onready var _dialog_host: VBoxContainer = $Safe/Card/Pad/VBox/DialogHost
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
@@ -14,22 +17,23 @@ func _ready() -> void:
 		NotificationManager.error("Этап не найден")
 		ScreenRouter.handle_back()
 		return
-	var box := $Safe/Card/VBox
-	box.get_node("Name").text = str(_stage.name)
-	box.get_node("Power").text = "Рекомендуемая сила: %d" % int(_stage.power)
-	box.get_node("Rewards").text = "Награды: %s" % ", ".join(PackedStringArray(_stage.rewards))
-	box.get_node("Meta").text = "Локальные демо-данные · не серверный прогресс"
-	box.get_node("PrepBtn").pressed.connect(_to_prep)
-	box.get_node("BackBtn").pressed.connect(func(): ScreenRouter.handle_back())
+	_box.get_node("Name").text = str(_stage.name)
+	_box.get_node("Power").text = "Рекомендуемая сила: %d" % int(_stage.power)
+	_box.get_node("Rewards").text = "Награды: %s" % ", ".join(PackedStringArray(_stage.rewards))
+	_box.get_node("Meta").text = "Локальные демо-данные · не серверный прогресс"
+	_box.get_node("PrepBtn").pressed.connect(_to_prep)
+	_box.get_node("BackBtn").pressed.connect(func(): ScreenRouter.handle_back())
 	var squad_p := DemoData.squad_power()
 	var rec := int(_stage.power)
-	var cmp := box.get_node("Compare")
+	var cmp := _box.get_node("Compare")
 	if squad_p >= rec:
 		cmp.text = "Сила отряда %d ≥ %d — преимущество" % [squad_p, rec]
 		cmp.add_theme_color_override("font_color", LunexColors.EMERALD)
 	else:
 		cmp.text = "Сила отряда %d < %d — будет сложно" % [squad_p, rec]
 		cmp.add_theme_color_override("font_color", LunexColors.AMBER)
+	for c in _dialog_host.get_children():
+		c.queue_free()
 	var before := _dialog_for(str(_stage.id), "before")
 	if not before.is_empty():
 		var dlg := UIFactory.fantasy_button("Сюжет до боя")
@@ -42,7 +46,7 @@ func _ready() -> void:
 				"next_payload": {"stage_id": str(_stage.id)},
 			})
 		)
-		box.add_child(dlg)
+		_dialog_host.add_child(dlg)
 
 func _dialog_for(stage_id: String, timing: String) -> Dictionary:
 	for d in ContentPackageLoader.dialogs_pack.get("dialogs", []):

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexmapregion"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/map_region_button.gd" id="1"]
+
+[node name="MapRegionButton" type="Button"]
+custom_minimum_size = Vector2(420, 200)
+theme_type_variation = &"GameButton"
+text = "Регион
+Открыт"
+autowrap_mode = 3
+script = ExtResource("1")
