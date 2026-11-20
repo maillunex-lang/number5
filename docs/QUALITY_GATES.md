@@ -59,6 +59,8 @@ godot --headless --path . --quit-after 2
 - Prod с memory store (после внедрения H4).  
 - Выдача «настоящих» наград от локального боя без H6.
 
-## Обёртка (опционально)
+## Обёртка
 
-Можно добавить `tools/verify_project.sh` как вызов быстрых команд выше — без новых зависимостей.
+```bash
+tools/verify_project.sh          # refs + validate active + go test
+```
