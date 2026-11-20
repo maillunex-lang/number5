@@ -1,0 +1,1476 @@
+{
+  "schema_version": 1,
+  "rigs": [
+    {
+      "id": "RIG-GUARD",
+      "name": "Страж",
+      "role": "defender",
+      "spd": 85
+    },
+    {
+      "id": "RIG-STRIKER",
+      "name": "Налётчик",
+      "role": "assassin",
+      "spd": 120
+    },
+    {
+      "id": "RIG-CASTER",
+      "name": "Заклинатель",
+      "role": "caster",
+      "spd": 100
+    },
+    {
+      "id": "RIG-CONSTRUCT",
+      "name": "Конструкт",
+      "role": "bruiser",
+      "spd": 80
+    },
+    {
+      "id": "RIG-BEAST",
+      "name": "Зверь",
+      "role": "beast",
+      "spd": 115
+    },
+    {
+      "id": "RIG-WISP",
+      "name": "Фантом",
+      "role": "controller",
+      "spd": 110
+    }
+  ],
+  "enemies": [
+    {
+      "id": "E01-01",
+      "name": "Сбойный курьер",
+      "chapter": 1,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b",
+      "role": "defender",
+      "modifier_note": "Обычный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E01-02",
+      "name": "Хрономышь",
+      "chapter": 1,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b",
+      "role": "assassin",
+      "modifier_note": "Усиленный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E01-03",
+      "name": "Страж очереди",
+      "chapter": 1,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b",
+      "role": "caster",
+      "modifier_note": "Охранный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E01-04",
+      "name": "Бумажный голем",
+      "chapter": 1,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_b",
+      "role": "bruiser",
+      "modifier_note": "Яростный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E01-05",
+      "name": "Патруль 2050",
+      "chapter": 1,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_b",
+      "role": "beast",
+      "modifier_note": "Разломный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E01-06",
+      "name": "Разломный фантом",
+      "chapter": 1,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_b",
+      "role": "controller",
+      "modifier_note": "Обычный; туман",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-01",
+      "name": "Известняковый страж",
+      "chapter": 2,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_a",
+      "role": "defender",
+      "modifier_note": "Усиленный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-02",
+      "name": "Песчаный двойник",
+      "chapter": 2,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_a",
+      "role": "assassin",
+      "modifier_note": "Охранный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-03",
+      "name": "Собиратель печатей",
+      "chapter": 2,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_a",
+      "role": "caster",
+      "modifier_note": "Яростный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-04",
+      "name": "Каменный жук",
+      "chapter": 2,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a",
+      "role": "bruiser",
+      "modifier_note": "Разломный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-05",
+      "name": "Осколочный голем",
+      "chapter": 2,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a",
+      "role": "beast",
+      "modifier_note": "Обычный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E02-06",
+      "name": "Хранитель рубежа",
+      "chapter": 2,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a",
+      "role": "controller",
+      "modifier_note": "Усиленный; туман",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-01",
+      "name": "Ржавый дозорный",
+      "chapter": 3,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_a",
+      "role": "defender",
+      "modifier_note": "Охранный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-02",
+      "name": "Кузнечный фантом",
+      "chapter": 3,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_a",
+      "role": "assassin",
+      "modifier_note": "Яростный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-03",
+      "name": "Лесной латник",
+      "chapter": 3,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_a",
+      "role": "caster",
+      "modifier_note": "Разломный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-04",
+      "name": "Паровой часовой",
+      "chapter": 3,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a",
+      "role": "bruiser",
+      "modifier_note": "Обычный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-05",
+      "name": "Механический волк",
+      "chapter": 3,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a",
+      "role": "beast",
+      "modifier_note": "Усиленный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E03-06",
+      "name": "Рунный автоматон",
+      "chapter": 3,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a",
+      "role": "controller",
+      "modifier_note": "Охранный; туман",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-01",
+      "name": "Дрон-переписчик",
+      "chapter": 4,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b",
+      "role": "defender",
+      "modifier_note": "Яростный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-02",
+      "name": "Синтетический страж",
+      "chapter": 4,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b",
+      "role": "assassin",
+      "modifier_note": "Разломный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-03",
+      "name": "Голографический двойник",
+      "chapter": 4,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b",
+      "role": "caster",
+      "modifier_note": "Обычный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-04",
+      "name": "Коллектор секунд",
+      "chapter": 4,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_b",
+      "role": "bruiser",
+      "modifier_note": "Усиленный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-05",
+      "name": "Сбойный медик",
+      "chapter": 4,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_b",
+      "role": "beast",
+      "modifier_note": "Охранный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E04-06",
+      "name": "Хронооператор",
+      "chapter": 4,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_b",
+      "role": "controller",
+      "modifier_note": "Яростный; туман",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-01",
+      "name": "Теневой проводник",
+      "chapter": 5,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_a",
+      "role": "defender",
+      "modifier_note": "Разломный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-02",
+      "name": "Эхо героя",
+      "chapter": 5,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_a",
+      "role": "assassin",
+      "modifier_note": "Обычный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-03",
+      "name": "Ледяной страж",
+      "chapter": 5,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_a",
+      "role": "caster",
+      "modifier_note": "Усиленный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-04",
+      "name": "Певец забвения",
+      "chapter": 5,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a",
+      "role": "bruiser",
+      "modifier_note": "Охранный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-05",
+      "name": "Зеркальный зверь",
+      "chapter": 5,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a",
+      "role": "beast",
+      "modifier_note": "Яростный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E05-06",
+      "name": "Страж разорванной клятвы",
+      "chapter": 5,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a",
+      "role": "controller",
+      "modifier_note": "Разломный; туман",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-01",
+      "name": "Хронофантом",
+      "chapter": 6,
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b",
+      "role": "defender",
+      "modifier_note": "Обычный; стена",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-02",
+      "name": "Судья эпох",
+      "chapter": 6,
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b",
+      "role": "assassin",
+      "modifier_note": "Усиленный; насечка",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-03",
+      "name": "Разорванный хранитель",
+      "chapter": 6,
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b",
+      "role": "caster",
+      "modifier_note": "Охранный; срыв ритма",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-04",
+      "name": "Страж нулевого цикла",
+      "chapter": 6,
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_b",
+      "role": "bruiser",
+      "modifier_note": "Яростный; сейсмический толчок",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-05",
+      "name": "Пожиратель памяти",
+      "chapter": 6,
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_b",
+      "role": "beast",
+      "modifier_note": "Разломный; охота",
+      "kind": "enemy"
+    },
+    {
+      "id": "E06-06",
+      "name": "Осколок безвременья",
+      "chapter": 6,
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_b",
+      "role": "controller",
+      "modifier_note": "Обычный; туман",
+      "kind": "enemy"
+    }
+  ],
+  "bosses": [
+    {
+      "id": "B01-01",
+      "name": "Начальник бесконечной очереди",
+      "stage_id": "CH01-10",
+      "chapter": 1,
+      "kind": "boss",
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B01-02",
+      "name": "Инспектор отменённых решений",
+      "stage_id": "CH01-20",
+      "chapter": 1,
+      "kind": "boss",
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B01-03",
+      "name": "Архивариус Нулевого Часа",
+      "stage_id": "CH01-30",
+      "chapter": 1,
+      "kind": "boss",
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B02-01",
+      "name": "Страж Трёх Клятв",
+      "stage_id": "CH02-10",
+      "chapter": 2,
+      "kind": "boss",
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B02-02",
+      "name": "Пожиратель надписей",
+      "stage_id": "CH02-20",
+      "chapter": 2,
+      "kind": "boss",
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B02-03",
+      "name": "Свидетель Без Имени",
+      "stage_id": "CH02-30",
+      "chapter": 2,
+      "kind": "boss",
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B03-01",
+      "name": "Мастер Без Искры",
+      "stage_id": "CH03-10",
+      "chapter": 3,
+      "kind": "boss",
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B03-02",
+      "name": "Горный Колосс",
+      "stage_id": "CH03-20",
+      "chapter": 3,
+      "kind": "boss",
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B03-03",
+      "name": "Смотритель Железного Сердца",
+      "stage_id": "CH03-30",
+      "chapter": 3,
+      "kind": "boss",
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B04-01",
+      "name": "Директор последней смены",
+      "stage_id": "CH04-10",
+      "chapter": 4,
+      "kind": "boss",
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B04-02",
+      "name": "Двойник будущего",
+      "stage_id": "CH04-20",
+      "chapter": 4,
+      "kind": "boss",
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B04-03",
+      "name": "Реакторный Регент",
+      "stage_id": "CH04-30",
+      "chapter": 4,
+      "kind": "boss",
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B05-01",
+      "name": "Эхо Первого Хранителя",
+      "stage_id": "CH05-10",
+      "chapter": 5,
+      "kind": "boss",
+      "rig_id": "RIG-GUARD",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B05-02",
+      "name": "Страж Невозможного Пути",
+      "stage_id": "CH05-20",
+      "chapter": 5,
+      "kind": "boss",
+      "rig_id": "RIG-STRIKER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B05-03",
+      "name": "Хранительница Расколотой Клятвы",
+      "stage_id": "CH05-30",
+      "chapter": 5,
+      "kind": "boss",
+      "rig_id": "RIG-CASTER",
+      "skin_id": "skin_b"
+    },
+    {
+      "id": "B06-01",
+      "name": "Советник Пустого Часа",
+      "stage_id": "CH06-10",
+      "chapter": 6,
+      "kind": "boss",
+      "rig_id": "RIG-CONSTRUCT",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B06-02",
+      "name": "Триединый Страж",
+      "stage_id": "CH06-20",
+      "chapter": 6,
+      "kind": "boss",
+      "rig_id": "RIG-BEAST",
+      "skin_id": "skin_a"
+    },
+    {
+      "id": "B06-03",
+      "name": "Вестник За Пределом",
+      "stage_id": "CH06-30",
+      "chapter": 6,
+      "kind": "boss",
+      "rig_id": "RIG-WISP",
+      "skin_id": "skin_a"
+    }
+  ],
+  "encounters": [
+    {
+      "stage_id": "CH01-01",
+      "slots": [
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-02",
+      "slots": [
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-03",
+      "slots": [
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-04",
+      "slots": [
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-05",
+      "slots": [
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-06",
+      "slots": [
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-07",
+      "slots": [
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-08",
+      "slots": [
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-09",
+      "slots": [
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-10",
+      "slots": [
+        {
+          "enemy_id": "B01-01",
+          "level": 10,
+          "tier": "boss"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 8,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-11",
+      "slots": [
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-12",
+      "slots": [
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-13",
+      "slots": [
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-14",
+      "slots": [
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-15",
+      "slots": [
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-16",
+      "slots": [
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-17",
+      "slots": [
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-18",
+      "slots": [
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-19",
+      "slots": [
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-20",
+      "slots": [
+        {
+          "enemy_id": "B01-02",
+          "level": 10,
+          "tier": "boss"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 8,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-21",
+      "slots": [
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-22",
+      "slots": [
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-23",
+      "slots": [
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-24",
+      "slots": [
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-25",
+      "slots": [
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-26",
+      "slots": [
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-27",
+      "slots": [
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-06",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-28",
+      "slots": [
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-04",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-01",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-29",
+      "slots": [
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-05",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-02",
+          "level": 5,
+          "tier": "normal"
+        }
+      ]
+    },
+    {
+      "stage_id": "CH01-30",
+      "slots": [
+        {
+          "enemy_id": "B01-03",
+          "level": 10,
+          "tier": "boss"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 8,
+          "tier": "normal"
+        },
+        {
+          "enemy_id": "E01-03",
+          "level": 8,
+          "tier": "normal"
+        }
+      ]
+    }
+  ],
+  "modifiers": [
+    "normal",
+    "enhanced",
+    "guardian",
+    "furious",
+    "rift"
+  ]
+}

@@ -1,0 +1,732 @@
+{
+  "schema_version": 1,
+  "mode": "DEMO_SANDBOX",
+  "disclaimer": "Гильдии — асинхронный DEMO. Общий HP рейда и членство авторитетны только на сервере.",
+  "unlock_stage": "CH01-20",
+  "account_level_min": 15,
+  "reset": {
+    "timezone": "Europe/Moscow",
+    "hour": 6,
+    "week_start": "monday"
+  },
+  "create_cost_gold": 10000,
+  "name_len": [
+    3,
+    24
+  ],
+  "tag_len": [
+    2,
+    5
+  ],
+  "starting_capacity": 20,
+  "max_capacity": 30,
+  "max_level": 10,
+  "levels": [
+    {
+      "level": 1,
+      "xp_required": 0,
+      "capacity": 20,
+      "unlocks": [
+        "chat",
+        "quests",
+        "raid_I"
+      ]
+    },
+    {
+      "level": 2,
+      "xp_required": 1000,
+      "capacity": 20,
+      "unlocks": [
+        "emblem_frame_extra"
+      ]
+    },
+    {
+      "level": 3,
+      "xp_required": 2500,
+      "capacity": 22,
+      "unlocks": [
+        "raid_II",
+        "capacity_+2"
+      ]
+    },
+    {
+      "level": 4,
+      "xp_required": 4500,
+      "capacity": 22,
+      "unlocks": [
+        "announcement_slot"
+      ]
+    },
+    {
+      "level": 5,
+      "xp_required": 7000,
+      "capacity": 25,
+      "unlocks": [
+        "raid_III",
+        "capacity_+3"
+      ]
+    },
+    {
+      "level": 6,
+      "xp_required": 10000,
+      "capacity": 25,
+      "unlocks": [
+        "hq_theme"
+      ]
+    },
+    {
+      "level": 7,
+      "xp_required": 14000,
+      "capacity": 28,
+      "unlocks": [
+        "raid_IV",
+        "capacity_+3"
+      ]
+    },
+    {
+      "level": 8,
+      "xp_required": 19000,
+      "capacity": 28,
+      "unlocks": [
+        "guild_title"
+      ]
+    },
+    {
+      "level": 9,
+      "xp_required": 25000,
+      "capacity": 30,
+      "unlocks": [
+        "raid_V",
+        "capacity_+2"
+      ]
+    },
+    {
+      "level": 10,
+      "xp_required": 32000,
+      "capacity": 30,
+      "unlocks": [
+        "season_emblem",
+        "cosmetic_frame"
+      ]
+    }
+  ],
+  "roles": [
+    "leader",
+    "deputy",
+    "officer",
+    "member",
+    "recruit"
+  ],
+  "max_deputies": 2,
+  "max_officers": 4,
+  "join_policies": [
+    "open",
+    "apply",
+    "closed"
+  ],
+  "cooldowns": {
+    "rejoin_hours": 24,
+    "create_days": 7,
+    "applications_per_day": 5,
+    "invites_per_day": 10
+  },
+  "contributions": [
+    {
+      "gold": 5000,
+      "guild_token": 30,
+      "guild_xp": 50
+    },
+    {
+      "gold": 15000,
+      "guild_token": 70,
+      "guild_xp": 100
+    },
+    {
+      "gold": 30000,
+      "guild_token": 120,
+      "guild_xp": 160
+    }
+  ],
+  "contribution_rules": {
+    "mutually_exclusive_per_day": true,
+    "max_guild_xp_from_contribute_per_day": 160,
+    "forbidden_resources": [
+      "diamonds",
+      "vip_xp",
+      "summon_scroll"
+    ]
+  },
+  "daily_quests": [
+    {
+      "id": "GQ_D01",
+      "name": "Победить 3 раза в кампании",
+      "condition": "campaign_wins_3",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 30
+        },
+        {
+          "resource_id": "gold",
+          "amount": 3000
+        }
+      ],
+      "guild_xp": 40
+    },
+    {
+      "id": "GQ_D02",
+      "name": "Собрать AFK-награду",
+      "condition": "afk_claim_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 20
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 1500
+        }
+      ],
+      "guild_xp": 30
+    },
+    {
+      "id": "GQ_D03",
+      "name": "Улучшить героя или навык 1 раз",
+      "condition": "upgrade_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 25
+        },
+        {
+          "resource_id": "essence",
+          "amount": 100
+        }
+      ],
+      "guild_xp": 35
+    },
+    {
+      "id": "GQ_D04",
+      "name": "Победить в 1 подземелье",
+      "condition": "dungeon_win_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 25
+        },
+        {
+          "resource_id": "ore",
+          "amount": 4
+        }
+      ],
+      "guild_xp": 35
+    },
+    {
+      "id": "GQ_D05",
+      "name": "Провести 1 бой с рейдовым боссом",
+      "condition": "raid_attempt_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 40
+        },
+        {
+          "resource_id": "boss_core",
+          "amount": 1
+        }
+      ],
+      "guild_xp": 60
+    },
+    {
+      "id": "GQ_D06",
+      "name": "Завершить 1 экспедицию",
+      "condition": "expedition_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 25
+        },
+        {
+          "resource_id": "essence",
+          "amount": 100
+        }
+      ],
+      "guild_xp": 35
+    },
+    {
+      "id": "GQ_D07",
+      "name": "Победить 1 босса кампании или PvE",
+      "condition": "boss_win_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 30
+        },
+        {
+          "resource_id": "skill_book",
+          "amount": 1
+        }
+      ],
+      "guild_xp": 45
+    },
+    {
+      "id": "GQ_D08",
+      "name": "Пройти 1 новый этаж Башни",
+      "condition": "tower_new_floor_1",
+      "rewards": [
+        {
+          "resource_id": "guild_token",
+          "amount": 30
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 1500
+        }
+      ],
+      "guild_xp": 45
+    }
+  ],
+  "daily_quest_board_size": 5,
+  "weekly_goals": [
+    {
+      "id": "wg_quests_100",
+      "condition": "personal_quests_100",
+      "base": 100,
+      "guild_xp": 2000
+    },
+    {
+      "id": "wg_raid_30",
+      "condition": "raid_battles_30",
+      "base": 30,
+      "guild_xp": 1500
+    },
+    {
+      "id": "wg_expeditions_50",
+      "condition": "expeditions_50",
+      "base": 50,
+      "guild_xp": 1000
+    },
+    {
+      "id": "wg_campaign_150",
+      "condition": "campaign_wins_150",
+      "base": 150,
+      "guild_xp": 1500
+    }
+  ],
+  "weekly_goal_scale": "max(30, ceil(base * active_members/15))",
+  "raids": {
+    "duration_hours": 72,
+    "weekly_launch_limit": 2,
+    "daily_attempts_per_member": 2,
+    "max_attempts_per_raid": 6,
+    "party_size": 5,
+    "battle_duration_seconds": 90,
+    "shared_hp": true,
+    "milestones": [
+      {
+        "hp_bp": 2500,
+        "guild_xp": 100,
+        "rewards": [
+          {
+            "resource_id": "guild_token",
+            "amount": 30
+          },
+          {
+            "resource_id": "essence",
+            "amount": 100
+          }
+        ]
+      },
+      {
+        "hp_bp": 5000,
+        "guild_xp": 150,
+        "rewards": [
+          {
+            "resource_id": "guild_token",
+            "amount": 40
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "hp_bp": 7500,
+        "guild_xp": 200,
+        "rewards": [
+          {
+            "resource_id": "guild_token",
+            "amount": 50
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "hp_bp": 10000,
+        "guild_xp": 400,
+        "rewards": [
+          {
+            "resource_id": "guild_token",
+            "amount": 80
+          },
+          {
+            "resource_id": "set_pattern",
+            "amount": 1
+          },
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 100
+          }
+        ]
+      }
+    ],
+    "tiers": [
+      {
+        "tier": "I",
+        "name": "Часовой архив Уфы",
+        "guild_level_required": 1,
+        "shared_hp": 1000000,
+        "recommended_active_members": 5,
+        "boss_id": "B01-01",
+        "minions": 2,
+        "participation_reward": [
+          {
+            "resource_id": "guild_token",
+            "amount": 60
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 1
+          }
+        ],
+        "modifiers_pool": [
+          "shield_up",
+          "energy_suppress",
+          "rift_wave",
+          "summon_minion",
+          "enrage_50"
+        ],
+        "max_active_modifiers": 2
+      },
+      {
+        "tier": "II",
+        "name": "Каменная клятва Шиханов",
+        "guild_level_required": 3,
+        "shared_hp": 3000000,
+        "recommended_active_members": 8,
+        "boss_id": "B02-01",
+        "minions": 2,
+        "participation_reward": [
+          {
+            "resource_id": "guild_token",
+            "amount": 80
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 2
+          }
+        ],
+        "modifiers_pool": [
+          "shield_up",
+          "energy_suppress",
+          "rift_wave",
+          "summon_minion",
+          "enrage_50"
+        ],
+        "max_active_modifiers": 2
+      },
+      {
+        "tier": "III",
+        "name": "Стальное сердце Белорецка",
+        "guild_level_required": 5,
+        "shared_hp": 8000000,
+        "recommended_active_members": 12,
+        "boss_id": "B03-01",
+        "minions": 2,
+        "participation_reward": [
+          {
+            "resource_id": "guild_token",
+            "amount": 110
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 3
+          }
+        ],
+        "modifiers_pool": [
+          "shield_up",
+          "energy_suppress",
+          "rift_wave",
+          "summon_minion",
+          "enrage_50"
+        ],
+        "max_active_modifiers": 2
+      },
+      {
+        "tier": "IV",
+        "name": "Реактор 2050",
+        "guild_level_required": 7,
+        "shared_hp": 18000000,
+        "recommended_active_members": 16,
+        "boss_id": "B04-01",
+        "minions": 2,
+        "participation_reward": [
+          {
+            "resource_id": "guild_token",
+            "amount": 140
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 4
+          }
+        ],
+        "modifiers_pool": [
+          "shield_up",
+          "energy_suppress",
+          "rift_wave",
+          "summon_minion",
+          "enrage_50"
+        ],
+        "max_active_modifiers": 2
+      },
+      {
+        "tier": "V",
+        "name": "Парадокс Иремеля",
+        "guild_level_required": 9,
+        "shared_hp": 40000000,
+        "recommended_active_members": 20,
+        "boss_id": "B05-01",
+        "minions": 2,
+        "participation_reward": [
+          {
+            "resource_id": "guild_token",
+            "amount": 180
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 5
+          }
+        ],
+        "modifiers_pool": [
+          "shield_up",
+          "energy_suppress",
+          "rift_wave",
+          "summon_minion",
+          "enrage_50"
+        ],
+        "max_active_modifiers": 2
+      }
+    ],
+    "rotation_weeks": [
+      {
+        "week": 1,
+        "themes": [
+          "Уфа",
+          "Шиханы"
+        ],
+        "boss_chapters": [
+          1,
+          2
+        ]
+      },
+      {
+        "week": 2,
+        "themes": [
+          "Белорецк"
+        ],
+        "boss_chapters": [
+          3
+        ]
+      },
+      {
+        "week": 3,
+        "themes": [
+          "Стерлитамак 2050"
+        ],
+        "boss_chapters": [
+          4
+        ]
+      },
+      {
+        "week": 4,
+        "themes": [
+          "Иремель",
+          "Разлом"
+        ],
+        "boss_chapters": [
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "shop": {
+    "currency_id": "guild_token",
+    "real_money_enabled": false,
+    "offers": [
+      {
+        "sku": "guild_gold",
+        "price_guild_token": 60,
+        "grants": [
+          {
+            "resource_id": "gold",
+            "amount": 15000
+          }
+        ],
+        "weekly_limit": 5,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_xp",
+        "price_guild_token": 80,
+        "grants": [
+          {
+            "resource_id": "hero_xp",
+            "amount": 10000
+          }
+        ],
+        "weekly_limit": 5,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_essence",
+        "price_guild_token": 100,
+        "grants": [
+          {
+            "resource_id": "essence",
+            "amount": 400
+          }
+        ],
+        "weekly_limit": 5,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_ore",
+        "price_guild_token": 90,
+        "grants": [
+          {
+            "resource_id": "ore",
+            "amount": 15
+          }
+        ],
+        "weekly_limit": 3,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_skill",
+        "price_guild_token": 120,
+        "grants": [
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          }
+        ],
+        "weekly_limit": 3,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_boss_core",
+        "price_guild_token": 150,
+        "grants": [
+          {
+            "resource_id": "boss_core",
+            "amount": 2
+          }
+        ],
+        "weekly_limit": 2,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_summon",
+        "price_guild_token": 250,
+        "grants": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          }
+        ],
+        "weekly_limit": 2,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_faction",
+        "price_guild_token": 500,
+        "grants": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          }
+        ],
+        "weekly_limit": 1,
+        "lifetime_limit": null
+      },
+      {
+        "sku": "guild_avatar_frame",
+        "price_guild_token": 400,
+        "grants": [
+          {
+            "resource_id": "cosmetic_frame",
+            "amount": 1,
+            "item_id": "guild_frame"
+          }
+        ],
+        "weekly_limit": null,
+        "lifetime_limit": 1
+      },
+      {
+        "sku": "guild_emblem_color",
+        "price_guild_token": 300,
+        "grants": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 1,
+            "item_id": "guild_emblem_color"
+          }
+        ],
+        "weekly_limit": null,
+        "lifetime_limit": 1
+      }
+    ]
+  },
+  "emblem": {
+    "symbols": 12,
+    "colors": 8,
+    "frames": 4,
+    "no_custom_uploads": true
+  },
+  "chat": {
+    "tabs": [
+      "general",
+      "announcements",
+      "events"
+    ],
+    "max_chars": 300,
+    "rate_limit_sec": 3,
+    "max_per_hour": 60,
+    "attachments": false,
+    "mvp_text_only": true
+  },
+  "season_ranking": {
+    "enabled": false,
+    "status": "soon",
+    "duration_days": 28,
+    "note": "Включить после античита/QA. Награды только косметика."
+  },
+  "demo": {
+    "guild": {
+      "id": "demo_ufa_keepers",
+      "name": "Хранители Уфы",
+      "tag": "UFA",
+      "level": 3,
+      "xp": 2600,
+      "members": 8,
+      "join_policy": "open",
+      "announcement": "Рейд I по понедельникам. Без доната. DEMO."
+    },
+    "wallet_guild_token": 180
+  }
+}

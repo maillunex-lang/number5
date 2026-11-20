@@ -29,6 +29,7 @@ const DOC_FILES = [
   "gacha",
   "liveops",
   "pve_modes",
+  "guilds",
 ] as const;
 
 const app = express();

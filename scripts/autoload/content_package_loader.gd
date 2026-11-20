@@ -32,6 +32,7 @@ var loot_tables: Dictionary = {}
 var gacha: Dictionary = {}
 var liveops: Dictionary = {}
 var pve_modes: Dictionary = {}
+var guilds: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -103,6 +104,7 @@ func _load_docs(base: String) -> void:
 	gacha = _read_json("%s/gacha.json" % base)
 	liveops = _read_json("%s/liveops.json" % base)
 	pve_modes = _read_json("%s/pve_modes.json" % base)
+	guilds = _read_json("%s/guilds.json" % base)
 
 func reload() -> bool:
 	return load_active_package()

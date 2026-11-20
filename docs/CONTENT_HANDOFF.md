@@ -14,6 +14,7 @@
 | `docs/content/GACHA_45_HEROES.md` | 4 баннера, pity |
 | `docs/content/AFK_DAILY_QUESTS_EXPEDITIONS.md` | AFK, квесты, 18 миссий |
 | `docs/content/PVE_MODES.md` | Башня, охота, врата, подземелья |
+| `docs/content/GUILDS_COOP_RAIDS.md` | Гильдии, асинхр. рейды, жетоны |
 | `docs/CONTENT_IMPLEMENTATION.md` | Фазы C0–C7 и инварианты ID |
 
 ## Что уже в игре (C0–C3 + E0–E4)
@@ -21,7 +22,7 @@
 - Пакет `content/packages/0.2.0/` + `active.json` → `0.2.0`
 - Герои/фракции/враги/CH01 связаны по ID
 - Клиент: `enemies_pack` + `economy`/`gacha`/`liveops`; бой из encounters; магазин 0 ₽; алтарь; AFK ставки
-- Активный пакет **0.4.0** (+ PvE)
+- Активный пакет **0.5.0** (+ гильдии)
 
 ## Что ещё нужно решить / доделать
 

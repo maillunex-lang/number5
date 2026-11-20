@@ -1,0 +1,771 @@
+{
+  "schema_version": 1,
+  "slots": [
+    "weapon",
+    "armor",
+    "helmet",
+    "boots",
+    "acc"
+  ],
+  "sets": [
+    {
+      "id": "SET01",
+      "name": "Печати Первого Часа",
+      "chapter": 1,
+      "theme_faction": "F01",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "hp_percent",
+          "value_bp": 400
+        },
+        {
+          "pieces": 4,
+          "effect_id": "first_low_hp_shield",
+          "threshold_bp": 4000,
+          "shield_bp": 800,
+          "duration_ms": 5000,
+          "max_uses": 1
+        }
+      ]
+    },
+    {
+      "id": "SET02",
+      "name": "Следопыты Трёх Дорог",
+      "chapter": 1,
+      "theme_faction": "F02",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "spd_flat",
+          "value": 3
+        },
+        {
+          "pieces": 4,
+          "effect_id": "after_3_aa_atk",
+          "value_bp": 500,
+          "duration_ms": 6000
+        }
+      ]
+    },
+    {
+      "id": "SET03",
+      "name": "Каменные Свидетели",
+      "chapter": 2,
+      "theme_faction": "F04",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "def_percent",
+          "value_bp": 600
+        },
+        {
+          "pieces": 4,
+          "effect_id": "block_counter",
+          "atk_bp": 5000,
+          "cd_ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "SET04",
+      "name": "Эхо Древнего Леса",
+      "chapter": 2,
+      "theme_faction": "F02",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "hp_percent",
+          "value_bp": 500
+        },
+        {
+          "pieces": 4,
+          "effect_id": "heal_taken",
+          "value_bp": 600
+        }
+      ]
+    },
+    {
+      "id": "SET05",
+      "name": "Кузнечный Завет",
+      "chapter": 3,
+      "theme_faction": "F04",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "atk_percent",
+          "value_bp": 500
+        },
+        {
+          "pieces": 4,
+          "effect_id": "vs_shield",
+          "value_bp": 700
+        }
+      ]
+    },
+    {
+      "id": "SET06",
+      "name": "Шестерни Предела",
+      "chapter": 3,
+      "theme_faction": "F03",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "accuracy",
+          "value_bp": 500
+        },
+        {
+          "pieces": 4,
+          "effect_id": "every_5_hit_energy",
+          "value": 80
+        }
+      ]
+    },
+    {
+      "id": "SET07",
+      "name": "Протокол 2050",
+      "chapter": 4,
+      "theme_faction": "F03",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "atk_percent",
+          "value_bp": 600
+        },
+        {
+          "pieces": 4,
+          "effect_id": "first_ult_damage",
+          "value_bp": 800
+        }
+      ]
+    },
+    {
+      "id": "SET08",
+      "name": "Контур Безмолвия",
+      "chapter": 4,
+      "theme_faction": "F05",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "dodge",
+          "value_bp": 400
+        },
+        {
+          "pieces": 4,
+          "effect_id": "after_dodge_atk",
+          "value_bp": 800,
+          "cd_ms": 10000
+        }
+      ]
+    },
+    {
+      "id": "SET09",
+      "name": "Тени Иремеля",
+      "chapter": 5,
+      "theme_faction": "F05",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "crit_chance",
+          "value_bp": 400
+        },
+        {
+          "pieces": 4,
+          "effect_id": "crit_energy",
+          "value": 20,
+          "cd_ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "SET10",
+      "name": "Клятва Хранителя",
+      "chapter": 5,
+      "theme_faction": "F06",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "heal_power",
+          "value_bp": 600
+        },
+        {
+          "pieces": 4,
+          "effect_id": "low_hp_heal_boost",
+          "value_bp": 1200
+        }
+      ]
+    },
+    {
+      "id": "SET11",
+      "name": "Сердце Разлома",
+      "chapter": 6,
+      "theme_faction": "F06",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "hp_percent",
+          "value_bp": 600
+        },
+        {
+          "pieces": 4,
+          "effect_id": "battle_start_shield",
+          "shield_bp": 500,
+          "duration_ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "SET12",
+      "name": "Парадокс Нулевого Часа",
+      "chapter": 6,
+      "theme_faction": "F01",
+      "bonuses": [
+        {
+          "pieces": 2,
+          "effect_id": "atk_percent",
+          "value_bp": 600
+        },
+        {
+          "pieces": 4,
+          "effect_id": "after_ult_resist",
+          "value_bp": 500,
+          "duration_ms": 6000
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "eq_weapon_tank",
+      "slot": "weapon",
+      "allowed_roles": [
+        "tank"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_warrior",
+      "slot": "weapon",
+      "allowed_roles": [
+        "warrior"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_assassin",
+      "slot": "weapon",
+      "allowed_roles": [
+        "assassin"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_ranger",
+      "slot": "weapon",
+      "allowed_roles": [
+        "ranger"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_mage",
+      "slot": "weapon",
+      "allowed_roles": [
+        "mage"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_support",
+      "slot": "weapon",
+      "allowed_roles": [
+        "support"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_weapon_healer",
+      "slot": "weapon",
+      "allowed_roles": [
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 0,
+        "atk": 20,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_tank",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_warrior",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_assassin",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_ranger",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_mage",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_support",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_armor_healer",
+      "slot": "armor",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_tank",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_warrior",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_assassin",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_ranger",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_mage",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_support",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_helmet_healer",
+      "slot": "helmet",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 15
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_tank",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_warrior",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_assassin",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_ranger",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_mage",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_support",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_boots_healer",
+      "slot": "boots",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 5
+      },
+      "placeholder": true
+    },
+    {
+      "id": "eq_acc_universal",
+      "slot": "acc",
+      "allowed_roles": [
+        "tank",
+        "warrior",
+        "assassin",
+        "ranger",
+        "mage",
+        "support",
+        "healer"
+      ],
+      "base_stats": {
+        "hp": 20,
+        "atk": 10,
+        "def": 5
+      },
+      "placeholder": true
+    }
+  ],
+  "upgrade": {
+    "max_level": 15,
+    "guaranteed": true
+  },
+  "craft": {
+    "rare": {
+      "ore": 20,
+      "boss_core": 1,
+      "gold": 5000
+    },
+    "epic": {
+      "ore": 55,
+      "boss_core": 3,
+      "gold": 16000
+    },
+    "legendary": {
+      "ore": 150,
+      "boss_core": 8,
+      "set_pattern": 1,
+      "gold": 55000
+    }
+  },
+  "note": "Экземпляры предметов — только в аккаунте (сервер). Здесь каталог."
+}

@@ -13,7 +13,7 @@ for f in "${REQUIRED[@]}"; do
   test -f "$DIR/$f"
   python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
 done
-OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json)
+OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json guilds.json)
 for f in "${OPTIONAL[@]}"; do
   if [[ -f "$DIR/$f" ]]; then
     python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
@@ -156,7 +156,25 @@ if (d/"pve_modes.json").exists():
     assert len(pve["rift_dungeons"]["dungeons"]) == 4
     print("PvE modes OK")
 
-if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4"):
+if (d/"guilds.json").exists():
+    gu = json.loads((d/"guilds.json").read_text())
+    assert gu.get("unlock_stage") == "CH01-20"
+    assert gu["max_level"] == 10
+    assert len(gu["daily_quests"]) == 8
+    assert len(gu["shop"]["offers"]) >= 8
+    assert gu["shop"]["real_money_enabled"] is False
+    tiers = gu["raids"]["tiers"]
+    assert len(tiers) == 5
+    foe_ids = set()
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        foe_ids = {b["id"] for b in en.get("bosses", [])}
+    for t in tiers:
+        if foe_ids:
+            assert t["boss_id"] in foe_ids, t["boss_id"]
+    print("Guilds / raids OK")
+
+if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ver.startswith("0.5"):
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 

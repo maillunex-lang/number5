@@ -1,0 +1,5885 @@
+{
+  "schema_version": 1,
+  "mode": "DEMO_SANDBOX",
+  "disclaimer": "Локальный DEMO. Попытки/награды/урон авторитетны только на сервере.",
+  "reset": {
+    "timezone": "Europe/Moscow",
+    "hour": 6
+  },
+  "battle_rules": {
+    "party_size": 5,
+    "combat_engine": "shared_5v5",
+    "duration_sec": 90
+  },
+  "modes": [
+    {
+      "id": "tower",
+      "unlock_stage": "CH01-15",
+      "floor_count": 120,
+      "reward_policy": "first_clear_only",
+      "battle_scene": "shared_5v5"
+    },
+    {
+      "id": "anomaly_hunt",
+      "unlock_stage": "CH02-10",
+      "daily_completed_attempts": 3,
+      "battle_duration_sec": 90
+    },
+    {
+      "id": "faction_gates",
+      "unlock_stage": "CH02-20",
+      "daily_rewarded_wins": 3,
+      "factions": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06"
+      ]
+    },
+    {
+      "id": "rift_dungeons",
+      "unlock_stage": "CH01-20",
+      "daily_rewarded_entries": 6,
+      "dungeons": [
+        "DUN_GOLD",
+        "DUN_XP",
+        "DUN_FORGE",
+        "DUN_SKILL"
+      ]
+    }
+  ],
+  "tower": {
+    "id": "tower",
+    "name": "Башня Времени",
+    "unlock_stage": "CH01-15",
+    "floor_count": 120,
+    "battle_duration_sec": 90,
+    "attempt_limit": null,
+    "stars": [
+      "win",
+      "no_deaths",
+      "under_60s"
+    ],
+    "floors": [
+      {
+        "id": "TWR-001",
+        "floor": 1,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 0.9,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 3250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-002",
+        "floor": 2,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 0.935,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 3500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-003",
+        "floor": 3,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 0.97,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 3750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-004",
+        "floor": 4,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 1.005,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 4000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-005",
+        "floor": 5,
+        "chapter": 1,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 1.04,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 4250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-006",
+        "floor": 6,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.075,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 4500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-007",
+        "floor": 7,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.11,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 4750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-008",
+        "floor": 8,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.145,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 5000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-009",
+        "floor": 9,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.18,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 5250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-010",
+        "floor": 10,
+        "chapter": 1,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 1.215,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "B01-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 5500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 200
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-011",
+        "floor": 11,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.25,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 5750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-012",
+        "floor": 12,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.285,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 6000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-013",
+        "floor": 13,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.32,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 6250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-014",
+        "floor": 14,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.355,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 6500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-015",
+        "floor": 15,
+        "chapter": 1,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 1.39,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 6750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-016",
+        "floor": 16,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 1.425,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 7000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-017",
+        "floor": 17,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 1.46,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 7250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-018",
+        "floor": 18,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 1.495,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 7500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-019",
+        "floor": 19,
+        "chapter": 1,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 1.53,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 7750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-020",
+        "floor": 20,
+        "chapter": 1,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 1.565,
+        "reference_hero_level": 20,
+        "enemy_squad": [
+          {
+            "enemy_id": "B01-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E01-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E01-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 8000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 300
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 1
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-021",
+        "floor": 21,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 1.6,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 8250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-022",
+        "floor": 22,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 1.635,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 8500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-023",
+        "floor": 23,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 1.67,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 8750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-024",
+        "floor": 24,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 1.705,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 9000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-025",
+        "floor": 25,
+        "chapter": 2,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 1.74,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 9250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-026",
+        "floor": 26,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.775,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 9500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-027",
+        "floor": 27,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.81,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 9750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-028",
+        "floor": 28,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.845,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 10000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-029",
+        "floor": 29,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 1.88,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 10250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-030",
+        "floor": 30,
+        "chapter": 2,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 1.915,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "B02-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 10500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 400
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-031",
+        "floor": 31,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.95,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 10750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-032",
+        "floor": 32,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 1.985,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 11000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-033",
+        "floor": 33,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.02,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 11250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-034",
+        "floor": 34,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.055,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 11500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-035",
+        "floor": 35,
+        "chapter": 2,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 2.09,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 11750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-036",
+        "floor": 36,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.125,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 12000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-037",
+        "floor": 37,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.16,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 12250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 4900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-038",
+        "floor": 38,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.195,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 12500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-039",
+        "floor": 39,
+        "chapter": 2,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.23,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 12750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-040",
+        "floor": 40,
+        "chapter": 2,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 2.265,
+        "reference_hero_level": 35,
+        "enemy_squad": [
+          {
+            "enemy_id": "B02-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E02-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E02-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 13000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 500
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 1
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-041",
+        "floor": 41,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 2.3,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 13250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-042",
+        "floor": 42,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 2.335,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 13500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-043",
+        "floor": 43,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 2.37,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 13750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-044",
+        "floor": 44,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 2.405,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 14000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-045",
+        "floor": 45,
+        "chapter": 3,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 2.44,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 14250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-046",
+        "floor": 46,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 2.475,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 14500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-047",
+        "floor": 47,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 2.51,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 14750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-048",
+        "floor": 48,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 2.545,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 15000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-049",
+        "floor": 49,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 2.58,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 15250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-050",
+        "floor": 50,
+        "chapter": 3,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 2.615,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "B03-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 15500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 600
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-051",
+        "floor": 51,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.65,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 15750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-052",
+        "floor": 52,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.685,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 16000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-053",
+        "floor": 53,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.72,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 16250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-054",
+        "floor": 54,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 2.755,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 16500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-055",
+        "floor": 55,
+        "chapter": 3,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 2.79,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 16750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-056",
+        "floor": 56,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.825,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 17000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-057",
+        "floor": 57,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.86,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 17250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-058",
+        "floor": 58,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.895,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 17500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-059",
+        "floor": 59,
+        "chapter": 3,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 2.93,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 17750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-060",
+        "floor": 60,
+        "chapter": 3,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 2.965,
+        "reference_hero_level": 50,
+        "enemy_squad": [
+          {
+            "enemy_id": "B03-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E03-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E03-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 18000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 700
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-061",
+        "floor": 61,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.0,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 18250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-062",
+        "floor": 62,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.035,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 18500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-063",
+        "floor": 63,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.07,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 18750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-064",
+        "floor": 64,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.105,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 19000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-065",
+        "floor": 65,
+        "chapter": 4,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 3.14,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 19250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-066",
+        "floor": 66,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.175,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 19500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-067",
+        "floor": 67,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.21,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 19750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-068",
+        "floor": 68,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.245,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 20000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-069",
+        "floor": 69,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.28,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 20250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-070",
+        "floor": 70,
+        "chapter": 4,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 3.315,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "B04-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 20500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 800
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-071",
+        "floor": 71,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 3.35,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 20750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-072",
+        "floor": 72,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 3.385,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 21000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-073",
+        "floor": 73,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 3.42,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 21250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-074",
+        "floor": 74,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 3.455,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 21500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-075",
+        "floor": 75,
+        "chapter": 4,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 3.49,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 21750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-076",
+        "floor": 76,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 3.525,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 22000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-077",
+        "floor": 77,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 3.56,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 22250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 8900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-078",
+        "floor": 78,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 3.595,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 22500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-079",
+        "floor": 79,
+        "chapter": 4,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 3.63,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 22750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-080",
+        "floor": 80,
+        "chapter": 4,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 3.665,
+        "reference_hero_level": 65,
+        "enemy_squad": [
+          {
+            "enemy_id": "B04-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E04-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E04-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 23000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 900
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-081",
+        "floor": 81,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.7,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 23250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-082",
+        "floor": 82,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.735,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 23500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-083",
+        "floor": 83,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.77,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 23750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-084",
+        "floor": 84,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 3.805,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 24000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-085",
+        "floor": 85,
+        "chapter": 5,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 3.84,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 24250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 3
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-086",
+        "floor": 86,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.875,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 24500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-087",
+        "floor": 87,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.91,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 24750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-088",
+        "floor": 88,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.945,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 25000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-089",
+        "floor": 89,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 3.98,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 25250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-090",
+        "floor": 90,
+        "chapter": 5,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 4.015,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "B05-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 25500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 1000
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-091",
+        "floor": 91,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.05,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 25750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-092",
+        "floor": 92,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.085,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 26000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-093",
+        "floor": 93,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.12,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 26250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-094",
+        "floor": 94,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.155,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 26500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-095",
+        "floor": 95,
+        "chapter": 5,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 4.19,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 26750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-096",
+        "floor": 96,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.225,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 27000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-097",
+        "floor": 97,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.26,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 27250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 10900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-098",
+        "floor": 98,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.295,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 27500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-099",
+        "floor": 99,
+        "chapter": 5,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.33,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 27750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-100",
+        "floor": 100,
+        "chapter": 5,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 4.365,
+        "reference_hero_level": 80,
+        "enemy_squad": [
+          {
+            "enemy_id": "B05-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E05-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E05-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 28000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 1100
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 3
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-101",
+        "floor": 101,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 4.4,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 28250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-102",
+        "floor": 102,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 4.435,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 28500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-103",
+        "floor": 103,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 4.47,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 28750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-104",
+        "floor": 104,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "hardened",
+        "power_multiplier": 4.505,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 29000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-105",
+        "floor": 105,
+        "chapter": 6,
+        "kind": "elite",
+        "modifier": "hardened",
+        "power_multiplier": 4.54,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 29250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-106",
+        "floor": 106,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 4.575,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 29500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-107",
+        "floor": 107,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 4.61,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 29750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-108",
+        "floor": 108,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 4.645,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 30000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-109",
+        "floor": 109,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "swift",
+        "power_multiplier": 4.68,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 30250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-110",
+        "floor": 110,
+        "chapter": 6,
+        "kind": "boss",
+        "modifier": "swift",
+        "power_multiplier": 4.715,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "B06-01",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 30500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 1200
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-111",
+        "floor": 111,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.75,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 30750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12300
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-112",
+        "floor": 112,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.785,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 31000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12400
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-113",
+        "floor": 113,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.82,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 31250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12500
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-114",
+        "floor": 114,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "volatile",
+        "power_multiplier": 4.855,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 31500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12600
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-115",
+        "floor": 115,
+        "chapter": 6,
+        "kind": "elite",
+        "modifier": "volatile",
+        "power_multiplier": 4.89,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "elite"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "elite"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 31750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12700
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 4
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-116",
+        "floor": 116,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.925,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 32000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12800
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-117",
+        "floor": 117,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.96,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 32250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 12900
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-118",
+        "floor": 118,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 4.995,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 32500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 13000
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-119",
+        "floor": 119,
+        "chapter": 6,
+        "kind": "normal",
+        "modifier": "warded",
+        "power_multiplier": 5.03,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-05",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 32750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 13100
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      },
+      {
+        "id": "TWR-120",
+        "floor": 120,
+        "chapter": 6,
+        "kind": "boss",
+        "modifier": "warded",
+        "power_multiplier": 5.065,
+        "reference_hero_level": 95,
+        "enemy_squad": [
+          {
+            "enemy_id": "B06-03",
+            "tier": "boss"
+          },
+          {
+            "enemy_id": "E06-01",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-02",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-03",
+            "tier": "normal"
+          },
+          {
+            "enemy_id": "E06-04",
+            "tier": "normal"
+          }
+        ],
+        "first_clear_rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 33000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 13200
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 5
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 1300
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 2
+          },
+          {
+            "resource_id": "boss_core",
+            "amount": 3
+          },
+          {
+            "resource_id": "cosmetic_frame",
+            "amount": 1,
+            "item_id": "tower_120"
+          }
+        ],
+        "reward_policy": "first_clear_only"
+      }
+    ]
+  },
+  "anomaly_hunt": {
+    "id": "anomaly_hunt",
+    "name": "Охота на Аномалии",
+    "unlock_stage": "CH02-10",
+    "daily_completed_attempts": 3,
+    "battle_duration_sec": 90,
+    "infinite_hp": true,
+    "thresholds_bp": [
+      2500,
+      6000,
+      10000
+    ],
+    "threshold_rewards": [
+      [
+        {
+          "resource_id": "boss_core",
+          "amount": 1
+        },
+        {
+          "resource_id": "essence",
+          "amount": 150
+        }
+      ],
+      [
+        {
+          "resource_id": "boss_core",
+          "amount": 1
+        },
+        {
+          "resource_id": "essence",
+          "amount": 200
+        }
+      ],
+      [
+        {
+          "resource_id": "set_pattern",
+          "amount": 1
+        },
+        {
+          "resource_id": "essence",
+          "amount": 250
+        }
+      ]
+    ],
+    "consolation": [
+      {
+        "resource_id": "essence",
+        "amount": 100
+      }
+    ],
+    "first_success_day": [
+      {
+        "resource_id": "skill_book",
+        "amount": 1
+      }
+    ],
+    "schedule": {
+      "mon": [
+        "B01-01",
+        "B04-01",
+        "B02-01"
+      ],
+      "tue": [
+        "B02-01",
+        "B05-01",
+        "B03-01"
+      ],
+      "wed": [
+        "B03-01",
+        "B06-01",
+        "B01-01"
+      ],
+      "thu": [
+        "B01-01",
+        "B04-01",
+        "B05-01"
+      ],
+      "fri": [
+        "B02-01",
+        "B05-01",
+        "B06-01"
+      ],
+      "sat": [
+        "B03-01",
+        "B06-01",
+        "B04-01"
+      ],
+      "sun": [
+        "B02-01",
+        "B04-01",
+        "B06-01"
+      ]
+    },
+    "note": "damage_score считает только сервер; клиент DEMO показывает пороги."
+  },
+  "faction_gates": {
+    "id": "faction_gates",
+    "name": "Фракционные врата",
+    "unlock_stage": "CH02-20",
+    "daily_rewarded_wins": 3,
+    "difficulties": [
+      {
+        "id": "novice",
+        "unlock_stage": "CH02-20",
+        "recommended_level": 35,
+        "rewards_repeat": [
+          {
+            "resource_id": "gold",
+            "amount": 4000
+          },
+          {
+            "resource_id": "essence",
+            "amount": 100
+          },
+          {
+            "resource_id": "class_seal",
+            "amount": 1
+          },
+          {
+            "resource_id": "faction_token",
+            "amount": 3
+          }
+        ]
+      },
+      {
+        "id": "veteran",
+        "unlock_stage": "CH04-10",
+        "recommended_level": 60,
+        "rewards_repeat": [
+          {
+            "resource_id": "gold",
+            "amount": 9000
+          },
+          {
+            "resource_id": "essence",
+            "amount": 250
+          },
+          {
+            "resource_id": "class_seal",
+            "amount": 2
+          },
+          {
+            "resource_id": "faction_token",
+            "amount": 6
+          }
+        ]
+      },
+      {
+        "id": "master",
+        "unlock_stage": "CH05-20",
+        "recommended_level": 80,
+        "rewards_repeat": [
+          {
+            "resource_id": "gold",
+            "amount": 18000
+          },
+          {
+            "resource_id": "essence",
+            "amount": 450
+          },
+          {
+            "resource_id": "class_seal",
+            "amount": 3
+          },
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          },
+          {
+            "resource_id": "faction_token",
+            "amount": 10
+          }
+        ]
+      }
+    ],
+    "factions": [
+      {
+        "faction_id": "F01",
+        "min_faction_heroes": 3,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "faction_id": "F02",
+        "min_faction_heroes": 3,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "faction_id": "F03",
+        "min_faction_heroes": 3,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "faction_id": "F04",
+        "min_faction_heroes": 3,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "faction_id": "F05",
+        "min_faction_heroes": 2,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "faction_id": "F06",
+        "min_faction_heroes": 2,
+        "party_size": 5,
+        "steps": 5,
+        "first_clear_step_rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 50
+          },
+          {
+            "resource_id": "skill_book",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "token_exchange": [
+      {
+        "cost": {
+          "faction_token": 20
+        },
+        "grant": {
+          "hero_shard_open_same_faction": 5
+        }
+      },
+      {
+        "cost": {
+          "faction_token": 60
+        },
+        "grant": {
+          "faction_scroll": 1
+        }
+      }
+    ]
+  },
+  "rift_dungeons": {
+    "id": "rift_dungeons",
+    "name": "Подземелья Разлома",
+    "unlock_stage": "CH01-20",
+    "daily_rewarded_entries": 6,
+    "dungeons": [
+      {
+        "id": "DUN_GOLD",
+        "name": "Казна Уфимского Часа",
+        "unlock_stage": "CH01-20",
+        "difficulties": [
+          {
+            "id": "easy",
+            "label": "I",
+            "recommended_level": 20,
+            "unlock_stage": "CH01-20"
+          },
+          {
+            "id": "normal",
+            "label": "II",
+            "recommended_level": 45,
+            "unlock_stage": "CH03-10"
+          },
+          {
+            "id": "hard",
+            "label": "III",
+            "recommended_level": 75,
+            "unlock_stage": "CH05-10"
+          }
+        ],
+        "rewards_by_difficulty": {
+          "easy": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 500
+            }
+          ],
+          "normal": [
+            {
+              "resource_id": "gold",
+              "amount": 16000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 1200
+            }
+          ],
+          "hard": [
+            {
+              "resource_id": "gold",
+              "amount": 38000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 3000
+            }
+          ]
+        },
+        "quick_clear_requires_stars": 3
+      },
+      {
+        "id": "DUN_XP",
+        "name": "Архив Потерянных Лет",
+        "unlock_stage": "CH01-20",
+        "difficulties": [
+          {
+            "id": "easy",
+            "label": "I",
+            "recommended_level": 20,
+            "unlock_stage": "CH01-20"
+          },
+          {
+            "id": "normal",
+            "label": "II",
+            "recommended_level": 45,
+            "unlock_stage": "CH03-10"
+          },
+          {
+            "id": "hard",
+            "label": "III",
+            "recommended_level": 75,
+            "unlock_stage": "CH05-10"
+          }
+        ],
+        "rewards_by_difficulty": {
+          "easy": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 120
+            }
+          ],
+          "normal": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 10000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 280
+            }
+          ],
+          "hard": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 24000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 650
+            }
+          ]
+        },
+        "quick_clear_requires_stars": 3
+      },
+      {
+        "id": "DUN_FORGE",
+        "name": "Шахты Белорецка",
+        "unlock_stage": "CH03-01",
+        "difficulties": [
+          {
+            "id": "easy",
+            "label": "I",
+            "recommended_level": 20,
+            "unlock_stage": "CH01-20"
+          },
+          {
+            "id": "normal",
+            "label": "II",
+            "recommended_level": 45,
+            "unlock_stage": "CH03-10"
+          },
+          {
+            "id": "hard",
+            "label": "III",
+            "recommended_level": 75,
+            "unlock_stage": "CH05-10"
+          }
+        ],
+        "rewards_by_difficulty": {
+          "easy": [
+            {
+              "resource_id": "ore",
+              "amount": 8
+            },
+            {
+              "resource_id": "gold",
+              "amount": 1500
+            }
+          ],
+          "normal": [
+            {
+              "resource_id": "ore",
+              "amount": 18
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "hard": [
+            {
+              "resource_id": "ore",
+              "amount": 35
+            },
+            {
+              "resource_id": "gold",
+              "amount": 9000
+            }
+          ]
+        },
+        "quick_clear_requires_stars": 3
+      },
+      {
+        "id": "DUN_SKILL",
+        "name": "Печати Мастерства",
+        "unlock_stage": "CH02-01",
+        "difficulties": [
+          {
+            "id": "easy",
+            "label": "I",
+            "recommended_level": 20,
+            "unlock_stage": "CH01-20"
+          },
+          {
+            "id": "normal",
+            "label": "II",
+            "recommended_level": 45,
+            "unlock_stage": "CH03-10"
+          },
+          {
+            "id": "hard",
+            "label": "III",
+            "recommended_level": 75,
+            "unlock_stage": "CH05-10"
+          }
+        ],
+        "rewards_by_difficulty": {
+          "easy": [
+            {
+              "resource_id": "skill_book",
+              "amount": 1
+            },
+            {
+              "resource_id": "gold",
+              "amount": 1000
+            }
+          ],
+          "normal": [
+            {
+              "resource_id": "skill_book",
+              "amount": 2
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "hard": [
+            {
+              "resource_id": "skill_book",
+              "amount": 4
+            },
+            {
+              "resource_id": "reforge_stone",
+              "amount": 1
+            }
+          ]
+        },
+        "quick_clear_requires_stars": 3
+      }
+    ]
+  }
+}
