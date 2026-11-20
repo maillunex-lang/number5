@@ -1,4 +1,4 @@
-# Схема контент-пакета (schema 2 → 3)
+# Схема контент-пакета (schema 2 → 4)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
@@ -14,6 +14,12 @@
 | `campaign.json` | Кампания (CH*, regions) |
 | `heroes.json` | Фракции + герои / отряд |
 | `enemies.json` | **schema 3:** риги, E*/B*, encounters по stage_id |
+| `economy.json` | **schema 4:** валюты, SKU VIRTUAL_FREE, VIP, BP, подписки |
+| `progression.json` | уровни, прорывы, звёзды, навыки |
+| `equipment.json` | 12 сетов, шаблоны слотов |
+| `loot_tables.json` | дроп по stage_id |
+| `gacha.json` | 4 баннера, rates/pity, пулы H* |
+| `liveops.json` | AFK, daily/weekly, экспедиции |
 | `battle_modes.json` | Порталы битвы |
 | `features.json` | Демо-фичи |
 

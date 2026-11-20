@@ -25,6 +25,12 @@ var strings: Dictionary = {}
 var motion: Dictionary = {}
 var assets: Dictionary = {}
 var enemies_pack: Dictionary = {}
+var economy: Dictionary = {}
+var progression: Dictionary = {}
+var equipment: Dictionary = {}
+var loot_tables: Dictionary = {}
+var gacha: Dictionary = {}
+var liveops: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -89,6 +95,12 @@ func _load_docs(base: String) -> void:
 	motion = _read_json("%s/motion.json" % base)
 	assets = _read_json("%s/assets.json" % base)
 	enemies_pack = _read_json("%s/enemies.json" % base)
+	economy = _read_json("%s/economy.json" % base)
+	progression = _read_json("%s/progression.json" % base)
+	equipment = _read_json("%s/equipment.json" % base)
+	loot_tables = _read_json("%s/loot_tables.json" % base)
+	gacha = _read_json("%s/gacha.json" % base)
+	liveops = _read_json("%s/liveops.json" % base)
 
 func reload() -> bool:
 	return load_active_package()

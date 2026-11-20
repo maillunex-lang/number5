@@ -1,8 +1,9 @@
 extends Control
-## HUB-01: интерфейс призыва (локальная демо-симуляция)
+## HUB-01: алтарь призыва. DEMO sandbox по gacha.json; авторитетный RNG — только сервер.
 
 var _payload: Dictionary = {}
 var _busy: bool = false
+var _banner_id: String = "standard"
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
@@ -10,31 +11,70 @@ func setup(payload: Dictionary = {}) -> void:
 func _ready() -> void:
 	_rebuild()
 
-func _summon_cfg() -> Dictionary:
-	return ContentPackageLoader.features.get("summon", {})
+func _banner() -> Dictionary:
+	var banners: Array = ContentPackageLoader.gacha.get("banners", [])
+	for b in banners:
+		if str(b.get("id", "")) == _banner_id:
+			return b
+	if banners.size() > 0:
+		return banners[0]
+	return {}
 
 func _rebuild() -> void:
 	var root := $Safe/Scroll/VBox
 	for c in root.get_children():
 		c.queue_free()
-	var cfg := _summon_cfg()
-	var banner := str(cfg.get("banner", "Баннер"))
-	var w: Dictionary = cfg.get("weights", {"common": 70, "rare": 22, "epic": 7, "legendary": 1})
-	root.add_child(UIFactory.section_header("Алтарь призыва"))
-	root.add_child(UIFactory.label("Баннер: %s" % banner, 26, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("%s · локальная демо-симуляция" % ContentPackageLoader.package_label(), 20))
+	var banner := _banner()
+	var name := str(banner.get("name", ContentPackageLoader.features.get("summon", {}).get("banner", "Баннер")))
+	root.add_child(UIFactory.section_header(ContentPackageLoader.tr_key("summon.altar", "Алтарь призыва")))
+	root.add_child(UIFactory.label("Баннер: %s" % name, 26, LunexColors.GOLD))
+	root.add_child(UIFactory.muted("%s · %s" % [
+		ContentPackageLoader.package_label(),
+		str(ContentPackageLoader.gacha.get("disclaimer", "локальная демо-симуляция")),
+	], 18))
+
+	var row_b := UIFactory.hbox(8)
+	root.add_child(row_b)
+	for b in ContentPackageLoader.gacha.get("banners", []):
+		var id := str(b.get("id", ""))
+		var btn := UIFactory.fantasy_button(str(b.get("name", id)))
+		btn.custom_minimum_size = Vector2(160, 44)
+		var bid := id
+		btn.pressed.connect(func():
+			_banner_id = bid
+			_rebuild()
+		)
+		row_b.add_child(btn)
+
 	var art := Panel.new()
-	art.custom_minimum_size = Vector2(0, 220)
+	art.custom_minimum_size = Vector2(0, 180)
 	art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color("1A2840"), LunexColors.CYAN, 18, 2))
 	root.add_child(art)
+
+	var rates: Dictionary = banner.get("rates_bp", {})
+	var cost1: Array = banner.get("cost_x1", [])
+	var cost10: Array = banner.get("cost_x10", [])
+	var c1 := "1 свиток"
+	var c10 := "8 свитков"
+	if cost1.size() > 0:
+		c1 = "%s ×%s" % [str(cost1[0].get("resource_id", "")), str(cost1[0].get("amount", 1))]
+	if cost10.size() > 0:
+		c10 = "%s ×%s" % [str(cost10[0].get("resource_id", "")), str(cost10[0].get("amount", 8))]
+	root.add_child(UIFactory.muted("×1: %s · ×10: %s (скидка 10→8)" % [c1, c10], 20))
+
 	var row := UIFactory.hbox(12)
 	root.add_child(row)
-	var info := UIFactory.fantasy_button("Шансы и правила")
+	var info := UIFactory.fantasy_button("Шансы и pity")
 	info.pressed.connect(func():
 		ModalManager.push_info(
-			"Правила призыва",
-			"Обычный %s%%\nРедкий %s%%\nЭпический %s%%\nЛегендарный %s%%\n\nГарантии и история — на сервере (здесь демо)." % [
-				str(w.get("common", 70)), str(w.get("rare", 22)), str(w.get("epic", 7)), str(w.get("legendary", 1))
+			"Правила · %s" % name,
+			"N %s%% · R %s%% · SR %s%% · SSR %s%% · UR %s%%\nPity: %s\nГарантия ×10: SR+\nДемо — серверный RNG позже." % [
+				str((rates.get("N", 0) as int) / 100.0),
+				str((rates.get("R", 0) as int) / 100.0),
+				str((rates.get("SR", 0) as int) / 100.0),
+				str((rates.get("SSR", 0) as int) / 100.0),
+				str((rates.get("UR", 0) as int) / 100.0),
+				str(banner.get("pity", {})),
 			]
 		)
 	)
@@ -42,9 +82,10 @@ func _rebuild() -> void:
 	var x1 := UIFactory.gold_button("Призыв ×1")
 	x1.pressed.connect(func(): _do_summon(1))
 	row.add_child(x1)
-	var x10 := UIFactory.gold_button("Призыв ×10")
+	var x10 := UIFactory.gold_button("Призыв ×10 (за 8)")
 	x10.pressed.connect(func(): _do_summon(10))
 	root.add_child(x10)
+
 	var to_heroes := UIFactory.fantasy_button("В коллекцию")
 	to_heroes.pressed.connect(func():
 		while ScreenRouter._shell and ScreenRouter._shell.has_overlay():
@@ -60,33 +101,73 @@ func _do_summon(count: int) -> void:
 	if _busy:
 		return
 	_busy = true
-	var cfg := _summon_cfg()
-	var cost := int(cfg.get("cost_x1", 300)) * count
-	if not AppState.spend_demo_gold(cost):
-		NotificationManager.warn("Недостаточно золота (демо)")
-		_busy = false
-		return
-	NotificationManager.info("Призыв…")
-	await get_tree().create_timer(0.45).timeout
+	var banner := _banner()
+	var rates: Dictionary = banner.get("rates_bp", {"N": 5000, "R": 3500, "SR": 1200, "SSR": 300, "UR": 0})
+	NotificationManager.info("Призыв… (демо)")
+	await get_tree().create_timer(0.35).timeout
 	var results: Array = []
-	var rarities := ["common", "rare", "epic", "legendary"]
-	var w: Dictionary = cfg.get("weights", {})
-	var weights := [int(w.get("common", 70)), int(w.get("rare", 22)), int(w.get("epic", 7)), int(w.get("legendary", 1))]
+	var got_sr_plus := false
 	for i in count:
-		var roll := randi() % 100
-		var acc := 0
-		var r := "common"
-		for j in rarities.size():
-			acc += weights[j]
-			if roll < acc:
-				r = rarities[j]
-				break
-		var pool := DemoData.get_filtered_heroes("", r if r != "common" else "", "", "", "name")
-		var hero_name := "Новичок"
-		if pool.size() > 0:
-			hero_name = str(pool[randi() % pool.size()]["name"])
-		elif DemoData.heroes.size() > 0:
-			hero_name = str(DemoData.heroes[randi() % DemoData.heroes.size()]["name"])
-		results.append("%s (%s)" % [hero_name, r])
-	ModalManager.push_rewards("Результаты призыва ×%d" % count, results)
+		var rarity := _roll_rarity(rates)
+		if count == 10 and i == 9 and not got_sr_plus:
+			rarity = _force_sr_plus(rates)
+		if rarity in ["SR", "SSR", "UR"]:
+			got_sr_plus = true
+		var hero := _pick_hero(banner, rarity)
+		results.append("%s (%s)" % [hero, rarity])
+	ModalManager.push_rewards("Результаты ×%d · %s" % [count, str(banner.get("name", ""))], results)
 	_busy = false
+
+func _roll_rarity(rates: Dictionary) -> String:
+	var order := ["N", "R", "SR", "SSR", "UR"]
+	var total := 0
+	for k in order:
+		total += int(rates.get(k, 0))
+	if total <= 0:
+		return "N"
+	var roll := randi() % total
+	var acc := 0
+	for k in order:
+		acc += int(rates.get(k, 0))
+		if roll < acc:
+			return k
+	return "N"
+
+func _force_sr_plus(rates: Dictionary) -> String:
+	var pool := ["SR", "SSR", "UR"]
+	var weights: Array[int] = []
+	var sum := 0
+	for k in pool:
+		var w := int(rates.get(k, 0))
+		weights.append(w)
+		sum += w
+	if sum <= 0:
+		return "SR"
+	var roll := randi() % sum
+	var acc := 0
+	for i in pool.size():
+		acc += weights[i]
+		if roll < acc:
+			return pool[i]
+	return "SR"
+
+func _pick_hero(banner: Dictionary, rarity: String) -> String:
+	var pools: Dictionary = banner.get("pools", {})
+	if banner.get("faction_select", false):
+		var by_f: Dictionary = banner.get("pools_by_faction", {})
+		if by_f.has("F01"):
+			pools = by_f["F01"]
+	var ids: Array = pools.get(rarity, [])
+	if ids.is_empty():
+		# fallback any rarity
+		for k in pools.keys():
+			if (pools[k] as Array).size() > 0:
+				ids = pools[k]
+				break
+	if ids.is_empty():
+		return "Новичок"
+	var hid := str(ids[randi() % ids.size()])
+	var h := DemoData.get_hero(hid)
+	if h.is_empty():
+		return hid
+	return str(h.get("name", hid))

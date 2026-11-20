@@ -1,46 +1,70 @@
 # CONTENT-C — внедрение «Башкортостан: Разлом эпох»
 
-Канон: `docs/content/STORY_6_CHAPTERS.md`, `FACTIONS_45_HEROES.md`, `BESTIARY_6_CHAPTERS.md`.  
-Пакет данных: `content/packages/0.2.0/` (не переписывать `0.1.0` на месте).
+Канон сюжета/героев/бестиария: `docs/content/STORY_*.md`, `FACTIONS_*.md`, `BESTIARY_*.md`.  
+Канон экономики: `MONETIZATION_VIP.md`, `PROGRESSION_EQUIPMENT_LOOT.md`, `GACHA_45_HEROES.md`, `AFK_DAILY_QUESTS_EXPEDITIONS.md`.  
+Пакеты: `0.2.0` (spine+CH01) · **`0.3.0` (экономика E0–E4)** · не rewrite старых на месте.
 
-## Порядок: не «только кампания» и не полный параллель
-
-Правильная последовательность — **общий каркас ID → вертикальный срез главы 1 → расширение**.
+## Порядок мира (C): не «только кампания»
 
 | Почему не так | Риск |
 |---|---|
-| Сначала только кампания без героев/врагов | Этапы ссылаются на несуществующие `H*` / `E*` / `B*` |
-| Полный параллель 6 глав × 45 героев × 36 врагов | Расходятся ID, ломается валидатор, нет играбельного среза |
+| Сначала только кампания | Этапы → несуществующие H/E/B |
+| Полный параллель 6×45×180 | Расходятся ID |
 
-## Этапы внедрения
+**C0→C3 готовы** (spine + CH01). Дальше C4–C7 по главам/арту.
 
-| ID | Этап | Статус | Артефакты | Критерий |
-|---|---|---|---|---|
-| **C0** | Канон в репо + фазы в ROADMAP | **Готово** | `docs/content/*`, этот файл | ID-схема зафиксирована |
-| **C1** | Каркас ID (фракции F01–F06, H01–H45, E**/B**, 6 ригов) | **Готово** | `heroes.json`, `enemies.json` | Валидатор: все ссылки резолвятся |
-| **C2** | Кампания CH01 (30 этапов + encounters) | **Готово** | `campaign.json`, encounters | Карта/бой читают `CH01-*` |
-| **C3** | Клиент на пакете 0.2.0 | **Готово** | Loader + DemoData + фильтры фракций | Smoke: хаб → карта → герои → бой |
-| **C4** | Главы CH02–CH06 (данные) | Дальше | stages + enemies по канону | Каждая глава валидна отдельно |
-| **C5** | Навыки/диалоги/улики (полный combat text) | Дальше | skills, story keys | Бой использует skill ids |
-| **C6** | Арт (портреты/атласы/риги) + экономика | Параллельно с ART-05 | `assets.json`, офферы | Placeholder → реальные ассеты |
-| **C7** | Publish OTA 0.2.x | После C3 | `active.json` + CDN | Телефон без новой APK (нужен HTTPS для OTA-2) |
+## Порядок экономики (E): решено по зависимостям
 
-## Связи ID (обязательные инварианты)
+| Почему не иначе | Риск |
+|---|---|
+| Сначала магазин/VIP | Награды ссылаются на валюты/свитки, которых нет |
+| Сначала гача | Нет `summon_scroll`/`diamonds` и правил звёзд/фрагментов |
+| Сначала AFK | Нет ставок в валютах и материалов прогрессии |
+
+**Корректная цепочка:**
 
 ```
-F0x  ←── heroes.faction_id
-H0x  ←── campaign rewards / squad / story speakers
-E0y-zz / B0y-zz  ←── enemies.encounters[].slots[].enemy_id
-RIG-*  ←── enemies[].rig_id / bosses[].rig_id
-CH0y-nn  ←── campaign.stages[].id = encounters[].stage_id
+E0 валюты          ← общий кошелёк (MONETIZATION §2)
+ → E1 прогресс/лут ← тратит gold/xp/essence, дроп с CH*
+ → E2 гача         ← тратит свитки/алмазы, даёт H*/shards → звёзды
+ → E3 AFK/квесты/экспедиции ← выдаёт те же ресурсы, слоты ↔ подписка
+ → E4 магазин/VIP/BP VIRTUAL_FREE ← офферы поверх всего (0 ₽)
 ```
 
-Генератор: `tools/generate_razlom_package.py` (пересборка из канона).  
-Валидатор: `tools/validate_content_package.sh 0.2.0` (кросс-ссылки).
+| ID | Этап | Статус | Артефакты |
+|---|---|---|---|
+| **E0** | Справочник валют/ресурсов | **Готово** | `economy.json` → `currencies` |
+| **E1** | Прогресс + 12 сетов + лут CH01 | **Готово** | `progression.json`, `equipment.json`, `loot_tables.json` |
+| **E2** | 4 баннера гачи + пулы H01–H45 | **Готово** | `gacha.json` + UI алтаря |
+| **E3** | AFK / 12+8 квестов / 18 экспедиций | **Готово** | `liveops.json` + AFK UI |
+| **E4** | Магазин SKU / 3 подписки / VIP 0–11 / BP 30 | **Готово (данные+UI демо)** | `economy.json` offers… · без реальных платежей |
+| **E5** | Сервер wallet/ledger/RNG | После CORE-01 | Go + Postgres |
+| **E6** | Admin Studio economy editors | После E5 | publish/rollback |
 
-## Что сознательно отложено
+## Этапы сюжета (C)
 
-- Серверный прогресс / авторитетный бой (CORE-01+).
-- Полные карточки навыков в runtime (пока слоты `skills[]`).
-- Анимации ригов и портреты (placeholder tint).
-- Экономика призыва сверх демо `features.json`.
+| ID | Статус | Критерий |
+|---|---|---|
+| C0–C3 | **Готово** | Пакет 0.2.0 / активный мир в 0.3.0 |
+| C4 | Дальше | CH02–CH06 данные |
+| C5–C7 | Дальше | навыки / арт / OTA-2 |
+
+## Связи ID
+
+```
+currency_id  ←── grants / AFK rates / gacha costs / craft
+H0x          ←── gacha pools / expedition heroes / equipment wear
+SET0x        ←── loot featured_sets / equipment.sets
+CH0y-nn      ←── loot_tables.stage_bindings / unlock gates
+sku / sub_*  ←── economy.offers / subscriptions (payable_price_rub=0)
+```
+
+Генераторы: `tools/generate_razlom_package.py`, `tools/generate_economy_package.py`.  
+Валидатор: `tools/validate_content_package.sh 0.3.0`.
+
+## Отложено сознательно
+
+- Авторитетный кошелёк / дроп / pity (CORE-01).
+- Реальные IAP / billing SDK.
+- Полный UI инвентаря экипировки и экранов экспедиций (данные есть; экраны — следующий вертикальный срез).
+- Лут привязки CH02–CH06 (после C4).

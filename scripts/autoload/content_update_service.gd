@@ -13,7 +13,8 @@ const CACHE_ACTIVE := "user://content_cache/active.json"
 const DOC_FILES := [
 	"manifest.json", "hub.json", "campaign.json", "heroes.json", "battle_modes.json",
 	"features.json", "theme.json", "shell.json", "motion.json", "strings.json", "assets.json",
-	"enemies.json",
+	"enemies.json", "economy.json", "progression.json", "equipment.json", "loot_tables.json",
+	"gacha.json", "liveops.json",
 ]
 
 var enabled: bool = true
@@ -139,13 +140,14 @@ func _on_request_completed(result: int, code: int, _headers: PackedStringArray, 
 	var optional := bool(_current.get("optional", false))
 	if result != HTTPRequest.RESULT_SUCCESS or code < 200 or code >= 300:
 		if optional and kind == "file":
-			# Старые пакеты без enemies.json — пишем пустой бестиарий и продолжаем.
+			# Старые пакеты без schema 3/4 файлов — пустой объект, загрузчик терпит.
+			var opt_name := str(_current.get("file", "optional.json"))
 			_write_text(
-				"user://content_cache/packages/%s/%s" % [_pending_version, str(_current.get("file", "enemies.json"))],
-				"{\"rigs\":[],\"enemies\":[],\"bosses\":[],\"encounters\":[]}\n"
+				"user://content_cache/packages/%s/%s" % [_pending_version, opt_name],
+				"{}\n"
 			)
 			_done += 1
-			update_progress.emit(_done, _total, str(_current.get("file", "")))
+			update_progress.emit(_done, _total, opt_name)
 			_pump()
 			return
 		_fail("CDN недоступен (%s/%s). Укажите доступный cdn_base. Сейчас: %s" % [str(result), str(code), cdn_base])
@@ -224,7 +226,10 @@ func _handle_manifest(body: PackedByteArray) -> void:
 			"kind": "file",
 			"file": fname,
 			"url": "%s/packages/%s/%s" % [cdn_base, remote_version, fname],
-			"optional": fname == "enemies.json",
+			"optional": fname in [
+				"enemies.json", "economy.json", "progression.json", "equipment.json",
+				"loot_tables.json", "gacha.json", "liveops.json",
+			],
 		})
 	_pump()
 

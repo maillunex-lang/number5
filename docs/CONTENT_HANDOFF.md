@@ -9,13 +9,18 @@
 | `docs/content/STORY_6_CHAPTERS.md` | 6 глав, зоны, 30 этапов/глава, сюжет |
 | `docs/content/FACTIONS_45_HEROES.md` | F01–F06, H01–H45, статы L1, навыки |
 | `docs/content/BESTIARY_6_CHAPTERS.md` | 6 ригов, E**/B**, encounters |
+| `docs/content/MONETIZATION_VIP.md` | Магазин VIRTUAL_FREE, VIP, BP |
+| `docs/content/PROGRESSION_EQUIPMENT_LOOT.md` | Уровни, сеты, дроп |
+| `docs/content/GACHA_45_HEROES.md` | 4 баннера, pity |
+| `docs/content/AFK_DAILY_QUESTS_EXPEDITIONS.md` | AFK, квесты, 18 миссий |
 | `docs/CONTENT_IMPLEMENTATION.md` | Фазы C0–C7 и инварианты ID |
 
-## Что уже в игре (C0–C3)
+## Что уже в игре (C0–C3 + E0–E4)
 
 - Пакет `content/packages/0.2.0/` + `active.json` → `0.2.0`
 - Герои/фракции/враги/CH01 связаны по ID
-- Клиент: `ContentPackageLoader.enemies_pack`, бой берёт encounters
+- Клиент: `enemies_pack` + `economy`/`gacha`/`liveops`; бой из encounters; магазин 0 ₽; алтарь; AFK ставки
+- Активный пакет **0.3.0**
 
 ## Что ещё нужно решить / доделать
 

@@ -22,6 +22,12 @@ const DOC_FILES = [
   "motion",
   "assets",
   "enemies",
+  "economy",
+  "progression",
+  "equipment",
+  "loot_tables",
+  "gacha",
+  "liveops",
 ] as const;
 
 const app = express();
