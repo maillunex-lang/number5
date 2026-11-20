@@ -1,0 +1,260 @@
+{
+  "id": "lunex-core",
+  "version": "0.9.0",
+  "schema": 10,
+  "client_min": "0.1.0",
+  "title": "Razlom Epoh · C6 art registry",
+  "locale": "ru",
+  "created_at": "2026-11-20T09:28:19Z",
+  "updated_at": "2026-11-20T09:28:19Z",
+  "notes": "C6: assets.json registry + media descriptors for heroes/rigs/chapters. Binary art = ART-05.",
+  "files": {
+    "achievements.json": {
+      "role": "achievements"
+    },
+    "assets.json": {
+      "role": "assets"
+    },
+    "battle_modes.json": {
+      "role": "battle_modes"
+    },
+    "campaign.json": {
+      "role": "campaign"
+    },
+    "daily_stories.json": {
+      "role": "daily_stories"
+    },
+    "dialogs.json": {
+      "role": "dialogs"
+    },
+    "economy.json": {
+      "role": "economy"
+    },
+    "enemies.json": {
+      "role": "enemies"
+    },
+    "equipment.json": {
+      "role": "equipment"
+    },
+    "features.json": {
+      "role": "features"
+    },
+    "gacha.json": {
+      "role": "gacha"
+    },
+    "guilds.json": {
+      "role": "guilds"
+    },
+    "heroes.json": {
+      "role": "heroes"
+    },
+    "hub.json": {
+      "role": "hub"
+    },
+    "live_events.json": {
+      "role": "live_events"
+    },
+    "liveops.json": {
+      "role": "liveops"
+    },
+    "login_calendars.json": {
+      "role": "login_calendars"
+    },
+    "loot_tables.json": {
+      "role": "loot_tables"
+    },
+    "mail.json": {
+      "role": "mail"
+    },
+    "motion.json": {
+      "role": "motion"
+    },
+    "profile.json": {
+      "role": "profile"
+    },
+    "progression.json": {
+      "role": "progression"
+    },
+    "pve_modes.json": {
+      "role": "pve_modes"
+    },
+    "shell.json": {
+      "role": "shell"
+    },
+    "skills.json": {
+      "role": "skills"
+    },
+    "strings.json": {
+      "role": "strings"
+    },
+    "theme.json": {
+      "role": "theme"
+    }
+  },
+  "media": {
+    "root": "media/",
+    "descriptors": 128
+  },
+  "integrity": {
+    "algo": "sha256",
+    "hashes": {
+      "achievements.json": "73c17515e8e295d2437a239064196e8545cfa8833e5a54e7cf2d76d5c3e65544",
+      "assets.json": "555020fd81bf986c41b8fae5a821ed5ffb334d2b97c83307f8a453706e273e96",
+      "battle_modes.json": "f03381b395a4fa0ee00d25be3f854f564427273dd3338ed21e30e2304aa4b00e",
+      "campaign.json": "b2c852704ec77b4dc188c4c415955c4b49115c95f5644d6a4e35ad62e60d48a3",
+      "daily_stories.json": "f8cbaeddab305ad4c9c0f69ce9db3997aa5a09588c98b2eaa7cce934e3a0c259",
+      "dialogs.json": "7357bbeab468f48dac2b46d7453fe9489ceac88d3bd8e1e5c1cbe6119167a5f2",
+      "economy.json": "a804b37e770dea0259f8e7faf9edf3285af31ee6a64d32722b348e29d02ab496",
+      "enemies.json": "43bc82f50362b1f68a20219a2806047a4f577e16ed824646502281b75a3b73dc",
+      "equipment.json": "193afbaa4a1ab03b3674dadda068384e89b51b1e58c87b87821477adaf597145",
+      "features.json": "3d4ce9c50267f598dac7e772b45df7546583583e40adfbacd4da85997d567375",
+      "gacha.json": "856e0ae2a75245deb7529a0e0ec35dd35cf4e24f108aa652d400b294d55d2d72",
+      "guilds.json": "13c273a8cd5463f3390aec40a3d360cb8663d78583c2be8d8a63787e6cd832cc",
+      "heroes.json": "35a58fe450ff9646b51e9dd8e6c7ca71b813b0cf0bd7f3f5e1b99ca10eadad02",
+      "hub.json": "a04819b47fb27d354dcaef9c5fe23da4b55f4bd46bbc0a8157cf56f00a8309da",
+      "live_events.json": "f9158643419818f49f4b9ac334ad607210a1ce6d096fb56fb08589c5dbd4b34d",
+      "liveops.json": "5fea958703d8cb2094dabb0f5def46924ceabea5b42bba1ba8302fad6cc2ae66",
+      "login_calendars.json": "e8ee0b369747f081d265a5a6f6691344aa3cbfb683dce3ed84de4e5a0325ebf7",
+      "loot_tables.json": "2bcc554cfeec50af016a4aba39981050afb729aeb036772bd51b97f7c1386617",
+      "mail.json": "895da6490cdb543eb86940483afda7dcaeeb1053049802ed36afb702f962eec6",
+      "motion.json": "cbd90ad7bd3ac090ffe5d5d61176abf3ffbe7bb04691940deee05dc322659eaf",
+      "profile.json": "fabd089c9882cadca0b4a1b4b2e9ba5b9aaaf511bcb6442fc850618358f786ad",
+      "progression.json": "6b671cea94620bbe00cad16dc4a9ab780d367e6193fed719003f7ff962aa9668",
+      "pve_modes.json": "08871cfbb54aeac19f1fa105bf2c6d3bd8e74bcbd58e441de7143081d00ac988",
+      "shell.json": "f879d4da1f60e717b89f8f30be6daedae9b1d282fd0658c5be6e0d127553b8c0",
+      "skills.json": "f729f56e45b878d4a97e0bed57478f2d9eb447627c3b44a9171d4a31614dc75c",
+      "strings.json": "67b65c04818e6baaa5c6dff241058f1fd42b5ad0fdb727dff9361cacdf7c2286",
+      "theme.json": "44a5e985fe4564e976119811241b8431ff839291cfcfc8df1cdaec54439bcdd2"
+    },
+    "media_hashes": {
+      "media/bosses/b01-01/manifest.json": "296e750a0fb1a30da8be1db0aa5e53e7f84b6c11868a6db1728c6ef99c883721",
+      "media/bosses/b01-02/manifest.json": "0f591b6b89ffff65ddc035189be406df25e039a6edf70732e6ba8069c8976773",
+      "media/bosses/b01-03/manifest.json": "1a42d9b33c539cefef7f1ff98de03509a66add46f022b15e45966887eac1887a",
+      "media/bosses/b02-01/manifest.json": "651191db0b3fad4fa8e704f9aaa2af5a76a791b8a0a6a0c74d79e6eaf0800425",
+      "media/bosses/b02-02/manifest.json": "0ee9fa377a3c21c28caffb5dfeb6f0f53c0162e61efa3b7287c4148492b6abb9",
+      "media/bosses/b02-03/manifest.json": "f1b64f384c237eea1194a5fa24a53ba2a87cd7ee69f5c6cb6fea74013f0e6320",
+      "media/bosses/b03-01/manifest.json": "21367047d6ff93bc8530b23385d3614dafcf23e58488423347725dc99c3a3568",
+      "media/bosses/b03-02/manifest.json": "7b00b459e3eca5ab4e2bbf0ce54ba9ad00494eb577d0ea5b346e94884d8c0b32",
+      "media/bosses/b03-03/manifest.json": "a9e9e7b4f6ccdefc20522fadd46e0594da26555fde163ddcf1fa51464abee8ca",
+      "media/bosses/b04-01/manifest.json": "7dd996f825f80be8e0e761f0478989c1950fb761ae031cc67af52eb681d701b1",
+      "media/bosses/b04-02/manifest.json": "8b280a4569f3faa0c4d7a63b7392094780bc8178d184ded86b35b428138883ec",
+      "media/bosses/b04-03/manifest.json": "40eaac2c5eaa0151decd8f9b7b1ab633b8002ff7a80b354d2f01b86432e6efd7",
+      "media/bosses/b05-01/manifest.json": "1c3f68d9a696166e638127282394207d6c0e45732c6e5ebec91bcceb28dfea9c",
+      "media/bosses/b05-02/manifest.json": "e15ea8807b6fab48adba85567faeafae5a178084901ddcb713f8893360ce63ec",
+      "media/bosses/b05-03/manifest.json": "92a8bab4f19ca0d9656991bf381d9a836aa41a0788c9919dfa8faa1c351b53ff",
+      "media/bosses/b06-01/manifest.json": "03ef4d78ca3f45be2dc39f6a9ed7198d30af880233d59d3a747412df12d8deda",
+      "media/bosses/b06-02/manifest.json": "ce5bf611526c6a7f540e1a0d13dfc62fa2018cf03808e6f6d8d0631dc090c06e",
+      "media/bosses/b06-03/manifest.json": "007946499b44b5aab7f6901fad5db96dc5b0b413b172bc8917f81c59c9a76faa",
+      "media/chapters/ch01/manifest.json": "9af29498b35312cf177e0dc05d72a4978b13ce376ed57c2217e6d5c77cf141fe",
+      "media/chapters/ch02/manifest.json": "0dbb6741f1d563736a0c1cbd9fe1b545c9e20f3212576e3f0d05cfae075d95c0",
+      "media/chapters/ch03/manifest.json": "3e139c0b447a609fc008aedbe981bf7c860c2c3a54fbdbed5a9c6b46b3a83da8",
+      "media/chapters/ch04/manifest.json": "ca2481dbc1bf2cb6b748fcd6cfd01b18a595fad63726a7c256991c600ede3c52",
+      "media/chapters/ch05/manifest.json": "1e5c262185fc71587779b195710616a5ba5913e2679b09e3047492f3eee255b7",
+      "media/chapters/ch06/manifest.json": "630f7a3ee9ac1b08aa0c68c8693f4a98d727311e567ef45941edc79da587a60e",
+      "media/heroes/h01/animations.json": "2a31f6851c6a389cc1461c2700305cfe6d7fe4a365a4574ce420b0c879497436",
+      "media/heroes/h01/manifest.json": "18ef847198c21a9be0904ecf8d8afd954b1183db72f0dc1f0758e37b11250595",
+      "media/heroes/h02/animations.json": "cfc570cdf39d5b8c56471683fb5f218eac3d41dbd60fb0feb6eb0999c112cc3a",
+      "media/heroes/h02/manifest.json": "79ed4b7c5cac941da4f57bfb9e6da2e3c404829b8865a58ab7595c2669fc3023",
+      "media/heroes/h03/animations.json": "bf1a36bb53b153a3bd541bf81f35e378570ca957c983e96579bf5a00fb9aef6f",
+      "media/heroes/h03/manifest.json": "dc655b71363c955c4ca7141d074049ccbbb96911cb6cd44add69a128eb939199",
+      "media/heroes/h04/animations.json": "a69ffef7f3bff6fd730b43a38247e3c83dfd3bddaef6a1324645efd22d520fe2",
+      "media/heroes/h04/manifest.json": "6683674c520d32b28933ee9ac6d2cd913f412a06107ce9cacbb8994471a57af8",
+      "media/heroes/h05/animations.json": "9c42844578e3770ca22ee206f4a5bf3986c0c418a431dff82ee23181c951990b",
+      "media/heroes/h05/manifest.json": "414c3b031e293d95aed86cffec2c59bd00f1163adf2312c9ed6123fcab176795",
+      "media/heroes/h06/animations.json": "2fb3136930c4562077550b1020342019fe425b783e3fbfdcb61130132e26c564",
+      "media/heroes/h06/manifest.json": "a2466fb73b1e542c9de889e5ba726f2ba8ca8c1d681fe6441c33e382dc240129",
+      "media/heroes/h07/animations.json": "0fbd4443961b55063d69d06239b7f14d190f580a890c1e56ee98ba69fd6f359b",
+      "media/heroes/h07/manifest.json": "112f0be6d83f00033d6b98d7aaa0f1c3250df00623f18c0127905bc2523f58f2",
+      "media/heroes/h08/animations.json": "96155652b897529ba1dffe4d4a4b18854d8658b7cb864e88eac040b58ca31b9e",
+      "media/heroes/h08/manifest.json": "5b75971810fe2858a7af85c10587c9c8ad630fe5096298ffb0603f6f3bfa8bb8",
+      "media/heroes/h09/animations.json": "bf97d7acd8b464e2a849763b27ddac1f0fe2d4d940a127a7ca7f88629852bf11",
+      "media/heroes/h09/manifest.json": "54d1f9702f223f5002e28924086cce4eb9fe15ec8fb5ce6f97612be314e89979",
+      "media/heroes/h10/animations.json": "5fda3f22f3aaa5ec99b631957695b1f0cc93ec0c86b02ab789fba6cde37338b6",
+      "media/heroes/h10/manifest.json": "7f097c4785688ea912386851b7f89006d995744c549a2d2690312f39843148c7",
+      "media/heroes/h11/animations.json": "c25450083578eaeb80db3f0138efbd9db52b24435465fffa5f6133c5da58567c",
+      "media/heroes/h11/manifest.json": "a0a5ef05f056964d063042a16559103caff3449399a98c4b5b72961789ca426f",
+      "media/heroes/h12/animations.json": "53605cb14f56cd03b1b44513333d241e62c5675db567aa778b62886fd4687005",
+      "media/heroes/h12/manifest.json": "3a4988fd372c2cdb2a424b79526ed2366c6fa1a7064ea4266f5e6f5155b18741",
+      "media/heroes/h13/animations.json": "7fbe8197c74c778ab5d300cfb07d6d939989be1e90926786159eb841dd54be0d",
+      "media/heroes/h13/manifest.json": "31fc8797fe21a4a97a3467d8cab4d3019292b004a867e17dc5c18b43341b5474",
+      "media/heroes/h14/animations.json": "326df51e80c6cb2fad62ee59598000f608613a1e0ca9dcc4dff5f26ad9356430",
+      "media/heroes/h14/manifest.json": "98662a3766358611dc36c748543a46b0cfe5989c95dd0f6473830ffe43cb7330",
+      "media/heroes/h15/animations.json": "d72d7c6135dfd1cbf4da1cbf92efb259f0c317b16889a78df9976e747481946c",
+      "media/heroes/h15/manifest.json": "c45ccb76d4b1b97e928d4cbff3537410f52201e9323f07b21f8891aaf91af1a1",
+      "media/heroes/h16/animations.json": "e5e10626c84a871d09848a0ac3c82f1769374de97f350f2fa3b636495e15875f",
+      "media/heroes/h16/manifest.json": "0b038e08b60b77525d0a38afdaf9b23ac7b10dece5d2c138de31b6f9d4364914",
+      "media/heroes/h17/animations.json": "70dd2af23f25a16758a2b7f8bb175f94bb6b1a6419d2bf161cc75e7986381652",
+      "media/heroes/h17/manifest.json": "c653b35018b824b7b7bb39a42190431643ce912806507ead98eeffaafc8734a3",
+      "media/heroes/h18/animations.json": "9d20a8d946a796440c3a4826b42af75d16a16f290999f298fc28d5af72e5a7ea",
+      "media/heroes/h18/manifest.json": "488755a5d6c18dbcec15c71e07ae919c0d64ec6a39dd0c3007da038b2d255696",
+      "media/heroes/h19/animations.json": "8a6b050b49c5535126c2a33bb24e95dffadd6e5856d73d31caf759013c9f5d1d",
+      "media/heroes/h19/manifest.json": "48b8d6b405cd80a38b6389bce14f083ce20339f18e73f9ee2220ae673af18037",
+      "media/heroes/h20/animations.json": "1cfff1086faee7fc676bd00c155f167c630c95e355c8029d18138acf37a6b60d",
+      "media/heroes/h20/manifest.json": "84f98edb18995750d7dee9dea90205ef9920116dc3aad1538fa7844485e2b872",
+      "media/heroes/h21/animations.json": "8c2acd7d29b393e454a404e1e370817d3930624314005b6450ec66b2f42d90ff",
+      "media/heroes/h21/manifest.json": "fbb5d39b0e6c3c408aee80dbd6474ed87c94c323e5b19e8e89de40f42d99fcfa",
+      "media/heroes/h22/animations.json": "a30563dea119846c5d8c3d00b53fd9ffab60b4a3309caa01a6bb5b569bcdc01c",
+      "media/heroes/h22/manifest.json": "1ceaf28089a5868f3926317753cc544bac19a24413582bcfcb68f0cec1e1529a",
+      "media/heroes/h23/animations.json": "8089a1b3d8008a35aa8292bc243e8950b977fb7c93f518acad53887ecf37fdbf",
+      "media/heroes/h23/manifest.json": "4ef10679097a8c6d1f8ad3613c4da294298a0c1d9abe7eb63a8893f665ab67ea",
+      "media/heroes/h24/animations.json": "aa23076cd3536657565095530826c3056f0d45aac95f66d9fdf9f84161f4b6b1",
+      "media/heroes/h24/manifest.json": "4ae520114660475afa59e829e7e2d12273935f6ec05dfe99cc8ff4fe67f92634",
+      "media/heroes/h25/animations.json": "7b52b37849377221489063902b2ac9d4c12e649e473f96b28f5451dec4cd96c1",
+      "media/heroes/h25/manifest.json": "8ca44e5c7d681827a941b5850fb7ee5c074018d09acd636bed9d2a43b617b31c",
+      "media/heroes/h26/animations.json": "b65cb9823d1a2cc2a1076f02203b3c5e0747c727232bd073e77b4daceba88e85",
+      "media/heroes/h26/manifest.json": "507f42648026e87298154da5684de9c4f6d51ab063e95de21b95353c91a0598d",
+      "media/heroes/h27/animations.json": "57de8d2d3035d802f9253b03d3c5b1588d8377efd83494c70ed554f59c4be2a0",
+      "media/heroes/h27/manifest.json": "7227739c0a5b49a0ca3489e2450cd8ea528897c4dbe80262e58df144ebea0ac3",
+      "media/heroes/h28/animations.json": "eb1c7a484abcefb9424c90e8a54afaab9314fc569679b34f0fb90a907be7458e",
+      "media/heroes/h28/manifest.json": "e906ddaf92a1f266c5f77f9364528a08fae911c727f5fa751a3c7b14c76d3eae",
+      "media/heroes/h29/animations.json": "98df9c7d8b156419eb2e853965a2923290f4e0533752b60ce6bdbadb2f062a11",
+      "media/heroes/h29/manifest.json": "b29371548a8e22c3188374efe17ebb228064d9d6dcf99c7865dafa0359c729a7",
+      "media/heroes/h30/animations.json": "de31f27e1b3237bb181e56f807d5a400abebe7a19fd00acddbc54062c0ba3b69",
+      "media/heroes/h30/manifest.json": "f985a3f4229929276862fabb8f9d706ae5d887c6fa69a6e38e8968cfca0b3e95",
+      "media/heroes/h31/animations.json": "f6c675ed9bf069c198245eccf46b0319373548149cada188a04327c88d50f559",
+      "media/heroes/h31/manifest.json": "a471ef606616a94829bd0609d545750ec7ee6bbee615b12fca547524f77f69cb",
+      "media/heroes/h32/animations.json": "7ebb60bd844f26f6094b25d168c54ff73ce0d6835f0d9ac0a04e83cc1424d4c9",
+      "media/heroes/h32/manifest.json": "439e98b4cffb2ed6120e4961751d7aaf8484b32841525488941785a3e5edca08",
+      "media/heroes/h33/animations.json": "55c452645af173df6c61ef63aa75c2c570f7950bd1e41dc2b4091517f51e87b0",
+      "media/heroes/h33/manifest.json": "515bc6e3be83c6b22a0251e42aa8d7c33624ef22567b4e1d85bb4ed47b382861",
+      "media/heroes/h34/animations.json": "cb418da128a04089749817eceeaa57252fa7e41ea2feae0dcb802386cbd5bfbb",
+      "media/heroes/h34/manifest.json": "14ee5aaed01758062e608966c0c0c97bbe60ba5401a8dbff8c53f579d097573c",
+      "media/heroes/h35/animations.json": "7905d9e7f0f9c17b4b5deb2325ed0743946e4f673376ae6900f01ba6404003d2",
+      "media/heroes/h35/manifest.json": "7cd63ef0415f616eabec80b9596be2dc30804b9bd264f3a8003464411d62589f",
+      "media/heroes/h36/animations.json": "75507e4eb80400b08d3769d809f8ae4ab15173db4456e265ff9e05e178795bd8",
+      "media/heroes/h36/manifest.json": "a7e1ac7d7c2695588a7929780c4eda4a09d07cabfa689717e95fafae33ba814b",
+      "media/heroes/h37/animations.json": "e723b5ce335dc6b44fe14858d9217c205c85e86767d9c412636381d9f6bbb0db",
+      "media/heroes/h37/manifest.json": "c16099d92ad9113a6f9c6c7a507142087c09f5c5fc551f911d4b1d0c178c4ca5",
+      "media/heroes/h38/animations.json": "85f506baa51f2571ea1d175223bc57c935ee9cd38c312f7505d00f50eb4ac500",
+      "media/heroes/h38/manifest.json": "709b8031e0314ea5297d2606d77989810f61823c0f72371b78ae0c50b926e7c3",
+      "media/heroes/h39/animations.json": "ef7868524d91be91463fad2f016775117c07c8de5767f029f1af0e78eda6373b",
+      "media/heroes/h39/manifest.json": "c39f3bac0c6ee738da45611b936432f0e156cf9436655e2951643daf9d4125bd",
+      "media/heroes/h40/animations.json": "fb34fea15453793b8721ea77e18aedcdb1a8e192088c295b7b7f43909630c653",
+      "media/heroes/h40/manifest.json": "3e75034f0c14c6475c42745e9bac751939fa3dd06d9d8b5b305450b24c7bf938",
+      "media/heroes/h41/animations.json": "79429bd713555003275770196fafac11f7e465d14fc70b6a67da2bac84244c04",
+      "media/heroes/h41/manifest.json": "3bab4bf5e1eb2b3e2998b97a69e4706ae7886e8323e7bd02fd1214c5220e500b",
+      "media/heroes/h42/animations.json": "ecde739884f2ea0b3a12e9c57d03087fb32ad8dddcbe2335e4355d90c2bb1dbb",
+      "media/heroes/h42/manifest.json": "5879f07d24232a0a765e022af953be3237dd4942289d83cdf2f92f9b8c6a8c95",
+      "media/heroes/h43/animations.json": "29ed1020ce7b738ef4c5372851fb753d341ec3d5ce4032b89f3ca93f8fa0639c",
+      "media/heroes/h43/manifest.json": "b375dc03f21a4f9ce9936fa9c480749ea4a6bb0495d5af5a15424ce52fb58f1b",
+      "media/heroes/h44/animations.json": "abb07c41b4b4895dfb99901635dc9998f101e2b1a60acb4705afaeb5a2e71c24",
+      "media/heroes/h44/manifest.json": "a497e98737acb2913d9ea09298a772677c2aab18af33f67800d626c6d6571604",
+      "media/heroes/h45/animations.json": "53c7f8c370b437405d4c35ba4e06e3c0f8856a2a025a8646be197e6f8e761778",
+      "media/heroes/h45/manifest.json": "5fc7f6e85409ddb9b3648ff36c0d9a4414154a278bdd5889a230319a5ba9195f",
+      "media/rigs/beast/animations.json": "008bc792ced0c5180fc20ea993e9067cc324375ddb3107f8b9a106a698861d77",
+      "media/rigs/beast/manifest.json": "131abcae3ab8273abae4312d85eb924e3fe128862b881bf2ebe4c695ec732d44",
+      "media/rigs/caster/animations.json": "e228a0d9cc1c967c5cd6018ebc676430294200cdae503942d767d9b85a286e81",
+      "media/rigs/caster/manifest.json": "e12639ad37507153a6dd2b5dec7a56909065475a8953ffb61b2f6ba192ed8604",
+      "media/rigs/construct/animations.json": "10c4a9a40480d1c271710e9b790ae58794084b561db7c56febb150d4db51d267",
+      "media/rigs/construct/manifest.json": "06c2f65b44d8947cd843e0fce88d8846d619ce5c180f2940bb72a8b8cc3c1e75",
+      "media/rigs/guard/animations.json": "53c4ff594b602a9c2077f3261ca6535a27cb0d685bae583b0eae499eca0b8afa",
+      "media/rigs/guard/manifest.json": "2fd3311987d6e5f000de8d3295790bb8324f6326043224bb2051c4b804861eff",
+      "media/rigs/striker/animations.json": "c708591bea74eb00ab54405486a48d4a11719085843fc81ff455293e9a6a4373",
+      "media/rigs/striker/manifest.json": "8f7df3b2ce189b8c63fea1b30113872a0cfe96dd185af7be0e8a2fa68ee923ab",
+      "media/rigs/wisp/animations.json": "71e8b11d0ecfaf12014eaa26317339c22c621495f031bbe23d19917a0e98425c",
+      "media/rigs/wisp/manifest.json": "bd99d1fb726fd4b9802c980c1716a4b2f8c9675918f11ef700b60bdd1fd12afc",
+      "media/sfx/manifest.json": "beb90a2d79f221a3788416dbcb06e284bcf488500d96b6a8628fa96377750827",
+      "media/vfx/manifest.json": "c94fd90284d8d0424b18bf03c029621a3ddc2e4d3b9ab86d19b8ddb90abc43ec"
+    }
+  }
+}

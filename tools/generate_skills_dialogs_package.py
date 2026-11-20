@@ -2,7 +2,7 @@
 """Build content package 0.8.0: C5 skills + story dialogs.
 
 Parses FACTIONS_45_HEROES skill cards (45×5) and STORY dialog beats (Dxx-*).
-Active package writer for this layer.
+Historical snapshot for 0.8.0 — does not write active.json (C6 owns active).
 """
 from __future__ import annotations
 
@@ -274,15 +274,7 @@ def main() -> None:
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    active = {
-        "version": "0.8.0",
-        "source": "content-c-c5",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": now,
-    }
-    (ROOT / "content/packages/active.json").write_text(json.dumps(active, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    # previous C4 generator should not clobber — patch note separately
+    # Does NOT write active.json — active pointer owned by generate_assets_c6_package.py (0.9.0+)
     print(f"Wrote {OUT}")
     print(f" heroes_skills={len(by_hero)} cards={len(flat)} dialogs={len(dialogs)}")
 

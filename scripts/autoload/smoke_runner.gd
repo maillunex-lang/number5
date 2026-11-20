@@ -49,6 +49,10 @@ func _run() -> void:
 	await get_tree().create_timer(0.4).timeout
 	ScreenRouter.handle_back()
 	await get_tree().create_timer(0.4).timeout
+	await ScreenRouter.go("ART-01")
+	await get_tree().create_timer(0.4).timeout
+	ScreenRouter.handle_back()
+	await get_tree().create_timer(0.35).timeout
 	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
 	var foes := DemoData.enemy_squad_for_stage(stage_id)
 	print("SMOKE: stage ", stage_id, " foes=", foes.size(), " first=", (foes[0]["name"] if foes.size() else "?"))

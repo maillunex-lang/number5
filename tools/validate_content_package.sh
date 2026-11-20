@@ -253,7 +253,7 @@ if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ve
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 
-if ver.startswith("0.7") or ver.startswith("0.8"):
+if ver.startswith("0.7") or ver.startswith("0.8") or ver.startswith("0.9"):
     assert len(heroes["heroes"]) >= 45
     assert len(camp["stages"]) == 180, len(camp["stages"])
     for ch in range(1, 7):
@@ -295,6 +295,44 @@ if (d/"dialogs.json").exists():
         if sid:
             assert sid in stage_ids, sid
     print("C5 dialogs OK")
+
+if ver.startswith("0.9") or (d/"assets.json").exists() and assets.get("schema", 0) >= 2:
+    item_ids = {it["id"] for it in assets.get("items", [])}
+    bindings = assets.get("bindings", {})
+    assert len(item_ids) >= 100, f"assets items={len(item_ids)}"
+    assert "production_budget" in assets
+    assert assets["production_budget"].get("rigs") == 6
+    # every hero has portrait binding → item
+    for h in heroes["heroes"]:
+        hid = h["id"]
+        art = h.get("art") or {}
+        for slot in ("portrait", "atlas", "animations", "ultimate_vfx"):
+            key = art.get(slot) or f"hero.{hid}.{slot}"
+            aid = bindings.get(key) or bindings.get(f"hero.{hid}.{slot}")
+            assert aid, f"missing binding {key}"
+            assert aid in item_ids, f"orphan binding {key}→{aid}"
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        for r in en.get("rigs", []):
+            rid = r["id"]
+            assert r.get("animations"), rid
+            assert bindings.get(f"rig.{rid}.atlas") in item_ids
+            assert bindings.get(f"rig.{rid}.skin_a") in item_ids
+            assert bindings.get(f"rig.{rid}.skin_b") in item_ids
+        for e in en.get("enemies", []) + en.get("bosses", []):
+            eid = e["id"]
+            aid = bindings.get(f"enemy.{eid}.visual")
+            assert aid in item_ids, eid
+        for b in en.get("bosses", []):
+            assert bindings.get(f"enemy.{b['id']}.portrait") in item_ids
+    for ch in range(1, 7):
+        assert bindings.get(f"chapter.CH{ch:02d}.map") in item_ids
+    media = d / "media"
+    assert media.is_dir(), "media/ required for C6"
+    assert (media / "rigs/guard/animations.json").exists()
+    assert (media / "heroes/h01/animations.json").exists()
+    assert (media / "chapters/ch01/manifest.json").exists()
+    print("C6 art registry OK")
 
 print(f"PASS {ver}")
 PY

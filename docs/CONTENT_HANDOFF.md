@@ -2,7 +2,7 @@
 
 Канон **«Башкортостан: Разлом эпох»** принят в репозиторий. Рабочее имя «Элиориан» из CONTENT-01 больше **не** используется в активном пакете.
 
-**Активный пакет:** `content/packages/active.json` → **`0.8.0`**.
+**Активный пакет:** `content/packages/active.json` → **`0.9.0`**.
 
 ## Источники (канон)
 
@@ -26,27 +26,27 @@
 | `docs/content/DAILY_STORY_EVENTS_30.md` | 30 сюжетных дней |
 | `docs/content/LIVE_EVENTS_6.md` | 6 live-событий |
 | `docs/CONTENT_IMPLEMENTATION.md` | Фазы C/E/P/G/M…V и инварианты ID |
+| `docs/ASSETS_REGISTRY.md` | UI-шрифты/иконки + указатель на C6 пакет |
 
 ## Что уже в игре
 
 | Пакет | Содержание | Статус |
 |---|---|---|
-| `0.2.0` | Spine + CH01 | Сохранён |
-| `0.3.0` | Экономика E0–E4 | Сохранён |
-| `0.4.0` | PvE P0–P2 | Сохранён |
-| `0.5.0` | Гильдии G0–G2 | Сохранён |
-| **`0.8.0`** | Meta M→V (+ всё выше) | **Активный** |
+| `0.2.0`…`0.6.0` | spine → E → P → G → meta | Сохранены |
+| `0.7.0` | C4: 180 этапов | Сохранён |
+| `0.8.0` | C5: skills + dialogs | Сохранён |
+| **`0.9.0`** | **C6: арт-реестр + media/** | **Активный** |
 
-Клиент: `ContentPackageLoader` читает optional JSON (enemies…live_events); UI DEMO без серверного claim.
+Клиент: `ContentPackageLoader` читает optional JSON; UI DEMO без серверного claim.
 
 ## Что ещё нужно решить / доделать
 
 | Блок | Статус | Комментарий |
 |---|---|---|
 | Фракции (6) | **В данных** | Бонусы 2/3/5 — проект, не в бою |
-| 45 героев | **Реестр + L1 статы** | Полные skill cards → C5 |
-| Кампания | **180 этапов** | C5 ✓ · дальше C6 арт |
-| Бестиарий | **36+18 ID** | Арт ригов → C6 |
+| 45 героев | **Реестр + skills + art slots** | Бинарный арт → ART-05 |
+| Кампания | **180 этапов** | C6 ✓ · дальше ART-05 / C7 OTA |
+| Бестиарий | **36+18 ID + 6 ригов** | Слоты анимаций в `0.9.0` |
 | Сервер claim/wallet | Открыто | CORE-01 |
 | Доступы CORE-01 | Открыто | Docker/VPS/email/keystore |
 
@@ -55,16 +55,19 @@
 Исторические пакеты (не двигают `active.json`):
 
 ```bash
-python3 tools/generate_razlom_package.py      # 0.2.0
-python3 tools/generate_economy_package.py     # 0.3.0
-python3 tools/generate_pve_package.py         # 0.4.0
-python3 tools/generate_guilds_package.py      # 0.5.0
+python3 tools/generate_razlom_package.py           # 0.2.0
+python3 tools/generate_economy_package.py          # 0.3.0
+python3 tools/generate_pve_package.py              # 0.4.0
+python3 tools/generate_guilds_package.py           # 0.5.0
+python3 tools/generate_meta_package.py             # 0.6.0
+python3 tools/generate_campaign_c4_package.py      # 0.7.0
+python3 tools/generate_skills_dialogs_package.py   # 0.8.0
 ```
 
 Активный пакет:
 
 ```bash
-python3 tools/generate_skills_dialogs_package.py  # 0.8.0 + active.json
-tools/validate_content_package.sh 0.8.0
+python3 tools/generate_assets_c6_package.py        # 0.9.0 + active.json
+tools/validate_content_package.sh 0.9.0
 python3 tools/check_repo_refs.py
 ```

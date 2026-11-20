@@ -182,3 +182,21 @@ func get_shell_tabs() -> Array:
 func get_asset_binding(key: String) -> String:
 	var bindings: Dictionary = assets.get("bindings", {})
 	return str(bindings.get(key, ""))
+
+func get_asset_item(asset_id: String) -> Dictionary:
+	if asset_id == "":
+		return {}
+	for it in assets.get("items", []):
+		if str(it.get("id", "")) == asset_id:
+			return it
+	return {}
+
+func resolve_asset(binding_key: String) -> Dictionary:
+	## binding key → item dict (may be empty / placeholder).
+	return get_asset_item(get_asset_binding(binding_key))
+
+func hero_art(hero_id: String) -> Dictionary:
+	for h in heroes_pack.get("heroes", []):
+		if str(h.get("id", "")) == hero_id:
+			return h.get("art", {})
+	return {}

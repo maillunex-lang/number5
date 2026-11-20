@@ -1,0 +1,746 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · claim/сервер после CORE-01; незабранное → MAIL_LOGIN_UNCLAIMED",
+  "unlock_stage": "CH01-03",
+  "daily_reset": "06:00 Europe/Moscow",
+  "auto_claim": false,
+  "premium_calendar": false,
+  "calendars": [
+    {
+      "id": "LOGIN_7",
+      "name": "7 дней",
+      "days": 7,
+      "repeat": true,
+      "once": false,
+      "entries": [
+        {
+          "day": 1,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 10000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 2000
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "rewards": [
+            {
+              "resource_id": "essence",
+              "amount": 250
+            },
+            {
+              "resource_id": "ore",
+              "amount": 8
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "gold",
+              "amount": 12000
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 5000
+            },
+            {
+              "resource_id": "skill_book",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "rewards": [
+            {
+              "resource_id": "diamonds",
+              "amount": 100
+            },
+            {
+              "resource_id": "essence",
+              "amount": 300
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 2
+            },
+            {
+              "resource_id": "ore",
+              "amount": 12
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "rewards": [
+            {
+              "resource_id": "diamonds",
+              "amount": 200
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 3
+            },
+            {
+              "resource_id": "cosmetic_token",
+              "amount": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LOGIN_30",
+      "name": "30 дней",
+      "days": 30,
+      "repeat": true,
+      "once": false,
+      "entries": [
+        {
+          "day": 1,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 2500
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 3000
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 9000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 3500
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 10000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 2
+            },
+            {
+              "resource_id": "skill_book",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 12000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 5000
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "rewards": [
+            {
+              "resource_id": "faction_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "essence",
+              "amount": 500
+            }
+          ]
+        },
+        {
+          "day": 8,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 14000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 6000
+            }
+          ]
+        },
+        {
+          "day": 9,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 15000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 6500
+            }
+          ]
+        },
+        {
+          "day": 10,
+          "rewards": [
+            {
+              "resource_id": "diamonds",
+              "amount": 250
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "day": 11,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 17000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 7500
+            }
+          ]
+        },
+        {
+          "day": 12,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 18000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 8000
+            }
+          ]
+        },
+        {
+          "day": 13,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 19000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 8500
+            }
+          ]
+        },
+        {
+          "day": 14,
+          "rewards": [
+            {
+              "resource_id": "faction_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "essence",
+              "amount": 500
+            }
+          ]
+        },
+        {
+          "day": 15,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 2
+            },
+            {
+              "resource_id": "skill_book",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "day": 16,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 22000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 10000
+            }
+          ]
+        },
+        {
+          "day": 17,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 23000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 10500
+            }
+          ]
+        },
+        {
+          "day": 18,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 24000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 11000
+            }
+          ]
+        },
+        {
+          "day": 19,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 25000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 11500
+            }
+          ]
+        },
+        {
+          "day": 20,
+          "rewards": [
+            {
+              "resource_id": "diamonds",
+              "amount": 250
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 3
+            }
+          ]
+        },
+        {
+          "day": 21,
+          "rewards": [
+            {
+              "resource_id": "faction_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "essence",
+              "amount": 500
+            }
+          ]
+        },
+        {
+          "day": 22,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 28000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 13000
+            }
+          ]
+        },
+        {
+          "day": 23,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 29000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 13500
+            }
+          ]
+        },
+        {
+          "day": 24,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 30000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 14000
+            }
+          ]
+        },
+        {
+          "day": 25,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 2
+            },
+            {
+              "resource_id": "skill_book",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "day": 26,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 32000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 15000
+            }
+          ]
+        },
+        {
+          "day": 27,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 33000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 15500
+            }
+          ]
+        },
+        {
+          "day": 28,
+          "rewards": [
+            {
+              "resource_id": "faction_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "essence",
+              "amount": 500
+            }
+          ]
+        },
+        {
+          "day": 29,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 35000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 16500
+            }
+          ]
+        },
+        {
+          "day": 30,
+          "rewards": [
+            {
+              "resource_id": "diamonds",
+              "amount": 500
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 8
+            },
+            {
+              "resource_id": "faction_scroll",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NEWCOMER_14",
+      "name": "Новичок",
+      "days": 14,
+      "repeat": false,
+      "once": true,
+      "entries": [
+        {
+          "day": 1,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 2000
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 3000
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 10000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 12000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 5000
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 14000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 6000
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 16000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 7000
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "rewards": [
+            {
+              "resource_id": "faction_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "essence",
+              "amount": 500
+            }
+          ]
+        },
+        {
+          "day": 8,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 20000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 9000
+            }
+          ]
+        },
+        {
+          "day": 9,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 22000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 10000
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "day": 10,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 24000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 11000
+            }
+          ]
+        },
+        {
+          "day": 11,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 26000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 12000
+            }
+          ]
+        },
+        {
+          "day": 12,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 28000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 13000
+            },
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "day": 13,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 30000
+            },
+            {
+              "resource_id": "hero_xp",
+              "amount": 14000
+            }
+          ]
+        },
+        {
+          "day": 14,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 8
+            },
+            {
+              "resource_id": "diamonds",
+              "amount": 300
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rollover": {
+    "unclaimed_to_mail_template": "MAIL_LOGIN_UNCLAIMED",
+    "mail_ttl_days": 7,
+    "advance_after_mail_or_claim": true
+  },
+  "demo": {
+    "LOGIN_7": {
+      "next_day": 3,
+      "cycle_no": 1,
+      "status": "available"
+    },
+    "LOGIN_30": {
+      "next_day": 5,
+      "cycle_no": 1,
+      "status": "available"
+    },
+    "NEWCOMER_14": {
+      "next_day": 4,
+      "cycle_no": 1,
+      "status": "available"
+    }
+  }
+}

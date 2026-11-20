@@ -1,7 +1,7 @@
 # Lunex AFK - CONTENT-01: мир и центральный конфликт
 
 Статус: WORLD-CONTENT-001, TONE-CONTENT-001, ORIGIN-001, THREAT-001, STORY-ROLE-001, HUMOR-001 утверждены.  
-**Активный канон кампании:** «Башкортостан: Разлом эпох» — см. `docs/content/`, указатели `docs/STORY_CAMPAIGN.md` / `docs/STORY_IDS.md`, активный пакет **`0.6.0`** (`docs/CONTENT_IMPLEMENTATION.md`, `content/packages/active.json`).  
+**Активный канон кампании:** «Башкортостан: Разлом эпох» — см. `docs/content/`, указатели `docs/STORY_CAMPAIGN.md` / `docs/STORY_IDS.md`, активный пакет **`0.9.0`** (`docs/CONTENT_IMPLEMENTATION.md`, `content/packages/active.json`).  
 Ниже — историческое предложение CONTENT-01 («Элиориан»); не использовать как источник ID для клиента.
 
 Репозиторий: maillunex-lang/number5. UI/пакеты/Studio в коде; фазы CONTENT-C: `docs/CONTENT_HANDOFF.md`.

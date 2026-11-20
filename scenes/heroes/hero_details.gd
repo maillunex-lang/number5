@@ -33,7 +33,7 @@ func _rebuild() -> void:
 
 	var tabs := UIFactory.hbox(8)
 	root.add_child(tabs)
-	for t in [["info", "Обзор"], ["skills", "Навыки"], ["equip", "Экип"]]:
+	for t in [["info", "Обзор"], ["skills", "Навыки"], ["art", "Арт"], ["equip", "Экип"]]:
 		var b := UIFactory.fantasy_button(t[1])
 		b.custom_minimum_size = Vector2(140, 44)
 		var key: String = t[0]
@@ -46,6 +46,8 @@ func _rebuild() -> void:
 	match _tab:
 		"skills":
 			_build_skills(root)
+		"art":
+			_build_art(root)
 		"equip":
 			_build_equip(root)
 		_:
@@ -114,6 +116,34 @@ func _build_skills(root: VBoxContainer) -> void:
 			if meta_parts.size() > 0:
 				v.add_child(UIFactory.muted(", ".join(meta_parts), 16))
 		root.add_child(p)
+
+func _build_art(root: VBoxContainer) -> void:
+	root.add_child(UIFactory.label(ContentPackageLoader.tr_key("art.title", "Реестр арта"), 28, LunexColors.GOLD))
+	root.add_child(UIFactory.muted(ContentPackageLoader.tr_key("c6.demo", "C6 DEMO"), 16))
+	var art: Dictionary = ContentPackageLoader.hero_art(str(_hero.id))
+	if art.is_empty():
+		root.add_child(UIFactory.muted("Нет art-блока в heroes.json", 18))
+		return
+	root.add_child(UIFactory.muted("status · %s" % str(art.get("status", "placeholder")), 18))
+	for slot in ["portrait", "atlas", "animations", "ultimate_vfx"]:
+		var key := str(art.get(slot, ""))
+		var item := ContentPackageLoader.resolve_asset(key)
+		var p := UIFactory.panel()
+		var v := UIFactory.vbox(4)
+		p.add_child(v)
+		v.add_child(UIFactory.label("%s" % slot, 20, LunexColors.GOLD))
+		v.add_child(UIFactory.muted("%s → %s" % [key, str(item.get("id", "—"))], 16))
+		v.add_child(UIFactory.muted("%s · %s" % [
+			str(item.get("path", "")),
+			str(item.get("status", "")),
+		], 14))
+		root.add_child(p)
+	var clips: Array = art.get("clips", [])
+	if not clips.is_empty():
+		root.add_child(UIFactory.muted("clips: %s" % ", ".join(clips), 16))
+	var open := UIFactory.fantasy_button("Весь реестр")
+	open.pressed.connect(func(): ScreenRouter.go("ART-01"))
+	root.add_child(open)
 
 func _build_equip(root: VBoxContainer) -> void:
 	root.add_child(UIFactory.title("Экипировка", 28))

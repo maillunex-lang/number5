@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · серверная доставка после CORE-01",
+  "player_to_player": false,
+  "ui_limit": 200,
+  "categories": [
+    "system",
+    "reward",
+    "daily_rollover",
+    "calendar_rollover",
+    "compensation",
+    "guild",
+    "season"
+  ],
+  "states": [
+    "unread",
+    "read",
+    "claimed",
+    "archived",
+    "expired",
+    "deleted"
+  ],
+  "templates": [
+    {
+      "id": "MAIL_DAILY_UNCLAIMED",
+      "category": "daily_rollover",
+      "ttl_days": 7,
+      "subject_key": "mail.MAIL_DAILY_UNCLAIMED.subject",
+      "subject": "Награда за вчерашние дела",
+      "body_key": "mail.MAIL_DAILY_UNCLAIMED.body",
+      "body": "Твой отряд заработал награду. Забери её до {expires_at}."
+    },
+    {
+      "id": "MAIL_LOGIN_UNCLAIMED",
+      "category": "calendar_rollover",
+      "ttl_days": 7,
+      "subject_key": "mail.MAIL_LOGIN_UNCLAIMED.subject",
+      "subject": "Календарь не забыт",
+      "body_key": "mail.MAIL_LOGIN_UNCLAIMED.body",
+      "body": "Награда входа сохранена. Забери до {expires_at}."
+    },
+    {
+      "id": "MAIL_EVENT_REWARD",
+      "category": "reward",
+      "ttl_days": 30,
+      "subject_key": "mail.MAIL_EVENT_REWARD.subject",
+      "subject": "Награда события",
+      "body_key": "mail.MAIL_EVENT_REWARD.body",
+      "body": "Событие завершено. Вложение ждёт в письме."
+    },
+    {
+      "id": "MAIL_ACHIEVEMENT",
+      "category": "reward",
+      "ttl_days": 30,
+      "subject_key": "mail.MAIL_ACHIEVEMENT.subject",
+      "subject": "Заслуженная награда",
+      "body_key": "mail.MAIL_ACHIEVEMENT.body",
+      "body": "Достижение выполнено. Забери награду."
+    },
+    {
+      "id": "MAIL_GUILD_RAID",
+      "category": "guild",
+      "ttl_days": 7,
+      "subject_key": "mail.MAIL_GUILD_RAID.subject",
+      "subject": "Итоги совместного рейда",
+      "body_key": "mail.MAIL_GUILD_RAID.body",
+      "body": "Право на рейдовую награду перенесено в почту."
+    },
+    {
+      "id": "MAIL_SEASON_END",
+      "category": "season",
+      "ttl_days": 30,
+      "subject_key": "mail.MAIL_SEASON_END.subject",
+      "subject": "Итоги сезона",
+      "body_key": "mail.MAIL_SEASON_END.body",
+      "body": "Сезон закрыт. Невостребованные права — во вложении."
+    },
+    {
+      "id": "MAIL_COMPENSATION",
+      "category": "compensation",
+      "ttl_days": 30,
+      "subject_key": "mail.MAIL_COMPENSATION.subject",
+      "subject": "Компенсация",
+      "body_key": "mail.MAIL_COMPENSATION.body",
+      "body": "Компенсация от службы Разлома."
+    },
+    {
+      "id": "MAIL_MAINTENANCE",
+      "category": "system",
+      "ttl_days": 30,
+      "subject_key": "mail.MAIL_MAINTENANCE.subject",
+      "subject": "Новости Разлома",
+      "body_key": "mail.MAIL_MAINTENANCE.body",
+      "body": "Краткое обслуживание завершено. Спасибо за терпение."
+    }
+  ],
+  "demo_inbox": [
+    {
+      "id": "demo_m1",
+      "template_id": "MAIL_MAINTENANCE",
+      "category": "system",
+      "subject": "Новости Разлома",
+      "body": "Демо-пакет 0.6.0: почта — единый канал наград. Без HTML/ссылок.",
+      "status": "unread",
+      "attachments": [],
+      "expires_in_days": 30
+    },
+    {
+      "id": "demo_m2",
+      "template_id": "MAIL_LOGIN_UNCLAIMED",
+      "category": "calendar_rollover",
+      "subject": "Календарь не забыт",
+      "body": "Демо: незабранный день LOGIN_7 перенесён сюда на 7 дней.",
+      "status": "unread",
+      "attachments": [
+        {
+          "resource_id": "gold",
+          "amount": 10000
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 2000
+        }
+      ],
+      "expires_in_days": 7
+    },
+    {
+      "id": "demo_m3",
+      "template_id": "MAIL_ACHIEVEMENT",
+      "category": "reward",
+      "subject": "Заслуженная награда",
+      "body": "Демо: ACH_STORY_01 ждал claim — право в почте.",
+      "status": "read",
+      "attachments": [
+        {
+          "resource_id": "diamonds",
+          "amount": 50
+        }
+      ],
+      "expires_in_days": 30
+    }
+  ],
+  "rules": {
+    "read_does_not_claim": true,
+    "delete_before_claim_forbidden_mvp": true,
+    "claim_all_atomic_per_mail": true,
+    "unique_source_key": [
+      "account_id",
+      "source_type",
+      "source_id",
+      "period_key"
+    ]
+  }
+}
