@@ -1,39 +1,8 @@
-# Lunex Admin Studio + версионные пакеты
+# Lunex Admin Studio — комбайн дизайна и контента
 
-Статус: локальный контент-пайплайн для прототипа. **Не игровой сервер** прогресса, валют, боёв и платежей.
+Статус: локальный пайплайн. **Не игровой сервер** прогресса/валют/боя/платежей.
 
-## Схема
-
-```
-Admin Studio (React/TS)  --publish-->  content/packages/{version}/
-                                              |
-                                              v
-                                     active.json (указатель)
-                                              |
-                                              v
-                              Godot ContentPackageLoader (только чтение)
-                                              |
-                                              v
-                                         DemoData / экраны рисуют UI
-```
-
-## Пакет
-
-Путь: `content/packages/0.1.0/` · схема: `docs/CONTENT_PACKAGE_SCHEMA.md`
-
-| Файл | Назначение |
-|---|---|
-| `manifest.json` | Версия, schema, sha256 хеши |
-| `hub.json` | Здания хаба, side-rail |
-| `campaign.json` | Регионы, этапы, рёбра |
-| `heroes.json` | Герои, экип, пресеты |
-| `battle_modes.json` | Порталы вкладки «Битва» |
-| `features.json` | Магазин/квесты/AFK/ивенты (демо-контент) |
-| `../active.json` | Какую версию читает клиент |
-
-Новая версия: `tools/create_content_version.sh 0.1.0 0.1.1`
-
-## Запуск Studio
+## Запуск
 
 ```bash
 cd admin-studio
@@ -41,21 +10,22 @@ npm install
 npm run dev
 ```
 
-- UI: http://127.0.0.1:5173  
-- API: http://127.0.0.1:8787 (`/api/health`)
+- UI http://127.0.0.1:5173  
+- API http://127.0.0.1:8787  
 
-Редакторы: хаб **Visual Editor 2.0** (телефон 9:16 ≈ Godot: здания, фон, свет, размеры, side-rail), кампания, герои, режимы битвы, фичи, версии/публикация.
+## Модули
 
-После **«Опубликовать для клиента»** Godot подхватит файлы из `res://content/packages` при следующем запуске (или перезагрузке пакета).
+| Раздел | Файл пакета | Назначение |
+|---|---|---|
+| Theme Studio | `theme.json` | Палитра, радиусы, кнопки |
+| Shell / Nav | `shell.json` | TopBar, вкладки, welcome |
+| Строки | `strings.json` | UI-тексты / ключи |
+| Motion | `motion.json` | Параллакс, pulse, FX |
+| Ассеты | `assets.json` + `media/` | Реестр и upload |
+| Хаб 2.0 | `hub.json` | Здания, фон, свет, side-rail |
+| Кампания / герои / битва / фичи | соответствующие JSON | Контент экранов |
+| Пакеты | `active.json` + history | publish / diff / rollback |
 
-## Клиент Godot
+Клиент: `ContentPackageLoader` → `ThemeManager` / Shell / экраны **только читают**.
 
-Autoload `ContentPackageLoader` → `DemoData` наполняется из JSON.  
-Хаб, карта, битва, магазин читают пакет. Игрок не может сохранить «серверный» прогресс через пакет.
-
-## Дальше (не в этом шаге)
-
-- Go admin API + PostgreSQL вместо файлового API  
-- Раздача пакетов по HTTPS + кеш на устройстве  
-- Подпись/откат версий в проде  
-- Полный визуальный превью-рендер Godot в браузере
+Схема: `docs/CONTENT_PACKAGE_SCHEMA.md`. Проверка: `tools/validate_content_package.sh`.

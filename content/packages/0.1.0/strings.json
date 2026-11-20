@@ -1,0 +1,21 @@
+{
+  "locale": "ru",
+  "entries": {
+    "app.name": "Lunex AFK",
+    "nav.map": "Карта",
+    "nav.heroes": "Герои",
+    "nav.hub": "Главная",
+    "nav.battle": "Битва",
+    "shell.shop": "Магазин",
+    "hub.title": "Главный хаб",
+    "map.title": "Карта мира · Элиориан",
+    "map.continue": "Продолжить",
+    "heroes.title": "Коллекция героев",
+    "battle.title": "Арена режимов",
+    "common.back": "Назад",
+    "common.demo": "Демо",
+    "common.save": "Сохранить",
+    "auth.guest": "Войти как гость",
+    "empty.generic": "Пока пусто — загляните позже"
+  }
+}

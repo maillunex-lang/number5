@@ -14,56 +14,69 @@ export default function Dashboard() {
   return (
     <div>
       <VersionBar
-        title="Lunex Admin Studio"
-        subtitle="Визуальное редактирование контента и версионные пакеты ассетов/данных."
+        title="Lunex Admin Studio · комбайн"
+        subtitle="Дизайн, интерфейс, контент и версии пакетов. Клиент Godot только читает."
       />
       <div className="panel" style={{ marginBottom: 16 }}>
         <p className="warn" style={{ marginTop: 0 }}>
           {note || "…"}
         </p>
         <p className="muted">
-          Активный пакет <strong>{active}</strong> читает Godot из <code>res://content/packages</code>. Клиент не пишет
-          сюда прогресс игрока.
+          Активный пакет <strong>{active}</strong> · schema {String((data?.manifest as any)?.schema ?? "—")}
         </p>
       </div>
       <div className="grid-2">
         <div className="panel">
-          <h3 style={{ marginTop: 0, color: "var(--gold)" }}>Быстрый вход</h3>
+          <h3 style={{ marginTop: 0, color: "var(--gold)" }}>Дизайн</h3>
           <ul>
             <li>
-              <Link to="/hub">Хаб · Visual Editor 2.0 (9:16)</Link>
+              <Link to="/theme">Theme Studio</Link>
             </li>
             <li>
-              <Link to="/campaign">Этапы кампании</Link>
+              <Link to="/shell">Shell / навигация</Link>
             </li>
             <li>
-              <Link to="/heroes">Герои и пресеты</Link>
+              <Link to="/strings">Строки UI</Link>
             </li>
             <li>
-              <Link to="/battle">Порталы режимов битвы</Link>
+              <Link to="/motion">Motion / FX</Link>
             </li>
             <li>
-              <Link to="/features">Фичи / офферы / квесты</Link>
+              <Link to="/assets">Библиотека ассетов</Link>
+            </li>
+          </ul>
+          <h3 style={{ color: "var(--gold)" }}>Экраны</h3>
+          <ul>
+            <li>
+              <Link to="/hub">Хаб Visual Editor 2.0</Link>
             </li>
             <li>
-              <Link to="/packages">Версии и публикация</Link>
+              <Link to="/campaign">Кампания</Link>
+            </li>
+            <li>
+              <Link to="/heroes">Герои</Link>
+            </li>
+            <li>
+              <Link to="/battle">Режимы битвы</Link>
+            </li>
+            <li>
+              <Link to="/features">Фичи</Link>
+            </li>
+            <li>
+              <Link to="/packages">Пакеты · diff / publish / rollback</Link>
             </li>
           </ul>
         </div>
         <div className="panel">
-          <h3 style={{ marginTop: 0, color: "var(--gold)" }}>Содержимое пакета</h3>
+          <h3 style={{ marginTop: 0, color: "var(--gold)" }}>Пакет сейчас</h3>
           {data ? (
             <ul className="muted">
-              <li>Здания хаба: {data.hub.buildings.length}</li>
-              <li>Этапы: {data.campaign.stages.length}</li>
-              <li>Герои: {data.heroes.heroes.length}</li>
-              <li>Порталы битвы: {data.battle_modes.portals.length}</li>
-              <li>
-                Офферы магазина:{" "}
-                {Array.isArray((data.features as { shop_offers?: unknown[] }).shop_offers)
-                  ? (data.features as { shop_offers: unknown[] }).shop_offers.length
-                  : 0}
-              </li>
+              <li>Здания: {data.hub?.buildings?.length ?? 0}</li>
+              <li>Этапы: {data.campaign?.stages?.length ?? 0}</li>
+              <li>Герои: {data.heroes?.heroes?.length ?? 0}</li>
+              <li>Тема: {data.theme?.title ?? "—"}</li>
+              <li>Строк: {Object.keys(data.strings?.entries || {}).length}</li>
+              <li>Ассетов: {data.assets?.items?.length ?? 0}</li>
             </ul>
           ) : (
             <p className="muted">Загрузка…</p>

@@ -29,7 +29,13 @@ func _ready() -> void:
 	show_tab(UIStateManager.current_tab if UIStateManager.current_tab != "" else "hub")
 	ScreenRouter._current = "ROOT-03"
 	ScreenRouter._history = ["ROOT-03"]
-	NotificationManager.info("Добро пожаловать в Lunex AFK (локальный прототип)")
+	var welcome := ContentPackageLoader.tr_key(
+		"app.name",
+		str(ContentPackageLoader.shell.get("welcome_toast", "Добро пожаловать в Lunex AFK (локальный прототип)"))
+	)
+	if ContentPackageLoader.shell.has("welcome_toast"):
+		welcome = str(ContentPackageLoader.shell["welcome_toast"])
+	NotificationManager.info(welcome)
 
 func _load_tabs() -> void:
 	var paths := {

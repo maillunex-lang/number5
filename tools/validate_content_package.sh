@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Validates content package JSON files for the Godot client.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 VER="${1:-}"
@@ -9,7 +8,8 @@ fi
 DIR="$ROOT/content/packages/$VER"
 echo "Validating package $VER at $DIR"
 test -d "$DIR"
-for f in manifest.json hub.json campaign.json heroes.json battle_modes.json features.json; do
+REQUIRED=(manifest.json hub.json campaign.json heroes.json battle_modes.json features.json theme.json shell.json strings.json motion.json assets.json)
+for f in "${REQUIRED[@]}"; do
   test -f "$DIR/$f"
   python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
 done
@@ -22,11 +22,21 @@ camp = json.loads((d/"campaign.json").read_text())
 heroes = json.loads((d/"heroes.json").read_text())
 modes = json.loads((d/"battle_modes.json").read_text())
 feat = json.loads((d/"features.json").read_text())
+theme = json.loads((d/"theme.json").read_text())
+shell = json.loads((d/"shell.json").read_text())
+strings = json.loads((d/"strings.json").read_text())
+motion = json.loads((d/"motion.json").read_text())
+assets = json.loads((d/"assets.json").read_text())
 assert hub.get("buildings"), "hub.buildings required"
 assert camp.get("stages"), "campaign.stages required"
 assert heroes.get("heroes"), "heroes.heroes required"
 assert modes.get("portals"), "battle_modes.portals required"
 assert "shop_offers" in feat
-print("Semantic checks OK")
+assert theme.get("palette"), "theme.palette required"
+assert shell.get("bottom_nav", {}).get("tabs"), "shell tabs required"
+assert strings.get("entries"), "strings.entries required"
+assert "transition_ms" in motion
+assert isinstance(assets.get("items"), list)
+print("Semantic checks OK (schema 2 combine)")
 PY
 echo "PASS $VER"

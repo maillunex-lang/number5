@@ -266,12 +266,13 @@ func _on_building(def: Dictionary) -> void:
 	ScreenRouter.go(route, payload)
 
 func _start_ambient() -> void:
-	if ThemeManager.max_active_fx <= 0:
+	if ThemeManager.max_active_fx <= 0 or not ThemeManager.hub_pulse:
 		return
+	var sec := ThemeManager.hub_pulse_sec
 	for p in _pulse_nodes:
 		var tw := create_tween().set_loops()
-		tw.tween_property(p, "modulate", Color(1.15, 1.1, 1.0, 1), 1.1)
-		tw.tween_property(p, "modulate", Color(1, 1, 1, 1), 1.1)
+		tw.tween_property(p, "modulate", Color(1.15, 1.1, 1.0, 1), sec)
+		tw.tween_property(p, "modulate", Color(1, 1, 1, 1), sec)
 
 func _apply_quality() -> void:
 	_fx.visible = ThemeManager.hub_decor_layers >= 2

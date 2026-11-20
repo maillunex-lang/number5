@@ -1,17 +1,21 @@
-# Схема контент-пакета (клиент только читает)
+# Схема контент-пакета (schema 2)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
-| Файл | Назначение | Читает клиент |
-|---|---|---|
-| `manifest.json` | Версия, schema, список файлов, sha256 | `ContentPackageLoader` |
-| `hub.json` | Мир хаба, `look` (фон/свет), здания+size, `side_rail` + layout | Хаб / Studio Editor 2.0 |
-| `campaign.json` | Регионы, этапы, рёбра, current_stage | Карта / глава / бой |
-| `heroes.json` | Герои, экип, пресеты, default_squad | Герои / отряд / бой |
-| `battle_modes.json` | Порталы вкладки «Битва» | Battle modes |
-| `features.json` | Магазин, квесты, почта, VIP, BP, AFK, summon, events | Feature-экраны |
+| Файл | Роль |
+|---|---|
+| `manifest.json` | Версия, schema, sha256 |
+| `theme.json` | UI Kit / палитра |
+| `shell.json` | GameShell chrome |
+| `strings.json` | Локализация UI |
+| `motion.json` | Motion / FX budget |
+| `assets.json` | Реестр + bindings (+ `media/`) |
+| `hub.json` | Хаб 2.5D + look |
+| `campaign.json` | Кампания |
+| `heroes.json` | Герои / отряд |
+| `battle_modes.json` | Порталы битвы |
+| `features.json` | Демо-фичи |
 
-`DemoData` копирует героев/кампанию/AFK-дефолты из пакета в сессию. **Прогресс игрока в пакет не пишется.**
+`DemoData` / `ThemeManager` / Shell читают пакет. Прогресс игрока сюда не пишется.
 
-Публикация: Admin Studio → `POST /api/packages/:version/publish` обновляет хеши и `active.json`.  
-Проверка: `tools/validate_content_package.sh [version]`.
+Studio: publish обновляет `active.json` и `publish_history.json`; rollback возвращает указатель.

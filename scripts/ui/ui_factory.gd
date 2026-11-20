@@ -24,40 +24,64 @@ static func title(text: String, size: int = 40) -> Label:
 static func muted(text: String, size: int = 22) -> Label:
 	return label(text, size, LunexColors.TEXT_MUTED, false)
 
+static func _c(key: String, fallback: Color) -> Color:
+	if Engine.is_editor_hint():
+		return fallback
+	if ThemeManager and ThemeManager.palette.size() > 0:
+		return ThemeManager.color(key, fallback)
+	return fallback
+
+static func _r(key: String, fallback: int) -> int:
+	if Engine.is_editor_hint():
+		return fallback
+	if ThemeManager and ThemeManager.radius_map.size() > 0:
+		return ThemeManager.radius(key)
+	return fallback
+
 static func panel_style(bg: Color = LunexColors.BG_PANEL, border: Color = LunexColors.FRAME_INNER, radius: int = 16, border_w: int = 2) -> StyleBoxFlat:
 	var s := StyleBoxFlat.new()
 	s.bg_color = bg
 	s.border_color = border
 	s.set_border_width_all(border_w)
-	s.set_corner_radius_all(radius)
-	s.content_margin_left = 16
-	s.content_margin_right = 16
-	s.content_margin_top = 12
-	s.content_margin_bottom = 12
+	s.set_corner_radius_all(radius if radius > 0 else _r("md", 16))
+	var spacing_md := 16
+	if not Engine.is_editor_hint() and ContentPackageLoader.theme.has("spacing"):
+		spacing_md = int(ContentPackageLoader.theme["spacing"].get("md", 16))
+	s.content_margin_left = spacing_md
+	s.content_margin_right = spacing_md
+	s.content_margin_top = int(spacing_md * 0.75)
+	s.content_margin_bottom = int(spacing_md * 0.75)
 	s.shadow_color = Color(0, 0, 0, 0.35)
-	s.shadow_size = 6
+	var shadow := 6
+	if not Engine.is_editor_hint() and ThemeManager.components.has("shadow_size"):
+		shadow = int(ThemeManager.components["shadow_size"])
+	s.shadow_size = shadow
 	s.shadow_offset = Vector2(0, 3)
 	return s
 
 static func button_styles() -> Dictionary:
-	var n := panel_style(LunexColors.BUTTON_NORMAL, LunexColors.GOLD_DIM, 14, 2)
-	var h := panel_style(LunexColors.BUTTON_HOVER, LunexColors.GOLD, 14, 2)
-	var p := panel_style(LunexColors.BUTTON_PRESSED, LunexColors.GOLD_BRIGHT, 14, 2)
-	var d := panel_style(LunexColors.BUTTON_DISABLED, LunexColors.FRAME_OUTER, 14, 1)
+	var rad := _r("md", 14)
+	var n := panel_style(_c("button_normal", LunexColors.BUTTON_NORMAL), _c("gold_dim", LunexColors.GOLD_DIM), rad, 2)
+	var h := panel_style(_c("button_hover", LunexColors.BUTTON_HOVER), _c("gold", LunexColors.GOLD), rad, 2)
+	var p := panel_style(_c("button_pressed", LunexColors.BUTTON_PRESSED), _c("gold_bright", LunexColors.GOLD_BRIGHT), rad, 2)
+	var d := panel_style(LunexColors.BUTTON_DISABLED, _c("frame_outer", LunexColors.FRAME_OUTER), rad, 1)
 	return {"normal": n, "hover": h, "pressed": p, "disabled": d}
 
 static func fantasy_button(text: String, min_h: int = 64) -> Button:
+	var h := min_h
+	if not Engine.is_editor_hint() and ThemeManager.components.has("button_height"):
+		h = int(ThemeManager.components["button_height"]) if min_h == 64 else min_h
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(0, min_h)
+	b.custom_minimum_size = Vector2(0, h)
 	var st := button_styles()
 	b.add_theme_stylebox_override("normal", st.normal)
 	b.add_theme_stylebox_override("hover", st.hover)
 	b.add_theme_stylebox_override("pressed", st.pressed)
 	b.add_theme_stylebox_override("disabled", st.disabled)
-	b.add_theme_color_override("font_color", LunexColors.TEXT_PRIMARY)
-	b.add_theme_color_override("font_hover_color", LunexColors.GOLD_BRIGHT)
-	b.add_theme_color_override("font_pressed_color", LunexColors.GOLD)
+	b.add_theme_color_override("font_color", _c("text_primary", LunexColors.TEXT_PRIMARY))
+	b.add_theme_color_override("font_hover_color", _c("gold_bright", LunexColors.GOLD_BRIGHT))
+	b.add_theme_color_override("font_pressed_color", _c("gold", LunexColors.GOLD))
 	b.add_theme_font_size_override("font_size", 28)
 	var font := load("res://fonts/OpenSans-SemiBold.ttf")
 	if font:
@@ -66,19 +90,26 @@ static func fantasy_button(text: String, min_h: int = 64) -> Button:
 	return b
 
 static func gold_button(text: String, min_h: int = 72) -> Button:
-	var b := fantasy_button(text, min_h)
-	var n := panel_style(Color("5A4318"), LunexColors.GOLD_BRIGHT, 16, 2)
-	var h := panel_style(Color("6E5420"), Color("FFF0C0"), 16, 2)
-	var p := panel_style(Color("3E2E10"), LunexColors.GOLD, 16, 2)
+	var hh := min_h
+	if not Engine.is_editor_hint() and ThemeManager.components.has("gold_button_height"):
+		hh = int(ThemeManager.components["gold_button_height"]) if min_h == 72 else min_h
+	var b := fantasy_button(text, hh)
+	var rad := _r("lg", 16)
+	var n := panel_style(Color("5A4318"), _c("gold_bright", LunexColors.GOLD_BRIGHT), rad, 2)
+	var h := panel_style(Color("6E5420"), Color("FFF0C0"), rad, 2)
+	var p := panel_style(Color("3E2E10"), _c("gold", LunexColors.GOLD), rad, 2)
 	b.add_theme_stylebox_override("normal", n)
 	b.add_theme_stylebox_override("hover", h)
 	b.add_theme_stylebox_override("pressed", p)
-	b.add_theme_color_override("font_color", LunexColors.GOLD_BRIGHT)
+	b.add_theme_color_override("font_color", _c("gold_bright", LunexColors.GOLD_BRIGHT))
 	return b
 
 static func panel(bg: Color = LunexColors.BG_PANEL) -> PanelContainer:
 	var p := PanelContainer.new()
-	p.add_theme_stylebox_override("panel", panel_style(bg))
+	var use_bg := bg
+	if bg == LunexColors.BG_PANEL:
+		use_bg = _c("bg_panel", LunexColors.BG_PANEL)
+	p.add_theme_stylebox_override("panel", panel_style(use_bg, _c("frame_inner", LunexColors.FRAME_INNER), _r("lg", 16), 2))
 	return p
 
 static func vbox(sep: int = 12) -> VBoxContainer:

@@ -6,7 +6,7 @@ extends Control
 @onready var _title: Label = $Header/Title
 
 func _ready() -> void:
-	_title.text = "Карта мира · Элиориан"
+	_title.text = ContentPackageLoader.tr_key("map.title", "Карта мира · Элиориан")
 	_build()
 	$Header/ContinueBtn.pressed.connect(_on_continue)
 	$Header/BackHint.text = "%s · выберите регион или «Продолжить»" % ContentPackageLoader.package_label()

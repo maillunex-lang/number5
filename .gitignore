@@ -40,3 +40,5 @@ dist/
 admin-studio/node_modules/
 admin-studio/dist/
 *.log
+content/packages/publish_history.json
+content/packages/*/media/

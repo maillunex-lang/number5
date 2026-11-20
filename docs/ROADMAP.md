@@ -11,7 +11,7 @@
 | Документы D (GDD / MVP / STRUCTURE / ARCHITECTURE / CONTENT-01) | Утверждены / зафиксированы | `docs/` |
 | UI Prototype v0.1 (Godot 4.7.2, локальный клиент) | **Сделано** на `main` | `project.godot`, `scenes/`, smoke |
 | Версионные контент-пакеты (клиент только читает) | **Сделано** (пакет `0.1.0`) | `content/packages/` |
-| Lunex Admin Studio (локальный файловый API) | **Сделано** + Visual Editor 2.0 хаба 9:16 | `admin-studio/` |
+| Lunex Admin Studio (локальный файловый API) | **Сделано** комбайн schema 2 (theme/shell/strings/motion/assets + Hub 2.0) | `admin-studio/` |
 | Android debug APK | **Собрано** ранее (не в git) | `docs/ANDROID_BUILD.md` |
 | CONTENT-02+ (фракции, 10–15 героев, 30 этапов, экономика) | **Не утверждено** | ожидает решений |
 | CORE-01 (Go API + PostgreSQL + CI сервера) | **Не начато** | нужен этап A / доступы |

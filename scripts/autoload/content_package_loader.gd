@@ -16,6 +16,11 @@ var campaign: Dictionary = {}
 var heroes_pack: Dictionary = {}
 var battle_modes: Dictionary = {}
 var features: Dictionary = {}
+var theme: Dictionary = {}
+var shell: Dictionary = {}
+var strings: Dictionary = {}
+var motion: Dictionary = {}
+var assets: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -32,7 +37,6 @@ func load_active_package() -> bool:
 
 func load_package(ver: String) -> bool:
 	var base := "%s/%s" % [BUNDLED_ROOT, ver]
-	# Optional override from user cache (local Studio publish sync)
 	var cache_base := "%s/%s" % [CACHE_ROOT, ver]
 	if DirAccess.open(cache_base) != null and FileAccess.file_exists("%s/hub.json" % cache_base):
 		base = cache_base
@@ -54,12 +58,33 @@ func _load_docs(base: String) -> void:
 	heroes_pack = _read_json("%s/heroes.json" % base)
 	battle_modes = _read_json("%s/battle_modes.json" % base)
 	features = _read_json("%s/features.json" % base)
+	theme = _read_json("%s/theme.json" % base)
+	shell = _read_json("%s/shell.json" % base)
+	strings = _read_json("%s/strings.json" % base)
+	motion = _read_json("%s/motion.json" % base)
+	assets = _read_json("%s/assets.json" % base)
 
 func reload() -> bool:
 	return load_active_package()
 
 func package_label() -> String:
 	return "Пакет %s · только чтение" % version
+
+func tr_key(key: String, fallback: String = "") -> String:
+	var entries: Dictionary = strings.get("entries", {})
+	if entries.has(key):
+		return str(entries[key])
+	return fallback if fallback != "" else key
+
+func color_of(key: String, fallback: Color = Color.WHITE) -> Color:
+	var pal: Dictionary = theme.get("palette", {})
+	if pal.has(key):
+		return Color(str(pal[key]))
+	return fallback
+
+func radius(key: String = "md") -> int:
+	var r: Dictionary = theme.get("radius", {})
+	return int(r.get(key, 14))
 
 func _read_json(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
@@ -84,3 +109,11 @@ func get_hub_world() -> Dictionary:
 
 func get_battle_portals() -> Array:
 	return battle_modes.get("portals", [])
+
+func get_shell_tabs() -> Array:
+	var bn: Dictionary = shell.get("bottom_nav", {})
+	return bn.get("tabs", [])
+
+func get_asset_binding(key: String) -> String:
+	var bindings: Dictionary = assets.get("bindings", {})
+	return str(bindings.get(key, ""))

@@ -41,17 +41,63 @@ export type SideRailLayout = {
 
 export type HubDoc = {
   world: { width: number; height: number };
-  parallax?: {
-    far_bands?: number;
-    mid_hills?: number;
-    path_width?: number;
-    far_factor?: number;
-    mid_factor?: number;
-  };
+  parallax?: Record<string, number>;
   look?: HubLook;
   side_rail_layout?: SideRailLayout;
   buildings: Building[];
   side_rail: SideRailItem[];
+};
+
+export type ThemeDoc = {
+  id: string;
+  title: string;
+  radius: Record<string, number>;
+  spacing: Record<string, number>;
+  fonts: Record<string, string>;
+  palette: Record<string, string>;
+  components: Record<string, number>;
+};
+
+export type ShellDoc = {
+  top_bar: Record<string, unknown>;
+  bottom_nav: {
+    height: number;
+    bg: string;
+    border: string;
+    tabs: Array<{ id: string; label: string; icon: string; enabled: boolean }>;
+  };
+  safe_area: Record<string, number>;
+  welcome_toast: string;
+};
+
+export type StringsDoc = {
+  locale: string;
+  entries: Record<string, string>;
+};
+
+export type MotionDoc = {
+  transition_ms: number;
+  parallax_enabled: boolean;
+  hub_pulse: boolean;
+  hub_pulse_sec: number;
+  particle_scale: number;
+  max_active_fx: number;
+  hub_decor_layers: number;
+  building_float: boolean;
+  toast_ms: number;
+};
+
+export type AssetsDoc = {
+  items: Array<{
+    id: string;
+    path: string;
+    role: string;
+    tags?: string[];
+    note?: string;
+    mime?: string;
+    bytes?: number;
+  }>;
+  bindings: Record<string, string>;
 };
 
 export type Stage = {
@@ -119,6 +165,11 @@ export type PackageBundle = {
   heroes: HeroesDoc;
   battle_modes: BattleModesDoc;
   features: Record<string, unknown>;
+  theme?: ThemeDoc;
+  shell?: ShellDoc;
+  strings?: StringsDoc;
+  motion?: MotionDoc;
+  assets?: AssetsDoc;
 };
 
 export const DEFAULT_HUB_LOOK: HubLook = {
@@ -138,4 +189,17 @@ export const DEFAULT_SIDE_RAIL_LAYOUT: SideRailLayout = {
   offset_top: 12,
   button_size: 64,
   gap: 10,
+};
+
+export const DOC_LABELS: Record<string, string> = {
+  theme: "Тема UI",
+  shell: "Shell / навигация",
+  strings: "Строки",
+  motion: "Motion / FX",
+  assets: "Ассеты",
+  hub: "Хаб",
+  campaign: "Кампания",
+  heroes: "Герои",
+  battle_modes: "Режимы битвы",
+  features: "Фичи",
 };
