@@ -1,15 +1,44 @@
 extends Control
-## HUB-01: алтарь призыва. Online → CORE-01 summon/roll; иначе локальный DEMO.
+## HUB-01: chrome в .tscn; BannersHost динамический; summon API без изменений.
 
 var _payload: Dictionary = {}
 var _busy: bool = false
 var _banner_id: String = "standard"
+var _nav_bound: bool = false
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _banner_name: Label = $Safe/Scroll/VBox/BannerName
+@onready var _subtitle: Label = $Safe/Scroll/VBox/Subtitle
+@onready var _banners: HBoxContainer = $Safe/Scroll/VBox/BannersHost
+@onready var _art: Panel = $Safe/Scroll/VBox/Art
+@onready var _cost: Label = $Safe/Scroll/VBox/CostLabel
+@onready var _pity: Button = $Safe/Scroll/VBox/Actions/PityBtn
+@onready var _x1: Button = $Safe/Scroll/VBox/Actions/Summon1Btn
+@onready var _x10: Button = $Safe/Scroll/VBox/Summon10Btn
+@onready var _heroes: Button = $Safe/Scroll/VBox/HeroesBtn
+@onready var _back: Button = $Safe/Scroll/VBox/BackBtn
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
+	_bind_nav()
+	_style_art()
 	_rebuild()
+
+func _bind_nav() -> void:
+	if _nav_bound:
+		return
+	_nav_bound = true
+	_pity.pressed.connect(_show_pity)
+	_x1.pressed.connect(func(): _do_summon(1))
+	_x10.pressed.connect(func(): _do_summon(10))
+	_heroes.pressed.connect(func(): ScreenRouter.switch_tab("heroes"))
+	_back.pressed.connect(func(): ScreenRouter.handle_back())
+
+func _style_art() -> void:
+	if _art:
+		_art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color("1A2840"), LunexColors.CYAN, 18, 2))
 
 func _banner() -> Dictionary:
 	var banners: Array = ContentPackageLoader.gacha.get("banners", [])
@@ -24,34 +53,27 @@ func _mode_label() -> String:
 	return "ONLINE · CORE-01" if ApiClient.online else "DEMO · локальный RNG"
 
 func _rebuild() -> void:
-	var root := $Safe/Scroll/VBox
-	for c in root.get_children():
-		c.queue_free()
 	var banner := _banner()
 	var name := str(banner.get("name", ContentPackageLoader.features.get("summon", {}).get("banner", "Баннер")))
-	root.add_child(UIFactory.section_header(ContentPackageLoader.tr_key("summon.altar", "Алтарь призыва")))
-	root.add_child(UIFactory.label("Баннер: %s" % name, 26, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("%s · %s" % [ContentPackageLoader.package_label(), _mode_label()], 18))
+	_title.text = ContentPackageLoader.tr_key("summon.altar", "Алтарь призыва")
+	_banner_name.text = "Баннер: %s" % name
+	_subtitle.text = "%s · %s" % [ContentPackageLoader.package_label(), _mode_label()]
 
-	var row_b := UIFactory.hbox(8)
-	root.add_child(row_b)
+	for c in _banners.get_children():
+		c.queue_free()
 	for b in ContentPackageLoader.gacha.get("banners", []):
 		var id := str(b.get("id", ""))
-		var btn := UIFactory.fantasy_button(str(b.get("name", id)))
+		var btn := Button.new()
+		btn.text = str(b.get("name", id))
 		btn.custom_minimum_size = Vector2(160, 44)
+		btn.theme_type_variation = &"GameButton"
 		var bid := id
 		btn.pressed.connect(func():
 			_banner_id = bid
 			_rebuild()
 		)
-		row_b.add_child(btn)
+		_banners.add_child(btn)
 
-	var art := Panel.new()
-	art.custom_minimum_size = Vector2(0, 180)
-	art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color("1A2840"), LunexColors.CYAN, 18, 2))
-	root.add_child(art)
-
-	var rates: Dictionary = banner.get("rates_bp", {})
 	var cost1: Array = banner.get("cost_x1", [])
 	var cost10: Array = banner.get("cost_x10", [])
 	var c1 := "1 свиток"
@@ -60,28 +82,7 @@ func _rebuild() -> void:
 		c1 = "%s ×%s" % [str(cost1[0].get("resource_id", "")), str(cost1[0].get("amount", 1))]
 	if cost10.size() > 0:
 		c10 = "%s ×%s" % [str(cost10[0].get("resource_id", "")), str(cost10[0].get("amount", 8))]
-	root.add_child(UIFactory.muted("×1: %s · ×10: %s" % [c1, c10], 20))
-
-	var row := UIFactory.hbox(12)
-	root.add_child(row)
-	var info := UIFactory.fantasy_button("Шансы и pity")
-	info.pressed.connect(_show_pity)
-	row.add_child(info)
-	var x1 := UIFactory.gold_button("Призыв ×1")
-	x1.pressed.connect(func(): _do_summon(1))
-	row.add_child(x1)
-	var x10 := UIFactory.gold_button("Призыв ×10")
-	x10.pressed.connect(func(): _do_summon(10))
-	root.add_child(x10)
-
-	var to_heroes := UIFactory.fantasy_button("В коллекцию")
-	to_heroes.pressed.connect(func():
-		ScreenRouter.switch_tab("heroes")
-	)
-	root.add_child(to_heroes)
-	var back := UIFactory.fantasy_button("Назад")
-	back.pressed.connect(func(): ScreenRouter.handle_back())
-	root.add_child(back)
+	_cost.text = "×1: %s · ×10: %s" % [c1, c10]
 
 func _show_pity() -> void:
 	var banner := _banner()

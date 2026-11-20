@@ -21,6 +21,7 @@ const PAGES := {
 	"Wave5+ Chat/Friends/Rank": "_show_wave5_plus",
 	"Wave6 demos": "_show_wave6",
 	"Mail/Shop/AFK": "_show_online_lists",
+	"Summon": "_show_summon",
 }
 
 func _ready() -> void:
@@ -317,3 +318,10 @@ func _show_online_lists() -> void:
 			_host.add_child(sc)
 		)
 		col.add_child(btn)
+
+func _show_summon() -> void:
+	_clear_host()
+	_hint.text = "HUB-01 Summon Theme chrome"
+	var sc: Control = (load("res://scenes/features/summon.tscn") as PackedScene).instantiate()
+	sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(sc)

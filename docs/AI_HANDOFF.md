@@ -1,13 +1,13 @@
-# Передача · UI-VISUAL wave8 online lists
+# Передача · UI-VISUAL wave9 summon
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-online-lists-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-summon-d5fe`.
 
-**Сделано (пока владелец на APK hang-fix):**
-- #29–#32 merged (wave5…shell).
-- Mail / Shop / AFK — chrome + ListHost/Tabs в `.tscn`; claim/buy/AFK API без смены контракта.
+**Сделано (пока владелец на APK):**
+- #29–#33 merged.
+- Summon — chrome + BannersHost в `.tscn`; roll/pity без смены контракта.
 
 ## Next
 
-1. Владелец: APK #28 + smoke mail claim / shop buy / AFK collect / top bar.
-2. Summon и прочие CODE_HEAVY online.
-3. game_shell safe-area.
+1. Владелец: APK #28 + smoke summon ×1/×10 + mail/shop/AFK.
+2. game_shell safe-area / CODE_HEAVY.
+3. Остальные feature CODE_HEAVY (quests/guild/events) по приоритету.

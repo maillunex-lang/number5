@@ -57,7 +57,7 @@
 | Mail | `features/mail.tscn` | ~14 | средняя | API | MED* | Title/Tabs/ListHost/ClaimAll | MailItem + claim | средний |
 | Shop | `features/shop.tscn` | ~18 | средняя | API | MED* | Title/Banner/Tabs/ListHost | ShopOfferCard + buy | средний |
 | AFK | `features/afk_rewards.tscn` | ~14 | низкая | API | MED* | Title/Accum/Chest/Collect | status/claim | низкий |
-| Summon / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки | списки |
+| Summon | `features/summon.tscn` | ~16 | средняя | API | MED* | Title/BannersHost/Art/Actions | roll/pity API | средний |
 | VIP | `features/vip.tscn` | ~12 | низкая | пакет | MED* | Title/Status/Back/DynamicHost | секции в host | низкий |
 | Social hub | `features/social_hub.tscn` | ~10 | низкая | демо | MED* | Title/Back/DynamicHost | route-кнопки | низкий |
 | Chat | `features/chat.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
@@ -105,6 +105,7 @@
 | Wave6 | BattlePass/PvP/Profile/Rewards/Sys off DemoScreenBuilder (builder unused) |
 | Wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
 | Wave8 lists | Mail/Shop/AFK Theme chrome + ListHost (claim/buy API intact) |
+| Wave9 summon | Summon altar Theme chrome; roll/pity API intact |
 
 ## 7. Критерии «экран модернизирован»
 
