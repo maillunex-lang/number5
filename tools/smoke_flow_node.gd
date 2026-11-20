@@ -23,13 +23,14 @@ func _run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	await ScreenRouter.go("MAP-01")
 	await get_tree().create_timer(0.5).timeout
-	await ScreenRouter.go("MAP-02", {"stage_id": "s1_3"})
+	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
+	await ScreenRouter.go("MAP-02", {"stage_id": stage_id})
 	await get_tree().create_timer(0.5).timeout
-	await ScreenRouter.go("COMBAT-01", {"stage_id": "s1_3", "mode": "campaign"})
+	await ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(0.5).timeout
-	await ScreenRouter.go("COMBAT-02", {"stage_id": "s1_3", "mode": "campaign"})
+	await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(3.0).timeout
-	print("SMOKE: after battle window")
+	print("SMOKE: after battle window stage=", stage_id)
 	await ScreenRouter.go("SETTINGS-01")
 	await get_tree().create_timer(0.4).timeout
 	ThemeManager.apply_preset("low")

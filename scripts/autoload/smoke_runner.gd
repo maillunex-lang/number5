@@ -40,11 +40,14 @@ func _run() -> void:
 	await get_tree().create_timer(0.4).timeout
 	ScreenRouter.handle_back()
 	await get_tree().create_timer(0.4).timeout
-	await ScreenRouter.go("COMBAT-01", {"stage_id": "s1_3", "mode": "campaign"})
+	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
+	var foes := DemoData.enemy_squad_for_stage(stage_id)
+	print("SMOKE: stage ", stage_id, " foes=", foes.size(), " first=", (foes[0]["name"] if foes.size() else "?"))
+	await ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(0.4).timeout
-	await ScreenRouter.go("COMBAT-02", {"stage_id": "s1_3", "mode": "campaign"})
+	await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(4.0).timeout
 	ThemeManager.apply_preset("low")
 	ThemeManager.apply_preset("high")
-	print("SMOKE: PASS")
+	print("SMOKE: PASS package=", ContentPackageLoader.version, " heroes=", DemoData.heroes.size())
 	get_tree().quit(0)

@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "source": "admin-studio",
+  "version": "0.2.0",
+  "source": "content-c-razlom",
   "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-  "published_at": "2026-11-20T07:38:57.688Z"
+  "published_at": "2026-11-20T07:45:51Z"
 }

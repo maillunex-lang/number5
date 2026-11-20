@@ -24,6 +24,7 @@ var shell: Dictionary = {}
 var strings: Dictionary = {}
 var motion: Dictionary = {}
 var assets: Dictionary = {}
+var enemies_pack: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -87,6 +88,7 @@ func _load_docs(base: String) -> void:
 	strings = _read_json("%s/strings.json" % base)
 	motion = _read_json("%s/motion.json" % base)
 	assets = _read_json("%s/assets.json" % base)
+	enemies_pack = _read_json("%s/enemies.json" % base)
 
 func reload() -> bool:
 	return load_active_package()

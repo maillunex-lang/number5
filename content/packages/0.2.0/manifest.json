@@ -1,0 +1,62 @@
+{
+  "id": "lunex-core",
+  "version": "0.2.0",
+  "schema": 3,
+  "client_min": "0.1.0",
+  "title": "Razlom Epoh · Chapter 1 vertical slice",
+  "locale": "ru",
+  "created_at": "2026-11-20T00:00:00Z",
+  "updated_at": "2026-11-20T07:45:51Z",
+  "notes": "Канон «Башкортостан: Разлом эпох». Глава 1 полная; гл.2–6 маркеры. Не серверный прогресс.",
+  "files": {
+    "hub.json": {
+      "role": "hub_layout"
+    },
+    "campaign.json": {
+      "role": "campaign"
+    },
+    "heroes.json": {
+      "role": "heroes"
+    },
+    "battle_modes.json": {
+      "role": "battle_modes"
+    },
+    "features.json": {
+      "role": "feature_demos"
+    },
+    "theme.json": {
+      "role": "ui_theme"
+    },
+    "shell.json": {
+      "role": "shell_chrome"
+    },
+    "strings.json": {
+      "role": "locale_strings"
+    },
+    "motion.json": {
+      "role": "motion_fx"
+    },
+    "assets.json": {
+      "role": "asset_registry"
+    },
+    "enemies.json": {
+      "role": "bestiary"
+    }
+  },
+  "integrity": {
+    "algo": "sha256",
+    "hashes": {
+      "hub.json": "36799ec2f2dfb7d17fd7e22971e89dab2b91d0030bdfb14268950621cac441cf",
+      "campaign.json": "b53a070320ffeaaac3494bb6fe0632b4b53e8de5b40df5cd3595731c2d24f272",
+      "heroes.json": "760dfbed90875cae84483865cf9502be1f6821bb72f9817f56f04d0d9fcd2743",
+      "battle_modes.json": "c347692fc8acad857078f91d0ad976a5a1f7bb66a70146ba39177ce8340976da",
+      "features.json": "90df127ea8aa6ddac0580dc76a5ff4adc47543c30d853fe82fe9aa1e59d9b7c9",
+      "theme.json": "44a5e985fe4564e976119811241b8431ff839291cfcfc8df1cdaec54439bcdd2",
+      "shell.json": "f879d4da1f60e717b89f8f30be6daedae9b1d282fd0658c5be6e0d127553b8c0",
+      "strings.json": "8c9a2619c00b385a49a5fd94441c9115ca07a2c88dc72ebbfd7bc44ff887ec4f",
+      "motion.json": "cbd90ad7bd3ac090ffe5d5d61176abf3ffbe7bb04691940deee05dc322659eaf",
+      "assets.json": "95b2eb879f3884e8b7bc6d917813c86487b9467d461178aa35ee38c694cc5ce9",
+      "enemies.json": "623e2aafc125e2600f1c8895081fb4059a758e7135305ea2b2a66b1d7cc076e4"
+    }
+  }
+}

@@ -21,6 +21,7 @@ const DOC_FILES = [
   "strings",
   "motion",
   "assets",
+  "enemies",
 ] as const;
 
 const app = express();
