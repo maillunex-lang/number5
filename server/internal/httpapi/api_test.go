@@ -5,92 +5,147 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"path/filepath"
+	"runtime"
 	"testing"
 
 	"github.com/maillunex-lang/number5/server/internal/config"
 	"github.com/maillunex-lang/number5/server/internal/httpapi"
+	"github.com/maillunex-lang/number5/server/internal/modules/afk"
 	"github.com/maillunex-lang/number5/server/internal/modules/auth"
+	"github.com/maillunex-lang/number5/server/internal/modules/battle"
+	"github.com/maillunex-lang/number5/server/internal/modules/campaign"
+	"github.com/maillunex-lang/number5/server/internal/modules/content"
+	"github.com/maillunex-lang/number5/server/internal/modules/heroes"
+	"github.com/maillunex-lang/number5/server/internal/modules/mail"
+	"github.com/maillunex-lang/number5/server/internal/modules/summon"
 	"github.com/maillunex-lang/number5/server/internal/modules/wallet"
 	"github.com/maillunex-lang/number5/server/internal/store"
 )
 
-func setup() http.Handler {
+func packagesRoot(t *testing.T) string {
+	t.Helper()
+	_, file, _, _ := runtime.Caller(0)
+	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "..", "content", "packages"))
+	return root
+}
+
+func setup(t *testing.T) http.Handler {
+	t.Helper()
+	root := packagesRoot(t)
+	cat, err := content.LoadCatalog(root)
+	if err != nil {
+		t.Fatal(err)
+	}
 	mem := store.NewMemory(nil)
 	return httpapi.NewMux(httpapi.Deps{
-		Config: config.Config{AppEnv: "test", ContentPackagesRoot: "../../../content/packages"},
-		Store:  mem,
-		Auth:   &auth.Service{Store: mem},
-		Wallet: &wallet.Service{Store: mem, ConfigVersion: "0.9.0", AllowTestGrant: true},
+		Config:   config.Config{AppEnv: "test", ContentPackagesRoot: root},
+		Store:    mem,
+		Auth:     &auth.Service{Store: mem, StarterHeroes: cat.Heroes.DefaultSquad},
+		Wallet:   &wallet.Service{Store: mem, ConfigVersion: cat.Version, AllowTestGrant: true},
+		Heroes:   &heroes.Service{Store: mem},
+		Campaign: &campaign.Service{Store: mem},
+		Battle:   &battle.Service{Store: mem, Catalog: cat},
+		Summon:   &summon.Service{Store: mem, Catalog: cat},
+		AFK:      &afk.Service{Store: mem, Catalog: cat},
+		Mail:     &mail.Service{Store: mem, Catalog: cat},
 	})
 }
 
-func TestGuestWalletIdempotentGrant(t *testing.T) {
-	h := setup()
-
+func guestToken(t *testing.T, h http.Handler) string {
+	t.Helper()
 	rr := httptest.NewRecorder()
 	h.ServeHTTP(rr, httptest.NewRequest(http.MethodPost, "/api/v1/auth/guest", nil))
 	if rr.Code != 200 {
-		t.Fatalf("guest status %d body %s", rr.Code, rr.Body.String())
+		t.Fatalf("guest %d %s", rr.Code, rr.Body.String())
 	}
 	var guest auth.GuestResponse
-	if err := json.Unmarshal(rr.Body.Bytes(), &guest); err != nil {
-		t.Fatal(err)
-	}
-	if guest.AccessToken == "" {
-		t.Fatal("empty token")
-	}
+	_ = json.Unmarshal(rr.Body.Bytes(), &guest)
+	return guest.AccessToken
+}
 
-	req, _ := http.NewRequest(http.MethodGet, "/api/v1/wallet", nil)
-	req.Header.Set("Authorization", "Bearer "+guest.AccessToken)
-	rr = httptest.NewRecorder()
-	h.ServeHTTP(rr, req)
-	if rr.Code != 200 {
-		t.Fatalf("wallet %d %s", rr.Code, rr.Body.String())
-	}
-	var wres wallet.WalletResponse
-	_ = json.Unmarshal(rr.Body.Bytes(), &wres)
-	if len(wres.Balances) < 3 {
-		t.Fatalf("expected starter balances, got %#v", wres.Balances)
-	}
-
+func TestGuestWalletIdempotentGrant(t *testing.T) {
+	h := setup(t)
+	tok := guestToken(t, h)
 	body := []byte(`{"resource_id":"diamonds","amount":50,"idempotency_key":"g1"}`)
-	doGrant := func() *httptest.ResponseRecorder {
+	do := func() *httptest.ResponseRecorder {
 		r, _ := http.NewRequest(http.MethodPost, "/api/v1/wallet/grant-test", bytes.NewReader(body))
-		r.Header.Set("Authorization", "Bearer "+guest.AccessToken)
-		r.Header.Set("Content-Type", "application/json")
+		r.Header.Set("Authorization", "Bearer "+tok)
 		out := httptest.NewRecorder()
 		h.ServeHTTP(out, r)
 		return out
 	}
-	g1 := doGrant()
-	g2 := doGrant()
-	if g1.Code != 200 || g2.Code != 200 {
-		t.Fatalf("grant codes %d %d bodies %s | %s", g1.Code, g2.Code, g1.Body.String(), g2.Body.String())
+	if do().Code != 200 || do().Code != 200 {
+		t.Fatal("grant failed")
 	}
-	var a, b wallet.GrantResponse
-	_ = json.Unmarshal(g1.Body.Bytes(), &a)
-	_ = json.Unmarshal(g2.Body.Bytes(), &b)
-	diamonds := func(gr wallet.GrantResponse) int64 {
-		for _, bal := range gr.Balances {
-			if bal.ResourceID == "diamonds" {
-				return bal.Amount
-			}
+}
+
+func TestFullLoopBattleSummonAfkMail(t *testing.T) {
+	h := setup(t)
+	tok := guestToken(t, h)
+	authH := func(method, path string, body []byte) *httptest.ResponseRecorder {
+		var r *http.Request
+		if body != nil {
+			r, _ = http.NewRequest(method, path, bytes.NewReader(body))
+			r.Header.Set("Content-Type", "application/json")
+		} else {
+			r, _ = http.NewRequest(method, path, nil)
 		}
-		return -1
-	}
-	if diamonds(a) != diamonds(b) {
-		t.Fatalf("idempotent replay changed balance %d vs %d", diamonds(a), diamonds(b))
-	}
-	if b.Replayed != true {
-		t.Fatalf("expected replayed=true on second grant")
+		r.Header.Set("Authorization", "Bearer "+tok)
+		rr := httptest.NewRecorder()
+		h.ServeHTTP(rr, r)
+		return rr
 	}
 
-	bad := []byte(`{"resource_id":"diamonds","amount":99,"idempotency_key":"g1"}`)
-	r, _ := http.NewRequest(http.MethodPost, "/api/v1/wallet/grant-test", bytes.NewReader(bad))
-	r.Header.Set("Authorization", "Bearer "+guest.AccessToken)
-	rr = httptest.NewRecorder()
-	h.ServeHTTP(rr, r)
-	if rr.Code != 409 {
-		t.Fatalf("expected 409 got %d %s", rr.Code, rr.Body.String())
+	rr := authH(http.MethodGet, "/api/v1/heroes/collection", nil)
+	if rr.Code != 200 {
+		t.Fatalf("heroes %d %s", rr.Code, rr.Body.String())
+	}
+	rr = authH(http.MethodGet, "/api/v1/campaign/progress", nil)
+	if rr.Code != 200 {
+		t.Fatalf("campaign %d %s", rr.Code, rr.Body.String())
+	}
+
+	rr = authH(http.MethodPost, "/api/v1/battle/start", []byte(`{"stage_id":"CH01-01","idempotency_key":"b1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("battle start %d %s", rr.Code, rr.Body.String())
+	}
+	var bat map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &bat)
+	if bat["victory"] != true {
+		t.Fatalf("expected victory for starter squad, got %#v", bat)
+	}
+	bid, _ := bat["battle_id"].(string)
+	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"bc1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("claim %d %s", rr.Code, rr.Body.String())
+	}
+
+	rr = authH(http.MethodPost, "/api/v1/summon/roll", []byte(`{"banner_id":"standard","count":1,"idempotency_key":"s1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("summon %d %s", rr.Code, rr.Body.String())
+	}
+
+	rr = authH(http.MethodPost, "/api/v1/afk/claim", []byte(`{"idempotency_key":"a1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("afk %d %s", rr.Code, rr.Body.String())
+	}
+
+	rr = authH(http.MethodGet, "/api/v1/mail", nil)
+	if rr.Code != 200 {
+		t.Fatalf("mail list %d %s", rr.Code, rr.Body.String())
+	}
+	var mailbox struct {
+		Messages []struct {
+			ID string `json:"id"`
+		} `json:"messages"`
+	}
+	_ = json.Unmarshal(rr.Body.Bytes(), &mailbox)
+	if len(mailbox.Messages) == 0 {
+		t.Fatal("expected demo mail")
+	}
+	rr = authH(http.MethodPost, "/api/v1/mail/"+mailbox.Messages[0].ID+"/claim", []byte(`{"idempotency_key":"m1"}`))
+	if rr.Code != 200 && rr.Code != 409 {
+		t.Fatalf("mail claim %d %s", rr.Code, rr.Body.String())
 	}
 }

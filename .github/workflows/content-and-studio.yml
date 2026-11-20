@@ -78,10 +78,20 @@ jobs:
               cat /tmp/core-health.json
               curl -fsS http://127.0.0.1:8080/api/v1/content/active
               TOK=$(curl -fsS -X POST http://127.0.0.1:8080/api/v1/auth/guest | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
-              curl -fsS -H "Authorization: Bearer $TOK" http://127.0.0.1:8080/api/v1/wallet
-              curl -fsS -X POST -H "Authorization: Bearer $TOK" -H "Content-Type: application/json" \
-                -d '{"resource_id":"gold","amount":1,"idempotency_key":"ci-1"}' \
-                http://127.0.0.1:8080/api/v1/wallet/grant-test
+              AUTH="Authorization: Bearer $TOK"
+              curl -fsS -H "$AUTH" http://127.0.0.1:8080/api/v1/wallet >/dev/null
+              curl -fsS -H "$AUTH" http://127.0.0.1:8080/api/v1/heroes/collection >/dev/null
+              BAT=$(curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"stage_id":"CH01-01","idempotency_key":"ci-b1"}' http://127.0.0.1:8080/api/v1/battle/start)
+              BID=$(echo "$BAT" | python3 -c "import sys,json; print(json.load(sys.stdin)['battle_id'])")
+              curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"idempotency_key":"ci-bc1"}' "http://127.0.0.1:8080/api/v1/battle/$BID/claim" >/dev/null
+              curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"banner_id":"standard","count":1,"idempotency_key":"ci-s1"}' \
+                http://127.0.0.1:8080/api/v1/summon/roll >/dev/null
+              curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"idempotency_key":"ci-a1"}' http://127.0.0.1:8080/api/v1/afk/claim >/dev/null
+              curl -fsS -H "$AUTH" http://127.0.0.1:8080/api/v1/mail >/dev/null
               exit 0
             fi
             sleep 1

@@ -8,7 +8,8 @@ import (
 )
 
 type Service struct {
-	Store store.Store
+	Store         store.Store
+	StarterHeroes []string
 }
 
 type GuestResponse struct {
@@ -20,7 +21,11 @@ type GuestResponse struct {
 }
 
 func (s *Service) CreateGuest() (GuestResponse, error) {
-	acc, sess, err := s.Store.CreateGuest()
+	heroes := s.StarterHeroes
+	if len(heroes) == 0 {
+		heroes = []string{"H01", "H02", "H03", "H04", "H05"}
+	}
+	acc, sess, err := s.Store.CreateGuest(heroes)
 	if err != nil {
 		return GuestResponse{}, err
 	}

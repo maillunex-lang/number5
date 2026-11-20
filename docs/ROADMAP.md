@@ -113,7 +113,7 @@ Claim/TTL серверные — после CORE-01.
 | OTA-2 | Прод CDN (HTTPS) | Ожидает | OTA-1, хост | Телефоны с публичным URL |
 | CONTENT-C | Игровой контент C | **В работе** (C0–C3 ✓, E/P/G ✓, M→V ✓) | DOC-D | C4–C7, сервер claim |
 | TZ-A | ТЗ фундамента | **Готово** | CONTENT-C ✓ | `docs/TZ_A_FOUNDATION.md` |
-| CORE-01 | Go + Postgres + CI | **Slice** (memory) | TZ-A ✓; PG ждёт Docker/VPS | auth+wallet ✓ · дальше battle |
+| CORE-01 | Go + Postgres + CI | **Memory slice ✓** | PG ждёт Docker/VPS | auth…mail ✓ · PG adapter next |
 | UI-02 | UI Kit на реальных API | Частично | CORE-01 | Серверные данные |
 | APK-03 | Подписанный APK | Частично (debug) | CORE-01, UI-02 | Целевой Android |
 | AUTH-04 | Email/гость/профиль | Ожидает | CORE-01 | Сохранение прогресса |

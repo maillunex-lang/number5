@@ -1,9 +1,23 @@
-# Lunex CORE-01 — Go API (скелет)
+# Lunex CORE-01 — Go API
 
 Спека: [`docs/TZ_A_FOUNDATION.md`](../docs/TZ_A_FOUNDATION.md).
 
-**Сейчас (dev):** in-memory store — `POST /auth/guest`, `GET /wallet`, `POST /wallet/grant-test` (idempotent).  
-**Позже:** Postgres adapter по тому же `store.Store` (нужен Docker/VPS).
+**Сейчас:** in-memory store с рабочим срезом модулей (без Docker/Postgres).
+
+| Метод | Путь |
+|---|---|
+| POST | `/api/v1/auth/guest` |
+| GET | `/api/v1/wallet` |
+| POST | `/api/v1/wallet/grant-test` (dev) |
+| GET | `/api/v1/heroes/collection` |
+| GET/PUT | `/api/v1/formations/{mode}` |
+| GET | `/api/v1/campaign/progress` |
+| POST | `/api/v1/battle/start` · `/api/v1/battle/{id}/claim` |
+| GET | `/api/v1/summon/banners` |
+| POST | `/api/v1/summon/roll` |
+| GET/POST | `/api/v1/afk` · `/api/v1/afk/claim` |
+| GET/POST | `/api/v1/mail` · `/api/v1/mail/{id}/claim` |
+| GET | `/api/v1/content/active` · `/api/v1/health` |
 
 ```bash
 cd server
@@ -11,25 +25,4 @@ go test ./...
 CONTENT_PACKAGES_ROOT=../content/packages APP_ENV=dev go run ./cmd/api
 ```
 
-```bash
-curl -X POST http://127.0.0.1:8080/api/v1/auth/guest
-curl -H "Authorization: Bearer $TOK" http://127.0.0.1:8080/api/v1/wallet
-```
-
-Docker Compose (когда Docker доступен):
-
-```bash
-docker compose up -d postgres
-DATABASE_URL=postgres://lunex:lunex@127.0.0.1:5432/lunex?sslmode=disable go run ./cmd/api
-```
-
-## Структура
-
-```
-cmd/api/            — HTTP entry
-internal/store/     — Store interface + memory
-internal/modules/   — auth, wallet, content…
-migrations/         — SQL stub for PG
-```
-
-Admin Studio Express **не** заменяется этим сервисом.
+Postgres adapter — после Docker/VPS; интерфейс `store.Store` уже готов.
