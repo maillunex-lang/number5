@@ -17,11 +17,39 @@ export type SideRailItem = {
   tip: string;
   route: string;
   color: string;
+  size?: number;
+};
+
+export type HubLook = {
+  sky_top: string;
+  sky_mid: string;
+  sky_bottom: string;
+  mid_color: string;
+  path_color: string;
+  ambient: number;
+  glow: number;
+  vignette: number;
+  show_shell: boolean;
+};
+
+export type SideRailLayout = {
+  offset_right: number;
+  offset_top: number;
+  button_size: number;
+  gap: number;
 };
 
 export type HubDoc = {
   world: { width: number; height: number };
-  parallax?: Record<string, number>;
+  parallax?: {
+    far_bands?: number;
+    mid_hills?: number;
+    path_width?: number;
+    far_factor?: number;
+    mid_factor?: number;
+  };
+  look?: HubLook;
+  side_rail_layout?: SideRailLayout;
   buildings: Building[];
   side_rail: SideRailItem[];
 };
@@ -91,4 +119,23 @@ export type PackageBundle = {
   heroes: HeroesDoc;
   battle_modes: BattleModesDoc;
   features: Record<string, unknown>;
+};
+
+export const DEFAULT_HUB_LOOK: HubLook = {
+  sky_top: "#101a2c",
+  sky_mid: "#132038",
+  sky_bottom: "#0b1220",
+  mid_color: "#1f332e",
+  path_color: "#382e1f8c",
+  ambient: 0.92,
+  glow: 0.45,
+  vignette: 0.28,
+  show_shell: true,
+};
+
+export const DEFAULT_SIDE_RAIL_LAYOUT: SideRailLayout = {
+  offset_right: 12,
+  offset_top: 12,
+  button_size: 64,
+  gap: 10,
 };

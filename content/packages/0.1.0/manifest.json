@@ -6,7 +6,7 @@
   "title": "Lunex AFK Core Content",
   "locale": "ru",
   "created_at": "2026-11-20T00:00:00Z",
-  "updated_at": "2026-11-20T06:20:01.268Z",
+  "updated_at": "2026-11-20T06:48:05.809Z",
   "notes": "Локальный контент-пакет прототипа. Не серверный прогресс игрока.",
   "files": {
     "hub.json": {
@@ -28,7 +28,7 @@
   "integrity": {
     "algo": "sha256",
     "hashes": {
-      "hub.json": "a09a721363d8e162ac991c55344412adc1e48777d76d73e4048a0a6ea959bdcd",
+      "hub.json": "026b0737c2761dbaa59dfadbbe4a25604235275ad019ee4e7178754b73ac26fb",
       "campaign.json": "6a3d9da3d5cba4c35676718cdd3eb44ba4e276b22c7230e9995ab4147fda6f10",
       "heroes.json": "1986bd0200293a24adf5a100a5575a18bdb822166504734e268036742966ef61",
       "battle_modes.json": "c347692fc8acad857078f91d0ad976a5a1f7bb66a70146ba39177ce8340976da",

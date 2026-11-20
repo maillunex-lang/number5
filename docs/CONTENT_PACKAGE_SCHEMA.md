@@ -5,7 +5,7 @@
 | Файл | Назначение | Читает клиент |
 |---|---|---|
 | `manifest.json` | Версия, schema, список файлов, sha256 | `ContentPackageLoader` |
-| `hub.json` | Мир хаба, здания, side_rail | Хаб |
+| `hub.json` | Мир хаба, `look` (фон/свет), здания+size, `side_rail` + layout | Хаб / Studio Editor 2.0 |
 | `campaign.json` | Регионы, этапы, рёбра, current_stage | Карта / глава / бой |
 | `heroes.json` | Герои, экип, пресеты, default_squad | Герои / отряд / бой |
 | `battle_modes.json` | Порталы вкладки «Битва» | Battle modes |

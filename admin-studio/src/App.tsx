@@ -21,7 +21,7 @@ export default function App() {
             Обзор
           </NavLink>
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/hub">
-            Хаб 2.5D
+            Хаб · Editor 2.0
           </NavLink>
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/campaign">
             Кампания

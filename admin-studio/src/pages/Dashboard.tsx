@@ -31,7 +31,7 @@ export default function Dashboard() {
           <h3 style={{ marginTop: 0, color: "var(--gold)" }}>Быстрый вход</h3>
           <ul>
             <li>
-              <Link to="/hub">Расстановка зданий хаба</Link>
+              <Link to="/hub">Хаб · Visual Editor 2.0 (9:16)</Link>
             </li>
             <li>
               <Link to="/campaign">Этапы кампании</Link>

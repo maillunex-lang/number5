@@ -3,7 +3,26 @@
   "parallax": {
     "far_bands": 4,
     "mid_hills": 6,
-    "path_width": 160
+    "path_width": 160,
+    "far_factor": 0.35,
+    "mid_factor": 0.18
+  },
+  "look": {
+    "sky_top": "#101a2c",
+    "sky_mid": "#132038",
+    "sky_bottom": "#0b1220",
+    "mid_color": "#1f332e",
+    "path_color": "#382e1f8c",
+    "ambient": 0.92,
+    "glow": 0.45,
+    "vignette": 0.28,
+    "show_shell": true
+  },
+  "side_rail_layout": {
+    "offset_right": 12,
+    "offset_top": 12,
+    "button_size": 64,
+    "gap": 10
   },
   "buildings": [
     {
@@ -97,10 +116,10 @@
     }
   ],
   "side_rail": [
-    { "id": "events", "icon": "✦", "tip": "События", "route": "HUB-04", "color": "#E8C56A" },
-    { "id": "mail", "icon": "✉", "tip": "Почта", "route": "SOCIAL-04", "color": "#5EC8E8" },
-    { "id": "quests", "icon": "☰", "tip": "Задания", "route": "HUB-03", "color": "#3DBE7A" },
-    { "id": "rewards", "icon": "★", "tip": "Награды", "route": "GLOBAL-01", "color": "#E09A3E" },
-    { "id": "social", "icon": "☺", "tip": "Соц.", "route": "SOCIAL-01", "color": "#2A9B8F" }
+    { "id": "events", "icon": "✦", "tip": "События", "route": "HUB-04", "color": "#E8C56A", "size": 64 },
+    { "id": "mail", "icon": "✉", "tip": "Почта", "route": "SOCIAL-04", "color": "#5EC8E8", "size": 64 },
+    { "id": "quests", "icon": "☰", "tip": "Задания", "route": "HUB-03", "color": "#3DBE7A", "size": 64 },
+    { "id": "rewards", "icon": "★", "tip": "Награды", "route": "GLOBAL-01", "color": "#E09A3E", "size": 64 },
+    { "id": "social", "icon": "☺", "tip": "Соц.", "route": "SOCIAL-01", "color": "#2A9B8F", "size": 64 }
   ]
 }
