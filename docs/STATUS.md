@@ -11,7 +11,7 @@
 | Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | **Владелец: повторные награды не выдаются** на свежем APK |
 | ART-05 | Procedural portrait/atlas webp в пакете; AssetLoader; BattleUnit clips; HUD/cards; headless load + Android export OK | Device verify: `docs/ART_05_DEVICE_VERIFY.md` — ждём «ART-05 device OK» |
 | MAP-01 list | StageListItem bind + scroll + squad power estimate (fix) | Device: имена этапов, сила ≠ 0, вертикальный скролл |
-| UI visual-edit | Theme + wave2 + **wave3**: FormationSlot, Settings chrome/tabs, MapRegionButton, StageListItem, stage_card Theme | Hero details / squad_manager / auth form ещё CODE_HEAVY |
+| UI visual-edit | Theme + wave2–3 + **wave4**: HeroDetails, SquadManager (FormationSlot/HeroCard), Auth form Theme | battle_result / DemoScreenBuilder features — следующие |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |
 | AUTH-04 | Memory+PG register/login/link; logout revoke; link_guest sync heroes; settings bind; Go tests + device checklist | Device verify: `docs/AUTH_04_DEVICE_VERIFY.md` — ждём владельца |

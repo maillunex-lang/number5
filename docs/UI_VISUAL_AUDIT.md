@@ -38,7 +38,7 @@
 | Version check | `bootstrap/version_check.tscn` | 6 | 0 | нет | HIGH | лейблы | логика версии | низкий |
 | Asset bootstrap | `bootstrap/asset_bootstrap.tscn` | 8 | 0 | пакет | HIGH | прогресс-бар layout | загрузка | низкий |
 | World select | `bootstrap/world_select.tscn` | 9 | 0 | сессия | HIGH | кнопки миров | вход в shell | низкий |
-| Auth | `bootstrap/auth.tscn` | 20 | высокая | API | CODE_HEAVY | часть полей в сцене | вкладки login/signup кодом | средний |
+| Auth | `bootstrap/auth.tscn` | ~30 | средняя | API | MED* | Card/Tabs/Email/Password/Login/Guest Theme | parallax + API + _adapt_layout | средний |
 | Game shell | `shell/game_shell.tscn` | 19 | средняя | — | CODE_HEAVY | слои, fade | вкладки, overlays | safe-area |
 | Top bar | `shell/top_bar.tscn` | 11 | низкая | wallet | MED | кнопки, отступы, подписи | тексты валют, стили из пакета | hit area |
 | Bottom nav | `shell/bottom_nav.tscn` | 7 | низкая | shell.json | MED | 4 вкладки, высота | иконки/лейблы из пакета | hit area ≥ |
@@ -47,8 +47,8 @@
 | Chapter map | `map/chapter_map.tscn` | ~12 | средняя | campaign | MED* | Header/Continue/Back | список через `StageListItem` | средний |
 | Stage card | `map/stage_card.tscn` | ~14 | низкая | stage | HIGH* | Card/Pad/кнопки Theme | DialogHost опционально | низкий |
 | Heroes root | `heroes/heroes_root.tscn` | 12 | высокая | heroes | MED* | фильтры/хост | сетка через `HeroCard` | списки |
-| Hero details | `heroes/hero_details.tscn` | 5 | высокая | hero | CODE_HEAVY | Safe/Scroll | весь контент | средний |
-| Squad | `heroes/squad_manager.tscn` | 5 | высокая | formation | CODE_HEAVY | скелет | слоты | средний |
+| Hero details | `heroes/hero_details.tscn` | ~20 | средняя | hero | MED* | Title/Portrait/Tabs/Back | TabContentHost | средний |
+| Squad | `heroes/squad_manager.tscn` | ~20 | средняя | formation | MED* | 5×FormationSlot, Back | PresetsHost + HeroesHost (HeroCard) | средний |
 | Battle modes | `battle/battle_modes_root.tscn` | 7 | средняя | — | LOW | список режимов-хост | кнопки режимов | низкий |
 | Formation | `battle/formation.tscn` | ~20 | средняя | battle API | MED* | labels, 5×FormationSlot, Start/Edit/Back | PresetsHost + battle_start | средний |
 | Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | MED* | Field/HUD/Controls | юниты через `BattleUnit` + timeline | полный экран |
@@ -91,6 +91,7 @@
 | E | HOW_TO + RULES + AGENTS.md |
 | Wave2 | HubBuilding, BattleUnit, HeroCard, MailItem, ShopOfferCard |
 | Wave3 | Formation chrome+slots; Settings tabs; Map landscape+MapRegionButton; StageListItem; stage_card Theme |
+| Wave4 | Hero details chrome+tabs; Squad FormationSlot+HeroCard; Auth form Theme; settings account Theme buttons |
 
 ## 7. Критерии «экран модернизирован»
 

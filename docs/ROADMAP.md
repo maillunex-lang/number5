@@ -25,6 +25,7 @@
 | AUTH-04 code | Memory+PG credentials, logout, link sync, device checklist | |
 | Battle replay farm | Повтор cleared-этапа без валюты (training until loot caps) | |
 | UI-VISUAL wave3 | Formation/Settings/Map chrome + FormationSlot/StageListItem/MapRegionButton | |
+| UI-VISUAL wave4 | HeroDetails + SquadManager + Auth form Theme; settings account Theme | |
 | settings pass keyword | GDScript reserved `pass` → email_edit/password_edit; Godot Android export OK | |
 
 ## Реализовано и проверено
