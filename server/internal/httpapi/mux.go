@@ -15,6 +15,7 @@ import (
 	"github.com/maillunex-lang/number5/server/internal/modules/content"
 	"github.com/maillunex-lang/number5/server/internal/modules/heroes"
 	"github.com/maillunex-lang/number5/server/internal/modules/mail"
+	"github.com/maillunex-lang/number5/server/internal/modules/shop"
 	"github.com/maillunex-lang/number5/server/internal/modules/summon"
 	"github.com/maillunex-lang/number5/server/internal/modules/wallet"
 	"github.com/maillunex-lang/number5/server/internal/store"
@@ -31,6 +32,7 @@ type Deps struct {
 	Summon   *summon.Service
 	AFK      *afk.Service
 	Mail     *mail.Service
+	Shop     *shop.Service
 }
 
 func NewMux(d Deps) http.Handler {
@@ -39,12 +41,12 @@ func NewMux(d Deps) http.Handler {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok":      true,
 			"service": "lunex-core-api",
-			"note":    "CORE-01 memory slice · auth/wallet/heroes/campaign/battle/summon/afk/mail",
+			"note":    "CORE-01 memory slice · auth…mail + store VIRTUAL_FREE",
 			"env":     d.Config.AppEnv,
 			"time":    time.Now().UTC().Format(time.RFC3339),
 			"db":      d.Config.DatabaseURL != "",
 			"store":   "memory",
-			"modules": []string{"auth", "wallet", "heroes", "campaign", "battle", "summon", "afk", "mail", "content"},
+			"modules": []string{"auth", "wallet", "heroes", "campaign", "battle", "summon", "afk", "mail", "shop", "content"},
 		})
 	})
 	mux.HandleFunc("GET /api/v1/content/active", func(w http.ResponseWriter, r *http.Request) {
@@ -165,6 +167,22 @@ func NewMux(d Deps) http.Handler {
 		st, body, err := d.Battle.Start(acc.ID, req)
 		writeRaw(w, st, body, err)
 	})
+	mux.HandleFunc("GET /api/v1/battle/{id}", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		res, err := d.Battle.Get(acc.ID, r.PathValue("id"))
+		if err != nil {
+			if err == store.ErrForbidden {
+				writeErr(w, http.StatusForbidden, "forbidden", "battle")
+				return
+			}
+			writeErr(w, http.StatusNotFound, "not_found", "battle")
+			return
+		}
+		writeJSON(w, http.StatusOK, res)
+	})
 	mux.HandleFunc("POST /api/v1/battle/{id}/claim", func(w http.ResponseWriter, r *http.Request) {
 		acc, ok := requireAuth(w, r, d.Auth)
 		if !ok {
@@ -187,6 +205,18 @@ func NewMux(d Deps) http.Handler {
 			return
 		}
 		writeJSON(w, http.StatusOK, map[string]any{"banners": d.Summon.Banners()})
+	})
+	mux.HandleFunc("GET /api/v1/summon/pity", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		pity, err := d.Summon.Pity(acc.ID)
+		if err != nil {
+			writeErr(w, http.StatusInternalServerError, "pity_failed", err.Error())
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{"pity": pity})
 	})
 	mux.HandleFunc("POST /api/v1/summon/roll", func(w http.ResponseWriter, r *http.Request) {
 		acc, ok := requireAuth(w, r, d.Auth)
@@ -260,6 +290,93 @@ func NewMux(d Deps) http.Handler {
 			key = payload.IdempotencyKey
 		}
 		st, body, err := d.Mail.Claim(acc.ID, r.PathValue("id"), key)
+		writeRaw(w, st, body, err)
+	})
+	mux.HandleFunc("POST /api/v1/mail/claim-all", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		key := r.Header.Get("Idempotency-Key")
+		var payload struct {
+			IdempotencyKey string `json:"idempotency_key"`
+		}
+		_ = json.NewDecoder(r.Body).Decode(&payload)
+		if key == "" {
+			key = payload.IdempotencyKey
+		}
+		st, body, err := d.Mail.ClaimAll(acc.ID, key)
+		writeRaw(w, st, body, err)
+	})
+
+	mux.HandleFunc("GET /api/v1/store/catalog", func(w http.ResponseWriter, r *http.Request) {
+		if _, ok := requireAuth(w, r, d.Auth); !ok {
+			return
+		}
+		if d.Shop == nil {
+			writeErr(w, http.StatusServiceUnavailable, "unavailable", "shop")
+			return
+		}
+		writeJSON(w, http.StatusOK, d.Shop.CatalogView())
+	})
+	mux.HandleFunc("POST /api/v1/store/orders", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		if d.Shop == nil {
+			writeErr(w, http.StatusServiceUnavailable, "unavailable", "shop")
+			return
+		}
+		var req shop.CreateOrderRequest
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			writeErr(w, http.StatusBadRequest, "bad_json", err.Error())
+			return
+		}
+		if req.IdempotencyKey == "" {
+			req.IdempotencyKey = r.Header.Get("Idempotency-Key")
+		}
+		st, body, err := d.Shop.CreateOrder(acc.ID, req)
+		writeRaw(w, st, body, err)
+	})
+	mux.HandleFunc("GET /api/v1/store/orders/{id}", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		if d.Shop == nil {
+			writeErr(w, http.StatusServiceUnavailable, "unavailable", "shop")
+			return
+		}
+		o, err := d.Shop.GetOrder(acc.ID, r.PathValue("id"))
+		if err != nil {
+			if err == store.ErrForbidden {
+				writeErr(w, http.StatusForbidden, "forbidden", "order")
+				return
+			}
+			writeErr(w, http.StatusNotFound, "not_found", "order")
+			return
+		}
+		writeJSON(w, http.StatusOK, o)
+	})
+	mux.HandleFunc("POST /api/v1/store/orders/{id}/confirm-test", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		if d.Shop == nil {
+			writeErr(w, http.StatusServiceUnavailable, "unavailable", "shop")
+			return
+		}
+		key := r.Header.Get("Idempotency-Key")
+		var payload struct {
+			IdempotencyKey string `json:"idempotency_key"`
+		}
+		_ = json.NewDecoder(r.Body).Decode(&payload)
+		if key == "" {
+			key = payload.IdempotencyKey
+		}
+		st, body, err := d.Shop.ConfirmTest(acc.ID, r.PathValue("id"), key)
 		writeRaw(w, st, body, err)
 	})
 

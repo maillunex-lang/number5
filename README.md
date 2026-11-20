@@ -31,24 +31,23 @@ cd admin-studio && npm install && npm run dev
 
 UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — `docs/ADMIN_STUDIO.md`.
 
-## CORE-01 (скелет)
+## CORE-01 (memory slice)
 
-ТЗ: `docs/TZ_A_FOUNDATION.md`. Каркас:
+ТЗ: `docs/TZ_A_FOUNDATION.md`. Auth…store на memory; Postgres — после Docker/VPS.
 
 ```bash
 cd server && go test ./... && go run ./cmd/api
-# GET http://127.0.0.1:8080/api/v1/health
-# GET http://127.0.0.1:8080/api/v1/content/active
+# guest → wallet → battle → summon → afk → mail → store
 ```
 
-Полный wallet/battle — после доступов к PostgreSQL/VPS.
+Godot: `ApiClient` (guest → `127.0.0.1:8080`, иначе офлайн-демо).
 
 ## Что включено в v0.1
 
 - GameShell: TopBar, 4 вкладки, Router, модалки
 - Хаб / кампания / герои / DEMO-бой 5v5
 - Пакеты `0.1.0`…`0.9.0` + Studio economy/meta/catalog
-- TZ-A + скелет Go API
+- TZ-A + CORE-01 memory API + `ApiClient`
 
 ## Лицензии
 

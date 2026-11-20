@@ -115,3 +115,15 @@ type MailAttach struct {
 	Amount     int64  `json:"amount"`
 	Claimed    bool   `json:"claimed"`
 }
+
+type StoreOrder struct {
+	ID             string         `json:"id"`
+	AccountID      AccountID      `json:"account_id"`
+	SKU            string         `json:"sku"`
+	Status         string         `json:"status"` // pending|confirmed|failed
+	Grants         []MailAttach   `json:"grants"`
+	VipXP          int            `json:"vip_xp"`
+	IdempotencyKey string         `json:"idempotency_key"`
+	CreatedAt      time.Time      `json:"created_at"`
+	ConfirmedAt    *time.Time     `json:"confirmed_at,omitempty"`
+}

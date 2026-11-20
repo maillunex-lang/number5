@@ -18,6 +18,7 @@ import (
 	"github.com/maillunex-lang/number5/server/internal/modules/content"
 	"github.com/maillunex-lang/number5/server/internal/modules/heroes"
 	"github.com/maillunex-lang/number5/server/internal/modules/mail"
+	"github.com/maillunex-lang/number5/server/internal/modules/shop"
 	"github.com/maillunex-lang/number5/server/internal/modules/summon"
 	"github.com/maillunex-lang/number5/server/internal/modules/wallet"
 	"github.com/maillunex-lang/number5/server/internal/store"
@@ -49,6 +50,7 @@ func setup(t *testing.T) http.Handler {
 		Summon:   &summon.Service{Store: mem, Catalog: cat},
 		AFK:      &afk.Service{Store: mem, Catalog: cat},
 		Mail:     &mail.Service{Store: mem, Catalog: cat},
+		Shop:     &shop.Service{Store: mem, Catalog: cat},
 	})
 }
 
@@ -147,5 +149,36 @@ func TestFullLoopBattleSummonAfkMail(t *testing.T) {
 	rr = authH(http.MethodPost, "/api/v1/mail/"+mailbox.Messages[0].ID+"/claim", []byte(`{"idempotency_key":"m1"}`))
 	if rr.Code != 200 && rr.Code != 409 {
 		t.Fatalf("mail claim %d %s", rr.Code, rr.Body.String())
+	}
+
+	rr = authH(http.MethodGet, "/api/v1/summon/pity", nil)
+	if rr.Code != 200 {
+		t.Fatalf("pity %d %s", rr.Code, rr.Body.String())
+	}
+	rr = authH(http.MethodGet, "/api/v1/battle/"+bid, nil)
+	if rr.Code != 200 {
+		t.Fatalf("battle get %d %s", rr.Code, rr.Body.String())
+	}
+	rr = authH(http.MethodGet, "/api/v1/store/catalog", nil)
+	if rr.Code != 200 {
+		t.Fatalf("store catalog %d %s", rr.Code, rr.Body.String())
+	}
+	rr = authH(http.MethodPost, "/api/v1/store/orders", []byte(`{"sku":"diamond_s","idempotency_key":"o1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("store order %d %s", rr.Code, rr.Body.String())
+	}
+	var ord struct {
+		Order struct {
+			ID string `json:"id"`
+		} `json:"order"`
+	}
+	_ = json.Unmarshal(rr.Body.Bytes(), &ord)
+	rr = authH(http.MethodPost, "/api/v1/store/orders/"+ord.Order.ID+"/confirm-test", []byte(`{"idempotency_key":"oc1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("store confirm %d %s", rr.Code, rr.Body.String())
+	}
+	rr = authH(http.MethodPost, "/api/v1/mail/claim-all", []byte(`{"idempotency_key":"mall1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("mail claim-all %d %s", rr.Code, rr.Body.String())
 	}
 }

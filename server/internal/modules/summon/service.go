@@ -50,6 +50,21 @@ func (s *Service) Banners() []content.Banner {
 	return out
 }
 
+func (s *Service) Pity(accountID domain.AccountID) ([]domain.PityState, error) {
+	out := []domain.PityState{}
+	for _, b := range s.Catalog.Gacha.Banners {
+		p, err := s.Store.GetPity(accountID, b.ID)
+		if err != nil {
+			p = domain.PityState{BannerID: b.ID}
+		}
+		if p.BannerID == "" {
+			p.BannerID = b.ID
+		}
+		out = append(out, p)
+	}
+	return out, nil
+}
+
 func (s *Service) Roll(accountID domain.AccountID, req RollRequest) (status int, body []byte, err error) {
 	if req.BannerID == "" || req.IdempotencyKey == "" || (req.Count != 1 && req.Count != 10) {
 		return 422, errJSON("invalid", "banner_id, count 1|10, idempotency_key required"), nil

@@ -38,7 +38,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | **E2** | 4 баннера гачи + пулы H01–H45 | **Готово** | `gacha.json` + UI алтаря |
 | **E3** | AFK / 12+8 квестов / 18 экспедиций | **Готово** | `liveops.json` + AFK UI |
 | **E4** | Магазин SKU / 3 подписки / VIP 0–11 / BP 30 | **Готово (данные+UI демо)** | `economy.json` offers… · без реальных платежей |
-| **E5** | Сервер wallet/ledger/RNG | После CORE-01 | Go + Postgres |
+| **E5** | Сервер wallet/ledger/RNG | **Memory ✓** (PG next) | `server/` CORE-01 |
 | **E6** | Admin Studio economy editors | После E5 | publish/rollback |
 
 ## Этапы сюжета (C)
@@ -83,7 +83,7 @@ E0–E4 экономика ✓ → P0–P2 PvE каталог+UI ✓ → C4 гл
 | **P0** | Канон + место в ROADMAP | **Готово** | `docs/content/PVE_MODES.md` |
 | **P1** | `pve_modes.json` (120 этажей, охота, врата, 4 подземелья) | **Готово** | пакет `0.4.0` |
 | **P2** | UI «Испытания» + порталы битвы | **Готово** | `pve_mode.gd`, `battle_modes.json` |
-| **P3** | Сервер попыток/урона/claim | После CORE-01 | Go API |
+| **P3** | Сервер попыток/урона/claim | **Memory ✓** (campaign battle) | PG next |
 | **P4** | Admin Studio PvE editors | После P3 | publish/sim |
 
 ## Порядок гильдий (G) — после экономики и PvE-каталога

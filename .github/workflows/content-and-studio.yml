@@ -92,6 +92,12 @@ jobs:
               curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
                 -d '{"idempotency_key":"ci-a1"}' http://127.0.0.1:8080/api/v1/afk/claim >/dev/null
               curl -fsS -H "$AUTH" http://127.0.0.1:8080/api/v1/mail >/dev/null
+              curl -fsS -H "$AUTH" http://127.0.0.1:8080/api/v1/summon/pity >/dev/null
+              ORD=$(curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"sku":"diamond_s","idempotency_key":"ci-o1"}' http://127.0.0.1:8080/api/v1/store/orders)
+              OID=$(echo "$ORD" | python3 -c "import sys,json; print(json.load(sys.stdin)['order']['id'])")
+              curl -fsS -X POST -H "$AUTH" -H "Content-Type: application/json" \
+                -d '{"idempotency_key":"ci-oc1"}' "http://127.0.0.1:8080/api/v1/store/orders/$OID/confirm-test" >/dev/null
               exit 0
             fi
             sleep 1

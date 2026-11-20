@@ -24,6 +24,7 @@ type Memory struct {
 	pity       map[domain.AccountID]map[string]domain.PityState
 	afk        map[domain.AccountID]domain.AFKState
 	mail       map[domain.AccountID]map[string]domain.MailMessage
+	orders     map[string]domain.StoreOrder
 	starter    []domain.Balance
 	clock      Clock
 }
@@ -44,6 +45,7 @@ func NewMemory(starter []domain.Balance) *Memory {
 		pity:       map[domain.AccountID]map[string]domain.PityState{},
 		afk:        map[domain.AccountID]domain.AFKState{},
 		mail:       map[domain.AccountID]map[string]domain.MailMessage{},
+		orders:     map[string]domain.StoreOrder{},
 		starter:    starter,
 		clock:      RealClock{},
 	}
@@ -401,6 +403,23 @@ func (m *Memory) SeedMail(accountID domain.AccountID, msgs []domain.MailMessage)
 		box[msg.ID] = msg
 	}
 	return nil
+}
+
+func (m *Memory) SaveStoreOrder(order domain.StoreOrder) error {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	m.orders[order.ID] = order
+	return nil
+}
+
+func (m *Memory) GetStoreOrder(id string) (domain.StoreOrder, error) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	o, ok := m.orders[id]
+	if !ok {
+		return domain.StoreOrder{}, ErrNotFound
+	}
+	return o, nil
 }
 
 func idemKey(accountID domain.AccountID, key string) string {

@@ -131,6 +131,20 @@ func (s *Service) Start(accountID domain.AccountID, req StartRequest) (status in
 	return 200, body, nil
 }
 
+func (s *Service) Get(accountID domain.AccountID, battleID string) (BattleResponse, error) {
+	b, err := s.Store.GetBattle(battleID)
+	if err != nil {
+		return BattleResponse{}, err
+	}
+	if b.AccountID != accountID {
+		return BattleResponse{}, store.ErrForbidden
+	}
+	return BattleResponse{
+		BattleID: b.ID, StageID: b.StageID, Victory: b.Victory, Seed: b.Seed,
+		Timeline: b.Timeline, ConfigVersion: b.ConfigVersion, Claimed: b.Claimed,
+	}, nil
+}
+
 func (s *Service) Claim(accountID domain.AccountID, battleID, idempotencyKey string) (status int, body []byte, err error) {
 	if battleID == "" || idempotencyKey == "" {
 		return 422, errJSON("invalid", "battle id and idempotency_key required"), nil

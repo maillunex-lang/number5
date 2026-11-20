@@ -46,6 +46,9 @@ type Store interface {
 	GetMail(accountID domain.AccountID, mailID string) (domain.MailMessage, error)
 	SaveMail(accountID domain.AccountID, msg domain.MailMessage) error
 	SeedMail(accountID domain.AccountID, msgs []domain.MailMessage) error
+
+	SaveStoreOrder(order domain.StoreOrder) error
+	GetStoreOrder(id string) (domain.StoreOrder, error)
 }
 
 type Clock interface {

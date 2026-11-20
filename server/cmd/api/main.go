@@ -14,6 +14,7 @@ import (
 	"github.com/maillunex-lang/number5/server/internal/modules/content"
 	"github.com/maillunex-lang/number5/server/internal/modules/heroes"
 	"github.com/maillunex-lang/number5/server/internal/modules/mail"
+	"github.com/maillunex-lang/number5/server/internal/modules/shop"
 	"github.com/maillunex-lang/number5/server/internal/modules/summon"
 	"github.com/maillunex-lang/number5/server/internal/modules/wallet"
 	"github.com/maillunex-lang/number5/server/internal/store"
@@ -47,6 +48,7 @@ func main() {
 		deps.Summon = &summon.Service{Store: mem, Catalog: cat}
 		deps.AFK = &afk.Service{Store: mem, Catalog: cat}
 		deps.Mail = &mail.Service{Store: mem, Catalog: cat}
+		deps.Shop = &shop.Service{Store: mem, Catalog: cat}
 	}
 	mux := httpapi.NewMux(deps)
 	log.Printf("lunex-api listening on %s (env=%s store=memory config=%s)", cfg.HTTPAddr, cfg.AppEnv, cfgVer)

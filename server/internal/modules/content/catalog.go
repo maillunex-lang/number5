@@ -18,6 +18,26 @@ type Catalog struct {
 	Liveops  LiveopsDoc
 	Mail     MailDoc
 	Enemies  EnemiesDoc
+	Economy  EconomyDoc
+}
+
+type EconomyDoc struct {
+	Mode       string          `json:"mode"`
+	Offers     []StoreOffer    `json:"offers"`
+	Categories json.RawMessage `json:"categories"`
+}
+
+type StoreOffer struct {
+	SKU              string           `json:"sku"`
+	Title            string           `json:"title"`
+	NominalPriceRub  int              `json:"nominal_price_rub"`
+	PayablePriceRub  int              `json:"payable_price_rub"`
+	Type             string           `json:"type"`
+	Grants           []Cost         `json:"grants"`
+	VipXP            int            `json:"vip_xp"`
+	Limits           map[string]any `json:"limits"`
+	Enabled          bool           `json:"enabled"`
+	CTA              string         `json:"cta"`
 }
 
 type HeroesDoc struct {
@@ -145,8 +165,20 @@ func LoadCatalog(root string) (*Catalog, error) {
 	if err := readJSON(filepath.Join(base, "enemies.json"), &c.Enemies); err != nil {
 		return nil, err
 	}
+	if err := readJSON(filepath.Join(base, "economy.json"), &c.Economy); err != nil {
+		return nil, err
+	}
 	cached = c
 	return c, nil
+}
+
+func (c *Catalog) Offer(sku string) (StoreOffer, bool) {
+	for _, o := range c.Economy.Offers {
+		if o.SKU == sku {
+			return o, true
+		}
+	}
+	return StoreOffer{}, false
 }
 
 func (c *Catalog) StageLoot(stageID string) (StageLoot, bool) {
