@@ -1,14 +1,14 @@
-# Передача · UI-VISUAL wave5
+# Передача · UI-VISUAL wave5+
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave5-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave5-plus-d5fe`.
 
-**Сделано (пока владелец тестирует APK hang-fix):**
-- `battle_result` — ClaimProgress/Status/Meta в `.tscn`, без UIFactory chrome.
-- VIP + Social hub — chrome + DynamicHost, без `DemoScreenBuilder`.
-- Preview «Wave5 VIP/Social/Result».
+**Сделано:**
+- Wave5 merged (#29): BattleResult + VIP + SocialHub.
+- Wave5+: Chat / Friends / Rankings — chrome + `FeatureSectionHost` (без DemoScreenBuilder).
+- VIP/SocialHub переведены на тот же helper.
 
 ## Next
 
-1. Владелец: APK после #28 (login hang) OK?
-2. Merge wave5 → APK smoke VIP/Social/Result.
-3. Остаток DemoScreenBuilder (chat/friends/rankings) / TopBar MED→HIGH.
+1. Владелец: APK hang-fix (#28) + wave5/5+ smoke.
+2. Остаток DemoScreenBuilder: battle_pass / pvp / profile / sys_* .
+3. TopBar/BottomNav MED→HIGH.
