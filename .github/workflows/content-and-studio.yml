@@ -104,3 +104,29 @@ jobs:
           done
           echo "CORE API did not become ready"
           exit 1
+
+  postgres-startup:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: lunex_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d lunex_test"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/lunex_test?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - name: Build API with embedded migrations
+        working-directory: server
+        run: go build -o "$RUNNER_TEMP/lunex-api" ./cmd/api
+      - name: Check clean startup and authenticated restart
+        run: python3 tools/check_postgres_startup.py "$RUNNER_TEMP/lunex-api"

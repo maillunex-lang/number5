@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/maillunex-lang/number5/server/internal/config"
@@ -81,11 +80,7 @@ func openStore(cfg config.Config) (store.Store, string) {
 		log.Printf("store: postgres unavailable (%v) · falling back to memory", err)
 		return store.NewMemory(nil), "memory"
 	}
-	mig := filepath.Join("migrations", "0001_init.sql")
-	if _, err := os.Stat(mig); err != nil {
-		mig = filepath.Join("..", "migrations", "0001_init.sql")
-	}
-	if err := pg.Migrate(ctx, mig); err != nil {
+	if err := pg.Migrate(ctx); err != nil {
 		if cfg.AppEnv == "prod" {
 			log.Fatalf("production migration failed: %v", err)
 		}
