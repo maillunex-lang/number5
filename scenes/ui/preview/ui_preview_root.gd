@@ -17,6 +17,7 @@ const PAGES := {
 	"Formation / Map": "_show_wave3",
 	"Settings scaffold": "_show_settings",
 	"Wave4 Heroes/Auth": "_show_wave4",
+	"Wave5 VIP/Social/Result": "_show_wave5",
 }
 
 func _ready() -> void:
@@ -212,6 +213,31 @@ func _show_wave4() -> void:
 			sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 			if sc.has_method("setup"):
 				sc.call("setup", {"hero_id": "H01", "region_id": "CH01"})
+			_host.add_child(sc)
+		)
+		col.add_child(btn)
+
+func _show_wave5() -> void:
+	_clear_host()
+	_hint.text = "Wave5: BattleResult · VIP · SocialHub"
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(col)
+	for path in [
+		"res://scenes/battle/battle_result.tscn",
+		"res://scenes/features/vip.tscn",
+		"res://scenes/features/social_hub.tscn",
+	]:
+		var btn := UIFactory.fantasy_button(path.get_file(), 56)
+		var p: String = path
+		btn.pressed.connect(func():
+			_clear_host()
+			_hint.text = p
+			var sc: Control = (load(p) as PackedScene).instantiate()
+			sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			if sc.has_method("setup"):
+				sc.call("setup", {"victory": true, "battle_id": "", "stage_id": "CH01-01"})
 			_host.add_child(sc)
 		)
 		col.add_child(btn)

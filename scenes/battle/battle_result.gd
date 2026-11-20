@@ -1,5 +1,5 @@
 extends Control
-## COMBAT-03: итоги серверного боя. Chrome в .tscn; claim и тексты — здесь.
+## COMBAT-03: chrome в .tscn (Title/ClaimProgress/Status/Meta/Nav); claim — здесь.
 
 @export_category("Lunex Battle Result")
 @export var bg_color: Color = Color(0.03, 0.04, 0.08, 1):
@@ -11,11 +11,14 @@ extends Control
 var _payload: Dictionary = {}
 var _busy: bool = false
 var _nav_bound: bool = false
+var _claim_tween: Tween = null
 
 @onready var _bg: ColorRect = $BG
 @onready var _title: Label = $Safe/VBox/Title
 @onready var _subtitle: Label = $Safe/VBox/Subtitle
-@onready var _dynamic: VBoxContainer = $Safe/VBox/DynamicHost
+@onready var _claim_bar: ProgressBar = $Safe/VBox/ClaimProgress
+@onready var _status: Label = $Safe/VBox/StatusLabel
+@onready var _meta: Label = $Safe/VBox/MetaLabel
 @onready var _again: Button = $Safe/VBox/Nav/AgainBtn
 @onready var _map_btn: Button = $Safe/VBox/Nav/MapBtn
 @onready var _hub: Button = $Safe/VBox/Nav/HubBtn
@@ -46,30 +49,43 @@ func _bind_nav() -> void:
 		ScreenRouter.switch_tab("hub")
 	)
 
-func _clear_dynamic() -> void:
-	for c in _dynamic.get_children():
-		c.queue_free()
+func _set_status(text: String, color: Color = LunexColors.TEXT_PRIMARY) -> void:
+	_status.text = text
+	_status.add_theme_color_override("font_color", color)
+
+func _show_claim_busy(on: bool) -> void:
+	_claim_bar.visible = on
+	if _claim_tween != null and is_instance_valid(_claim_tween):
+		_claim_tween.kill()
+		_claim_tween = null
+	if on:
+		_claim_bar.value = 0.35
+		_claim_tween = create_tween().set_loops()
+		_claim_tween.tween_property(_claim_bar, "value", 0.9, 1.2)
+		_claim_tween.tween_property(_claim_bar, "value", 0.35, 1.2)
 
 func _build() -> void:
 	var victory: bool = bool(_payload.get("victory", false))
 	var aborted: bool = bool(_payload.get("aborted", false))
 	var sid: String = str(_payload.get("stage_id", ""))
-	_clear_dynamic()
 	_again.visible = true
 	_map_btn.visible = true
 	_hub.visible = true
+	_meta.text = ""
+	_show_claim_busy(false)
 
 	if aborted:
 		_title.text = "Бой прерван"
 		_subtitle.text = "Награды не выданы."
 		_subtitle.add_theme_color_override("font_color", LunexColors.TEXT_MUTED)
+		_set_status("")
 		return
 
 	if not victory:
 		_title.text = "Поражение"
 		_subtitle.text = "Усильте отряд и попробуйте снова."
 		_subtitle.add_theme_color_override("font_color", LunexColors.TEXT_DANGER)
-		_dynamic.add_child(UIFactory.muted("Серверный claim только при победе.", 20))
+		_set_status("Серверный claim только при победе.", LunexColors.TEXT_MUTED)
 		return
 
 	_title.text = "Победа!"
@@ -78,24 +94,16 @@ func _build() -> void:
 	if ApiClient.online and bid != "":
 		_subtitle.text = "Подтверждение наград на сервере…"
 		_subtitle.add_theme_color_override("font_color", LunexColors.EMERALD)
-		var bar := ProgressBar.new()
-		bar.custom_minimum_size = Vector2(0, 18)
-		bar.max_value = 1.0
-		bar.value = 0.35
-		bar.show_percentage = false
-		_dynamic.add_child(bar)
-		var tw := create_tween().set_loops()
-		tw.tween_property(bar, "value", 0.9, 1.2)
-		tw.tween_property(bar, "value", 0.35, 1.2)
+		_set_status("")
+		_show_claim_busy(true)
 		var ok := await _claim_online(bid, sid)
-		if tw.is_valid():
-			tw.kill()
+		_show_claim_busy(false)
 		if ok:
 			return
 		_subtitle.text = ""
-		_dynamic.add_child(UIFactory.muted("Не удалось подтвердить результат на сервере. Награды не выданы.", 22))
+		_set_status("Не удалось подтвердить результат на сервере. Награды не выданы.", LunexColors.TEXT_MUTED)
 	else:
-		_dynamic.add_child(UIFactory.muted("Нет онлайн-сессии. Награды не выданы.", 22))
+		_set_status("Нет онлайн-сессии. Награды не выданы.", LunexColors.TEXT_MUTED)
 
 func _claim_online(bid: String, sid: String) -> bool:
 	if _busy:
@@ -113,17 +121,15 @@ func _claim_online(bid: String, sid: String) -> bool:
 		lines.append("%s ×%s" % [str(k), str(crewards[k])])
 	if lines.is_empty():
 		lines.append("Тренировка — без наград")
-	# Apply campaign tip from claim immediately; wallet refresh in background.
 	_apply_claim_progress(cdata, sid)
-	_clear_dynamic()
 	_subtitle.text = ""
 	if first_clear and not crewards.is_empty():
-		_dynamic.add_child(UIFactory.label("Награды подтверждены сервером.", 26, LunexColors.EMERALD))
+		_set_status("Награды подтверждены сервером.", LunexColors.EMERALD)
 		ModalManager.push_rewards("Награды (ONLINE)", lines)
 	else:
-		_dynamic.add_child(UIFactory.label("Повтор: тренировка без наград.", 26, LunexColors.GOLD))
+		_set_status("Повтор: тренировка без наград.", LunexColors.GOLD)
 		ModalManager.push_info("Повтор этапа", "Этот бой уже был пройден.\nНаграды за first clear не выдаются повторно.")
-	_dynamic.add_child(UIFactory.muted("battle_id %s · CORE-01" % bid, 18))
+	_meta.text = "battle_id %s · CORE-01" % bid
 	_busy = false
 	_refresh_economy_bg()
 	return true
@@ -143,7 +149,6 @@ func _apply_claim_progress(cdata: Dictionary, sid: String) -> void:
 			st["state"] = "cleared"
 
 func _refresh_economy_bg() -> void:
-	# Non-blocking: top bar wallet + full campaign cleared list.
 	await ApiClient.sync_wallet()
 	var campaign := await ApiClient.get_campaign()
 	if not campaign.get("ok", false):

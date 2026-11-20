@@ -1,12 +1,14 @@
-# Передача · fix sync hang on login overlay
+# Передача · UI-VISUAL wave5
 
-Срез 20 ноября 2026. Ветка: `cursor/fix-sync-hang-parallel-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave5-d5fe`.
 
-**Баг:** `_parallel_authed_gets` — лямбда захватывала общий `http` из цикла → `queue_free` чужого запроса → `pending` не доходил до 0 → оверлей «С возвращением» навечно.
-
-**Сделано:** nodes[] по индексу; CONNECT_ONE_SHOT; deadline timeout; auth watchdog 18с.
+**Сделано (пока владелец тестирует APK hang-fix):**
+- `battle_result` — ClaimProgress/Status/Meta в `.tscn`, без UIFactory chrome.
+- VIP + Social hub — chrome + DynamicHost, без `DemoScreenBuilder`.
+- Preview «Wave5 VIP/Social/Result».
 
 ## Next
 
-1. Merge → срочный APK → проверить restore/login.
-2. Wave5 UI.
+1. Владелец: APK после #28 (login hang) OK?
+2. Merge wave5 → APK smoke VIP/Social/Result.
+3. Остаток DemoScreenBuilder (chat/friends/rankings) / TopBar MED→HIGH.

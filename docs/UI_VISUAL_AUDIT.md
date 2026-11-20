@@ -52,10 +52,12 @@
 | Battle modes | `battle/battle_modes_root.tscn` | 7 | средняя | — | LOW | список режимов-хост | кнопки режимов | низкий |
 | Formation | `battle/formation.tscn` | ~20 | средняя | battle API | MED* | labels, 5×FormationSlot, Start/Edit/Back | PresetsHost + battle_start | средний |
 | Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | MED* | Field/HUD/Controls | юниты через `BattleUnit` + timeline | полный экран |
-| Result | `battle/battle_result.tscn` | 4 | высокая | claim | CODE_HEAVY | BG/Safe | title+nav кодом → миграция | низкий |
+| Result | `battle/battle_result.tscn` | ~12 | низкая | claim | MED* | Title/ClaimProgress/Status/Meta/Nav Theme | claim API + тексты | низкий |
 | Settings | `features/settings.tscn` | ~18 | средняя | local | MED* | Title/Close/5 Tabs/ContentPanel | DynamicHost вкладок | средний |
 | Shop / Summon / AFK / Mail / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки/кнопки | списки |
-| VIP / Chat / Friends / Rankings / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
+| VIP | `features/vip.tscn` | ~12 | низкая | пакет | MED* | Title/Status/Back/DynamicHost | секции в host | низкий |
+| Social hub | `features/social_hub.tscn` | ~10 | низкая | демо | MED* | Title/Back/DynamicHost | route-кнопки | низкий |
+| Chat / Friends / Rankings / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
 | PvE / Guild / Events / Profile | `features/*` | 5 | высокая | пакет | CODE_HEAVY | скелет | карточки/рейды | средний |
 
 \*HIGH по `.tscn`, но наполнение DEMO всё равно в коде через `DemoScreenBuilder`.
@@ -92,6 +94,7 @@
 | Wave2 | HubBuilding, BattleUnit, HeroCard, MailItem, ShopOfferCard |
 | Wave3 | Formation chrome+slots; Settings tabs; Map landscape+MapRegionButton; StageListItem; stage_card Theme |
 | Wave4 | Hero details chrome+tabs; Squad FormationSlot+HeroCard; Auth form Theme; settings account Theme buttons |
+| Wave5 | BattleResult ClaimProgress/Status; VIP + SocialHub off DemoScreenBuilder |
 
 ## 7. Критерии «экран модернизирован»
 
