@@ -1,13 +1,17 @@
-# Передача · UI-VISUAL wave10 quests
+# Передача · UI-VISUAL wave11 guild + пауза device
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-quests-guild-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-guild-d5fe`.
 
-**Сделано (пока владелец на APK):**
-- #29–#34 merged.
-- Quests + Expeditions — chrome + ListHost в `.tscn`.
+**Сделано (пока владелец на APK hang-fix #28):**
+- #29–#35 merged (wave5…quests).
+- Guild — chrome + Tabs/ListHost в `.tscn`.
 
-## Next
+## Стоп-линия для следующего ИИ
 
-1. Владелец: APK #28 hang-fix + smoke новых экранов (нужна свежая APK после wave5–10).
-2. Guild / Events chrome.
+Владелец тестирует APK. **Не плодить новые UI-волны** без его OK по входу (#28) и без свежей APK на wave5–11.
+
+## Next (после device OK)
+
+1. Свежая APK → smoke shell/mail/shop/AFK/summon/quests/guild.
+2. Events chrome.
 3. game_shell safe-area.
