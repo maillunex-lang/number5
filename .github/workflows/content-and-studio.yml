@@ -6,6 +6,7 @@ on:
     paths:
       - "content/**"
       - "admin-studio/**"
+      - "server/**"
       - "docs/**"
       - "tools/**"
       - ".github/workflows/content-and-studio.yml"
@@ -14,6 +15,7 @@ on:
     paths:
       - "content/**"
       - "admin-studio/**"
+      - "server/**"
       - "docs/**"
       - "tools/**"
       - ".github/workflows/content-and-studio.yml"
@@ -54,4 +56,30 @@ jobs:
             sleep 1
           done
           echo "API did not become ready"
+          exit 1
+
+  core-api-skeleton:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - run: go test ./...
+      - run: go build -o /tmp/lunex-api ./cmd/api
+      - name: Health + content/active smoke
+        run: |
+          CONTENT_PACKAGES_ROOT="$GITHUB_WORKSPACE/content/packages" HTTP_ADDR=127.0.0.1:8080 /tmp/lunex-api &
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -fsS http://127.0.0.1:8080/api/v1/health >/tmp/core-health.json; then
+              cat /tmp/core-health.json
+              curl -fsS http://127.0.0.1:8080/api/v1/content/active
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "CORE API did not become ready"
           exit 1

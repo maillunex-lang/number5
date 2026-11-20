@@ -8,14 +8,15 @@
 - `0.8.0` C5: skills + dialogs; `0.7.0` C4: 180 этапов.
 - UI: карточка героя → Навыки / Арт; хаб → реестр арта; этап → диалог → бой.
 - Admin Studio: `/economy`, `/meta` (M→V), `/catalog` + фильтр ассетов C6.
+- **TZ-A:** `docs/TZ_A_FOUNDATION.md` · скелет Go API `server/` (health + content/active).
 
 ## Сейчас нет / блокер
 
-- **CORE-01** — доступы + TZ-A.
+- **CORE-01** — реализация модулей (**блокер:** доступы PG/VPS).
 - **OTA-2** — HTTPS-хост.
 - **ART-05** — бинарные webp/атласы (слоты уже в `0.9.0`).
 
 ```bash
 tools/validate_content_package.sh 0.9.0
-python3 tools/generate_assets_c6_package.py
+cd server && go test ./... && go run ./cmd/api
 ```

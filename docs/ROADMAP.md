@@ -17,7 +17,7 @@
 | **CONTENT-C канон** (6 глав / 45 героев / бестиарий + meta) | **В репо** | `docs/content/*.md` |
 | **CONTENT-C вертикальный срез** | **В коде** (C0–C6, E/P/G, M→V) | active `0.9.0`, `docs/CONTENT_IMPLEMENTATION.md` |
 | HTTPS CDN / VPS (OTA-2) | Не развёрнуто | хост + `cdn_base` |
-| CORE-01 (Go + PostgreSQL + CI) | Не начато | этап A |
+| CORE-01 (Go + PostgreSQL + CI) | ТЗ готово (TZ-A); код — скелет `server/` | ждёт доступы PG/VPS |
 | Серверный бой / прогресс / платежи | Не начато | после AUTH/BATTLE |
 
 ## CONTENT-C — фазы (взаимосвязанные ID)
@@ -112,8 +112,8 @@ Claim/TTL серверные — после CORE-01.
 | OTA-1 | Hot-reload контента | **Готово (dev)** | PKG-PROTO | Save→Publish→клиент |
 | OTA-2 | Прод CDN (HTTPS) | Ожидает | OTA-1, хост | Телефоны с публичным URL |
 | CONTENT-C | Игровой контент C | **В работе** (C0–C3 ✓, E/P/G ✓, M→V ✓) | DOC-D | C4–C7, сервер claim |
-| TZ-A | ТЗ фундамента | Ожидает | CONTENT-C (минимум C3) | API/БД/протокол боя |
-| CORE-01 | Go + Postgres + CI | Ожидает | TZ-A, доступы | Сервисы изолированно |
+| TZ-A | ТЗ фундамента | **Готово** | CONTENT-C ✓ | `docs/TZ_A_FOUNDATION.md` |
+| CORE-01 | Go + Postgres + CI | Скелет | TZ-A ✓, **доступы** | `server/` · модули §4 |
 | UI-02 | UI Kit на реальных API | Частично | CORE-01 | Серверные данные |
 | APK-03 | Подписанный APK | Частично (debug) | CORE-01, UI-02 | Целевой Android |
 | AUTH-04 | Email/гость/профиль | Ожидает | CORE-01 | Сохранение прогресса |
@@ -140,16 +140,15 @@ Claim/TTL серверные — после CORE-01.
 | пакет **0.7.0** | C4: CH01–CH06 ×30 + loot/encounters | Сохранён |
 | пакет **0.8.0** | C5: skills + dialogs | Сохранён |
 | пакет **0.9.0** | C6: art registry + media/ | **Активный** (`active.json`) |
-| v0.1 Alpha | Расширенный MVP | Дальше: ART-05 / C7 → TZ-A → CORE-01 |
+| v0.1 Alpha | Расширенный MVP | Дальше: CORE-01 (доступы) / ART-05 / OTA-2 |
 
 ## Ближайший рабочий порядок
 
-1. **CORE-01** — серверный wallet / claim / TTL почты (**блокер:** доступы + TZ-A).
+1. **CORE-01** — wallet / battle / claim по TZ-A (**блокер:** доступы PG/VPS).
 2. **ART-05** — бинарные webp/атласы в слоты `0.9.0`.
 3. **OTA-2** — HTTPS CDN (**блокер:** хост).
-4. Admin Studio editors для meta/economy — **готово** (`/economy`, `/meta`, `/catalog`).
 
-Готово: C4 · C5 · C6 · Studio economy/meta/catalog · UI инвентаря/экспедиций/навыков/диалогов/арт-реестра.
+Готово: C4 · C5 · C6 · Studio economy/meta/catalog · **TZ-A** · скелет `server/`.
 
 ## Тестовые ворота
 
