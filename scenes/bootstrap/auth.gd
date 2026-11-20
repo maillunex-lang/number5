@@ -1,5 +1,5 @@
 extends Control
-## AUTH: chrome + form в .tscn (Theme GamePanel/GoldButton/GameButton); parallax + API в скрипте.
+## AUTH: chrome + form в .tscn; loading overlay на sync; parallax + API в скрипте.
 
 @onready var _status: Label = $Safe/Layout/Card/CardMargin/VBox/Status
 @onready var _guest_btn: Button = $Safe/Layout/Card/CardMargin/VBox/GuestBtn
@@ -12,11 +12,16 @@ extends Control
 @onready var _tab_login: Button = $Safe/Layout/Card/CardMargin/VBox/Tabs/TabLogin
 @onready var _tab_signup: Button = $Safe/Layout/Card/CardMargin/VBox/Tabs/TabSignup
 @onready var _server_chip: Label = $Safe/Layout/ServerChip
+@onready var _loading: ColorRect = $LoadingOverlay
+@onready var _loading_title: Label = $LoadingOverlay/LoadingCard/Pad/Col/LoadingTitle
+@onready var _loading_hint: Label = $LoadingOverlay/LoadingCard/Pad/Col/LoadingHint
+@onready var _loading_bar: ProgressBar = $LoadingOverlay/LoadingCard/Pad/Col/LoadingBar
 
 var _checking: HTTPRequest
 var _restore_checked := false
 var _bg_offset := Vector2.ZERO
 var _tab_register := false
+var _load_tween: Tween = null
 
 func _ready() -> void:
 	_guest_btn.disabled = true
@@ -34,8 +39,16 @@ func _ready() -> void:
 	resized.connect(_adapt_layout)
 	_adapt_layout()
 	set_process(true)
+	if not ApiClient.sync_progress.is_connected(_on_sync_progress):
+		ApiClient.sync_progress.connect(_on_sync_progress)
+	var has_token := ApiClient.has_saved_token()
+	if has_token:
+		_server_chip.text = "● Восстановление сессии…"
+		_show_loading("С возвращением", "Восстанавливаем игровую сессию…")
 	_try_restore()
-	_check_server()
+	# Health only when there is no saved session (avoids racing restore status).
+	if not has_token:
+		_check_server()
 
 func _adapt_layout() -> void:
 	if not is_inside_tree():
@@ -86,6 +99,28 @@ func _process(delta: float) -> void:
 	_bg_texture.offset_right = overscan + _bg_offset.x
 	_bg_texture.offset_bottom = overscan + _bg_offset.y
 
+func _show_loading(title: String, hint: String) -> void:
+	_loading.visible = true
+	_loading_title.text = title
+	_loading_hint.text = hint
+	_loading_bar.value = 0.15
+	if _load_tween != null and is_instance_valid(_load_tween):
+		_load_tween.kill()
+	_load_tween = create_tween().set_loops()
+	_load_tween.tween_property(_loading_bar, "value", 0.85, 1.1)
+	_load_tween.tween_property(_loading_bar, "value", 0.2, 1.1)
+
+func _hide_loading() -> void:
+	if _load_tween != null and is_instance_valid(_load_tween):
+		_load_tween.kill()
+		_load_tween = null
+	_loading.visible = false
+
+func _on_sync_progress(step: String) -> void:
+	if _loading.visible:
+		_loading_hint.text = step
+	_status.text = step
+
 func _try_restore() -> void:
 	_status.text = "Восстанавливаем игровую сессию..."
 	var ok := await ApiClient.restore_session()
@@ -93,38 +128,48 @@ func _try_restore() -> void:
 		return
 	_restore_checked = true
 	_guest_btn.disabled = false
+	_hide_loading()
 	if not ok:
-		_status.text = "Выбери способ входа. Сервер проверяется..."
-	if ok:
-		AppState.session_active = true
-		ScreenRouter.enter_game_shell()
+		_status.text = "Выбери способ входа"
+		_server_chip.text = "● Готов к входу"
+		_check_server()
+		return
+	AppState.session_active = true
+	ScreenRouter.enter_game_shell()
 
 func _credentials(register_new: bool) -> void:
 	if not _restore_checked:
 		return
 	_login.disabled = true
 	_register.disabled = true
+	_guest_btn.disabled = true
+	_show_loading("Вход в аккаунт", "Подключаемся к игровому серверу…")
 	_status.text = "Подключаемся к игровому серверу..."
 	var ok := await ApiClient.credentials_login(_email.text.strip_edges(), _password.text, register_new)
 	if not is_inside_tree():
 		return
 	_login.disabled = false
 	_register.disabled = false
+	_guest_btn.disabled = false
 	_password.clear()
 	if not ok:
+		_hide_loading()
 		_status.text = "Ошибка входа или регистрации. Проверь email и пароль."
 		return
 	if not _remember.button_pressed:
 		ApiClient.forget_saved_session()
 	AppState.session_active = true
 	AppState.is_guest = false
+	_hide_loading()
 	ScreenRouter.enter_game_shell()
 
 func _check_server() -> void:
-	_status.text = "Проверяем подключение к серверу..."
+	_server_chip.text = "● Проверяем сервер..."
 	var err := _checking.request(ApiClient.base_url + "/api/v1/health")
 	if err != OK:
-		_status.text = "Сервер недоступен · повтори подключение"
+		_server_chip.text = "● Сервер недоступен"
+		if _restore_checked:
+			_status.text = "Сервер недоступен · повтори подключение"
 		return
 	var response: Array = await _checking.request_completed
 	if not is_inside_tree():
@@ -133,27 +178,33 @@ func _check_server() -> void:
 	if valid:
 		var data: Variant = JSON.parse_string((response[3] as PackedByteArray).get_string_from_utf8())
 		valid = typeof(data) == TYPE_DICTIONARY and data.get("ok", false) == true and data.get("db", false) == true
-	if not _restore_checked:
-		return
 	_server_chip.text = "● Сервер онлайн" if valid else "● Сервер недоступен"
 	_server_chip.add_theme_color_override("font_color", Color(0.35, 1, 0.55) if valid else Color(1, 0.5, 0.43))
-	_status.text = "Подключение доступно" if valid else "Проверь соединение и повтори вход"
+	if _restore_checked and not _loading.visible:
+		_status.text = "Подключение доступно" if valid else "Проверь соединение и повтори вход"
 
 func _on_guest() -> void:
 	if not _restore_checked:
 		return
 	_guest_btn.disabled = true
+	_login.disabled = true
+	_register.disabled = true
+	_show_loading("Гостевой вход", "Создаём игровую сессию…")
 	_status.text = "Создаём игровую сессию..."
 	var ok := await ApiClient.guest_login()
 	if not is_inside_tree():
 		return
 	_guest_btn.disabled = false
+	_login.disabled = false
+	_register.disabled = false
 	if not ok:
+		_hide_loading()
 		_status.text = "Не удалось подключиться · попробуй снова"
 		NotificationManager.warn("Онлайн-вход недоступен")
 		return
 	AppState.enter_as_guest(AppState.display_name)
 	NotificationManager.success("Подключено к игровому серверу")
+	_hide_loading()
 	ScreenRouter.enter_game_shell()
 
 func _on_settings() -> void:

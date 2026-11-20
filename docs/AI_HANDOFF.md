@@ -1,13 +1,15 @@
-# Передача · device OK + wave4 merged
+# Передача · UX loading + faster sync/claim
 
-Срез 20 ноября 2026. `main` @ merge #25 (UI wave4).
+Срез 20 ноября 2026. Ветка: `cursor/ux-loading-claim-feedback-d5fe`.
 
-**Владелец на APK:** H6 / AUTH-04 / ART-05 / MAP-01 / replay-farm — **OK**.
+**Проблема:** вход ~5с (6 serial HTTP); после боя ~3с claim+wallet+campaign с пустым экраном.
 
-**Код:** wave4 влит (HeroDetails, SquadManager, Auth Theme). Нужен следующий VPS APK для device-проверки wave4 chrome.
+**Сделано:**
+- `sync_player` — параллельные GET (`_parallel_authed_gets`); heartbeat после входа.
+- Auth: LoadingOverlay + progress; health не гоняет restore.
+- Battle result: награды сразу после claim; wallet/campaign в фоне; progress bar на ожидании claim.
 
 ## Next
 
-1. VPS APK после #25 → владелец: auth / HERO-01 / HERO-02.
-2. Wave5: `battle_result` chrome, DemoScreenBuilder features, TopBar/BottomNav.
-3. Опционально: серверный power/formation mutate API.
+1. Merge → APK → проверить вход и экран победы.
+2. Wave5 UI / optional bootstrap API bundle.
