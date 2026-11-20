@@ -211,4 +211,4 @@ content_bindings(account_id PK, package_version, schema)
 - OTA: `docs/CONTENT_OTA.md`  
 - Канон API деталей: `docs/content/*.md`
 
-**Следующий шаг:** проверить миграции профиля и авторизации на пустой PostgreSQL.
+**Следующий шаг:** проверить полный сценарий на физическом Android.

@@ -2,7 +2,7 @@
 
 Спека: [`docs/TZ_A_FOUNDATION.md`](../docs/TZ_A_FOUNDATION.md).
 
-**Store:** memory по умолчанию; Postgres при `DATABASE_URL` (`internal/store/postgres` + `migrations/0001_init.sql`).
+**Store:** memory по умолчанию; Postgres при `DATABASE_URL` (`internal/store/postgres` + `migrations/*.sql`).
 
 | Метод | Путь |
 |---|---|
@@ -28,3 +28,7 @@ CONTENT_PACKAGES_ROOT=../content/packages APP_ENV=dev go run ./cmd/api
 ```
 
 Клиент Godot: `ApiClient` → `LUNEX_API_BASE` или `https://rikagro.ru/afkgame`.
+
+Встроенные SQL-файлы выполняются в порядке имён при старте API. Журнал lunex_schema_migrations хранит применённые версии. Приложение сериализует параллельные старты через транзакционную блокировку PostgreSQL. Для следующего изменения схемы добавьте новый файл с четырёхзначным числовым префиксом.
+
+GitHub Actions запускает postgres-startup на пустой PostgreSQL 16. Для локальной проверки соберите API и передайте путь к бинарнику в tools/check_postgres_startup.py с DATABASE_URL отдельной тестовой БД.

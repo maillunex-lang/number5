@@ -45,7 +45,7 @@ cd server && go test ./... && go run ./cmd/api
 
 ## Публикация
 
-Android 0.5.5 доступен на [странице игры](https://rikagro.ru/afkgame/). Публичный Web отключён. Приоритеты — физический Android, миграции PostgreSQL и атомарность экономики. [Дорожная карта](docs/ROADMAP.md)
+Android 0.5.5 доступен на [странице игры](https://rikagro.ru/afkgame/). Публичный Web отключён. Приоритеты — физический Android и атомарность экономики. [Дорожная карта](docs/ROADMAP.md)
 
 ## Лицензии
 

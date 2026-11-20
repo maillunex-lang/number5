@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
-	"path/filepath"
 	"time"
+
+	"github.com/maillunex-lang/number5/server/migrations"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -48,18 +48,8 @@ func (s *Store) Close() {
 	}
 }
 
-func (s *Store) Migrate(ctx context.Context, migrationsPath string) error {
-	raw, err := os.ReadFile(migrationsPath)
-	if err != nil {
-		// try relative to module
-		alt := filepath.Join("migrations", "0001_init.sql")
-		raw, err = os.ReadFile(alt)
-		if err != nil {
-			return err
-		}
-	}
-	_, err = s.pool.Exec(ctx, string(raw))
-	return err
+func (s *Store) Migrate(ctx context.Context) error {
+	return migrations.Apply(ctx, s.pool)
 }
 
 func (s *Store) now() time.Time {
