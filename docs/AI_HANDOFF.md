@@ -1,17 +1,16 @@
 # AI_HANDOFF — сводка для следующего ИИ
 
 **Обновлять вручную** после каждого значимого PR (см. `AI_WORKFLOW.md`).  
-Последнее обновление: **2026-11-20** · ветка `cursor/audit-repository-master-9d0b` · PR [#5](https://github.com/maillunex-lang/number5/pull/5) (до merge в main).
+Последнее обновление: **2026-11-20** · `main` @ `5f6f754` (merge PR #5 master audit).
 
 ## Текущий этап
 
-Документационный **master audit** после CORE-01 memory + UI-02.  
-Игровой контент C0–C6 в пакете **`0.9.0`**. Онлайн-прототип на memory API.
+Master audit **закрыт и в main**. Игровой контент C0–C6 в пакете **`0.9.0`**. Онлайн-прототип на memory API. Ждём следующую команду пользователя на код (рекомендация: H5 → logout → H6).
 
 ## Последний проверенный коммит main
 
-`main` @ `572c27d` — merge PR #4 (UI-02 + postgres adapter stub).  
-Аудит-доки — tip ветки PR #5 (этот аудит).
+`5f6f754` — Merge pull request #5 (docs master audit H1–H6 locked).  
+До аудита: `572c27d` — PR #4 (UI-02 + postgres adapter stub).
 
 ## Что действительно готово
 
@@ -19,6 +18,7 @@
 - CORE-01 memory API (guest…store) + CI smoke  
 - ApiClient wiring: summon, AFK, shop, mail, battle claim  
 - Postgres **код** adapter  
+- AGENTS / AI_WORKFLOW / TECH_DEBT / QUALITY_GATES / AUDIT_REPORT  
 
 ## В работе / PARTIAL
 
@@ -39,10 +39,10 @@
 
 | ID | Решение |
 |---|---|
-| H1 | 4 вкладки — канон UI; GDD исправлен |
+| H1 | 4 вкладки — канон UI |
 | H2 | Шапки `docs/content/*` = статус внедрения |
-| H3 | ARCHITECTURE/STRUCTURE/PROTOTYPE актуализировать |
-| H4 | prod → только Postgres, без memory fallback (**код отдельной задачей**) |
+| H3 | ARCHITECTURE/STRUCTURE/PROTOTYPE актуализированы |
+| H4 | prod → только Postgres (**код отдельной задачей**) |
 | H5 | grant/confirm-test только `APP_ENV=test` (**код отдельной задачей**) |
 | H6 | server timeline → playback → single claim (**код отдельной задачей**) |
 
@@ -53,23 +53,22 @@
 3. `docs/ROADMAP.md`  
 4. этот `AI_HANDOFF.md`  
 5. `docs/TECH_DEBT.md` (TD-*)  
-6. При сервере: `docs/TZ_A_FOUNDATION.md` + `server/internal/httpapi/mux.go`  
-7. При контенте: `docs/CONTENT_IMPLEMENTATION.md` + `content/packages/0.9.0/`  
+6. Сервер: `docs/TZ_A_FOUNDATION.md` + `server/internal/httpapi/mux.go`  
+7. Контент: `docs/CONTENT_IMPLEMENTATION.md` + `content/packages/0.9.0/`  
 
 ## Тесты перед работой
 
 ```bash
-tools/validate_content_package.sh 0.9.0
-python3 tools/check_repo_refs.py
-cd server && go test ./...
+tools/verify_project.sh
 ```
 
 ## Рекомендуемые следующие задачи
 
 1. `CORE-SEC-TESTONLY` (H5) — без инфра  
-2. `UI-LOGOUT-CLEAR` + health probe  
-3. `CORE-PG-DEPLOY` / `CORE-PG-FAILCLOSED` (H4) на изолированной БД  
-4. `BATTLE-SERVER-PIPELINE` (H6)  
+2. `UI-LOGOUT-CLEAR` (+ health probe)  
+3. `BATTLE-SERVER-PIPELINE` (H6)  
+4. `CORE-PG-DEPLOY` / `CORE-PG-FAILCLOSED` (H4) — когда есть изолированная БД  
 5. `ATOMIC-ECONOMY`  
 
-Не начинать гильдии/ивенты server, пока нет PG + H4/H6.
+Не начинать гильдии/ивенты server, пока нет PG + H4/H6.  
+Не повторять полный аудит без причины.

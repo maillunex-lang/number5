@@ -2,11 +2,11 @@
 
 **Дата:** 2026-11-20  
 **Репо:** `maillunex-lang/number5`  
-**База main:** `572c27d`  
-**Ветка аудита:** `cursor/audit-repository-master-9d0b`  
+**База main до аудита:** `572c27d`  
+**Merged:** PR [#5](https://github.com/maillunex-lang/number5/pull/5) → `main` @ `5f6f754`  
 **Решения PO:** H1–H6 = **A**
 
-Полный READ-ONLY проход (этапы 1–5) выполнен до правок; этапы 6–13 — документация и реестры в этой ветке. Код H4/H5/H6 **не** внедрялся.
+Полный READ-ONLY проход (этапы 1–5) выполнен до правок; этапы 6–13 — документация и реестры (merged). Код H4/H5/H6 **не** внедрялся.
 
 ---
 
@@ -67,18 +67,18 @@
 
 H1–H6 утверждены. Дальнейший код H4/H5/H6 — отдельные PR.
 
-## I. Топ-10 next
+## I. Топ-10 next (после merge #5)
 
-1. Merge audit PR  
-2. H5 test-only endpoints  
-3. UI logout clear + health  
+1. H5 test-only endpoints  
+2. UI logout clear + health  
+3. H6 battle pipeline  
 4. Lunex isolated PG deploy  
 5. H4 fail-closed  
-6. H6 battle pipeline  
-7. Atomic economy TX  
-8. UI sync heroes/campaign  
-9. ART-05  
-10. OTA-2  
+6. Atomic economy TX  
+7. UI sync heroes/campaign  
+8. ART-05  
+9. OTA-2  
+10. AUTH-04 email  
 
 ## J. Следующий ИИ
 

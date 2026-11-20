@@ -43,11 +43,11 @@ cd server && go test ./... && go run ./cmd/api
 
 Утверждено: в **prod** memory fallback запрещён (H4); test-grant только `APP_ENV=test` (H5) — см. TECH_DEBT.
 
-## Блокеры
+## Блокеры / next
 
-1. Изолированный Lunex Postgres (+ CDN HTTPS). VPS есть; БД Nexus AI **не** использовать.  
-2. ART-05 бинарный арт.  
-3. H6 server battle pipeline (пока local sim ≠ авторитет).
+Блокеры: изолированный Lunex Postgres · CDN HTTPS · ART-05.  
+Без инфра: **H5** → logout clear → **H6** (см. `docs/ROADMAP.md`).  
+H4/H5/H6 утверждены; код ещё не внедрён.
 
 ## Лицензии
 
