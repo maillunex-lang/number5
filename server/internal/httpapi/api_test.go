@@ -33,12 +33,15 @@ func packagesRoot(t *testing.T) string {
 
 func setup(t *testing.T) http.Handler {
 	t.Helper()
-	root := packagesRoot(t)
+	return setupWithStore(t, packagesRoot(t), store.NewMemory(nil))
+}
+
+func setupWithStore(t *testing.T, root string, mem *store.Memory) http.Handler {
+	t.Helper()
 	cat, err := content.LoadCatalog(root)
 	if err != nil {
 		t.Fatal(err)
 	}
-	mem := store.NewMemory(nil)
 	return httpapi.NewMux(httpapi.Deps{
 		Config:   config.Config{AppEnv: "test", ContentPackagesRoot: root},
 		Store:    mem,

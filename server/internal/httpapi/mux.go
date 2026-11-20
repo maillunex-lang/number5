@@ -68,7 +68,7 @@ func NewMux(d Deps) http.Handler {
 		writeJSON(w, http.StatusOK, res)
 	})
 
-	// Credential endpoints are available only when the persistent PostgreSQL adapter is active.
+	// Credential endpoints: Memory (dev/test) and Postgres (prod) both implement Register/Login/Link.
 	mux.HandleFunc("POST /api/v1/auth/register", func(w http.ResponseWriter, r *http.Request) {
 		var p struct {
 			Email    string `json:"email"`
@@ -90,7 +90,7 @@ func NewMux(d Deps) http.Handler {
 			writeErr(w, 409, "registration_failed", "Account could not be created")
 			return
 		}
-		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false})
+		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false, "email": acc.Email})
 	})
 	mux.HandleFunc("POST /api/v1/auth/login", func(w http.ResponseWriter, r *http.Request) {
 		var p struct {
@@ -113,7 +113,7 @@ func NewMux(d Deps) http.Handler {
 			writeErr(w, 401, "invalid_credentials", "Invalid email or password")
 			return
 		}
-		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false})
+		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false, "email": acc.Email})
 	})
 	mux.HandleFunc("POST /api/v1/auth/link", func(w http.ResponseWriter, r *http.Request) {
 		acc, ok := requireAuth(w, r, d.Auth)
@@ -143,7 +143,24 @@ func NewMux(d Deps) http.Handler {
 			writeErr(w, 409, "link_failed", "Email already used or link unavailable")
 			return
 		}
-		writeJSON(w, 200, map[string]any{"ok": true, "is_guest": false})
+		email := strings.ToLower(strings.TrimSpace(p.Email))
+		writeJSON(w, 200, map[string]any{"ok": true, "is_guest": false, "email": email})
+	})
+	mux.HandleFunc("POST /api/v1/auth/logout", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		_ = acc
+		token := ""
+		h := r.Header.Get("Authorization")
+		if len(h) >= 7 && strings.EqualFold(h[:7], "bearer ") {
+			token = strings.TrimSpace(h[7:])
+		}
+		if rev, ok := d.Store.(interface{ RevokeSession(string) error }); ok && token != "" {
+			_ = rev.RevokeSession(token)
+		}
+		writeJSON(w, 200, map[string]any{"ok": true})
 	})
 	mux.HandleFunc("GET /api/v1/auth/me", func(w http.ResponseWriter, r *http.Request) {
 		acc, ok := requireAuth(w, r, d.Auth)

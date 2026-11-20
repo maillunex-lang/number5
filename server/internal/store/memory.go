@@ -14,6 +14,7 @@ type Memory struct {
 	mu         sync.Mutex
 	accounts   map[domain.AccountID]domain.Account
 	sessions   map[string]domain.Session
+	passwords  map[domain.AccountID]string
 	wallet     map[domain.AccountID]map[string]domain.Balance
 	ledger     []domain.LedgerEntry
 	idem       map[string]domain.IdempotencyRecord
@@ -36,6 +37,7 @@ func NewMemory(starter []domain.Balance) *Memory {
 	return &Memory{
 		accounts:   map[domain.AccountID]domain.Account{},
 		sessions:   map[string]domain.Session{},
+		passwords:  map[domain.AccountID]string{},
 		wallet:     map[domain.AccountID]map[string]domain.Balance{},
 		idem:       map[string]domain.IdempotencyRecord{},
 		heroes:     map[domain.AccountID]map[string]domain.HeroOwned{},

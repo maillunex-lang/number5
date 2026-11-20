@@ -129,14 +129,35 @@ func _rebuild() -> void:
 			body.add_child(_label("Игрок: " + AppState.display_name, 23))
 			body.add_child(_label("Тип: " + ("Гостевой" if AppState.is_guest else "Зарегистрированный"), 21))
 			body.add_child(_label("Email: " + (AppState.email_hint if AppState.email_hint != "" else ("Не привязан" if AppState.is_guest else "Не получен от сервера")), 21))
+			if AppState.is_guest:
+				body.add_child(_label("Привязать email — прогресс гостя сохранится", 20, GOLD))
+				var email := LineEdit.new()
+				email.placeholder_text = "email@example.com"
+				email.custom_minimum_size.y = 56
+				email.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				body.add_child(email)
+				var pass := LineEdit.new()
+				pass.placeholder_text = "Пароль (от 10 символов)"
+				pass.secret = true
+				pass.custom_minimum_size.y = 56
+				pass.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				body.add_child(pass)
+				var link := _button("Привязать аккаунт")
+				link.pressed.connect(func():
+					link.disabled = true
+					var ok := await ApiClient.link_guest(email.text.strip_edges(), pass.text)
+					link.disabled = false
+					pass.clear()
+					if ok:
+						NotificationManager.success("Аккаунт привязан")
+						_rebuild()
+					else:
+						NotificationManager.warn("Не удалось привязать · проверь email/пароль")
+				)
+				body.add_child(link)
 			var logout := _button("Выйти из аккаунта")
 			logout.pressed.connect(func():
-				ModalManager.push_confirm("Выйти из аккаунта?", "Вернуться на экран входа.", func():
-					ApiClient.clear_session()
-					ApiClient.forget_saved_session()
-					AppState.logout()
-					get_tree().change_scene_to_file("res://scenes/bootstrap/auth.tscn")
-				)
+				ModalManager.push_confirm("Выйти из аккаунта?", "Вернуться на экран входа. Сессия на сервере будет отозвана.", _logout_confirmed)
 			)
 			body.add_child(logout)
 		"general":
@@ -205,6 +226,11 @@ func _build_graphics(body: VBoxContainer) -> void:
 		_rebuild()
 	)
 	actions.add_child(apply)
+
+func _logout_confirmed() -> void:
+	await ApiClient.logout_remote()
+	AppState.logout()
+	get_tree().change_scene_to_file("res://scenes/bootstrap/auth.tscn")
 
 func _select_tab(tab_name: String) -> void:
 	if tab_name == _tab:
