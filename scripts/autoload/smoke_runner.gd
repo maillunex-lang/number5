@@ -59,7 +59,23 @@ func _run() -> void:
 	await ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(0.4).timeout
 	await _maybe_shot("04_battle_prep")
-	await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
+	# H6: when online, start a real battle so COMBAT-02 plays server timeline.
+	if ApiClient.online:
+		var start := await ApiClient.battle_start(stage_id, "smoke-h6-%s" % stage_id)
+		if start.get("ok", false):
+			var data: Dictionary = start.get("data", {})
+			await ScreenRouter.go("COMBAT-02", {
+				"stage_id": stage_id,
+				"mode": "campaign",
+				"battle_id": str(data.get("battle_id", "")),
+				"timeline": data.get("timeline", []),
+				"server_victory": bool(data.get("victory", false)),
+			})
+		else:
+			print("SMOKE: online battle_start failed, DEMO playback")
+			await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
+	else:
+		await ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": "campaign"})
 	await get_tree().create_timer(4.0).timeout
 	ThemeManager.apply_preset("low")
 	ThemeManager.apply_preset("high")

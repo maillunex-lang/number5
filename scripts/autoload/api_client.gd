@@ -280,8 +280,9 @@ func battle_get(battle_id: String) -> Dictionary:
 	return await _authed("GET", "/api/v1/battle/%s" % battle_id)
 
 func battle_claim(battle_id: String, idem: String = "") -> Dictionary:
+	# Stable per battle so a lost response can be safely replayed (H6 device verify).
 	if idem == "":
-		idem = new_idem("bcl")
+		idem = "claim:%s" % battle_id
 	return await _authed("POST", "/api/v1/battle/%s/claim" % battle_id, {
 		"idempotency_key": idem,
 	})

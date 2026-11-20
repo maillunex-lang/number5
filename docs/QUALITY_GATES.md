@@ -51,6 +51,7 @@ godot --headless --path . --quit-after 2
 3. grant/confirm-test недоступны вне APP_ENV=test.
 4. `/health` → store=postgres.  
 5. Идемпотентность claim/summon проверена.  
+6. Опционально: `tools/h6_verify_api.sh <API_BASE>` (start→GET→claim→replay).  
 
 ## Stop-the-line
 

@@ -1,18 +1,19 @@
-# Передача проекта · ATOMIC-ECONOMY
+# Передача проекта · H6 device verify
 
-Срез от 20 ноября 2026. Ветка: `cursor/atomic-economy-td-pg-race-d5fe`.
+Срез от 20 ноября 2026. Ветка: `cursor/h6-device-verify-prep-d5fe`.
 
-**Сделано:**
+**Сделано в коде (prep):**
 
-- `store.Run` / `RunAtomic` — мутации экономики в одной TX (PG) или с rollback snapshot (Memory)
-- Battle claim, AFK claim, mail claim, shop confirm, summon roll — через Atomic Ops
-- PG `ApplyLedger`: advisory lock + `FOR UPDATE` на `wallet_balances` (TD-PG-RACE)
-- Тесты: memory atomic/rollback/concurrent; PG tests при `DATABASE_URL` (CI postgres-startup)
-- VPS deploy после FIX-GODOT-DEPLOY-002 подтверждён владельцем
+- Стабильный claim idempotency: `claim:{battle_id}` в `ApiClient.battle_claim` (replay после обрыва сети)
+- API-тесты: GET reconnect timeline, claim replay + stage advance
+- `docs/H6_DEVICE_VERIFY.md` + `tools/h6_verify_api.sh`
+- Smoke: online → `battle_start` + COMBAT-02 с server timeline
 
-## Next (P1)
+**Владельцу:** пройти чеклист в `docs/H6_DEVICE_VERIFY.md` на свежем APK и написать **H6 device OK**.
 
-1. **H6 device verify** на свежем APK.
-2. AUTH-04 / UI-SYNC-HEROES; ART-05.
-3. Visual wave3: formation / settings / map nodes.
-4. Опционально: `mail ClaimAll` тоже через `RunAtomic` (сейчас SaveMail до ledger).
+## Next после device OK
+
+1. AUTH-04 / UI-SYNC-HEROES  
+2. ART-05  
+3. mail ClaimAll → RunAtomic (остаток TD-ATOMIC)  
+4. Visual wave3  

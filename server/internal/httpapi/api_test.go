@@ -130,12 +130,40 @@ func TestFullLoopBattleSummonAfkMail(t *testing.T) {
 		t.Fatalf("timeline end missing: %#v", last)
 	}
 	bid, _ := bat["battle_id"].(string)
-	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"bc1"}`))
+
+	// H6 reconnect: GET battle returns the same timeline as start.
+	rr = authH(http.MethodGet, "/api/v1/battle/"+bid, nil)
+	if rr.Code != 200 {
+		t.Fatalf("battle get %d %s", rr.Code, rr.Body.String())
+	}
+	var got map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &got)
+	gotTL, _ := got["timeline"].([]any)
+	if len(gotTL) != len(tl) {
+		t.Fatalf("reconnect timeline len %d want %d", len(gotTL), len(tl))
+	}
+	if got["battle_id"] != bid || got["victory"] != true {
+		t.Fatalf("reconnect payload %#v", got)
+	}
+
+	rr = authH(http.MethodGet, "/api/v1/wallet", nil)
+	if rr.Code != 200 {
+		t.Fatalf("wallet before claim %d", rr.Code)
+	}
+	var walletBefore map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &walletBefore)
+
+	claimKey := "claim:" + bid
+	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"`+claimKey+`"}`))
 	if rr.Code != 200 {
 		t.Fatalf("claim %d %s", rr.Code, rr.Body.String())
 	}
+	var claim1 map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &claim1)
+	rewards1, _ := claim1["rewards"].(map[string]any)
+
 	// Replayed claim with same idempotency key must succeed and mark replayed.
-	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"bc1"}`))
+	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"`+claimKey+`"}`))
 	if rr.Code != 200 {
 		t.Fatalf("claim replay %d %s", rr.Code, rr.Body.String())
 	}
@@ -143,6 +171,25 @@ func TestFullLoopBattleSummonAfkMail(t *testing.T) {
 	_ = json.Unmarshal(rr.Body.Bytes(), &claimReplay)
 	if claimReplay["replayed"] != true {
 		t.Fatalf("expected replayed claim, got %#v", claimReplay)
+	}
+	rewards2, _ := claimReplay["rewards"].(map[string]any)
+	if len(rewards2) != len(rewards1) {
+		t.Fatalf("replay rewards mismatch %#v vs %#v", rewards2, rewards1)
+	}
+
+	rr = authH(http.MethodGet, "/api/v1/campaign/progress", nil)
+	if rr.Code != 200 {
+		t.Fatalf("campaign after claim %d", rr.Code)
+	}
+	var prog map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &prog)
+	if prog["current_stage"] == "CH01-01" {
+		t.Fatalf("expected stage advance after first clear, got %#v", prog["current_stage"])
+	}
+
+	rr = authH(http.MethodGet, "/api/v1/wallet", nil)
+	if rr.Code != 200 {
+		t.Fatalf("wallet after claim %d", rr.Code)
 	}
 
 	rr = authH(http.MethodPost, "/api/v1/summon/roll", []byte(`{"banner_id":"standard","count":1,"idempotency_key":"s1"}`))
