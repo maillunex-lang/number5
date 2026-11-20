@@ -3,13 +3,6 @@ name: content-and-studio
 on:
   push:
     branches: [main]
-    paths:
-      - "content/**"
-      - "admin-studio/**"
-      - "server/**"
-      - "docs/**"
-      - "tools/**"
-      - ".github/workflows/content-and-studio.yml"
   pull_request:
     branches: [main]
     paths:

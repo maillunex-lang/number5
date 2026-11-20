@@ -1,0 +1,9 @@
+[Unit]
+Description=Deploy tested Lunex AFK main on this VPS
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/lunex-afk/deploy-vps.sh
+TimeoutStartSec=15min

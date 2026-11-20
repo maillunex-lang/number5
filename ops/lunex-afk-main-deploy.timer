@@ -1,0 +1,10 @@
+[Unit]
+Description=Check for a tested Lunex AFK main commit
+
+[Timer]
+OnBootSec=30s
+OnUnitInactiveSec=60s
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target
