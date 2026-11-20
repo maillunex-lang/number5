@@ -27,14 +27,27 @@ signal selected(hero_id: String)
 @onready var _name: Label = $Pad/Col/Name
 @onready var _power: Label = $Pad/Col/Power
 @onready var _portrait: ColorRect = $Pad/Col/Portrait
+var _face: TextureRect = null
 
 func _ready() -> void:
 	theme_type_variation = &"GamePanel"
 	custom_minimum_size = card_size
+	_ensure_face()
 	_apply_preview()
 	gui_input.connect(_on_gui)
 	if not Engine.is_editor_hint():
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+func _ensure_face() -> void:
+	if _face != null or _portrait == null:
+		return
+	_face = TextureRect.new()
+	_face.name = "Face"
+	_face.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_face.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_portrait.add_child(_face)
 
 func set_hero(data: Dictionary) -> void:
 	hero_id = str(data.get("id", hero_id))
@@ -46,12 +59,18 @@ func set_hero(data: Dictionary) -> void:
 	_apply_preview()
 
 func _apply_preview() -> void:
+	_ensure_face()
 	if _name:
 		_name.text = display_name
 	if _power:
 		_power.text = "Сила %s" % power_text
+	var tex: Texture2D = null
+	if not Engine.is_editor_hint() and hero_id != "":
+		tex = AssetLoader.hero_portrait(hero_id)
+	if _face:
+		_face.texture = tex
 	if _portrait:
-		_portrait.color = Color(tint.r * 0.45, tint.g * 0.45, tint.b * 0.45, 1)
+		_portrait.color = Color(tint.r * 0.45, tint.g * 0.45, tint.b * 0.45, 1) if tex == null else Color(0.08, 0.1, 0.14, 1)
 
 func _on_gui(ev: InputEvent) -> void:
 	if Engine.is_editor_hint():

@@ -4,8 +4,7 @@
   "assets": {
     "portrait": "portrait.webp",
     "atlas": "atlas.webp",
-    "animations": "animations.json",
-    "ultimate_vfx": "ultimate_vfx.webp"
+    "animations": "animations.json"
   },
-  "status": "placeholder"
+  "status": "art05_placeholder"
 }

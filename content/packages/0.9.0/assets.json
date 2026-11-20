@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "disclaimer": "C6 DEMO · реестр слотов без бинарного арта; ART-05 подставляет webp/атласы",
+  "disclaimer": "ART-05 · placeholder webp portraits/atlases for heroes+rigs (procedural); replace with final art via Studio",
   "production_budget": {
     "rigs": 6,
     "enemy_skins": 12,
@@ -6526,5 +6526,15 @@
     "sfx.ui_confirm": "sfx_ui_confirm",
     "sfx.ui_back": "sfx_ui_back",
     "sfx.rift_pulse": "sfx_rift_pulse"
+  },
+  "art05": {
+    "generated": true,
+    "clips": [
+      "idle",
+      "attack",
+      "hit",
+      "death"
+    ],
+    "frame": 128
   }
 }

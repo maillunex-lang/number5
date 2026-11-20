@@ -1,11 +1,11 @@
-# Передача · UI-VISUAL wave3
+# Передача · ART-05 battle portraits/atlases
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave3-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/art-05-battle-portraits-d5fe`.
 
-**Сделано:** миграция chrome Formation / Settings / Map + шаблоны `FormationSlot`, `StageListItem`, `MapRegionButton`; preview «Formation / Map»; аудит/HOW_TO/STATUS.
+**Сделано:** `tools/generate_art05_placeholders.py` → media heroes/rigs webp (force-add в git); `AssetLoader` package textures; `BattleUnit` atlas clips; playback attack/hit/death; HUD + FormationSlot + HeroCard portraits; checklist `docs/ART_05_DEVICE_VERIFY.md`. Headless: H01 portrait+atlas + E01-01 enemy atlas/skin OK; Android export APK ~35MB с `.ctex` в assets. `ops/deploy-vps.sh` regenerate перед export.
 
 ## Next
 
-1. Владелец: H6 / AUTH-04 / farm-fix на устройстве после деплоя.
-2. Агент: ART-05 или wave4 (hero_details / squad_manager / auth form).
-3. Replay loot + daily cap — по явному приоритету.
+1. Merge → VPS APK → **ART-05 device OK** (`docs/ART_05_DEVICE_VERIFY.md`).
+2. Владелец: H6 / AUTH-04 device.
+3. Финальный арт Studio вместо placeholder; wave4 UI (hero_details / squad / auth).

@@ -8,7 +8,7 @@
 |---|---|---|
 | P1 | H6 — device verify | Чеклист `docs/H6_DEVICE_VERIFY.md` на свежем APK; API-контракт уже зелёный. Закрыть после «H6 device OK» от владельца |
 | P1 | AUTH-04 и UI-SYNC-HEROES | Код: Memory+PG register/login/link/logout, link_guest sync, settings bind; API tests + `docs/AUTH_04_DEVICE_VERIFY.md`. Закрыть после «AUTH-04 device OK» |
-| P1 | ART-05 | Проверить реальные портреты, атласы и анимации героев в боевой сцене на целевом устройстве |
+| P1 | ART-05 | Код: placeholder webp + BattleUnit atlas clips + HUD/HeroCard portraits; `docs/ART_05_DEVICE_VERIFY.md`. Закрыть после «ART-05 device OK» |
 
 ## Закрыто в этом срезе
 
@@ -24,6 +24,7 @@
 | AUTH-04 code | Memory+PG credentials, logout, link sync, device checklist | |
 | Battle replay farm | Повтор cleared-этапа без валюты (training until loot caps) | |
 | UI-VISUAL wave3 | Formation/Settings/Map chrome + FormationSlot/StageListItem/MapRegionButton | |
+| settings pass keyword | GDScript reserved `pass` → email_edit/password_edit; Godot Android export OK | |
 
 ## Реализовано и проверено
 
