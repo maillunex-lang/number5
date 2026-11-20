@@ -76,8 +76,6 @@ func _rebuild() -> void:
 
 	var to_heroes := UIFactory.fantasy_button("В коллекцию")
 	to_heroes.pressed.connect(func():
-		while ScreenRouter._shell and ScreenRouter._shell.has_overlay():
-			await ScreenRouter._shell.close_overlay()
 		ScreenRouter.switch_tab("heroes")
 	)
 	root.add_child(to_heroes)

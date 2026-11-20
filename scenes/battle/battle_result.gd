@@ -92,8 +92,7 @@ func _add_nav(root: VBoxContainer) -> void:
 	root.add_child(next)
 	var hub := UIFactory.fantasy_button("В хаб")
 	hub.pressed.connect(func():
-		while ScreenRouter._shell and ScreenRouter._shell.has_overlay():
-			await ScreenRouter._shell.close_overlay()
+		# switch_tab → show_tab.clear_overlays(): без пошагового rewind стека.
 		ScreenRouter.switch_tab("hub")
 	)
 	root.add_child(hub)
