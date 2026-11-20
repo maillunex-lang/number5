@@ -5,5 +5,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
+User=root
+SetLoginEnvironment=yes
 ExecStart=/opt/lunex-afk/deploy-vps.sh
 TimeoutStartSec=15min
