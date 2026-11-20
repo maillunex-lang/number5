@@ -121,23 +121,23 @@ func _rebuild_content() -> void:
 			_host.add_child(_label("Email: " + (AppState.email_hint if AppState.email_hint != "" else ("Не привязан" if AppState.is_guest else "Не получен от сервера")), 21))
 			if AppState.is_guest:
 				_host.add_child(_label("Привязать email — прогресс гостя сохранится", 20, GOLD))
-				var email := LineEdit.new()
-				email.placeholder_text = "email@example.com"
-				email.custom_minimum_size.y = 56
-				email.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				_host.add_child(email)
-				var pass := LineEdit.new()
-				pass.placeholder_text = "Пароль (от 10 символов)"
-				pass.secret = true
-				pass.custom_minimum_size.y = 56
-				pass.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				_host.add_child(pass)
+				var email_edit := LineEdit.new()
+				email_edit.placeholder_text = "email@example.com"
+				email_edit.custom_minimum_size.y = 56
+				email_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				_host.add_child(email_edit)
+				var password_edit := LineEdit.new()
+				password_edit.placeholder_text = "Пароль (от 10 символов)"
+				password_edit.secret = true
+				password_edit.custom_minimum_size.y = 56
+				password_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				_host.add_child(password_edit)
 				var link := _button("Привязать аккаунт")
 				link.pressed.connect(func():
 					link.disabled = true
-					var ok := await ApiClient.link_guest(email.text.strip_edges(), pass.text)
+					var ok := await ApiClient.link_guest(email_edit.text.strip_edges(), password_edit.text)
 					link.disabled = false
-					pass.clear()
+					password_edit.clear()
 					if ok:
 						NotificationManager.success("Аккаунт привязан")
 						_rebuild_content()
