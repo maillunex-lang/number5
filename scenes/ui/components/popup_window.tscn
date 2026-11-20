@@ -4,7 +4,7 @@
 
 [node name="PopupWindow" type="PanelContainer"]
 custom_minimum_size = Vector2(720, 0)
-theme_type_variation = &"PopupPanel"
+theme_type_variation = &"GamePopupPanel"
 script = ExtResource("1")
 
 [node name="Pad" type="MarginContainer" parent="."]

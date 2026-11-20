@@ -45,11 +45,14 @@ func set_unit(data: Dictionary) -> void:
 	side = str(data.get("side", "ally"))
 	if _name:
 		_name.text = str(data.get("name", preview_name))
-	var tint = data.get("tint", preview_tint)
-	if typeof(tint) != TYPE_COLOR:
-		tint = Color(str(tint)) if str(tint).begins_with("#") else preview_tint
+	var tint_raw: Variant = data.get("tint", preview_tint)
+	var tint: Color = preview_tint
+	if typeof(tint_raw) == TYPE_COLOR:
+		tint = tint_raw
+	elif str(tint_raw).begins_with("#"):
+		tint = Color(str(tint_raw))
 	_paint_body(tint)
-	var max_hp := float(data.get("max_hp", data.get("hp", 1000)))
+	var max_hp: float = float(data.get("max_hp", data.get("hp", 1000)))
 	if _hp:
 		_hp.max_value = max_hp
 		_hp.value = float(data.get("hp", max_hp))

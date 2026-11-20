@@ -13,26 +13,26 @@ func _ready() -> void:
 	if _offers.is_empty():
 		_offers = ContentPackageLoader.features.get("shop_offers", [])
 	if ApiClient.online:
-		var res := await ApiClient.store_catalog()
+		var res: Dictionary = await ApiClient.store_catalog()
 		if res.get("ok", false):
-			var data: Dictionary = res.get("data", {})
-			var remote: Array = data.get("offers", [])
+			var data: Dictionary = res.get("data", {}) as Dictionary
+			var remote: Array = data.get("offers", []) as Array
 			if not remote.is_empty():
 				_offers = remote
 	_rebuild()
 
 func _shop_text(value: String, size: int = 23, color: Color = LunexColors.TEXT_PRIMARY) -> Label:
-	var node := UIFactory.label(value, size, color)
+	var node: Label = UIFactory.label(value, size, color)
 	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	node.custom_minimum_size.x = 0
 	return node
 
-const CATEGORIES := ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
-var _selected_category := "Рекомендуем"
+const CATEGORIES: Array[String] = ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
+var _selected_category: String = "Рекомендуем"
 
 func _category_of(offer: Dictionary) -> String:
-	var key := ("%s %s %s" % [str(offer.get("sku", offer.get("id", ""))), str(offer.get("title", offer.get("name", ""))), str(offer.get("category", ""))]).to_lower()
+	var key: String = ("%s %s %s" % [str(offer.get("sku", offer.get("id", ""))), str(offer.get("title", offer.get("name", ""))), str(offer.get("category", ""))]).to_lower()
 	if "vip" in key or "вип" in key:
 		return "VIP"
 	if "pass" in key or "пропуск" in key:
@@ -103,14 +103,14 @@ func _rebuild() -> void:
 	root.add_child(back)
 
 func _add_offer(root: VBoxContainer, offer: Dictionary) -> void:
-	var title := str(offer.get("title", offer.get("name", "Предложение")))
-	var sku := str(offer.get("sku", offer.get("id", title)))
-	var grants: Array = offer.get("grants", [])
+	var title: String = str(offer.get("title", offer.get("name", "Предложение")))
+	var sku: String = str(offer.get("sku", offer.get("id", title)))
+	var grants: Array = offer.get("grants", []) as Array
 	var card: ShopOfferCard = (load("res://scenes/ui/components/shop_offer_card.tscn") as PackedScene).instantiate()
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card.set_offer(offer)
-	var disclaimer := str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Без списаний"))
-	card.buy_pressed.connect(func(_sku):
+	var disclaimer: String = str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Без списаний"))
+	card.buy_pressed.connect(func(_sku: String) -> void:
 		_buy(sku, title, disclaimer, grants)
 	)
 	root.add_child(card)
@@ -127,11 +127,12 @@ func _buy(sku: String, title: String, disclaimer: String, grants: Array) -> void
 func _confirm_buy(sku: String, title: String, grants: Array) -> void:
 	_busy = true
 	if ApiClient.online:
-		var ord := await ApiClient.store_order(sku)
+		var ord: Dictionary = await ApiClient.store_order(sku)
 		if ord.get("ok", false):
-			var order: Dictionary = ord.get("data", {}).get("order", {})
-			var oid := str(order.get("id", ""))
-			var conf := await ApiClient.store_confirm(oid)
+			var order_wrap: Dictionary = ord.get("data", {}) as Dictionary
+			var order: Dictionary = order_wrap.get("order", {}) as Dictionary
+			var oid: String = str(order.get("id", ""))
+			var conf: Dictionary = await ApiClient.store_confirm(oid)
 			if conf.get("ok", false):
 				var lines: Array = ["Источник: store VIRTUAL_FREE", "SKU %s" % sku]
 				for g in order.get("grants", grants):

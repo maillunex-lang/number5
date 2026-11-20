@@ -1,10 +1,10 @@
 @tool
 class_name GamePanel
 extends PanelContainer
-## Панель с Theme type GamePanel / PopupPanel.
+## Панель с Theme type GamePanel / GamePopupPanel.
 
 @export_category("Lunex Panel")
-@export_enum("GamePanel", "PopupPanel") var panel_kind: String = "GamePanel":
+@export_enum("GamePanel", "GamePopupPanel") var panel_kind: String = "GamePanel":
 	set(v):
 		panel_kind = v
 		theme_type_variation = StringName(v)
