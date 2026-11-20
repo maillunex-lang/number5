@@ -4,7 +4,7 @@
 
 | Компонент | Подтверждено | Граница проверки |
 |---|---|---|
-| Android | Подпись APK проверена. SHA-256 опубликованного файла совпал со сборкой на VPS. **Приёмка на физическом устройстве подтверждена владельцем (P0)** | Retest #28 hang-fix; затем wave5 VIP/Social/Result |
+| Android | Подпись APK проверена. SHA-256 опубликованного файла совпал со сборкой на VPS. **Приёмка на физическом устройстве подтверждена владельцем (P0)** | Следующая APK: Events / game_shell по ROADMAP |
 
 | Интерфейс | В портретном тесте Godot проверены 42 состояния. Все 269 доступных кнопок в 37 игровых меню приняли нажатие. Колесо прокрутило 8 из 8 переполненных областей | Только доступные тестовому профилю действия. Серверный эффект каждой операции этим тестом не проверялся |
 | Аккаунт и прогресс | Гостевой вход, загрузка профиля, героев, отряда и кошелька. После боя CH01-01 открывался CH01-02, повтор получения награды сохранял баланс, перезапуск сохранял этап | Шесть исторических HTTP 500 профиля наблюдались 20 ноября. Точная причина не установлена |
@@ -12,8 +12,9 @@
 | Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | **Владелец: повторные награды не выдаются** |
 | ART-05 | Procedural portrait/atlas webp; AssetLoader; BattleUnit clips; HUD/cards | **ART-05 device OK** (владелец, 20.11) |
 | MAP-01 list | StageListItem bind + scroll + squad power estimate | **MAP-01 device OK** — имена этапов, сила ≠ 0, скролл (владелец, 20.11) |
-| UI visual-edit | Theme + wave2–11; **shop scroll fix** (ListHost-only Scroll + card PASS) | Device: shop scroll + VIRTUAL_FREE claim; #28 hang |
-| Shop VIRTUAL_FREE | Online order/confirm; UI copy без ложного «демо» | Device smoke «Получить» |
+| UI visual-edit | Theme + wave2–11; shop scroll fix | **Shop device OK** (скролл + выдача); Events / game_shell |
+| Shop VIRTUAL_FREE | Online order/confirm; copy VIRTUAL_FREE | **Shop device OK** (владелец, 20.11) |
+| UX hang-fix #28 | Parallel sync + auth watchdog | **Device OK** (владелец: «Все ок») |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy OK** | — |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |
 | AUTH-04 | Memory+PG register/login/link; logout revoke; link_guest sync; settings bind | **AUTH-04 device OK** (владелец, 20.11) |

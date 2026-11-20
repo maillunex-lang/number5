@@ -6,8 +6,8 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | Device APK (#28 + wave5–11) | Вход без зависания; smoke hub/mail/shop/AFK/summon/quests/guild |
-| P2 | UI-VISUAL remainder | Events chrome; game_shell safe-area |
+| P1 | UI-VISUAL Events | Events chrome Theme/ListHost (как guild/quests) |
+| P2 | game_shell | safe-area / CODE_HEAVY → MED |
 
 ## Закрыто в этом срезе
 
@@ -31,6 +31,8 @@
 | UI-VISUAL wave9 summon | Summon altar Theme chrome; roll/pity intact |
 | UI-VISUAL wave10 quests | Quests + Expeditions Theme chrome + ListHost |
 | UI-VISUAL wave11 guild | Guild Theme chrome + Tabs/ListHost |
+| Shop scroll + copy | ListHost Scroll + PASS; VIRTUAL_FREE copy; **device OK** |
+| UX hang-fix #28 device | **Владелец: Все ок** |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
 | mail ClaimAll atomic | ClaimAll в одной TX |
