@@ -9,7 +9,7 @@
 | Аккаунт и прогресс | Гостевой вход, загрузка профиля, героев, отряда и кошелька. После боя CH01-01 открывался CH01-02, повтор получения награды сохранял баланс, перезапуск сохранял этап | Шесть исторических HTTP 500 профиля наблюдались 20 ноября. Точная причина не установлена |
 | Бой H6 | Сервер считает детерминированную timeline (start/hit/death/end). Клиент COMBAT-02 воспроизводит timeline; при обрыве — `GET /battle/{id}`. Claim идемпотентен | Нужна APK с новым клиентом и проверка на устройстве: анимация ↔ timeline, reconnect, повтор claim |
 | UI visual-edit | Theme + компоненты; HubBuilding/BattleUnit/HeroCard/MailItem/ShopOfferCard; DemoScreenBuilder на GamePanel; preview F6 | Formation/settings/map nodes ещё частично code; см. `docs/UI_VISUAL_AUDIT.md` |
-| FIX-GODOT-DEPLOY-002 | Theme variation `PopupPanel`→`GamePopupPanel`; явная типизация `end_ev` и Variant-`:=` в playback/shop/components; headless import без SCRIPT ERROR | Android APK export на VPS (SDK/templates); повторный auto-deploy после merge в `main` |
+| FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
 | Инфраструктура | Nginx, Go API в prod и отдельный PostgreSQL. Health подтверждал соединение с БД | Чистый запуск и перезапуск проверены на отдельной PostgreSQL 16 |
 | Контент | 27 файлов из манифеста совпали с копией на VPS. Проверены HTTPS CDN, загрузка диалогов и активация OTA-кэша | Новый код, сцены и встроенные пиктограммы распространяются в APK |
 

@@ -19,7 +19,7 @@
 | H6 code | Серверная timeline + клиентский playback + GET reconnect + claim replay (тесты Go) |
 | UI-VISUAL foundation | Аудит, Theme styles, component library, preview, docs; частичная миграция chrome |
 | UI-VISUAL wave2 | HubBuilding, BattleUnit, HeroCard grid, MailItem, ShopOfferCard, DemoScreenBuilder→GamePanel |
-| FIX-GODOT-DEPLOY-002 | Godot 4.7.2: Theme GamePopupPanel, typed battle/shop GDScript; import clean; deploy script review |
+| FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK (owner confirmed) |
 
 ## Реализовано и проверено
 
