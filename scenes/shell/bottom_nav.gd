@@ -3,6 +3,7 @@ extends PanelContainer
 ## Нижняя навигация (4 вкладки). Кнопки и отступы — в .tscn.
 
 @export_category("Lunex Bottom Nav")
+@export_group("Layout")
 @export var bar_min_height: float = 156.0:
 	set(v):
 		bar_min_height = v
@@ -23,21 +24,44 @@ extends PanelContainer
 	set(v):
 		pad_bottom = v
 		_apply_pad()
+@export var row_separation: int = 6:
+	set(v):
+		row_separation = v
+		_apply_row()
+@export var tab_btn_min_height: float = 126.0:
+	set(v):
+		tab_btn_min_height = v
+		_apply_tab_metrics()
+@export var tab_font_size: int = 31:
+	set(v):
+		tab_font_size = v
+		_apply_tab_metrics()
+
+@export_group("Preview (editor only)")
+@export_enum("map", "heroes", "hub", "battle") var preview_active_tab: String = "hub":
+	set(v):
+		preview_active_tab = v
+		if Engine.is_editor_hint() and not _buttons.is_empty():
+			set_active(preview_active_tab)
 
 var _shell: Node
 var _buttons: Dictionary = {}
 @onready var _pad: MarginContainer = $Pad
+@onready var _row: HBoxContainer = $Pad/Row
 
 func _ready() -> void:
 	custom_minimum_size.y = bar_min_height
 	_apply_pad()
+	_apply_row()
 	_buttons = {
 		"map": $Pad/Row/Map,
 		"heroes": $Pad/Row/Heroes,
 		"hub": $Pad/Row/Hub,
 		"battle": $Pad/Row/Battle,
 	}
+	_apply_tab_metrics()
 	if Engine.is_editor_hint():
+		set_active(preview_active_tab)
 		return
 
 func setup(shell: Node) -> void:
@@ -49,6 +73,7 @@ func setup(shell: Node) -> void:
 		"hub": $Pad/Row/Hub,
 		"battle": $Pad/Row/Battle,
 	}
+	_apply_tab_metrics()
 	_apply_tab_labels()
 	_buttons["map"].pressed.connect(func(): _shell.on_nav("map"))
 	_buttons["heroes"].pressed.connect(func(): _shell.on_nav("heroes"))
@@ -67,6 +92,21 @@ func _apply_pad() -> void:
 	_pad.add_theme_constant_override("margin_right", pad_right)
 	_pad.add_theme_constant_override("margin_top", pad_top)
 	_pad.add_theme_constant_override("margin_bottom", pad_bottom)
+
+func _apply_row() -> void:
+	if _row == null:
+		return
+	_row.add_theme_constant_override("separation", row_separation)
+
+func _apply_tab_metrics() -> void:
+	if _buttons.is_empty():
+		return
+	for id in _buttons.keys():
+		var b: Button = _buttons[id]
+		if b == null:
+			continue
+		b.custom_minimum_size.y = tab_btn_min_height
+		b.add_theme_font_size_override("font_size", tab_font_size)
 
 func _apply_shell_chrome() -> void:
 	var bn: Dictionary = ContentPackageLoader.shell.get("bottom_nav", {})
@@ -89,7 +129,7 @@ func _apply_tab_labels() -> void:
 		b.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
 		b.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		b.text = label
-		b.add_theme_font_size_override("font_size", 31)
+		b.add_theme_font_size_override("font_size", tab_font_size)
 		b.visible = bool(conf.get("enabled", true)) if not conf.is_empty() else true
 
 func set_active(tab: String) -> void:
