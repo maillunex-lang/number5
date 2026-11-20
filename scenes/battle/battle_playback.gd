@@ -1,5 +1,5 @@
 extends Control
-## COMBAT-02: клиентская анимация; результат и награды определяет сервер.
+## COMBAT-02: воспроизведение серверной timeline (H6). Локальный DEMO — только без battle_id.
 
 var _payload: Dictionary = {}
 var _allies: Array[Dictionary] = []
@@ -11,6 +11,11 @@ var _finished: bool = false
 var _tick_accum: float = 0.0
 var _time_s: float = 0.0
 var _fx_count: int = 0
+var _timeline: Array = []
+var _event_i: int = 0
+var _server_mode: bool = false
+var _server_victory: bool = false
+var _bootstrapping: bool = true
 
 @onready var _field: Control = $Field
 @onready var _hud_top: Label = $HUD/Top
@@ -22,7 +27,115 @@ func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
+	_speed_btn.pressed.connect(_cycle_speed)
+	_pause_btn.pressed.connect(func():
+		_paused = not _paused
+		_pause_btn.text = "▶" if _paused else "⏸"
+	)
+	$HUD/Controls/ExitBtn.pressed.connect(func():
+		ModalManager.push_confirm("Выйти из боя?", "Награды не будут получены.", func():
+			_finished = true
+			ScreenRouter.go("COMBAT-03", {"victory": false, "aborted": true})
+		)
+	)
+	await _bootstrap()
+
+func _bootstrap() -> void:
 	var stage_id: String = str(_payload.get("stage_id", UIStateManager.last_combat_context.get("stage_id", "s1_3")))
+	var battle_id := str(_payload.get("battle_id", UIStateManager.last_combat_context.get("battle_id", "")))
+	_timeline = _payload.get("timeline", [])
+	_server_victory = bool(_payload.get("server_victory", false))
+
+	if battle_id != "" and ApiClient.online:
+		_server_mode = true
+		if _timeline.is_empty():
+			_hud_top.text = "Восстановление боя…"
+			var fetched := await ApiClient.battle_get(battle_id)
+			if not fetched.get("ok", false):
+				NotificationManager.warn("Не удалось восстановить бой с сервера")
+				_finished = true
+				ScreenRouter.go("COMBAT-03", {"victory": false, "aborted": true, "battle_id": battle_id, "stage_id": stage_id})
+				return
+			var data: Dictionary = fetched.get("data", {})
+			_timeline = data.get("timeline", [])
+			_server_victory = bool(data.get("victory", false))
+			_payload["server_victory"] = _server_victory
+			_payload["battle_id"] = battle_id
+			_payload["stage_id"] = str(data.get("stage_id", stage_id))
+			stage_id = str(_payload["stage_id"])
+		if not _apply_server_start(stage_id):
+			NotificationManager.warn("Серверная timeline повреждена")
+			_finished = true
+			ScreenRouter.go("COMBAT-03", {
+				"victory": _server_victory,
+				"battle_id": battle_id,
+				"stage_id": stage_id,
+				"mode": _payload.get("mode", "campaign"),
+			})
+			return
+		_hud_top.text = "Бой · %s · сервер · x%.0f" % [stage_id, _speed]
+	else:
+		_server_mode = false
+		_boot_demo_units(stage_id)
+		_hud_top.text = "Бой · %s · DEMO · x%.0f" % [stage_id, _speed]
+
+	_spawn_units()
+	_build_portraits()
+	_bootstrapping = false
+
+func _apply_server_start(stage_id: String) -> bool:
+	if _timeline.is_empty():
+		return false
+	var start_ev: Dictionary = {}
+	for ev in _timeline:
+		if str(ev.get("type", "")) == "start":
+			start_ev = ev
+			break
+	if start_ev.is_empty():
+		return false
+	_allies = []
+	for u in start_ev.get("allies", []):
+		_allies.append(_unit_from_snapshot(u, "ally"))
+	_enemies = []
+	for u in start_ev.get("enemies", []):
+		_enemies.append(_unit_from_snapshot(u, "enemy"))
+	if _allies.is_empty() or _enemies.is_empty():
+		return false
+	# Skip start event; playback continues from next.
+	_event_i = 1
+	for i in range(_timeline.size()):
+		if str(_timeline[i].get("type", "")) == "start":
+			_event_i = i + 1
+			break
+	var end_ev := _timeline[_timeline.size() - 1]
+	if str(end_ev.get("type", "")) == "end":
+		_server_victory = bool(end_ev.get("victory", _server_victory))
+	return true
+
+func _unit_from_snapshot(raw: Variant, side: String) -> Dictionary:
+	var u: Dictionary = raw if typeof(raw) == TYPE_DICTIONARY else {}
+	var max_hp := float(u.get("max_hp", u.get("hp", 1000)))
+	return {
+		"id": str(u.get("id", "")),
+		"name": str(u.get("name", u.get("id", "?"))),
+		"side": side,
+		"max_hp": max_hp,
+		"hp": max_hp,
+		"atk": float(u.get("atk", 100)),
+		"energy": 0.0,
+		"alive": true,
+		"tint": _parse_tint(u.get("tint", "#888888")),
+	}
+
+func _parse_tint(v: Variant) -> Color:
+	if typeof(v) == TYPE_COLOR:
+		return v
+	var s := str(v)
+	if s.begins_with("#"):
+		return Color(s)
+	return Color("888888")
+
+func _boot_demo_units(stage_id: String) -> void:
 	_allies = []
 	for u in DemoData.ally_battle_units():
 		var d := u.duplicate(true)
@@ -42,20 +155,6 @@ func _ready() -> void:
 		d["alive"] = true
 		d["skills"] = ["strike", "skill"]
 		_enemies.append(d)
-	_spawn_units()
-	_build_portraits()
-	_speed_btn.pressed.connect(_cycle_speed)
-	_pause_btn.pressed.connect(func():
-		_paused = not _paused
-		_pause_btn.text = "▶" if _paused else "⏸"
-	)
-	$HUD/Controls/ExitBtn.pressed.connect(func():
-		ModalManager.push_confirm("Выйти из боя?", "Награды не будут получены.", func():
-			_finished = true
-			ScreenRouter.go("COMBAT-03", {"victory": false, "aborted": true})
-		)
-	)
-	_hud_top.text = "Бой · %s · x%.0f" % [stage_id, _speed]
 
 func _spawn_units() -> void:
 	for c in _field.get_children():
@@ -129,21 +228,88 @@ func _cycle_speed() -> void:
 	else:
 		_speed = 1.0
 	_speed_btn.text = "x%.0f" % _speed
-	_hud_top.text = "Бой · x%.0f" % _speed
+	var mode := "сервер" if _server_mode else "DEMO"
+	_hud_top.text = "Бой · %s · x%.0f" % [mode, _speed]
 
 func _process(delta: float) -> void:
-	if _finished or _paused:
+	if _bootstrapping or _finished or _paused:
 		return
 	_time_s += delta * _speed
-	_tick_accum += delta * _speed
-	if _tick_accum < 0.35:
-		return
-	_tick_accum = 0.0
-	_sim_tick()
-	_refresh_ui()
-	_check_end()
+	if _server_mode:
+		_playback_tick()
+	else:
+		_tick_accum += delta * _speed
+		if _tick_accum < 0.35:
+			return
+		_tick_accum = 0.0
+		_sim_tick_demo()
+		_refresh_ui()
+		_check_end_demo()
 
-func _sim_tick() -> void:
+func _playback_tick() -> void:
+	while _event_i < _timeline.size():
+		var ev: Dictionary = _timeline[_event_i]
+		var t := float(ev.get("t", 0))
+		if t > _time_s:
+			break
+		_apply_event(ev)
+		_event_i += 1
+	_refresh_ui()
+
+func _apply_event(ev: Dictionary) -> void:
+	var typ := str(ev.get("type", ""))
+	match typ:
+		"hit":
+			var target_id := str(ev.get("target", ""))
+			var actor_id := str(ev.get("actor", ""))
+			var dmg := float(ev.get("damage", 0))
+			var is_skill := bool(ev.get("skill", false))
+			var unit := _find_unit(target_id)
+			if not unit.is_empty():
+				if ev.has("hp"):
+					unit.hp = float(ev.get("hp"))
+				else:
+					unit.hp = maxf(0.0, float(unit.hp) - dmg)
+				if unit.hp <= 0.0:
+					unit.alive = false
+					if _units_ui.has(target_id):
+						_units_ui[target_id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+			var actor := _find_unit(actor_id)
+			if not actor.is_empty() and ev.has("energy"):
+				actor.energy = float(ev.get("energy"))
+			elif not actor.is_empty() and is_skill:
+				actor.energy = 0.0
+			_spawn_fx(target_id, is_skill)
+			if is_skill and ThemeManager.preset != "low":
+				_portraits.modulate.a = 0.15
+				var tw := create_tween()
+				tw.tween_interval(0.45 / _speed)
+				tw.tween_property(_portraits, "modulate:a", 1.0, 0.2)
+			AudioManager.play_battle_hit()
+		"death":
+			var uid := str(ev.get("unit", ""))
+			var unit2 := _find_unit(uid)
+			if not unit2.is_empty():
+				unit2.hp = 0.0
+				unit2.alive = false
+				if _units_ui.has(uid):
+					_units_ui[uid].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+		"end":
+			_server_victory = bool(ev.get("victory", _server_victory))
+			_finish(_server_victory)
+		_:
+			pass
+
+func _find_unit(uid: String) -> Dictionary:
+	for u in _allies:
+		if str(u.id) == uid:
+			return u
+	for u in _enemies:
+		if str(u.id) == uid:
+			return u
+	return {}
+
+func _sim_tick_demo() -> void:
 	var attackers: Array[Dictionary] = []
 	for u in _allies:
 		if u.alive:
@@ -170,7 +336,6 @@ func _sim_tick() -> void:
 			dmg *= 1.85
 			u.energy = 0.0
 			_spawn_fx(target.id, true)
-			# hide portraits briefly on ult (BATTLE-UI-002)
 			if ThemeManager.preset != "low":
 				_portraits.modulate.a = 0.15
 				var tw := create_tween()
@@ -221,7 +386,7 @@ func _refresh_ui() -> void:
 			ui.portrait_hp.value = u.hp
 			ui.portrait_en.value = u.energy
 
-func _check_end() -> void:
+func _check_end_demo() -> void:
 	var allies_alive := false
 	var enemies_alive := false
 	for u in _allies:
@@ -232,7 +397,6 @@ func _check_end() -> void:
 			enemies_alive = true
 	if allies_alive and enemies_alive:
 		if _time_s > 90.0:
-			# timeout — higher power wins
 			var ap := DemoData.squad_power()
 			var stage := DemoData.get_stage(str(_payload.get("stage_id", "")))
 			_finish(ap >= int(stage.get("power", 0)))
@@ -243,9 +407,12 @@ func _finish(victory: bool) -> void:
 	if _finished:
 		return
 	_finished = true
+	var final_victory := victory
+	if _server_mode:
+		final_victory = _server_victory
 	await get_tree().create_timer(0.6 / _speed).timeout
 	ScreenRouter.go("COMBAT-03", {
-		"victory": bool(_payload.get("server_victory", false)),
+		"victory": final_victory,
 		"battle_id": str(_payload.get("battle_id", "")),
 		"stage_id": _payload.get("stage_id", ""),
 		"mode": _payload.get("mode", "campaign"),

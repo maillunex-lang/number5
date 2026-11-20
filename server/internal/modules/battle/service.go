@@ -103,7 +103,7 @@ func (s *Service) Start(accountID domain.AccountID, req StartRequest) (status in
 	}
 
 	seed := seedFrom(accountID, req.StageID, req.IdempotencyKey)
-	victory, timeline := simulate(seed, squad, enc)
+	victory, timeline := simulate(seed, squad, enc, s.Catalog)
 
 	b := domain.BattleInstance{
 		ID: store.NewID("bat"), AccountID: accountID, Mode: req.Mode, StageID: req.StageID,
@@ -229,20 +229,6 @@ func (s *Service) Claim(accountID domain.AccountID, battleID, idempotencyKey str
 		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
 	}
 	return 200, body, nil
-}
-
-func simulate(seed int64, squad []string, enc content.Encounter) (bool, []map[string]any) {
-	// Deterministic lightweight sim: squad size vs encounter power proxy.
-	power := int64(len(squad)) * 1000
-	enemyPower := int64(len(enc.Slots)) * 700
-	r := seed%100 + 1
-	victory := power+r >= enemyPower
-	tl := []map[string]any{
-		{"t": 0, "type": "start", "squad": squad, "enemies": len(enc.Slots)},
-		{"t": 30, "type": "tick", "note": "auto combat"},
-		{"t": 90, "type": "end", "victory": victory},
-	}
-	return victory, tl
 }
 
 func seedFrom(accountID domain.AccountID, stageID, key string) int64 {

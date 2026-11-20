@@ -1,7 +1,7 @@
 # CONTENT-C — внедрение «Башкортостан: Разлом эпох»
 
 > **Статус данных:** C0–C6 + E0–E4 в пакете **`0.9.0`**. **E5:** CORE-01 memory ✓; PG adapter код ✓ / runtime BLOCKED.  
-> **Бой (H6):** серверный timeline → playback → claim — **NOT_STARTED** (см. ROADMAP BATTLE-*).  
+> **Бой (H6):** серверный timeline → playback → claim — **CODE DONE** (device verify остаётся в ROADMAP).  
 > Канон в `docs/content/*.md` — сюжет/баланс; шапки = статус внедрения. Не путать с Eliorian `CONTENT.md`.
 
 Канон сюжета/героев/бестиария: `docs/content/STORY_*.md`, `FACTIONS_*.md`, `BESTIARY_*.md`.  

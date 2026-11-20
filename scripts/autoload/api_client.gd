@@ -276,6 +276,9 @@ func battle_start(stage_id: String, idem: String = "") -> Dictionary:
 		"idempotency_key": idem,
 	})
 
+func battle_get(battle_id: String) -> Dictionary:
+	return await _authed("GET", "/api/v1/battle/%s" % battle_id)
+
 func battle_claim(battle_id: String, idem: String = "") -> Dictionary:
 	if idem == "":
 		idem = new_idem("bcl")
