@@ -37,10 +37,11 @@ type BattleResponse struct {
 }
 
 type ClaimResponse struct {
-	BattleID string           `json:"battle_id"`
-	Rewards  map[string]int64 `json:"rewards"`
-	Replayed bool             `json:"replayed"`
-	Progress campaignLite     `json:"progress"`
+	BattleID   string           `json:"battle_id"`
+	Rewards    map[string]int64 `json:"rewards"`
+	Replayed   bool             `json:"replayed"`
+	FirstClear bool             `json:"first_clear"`
+	Progress   campaignLite     `json:"progress"`
 }
 
 type campaignLite struct {
@@ -196,13 +197,17 @@ func (s *Service) Claim(accountID domain.AccountID, battleID, idempotencyKey str
 		if st, ok2 := prog.Stages[b.StageID]; ok2 && st.FirstClearClaimed {
 			first = false
 		}
-		if ok && first {
-			for k, v := range loot.FirstClear {
-				rewards[k] = int64(v)
+		// First clear only: package first_clear table. Replay is training until
+		// loot_tables replay + daily caps are wired (no hardcoded farm currency).
+		if first {
+			if ok {
+				for k, v := range loot.FirstClear {
+					rewards[k] = int64(v)
+				}
+			} else {
+				rewards["gold"] = 500
+				rewards["hero_xp"] = 200
 			}
-		} else {
-			rewards["gold"] = 500
-			rewards["hero_xp"] = 200
 		}
 
 		entries := make([]domain.LedgerEntry, 0, len(rewards))
@@ -233,7 +238,8 @@ func (s *Service) Claim(accountID domain.AccountID, battleID, idempotencyKey str
 		}
 
 		out = ClaimResponse{
-			BattleID: battleID, Rewards: rewards, Progress: campaignLite{CurrentStage: prog.CurrentStage},
+			BattleID: battleID, Rewards: rewards, FirstClear: first,
+			Progress: campaignLite{CurrentStage: prog.CurrentStage},
 		}
 		body = mustJSON(out)
 		outStatus = 200
