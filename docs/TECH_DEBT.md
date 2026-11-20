@@ -12,7 +12,7 @@
 | TD-PUBHIST | IMPROVE | publish_history до 0.6.0 | Низкий | admin-studio publish | файл | дописать 0.7–0.9 | P2 | history полный |
 | TD-NILMOD | RISK | Catalog fail → nil Battle/Summon panic | Средний | `cmd/api/main.go` | код | fail boot / 503 | P1 | — |
 | TD-FORM-PG | RISK | GetFormation missing → ErrNotFound на PG vs empty memory | Средний | postgres vs memory | код | выровнять семантику | P1 | — |
-| TD-DEMOBUILDER | IMPROVE | `DemoScreenBuilder` без callers после wave6 | Низкий | `scripts/ui/demo_screen_builder.gd` | grep | удалить или пометить deprecated | P2 | нет мёртвого builder |
+| TD-DEMOBUILDER | IMPROVE | ~~`DemoScreenBuilder` без callers~~ | — | удалён wave7 | закрыто | FeatureSectionHost | P2 | ✅ |
 
 ## Приоритеты версии 0.5.5
 

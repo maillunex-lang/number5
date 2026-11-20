@@ -20,7 +20,7 @@
 |---|---|---|
 | Theme | `theme/lunex_theme.tres` + `ThemeManager` + `content/packages/0.9.0/theme.json` | Глобальная тема проекта; runtime-палитра из пакета |
 | Фабрика | `scripts/ui/ui_factory.gd`, `lunex_colors.gd` | Кнопки/панели/лейблы **кодом** |
-| DEMO-сборщик | `scripts/ui/demo_screen_builder.gd` | VIP/чат/друзья и др. — весь UI в VBox |
+| Feature sections | `scripts/ui/feature_section_host.gd` | демо-секции в DynamicHost |
 | Навигация | `ScreenRouter`, `GameShell` overlays | Вкладки + стек оверлеев |
 | Контент | `content/packages/0.9.0/` (в т.ч. `theme.json` внутри пакета) | Hub buildings, shell chrome, палитра |
 
@@ -40,8 +40,8 @@
 | World select | `bootstrap/world_select.tscn` | 9 | 0 | сессия | HIGH | кнопки миров | вход в shell | низкий |
 | Auth | `bootstrap/auth.tscn` | ~30 | средняя | API | MED* | Card/Tabs/Email/Password/Login/Guest Theme | parallax + API + _adapt_layout | средний |
 | Game shell | `shell/game_shell.tscn` | 19 | средняя | — | CODE_HEAVY | слои, fade | вкладки, overlays | safe-area |
-| Top bar | `shell/top_bar.tscn` | 11 | низкая | wallet | MED | кнопки, отступы, подписи | тексты валют, стили из пакета | hit area |
-| Bottom nav | `shell/bottom_nav.tscn` | 7 | низкая | shell.json | MED | 4 вкладки, высота | иконки/лейблы из пакета | hit area ≥ |
+| Top bar | `shell/top_bar.tscn` | ~14 | низкая | wallet | HIGH* | Profile/Shop/Settings + 3×ResourceCounter | wallet sync + shell.json chrome | hit area |
+| Bottom nav | `shell/bottom_nav.tscn` | ~10 | низкая | shell.json | HIGH* | 4×GameButton, exports | иконки/лейблы из пакета | hit area ≥ |
 | Hub | `hub/hub_root.tscn` | 10 | высокая | hub.json | LOW* | SideRail, Scroll/World | здания через `HubBuilding` + JSON позиции | WORLD 1080×2400 |
 | Map root | `map/map_root.tscn` | ~12 | средняя | campaign | MED* | Header, Landscape, Scroll | регионы через `MapRegionButton` | средний |
 | Chapter map | `map/chapter_map.tscn` | ~12 | средняя | campaign | MED* | Header/Continue/Back | список через `StageListItem` | средний |
@@ -75,7 +75,7 @@
 | `hero_portrait` | бой, герои | `HeroCard` / portrait template |
 | Safe + Scroll + VBox | features | `FeatureScreen` scaffold |
 | Modal rewards | ModalManager | `PopupWindow` / `RewardCard` |
-| TopBar / BottomNav | shell | уже сцены; усилить exports |
+| TopBar / BottomNav | shell | HIGH*: ResourceCounter + GameButton + Inspector exports |
 
 ## 5. Что нельзя (или не стоит) полностью выносить в сцену
 
@@ -100,6 +100,7 @@
 | Wave5 | BattleResult ClaimProgress/Status; VIP + SocialHub off DemoScreenBuilder |
 | Wave5+ | Chat / Friends / Rankings Theme hosts; FeatureSectionHost helper |
 | Wave6 | BattlePass/PvP/Profile/Rewards/Sys off DemoScreenBuilder (builder unused) |
+| Wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
 
 ## 7. Критерии «экран модернизирован»
 

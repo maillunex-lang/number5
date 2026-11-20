@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://lunextopbar001"]
+[gd_scene load_steps=3 format=3 uid="uid://lunextopbar001"]
 
 [ext_resource type="Script" path="res://scenes/shell/top_bar.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/resource_counter.tscn" id="2_res"]
 
 [node name="TopBar" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 158)
+theme_type_variation = &"GamePanel"
 script = ExtResource("1")
 
 [node name="Pad" type="MarginContainer" parent="."]
@@ -21,43 +23,51 @@ theme_override_constants/separation = 4
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Secondary" type="HBoxContainer" parent="Pad/Rows"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
 [node name="ProfileBtn" type="Button" parent="Pad/Rows/Primary"]
 custom_minimum_size = Vector2(0, 78)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+theme_override_font_sizes/font_size = 28
 text = "Профиль"
 
-[node name="Vip" type="Label" parent="Pad/Rows/Secondary"]
+[node name="SettingsBtn" type="Button" parent="Pad/Rows/Primary"]
+visible = false
+custom_minimum_size = Vector2(86, 78)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.91, 0.772, 0.416, 1)
-theme_override_font_sizes/font_size = 25
-text = "VIP 0"
-vertical_alignment = 1
+theme_type_variation = &"GameButton"
+theme_override_font_sizes/font_size = 34
+text = "⚙"
+tooltip_text = "Настройки"
 
-[node name="Gold" type="Label" parent="Pad/Rows/Secondary"]
+[node name="Secondary" type="HBoxContainer" parent="Pad/Rows"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.91, 0.772, 0.416, 1)
-theme_override_font_sizes/font_size = 26
-text = "◈ 0"
-vertical_alignment = 1
+theme_override_constants/separation = 16
 
-[node name="Dia" type="Label" parent="Pad/Rows/Secondary"]
+[node name="Vip" parent="Pad/Rows/Secondary" instance=ExtResource("2_res")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.369, 0.784, 0.91, 1)
-theme_override_font_sizes/font_size = 26
-text = "◆ 0"
-vertical_alignment = 1
+icon_glyph = ""
+value_text = "0"
+accent = Color(0.909804, 0.772549, 0.415686, 1)
+caption = "VIP"
+
+[node name="Gold" parent="Pad/Rows/Secondary" instance=ExtResource("2_res")]
+layout_mode = 2
+icon_glyph = ""
+value_text = "0"
+accent = Color(0.909804, 0.772549, 0.415686, 1)
+caption = "Золото"
+
+[node name="Dia" parent="Pad/Rows/Secondary" instance=ExtResource("2_res")]
+layout_mode = 2
+icon_glyph = ""
+value_text = "0"
+accent = Color(0.368627, 0.784314, 0.909804, 1)
+caption = "Алмазы"
 
 [node name="ShopBtn" type="Button" parent="Pad/Rows/Secondary"]
 custom_minimum_size = Vector2(96, 78)
 layout_mode = 2
-text = "🏪"
-
-[node name="SettingsBtn" type="Button" parent="Pad/Rows/Primary"]
-custom_minimum_size = Vector2(96, 78)
-layout_mode = 2
-text = "⚙"
+theme_type_variation = &"GameButton"
+theme_override_font_sizes/font_size = 26
+text = "Магазин"

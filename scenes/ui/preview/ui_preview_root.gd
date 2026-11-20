@@ -59,7 +59,7 @@ func _show_components() -> void:
 
 func _show_top_bar() -> void:
 	_clear_host()
-	_hint.text = "TopBar · preview тексты из Inspector экспортов"
+	_hint.text = "TopBar · ResourceCounter + Inspector preview"
 	var bar: Control = (load("res://scenes/shell/top_bar.tscn") as PackedScene).instantiate()
 	bar.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	bar.custom_minimum_size.y = 158
@@ -67,7 +67,7 @@ func _show_top_bar() -> void:
 
 func _show_bottom_nav() -> void:
 	_clear_host()
-	_hint.text = "BottomNav · 4 вкладки"
+	_hint.text = "BottomNav · 4×GameButton + preview_active_tab"
 	var nav: Control = (load("res://scenes/shell/bottom_nav.tscn") as PackedScene).instantiate()
 	nav.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	nav.custom_minimum_size.y = 156
