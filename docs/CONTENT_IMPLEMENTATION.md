@@ -15,7 +15,7 @@
 | Сначала только кампания | Этапы → несуществующие H/E/B |
 | Полный параллель 6×45×180 | Расходятся ID |
 
-**C0→C6 готовы** (spine → 180 этапов → skills/dialogs → арт-реестр). Дальше **C7** = OTA-2.
+**C0→C6 готовы** (spine → 180 этапов → skills/dialogs → арт-реестр). Пакет 0.9.0 опубликован в HTTPS CDN.
 
 ## Порядок экономики (E): решено по зависимостям
 
@@ -42,7 +42,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | **E2** | 4 баннера гачи + пулы H01–H45 | **Готово** | `gacha.json` + UI алтаря |
 | **E3** | AFK / 12+8 квестов / 18 экспедиций | **Готово** | `liveops.json` + AFK UI |
 | **E4** | Магазин SKU / 3 подписки / VIP 0–11 / BP 30 | **Готово (данные+UI демо)** | `economy.json` offers… · без реальных платежей |
-| **E5** | Сервер wallet/ledger/RNG | **Memory ✓** · PG adapter код · runtime **BLOCKED** (изолир. Lunex PG) | `server/` · H4/H5 в ROADMAP |
+| **E5** | Сервер wallet/ledger/RNG | Go API работает с PostgreSQL; атомарность составных операций остаётся в работе | `server/` · H4/H5 в ROADMAP |
 | **E6** | Admin Studio economy editors | Частично (`/economy`) | publish/rollback на CDN |
 
 ## Этапы сюжета (C)
@@ -53,7 +53,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | C4 | **Готово** | CH01–CH06 ×30 в `0.7.0` |
 | C5 | **Готово** | skills + dialogs в `0.8.0` |
 | C6 | **Готово** | assets registry + `media/` в `0.9.0` (active) |
-| C7 | Дальше | OTA-2 CDN |
+| C7 | HTTPS CDN работает | OTA пакета 0.9.0 проверено |
 
 ## Связи ID
 
@@ -76,7 +76,7 @@ sku / sub_*  ←── economy.offers / subscriptions (payable_price_rub=0)
 | Нужны валюты E0 и материалы E1 | Без `gold`/`boss_core`/`skill_book` некуда класть награды |
 | Нужны `B*`/`E*`/`F*` из C1 | Башня/охота ссылаются на бестиарий |
 | Unlock `CHxx` можно как gate | Не ждать полные stages CH02–06 (C4) — режимы просто «закрыты» |
-| Сервер E5/P3 | Memory ✓; PG — после Docker/VPS |
+| Сервер E5/P3 | PostgreSQL работает; P3 остаётся в плане |
 
 ```
 E0–E4 ✓ → P0–P2 ✓ → C4–C6 ✓ → E5/P3 memory ✓ → PG adapter
@@ -130,7 +130,7 @@ M mail → L login calendars → R profile → A achievements → S daily storie
 | **S** 30 сюжетных дней | Главы + E* бой; не путать с EVENT-01 |
 | **V** 6 live-событий | Самый тяжёлый: event_token, гильдия, PvE, магазин |
 
-Mail claim (memory) уже в CORE-01; остальные M3+/L3+/… — после Postgres.
+Mail claim есть в CORE-01. Отдельная приёмка метасистем остаётся в плане.
 
 | ID | Этап | Статус |
 |---|---|---|
@@ -140,12 +140,12 @@ Mail claim (memory) уже в CORE-01; остальные M3+/L3+/… — пос
 | **A0–A2** | Канон + `achievements.json` + UI | **Готово** |
 | **S0–S2** | Канон + `daily_stories.json` + UI | **Готово** |
 | **V0–V2** | Канон + `live_events.json` + UI | **Готово** |
-| **M3** | Mail claim (сервер) | **Memory ✓** · PG next |
-| **L3+/…** | Календарь / профиль / … | После PG |
+| **M3** | Mail claim (сервер) | Реализован в API; нужен сквозной тест с PostgreSQL |
+| **L3+/…** | Календарь / профиль / … | Запланировано |
 
 ## Отложено сознательно
 
-- Postgres persistence (Docker/VPS).
+- Проверка атомарности составных операций в PostgreSQL.
 - Реальные IAP / billing SDK.
 - Полный UI инвентаря экипировки и экранов экспедиций (данные есть).
 - Гильдии / live-events / daily-story сервер (G3+, V3+, S3+).

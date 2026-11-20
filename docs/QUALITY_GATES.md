@@ -1,5 +1,7 @@
 # QUALITY_GATES — проверки качества
 
+Android 0.5.5 прошёл headless-проверку интерфейса. Для приёмки на телефоне проверить свайп пальцем, системный возврат, восстановление и сохранение прогресса. Результаты фиксировать с моделью и версией ОС.
+
 ## Быстрые (перед коммитом)
 
 ```bash
@@ -11,7 +13,7 @@ cd server && go test ./...
 Если трогали Studio:
 
 ```bash
-cd admin-studio && npm test 2>/dev/null; npm run build
+cd admin-studio && npm run build
 ```
 
 Если трогали Godot сцены — желательно:
@@ -44,9 +46,9 @@ godot --headless --path . --quit-after 2
 
 ## Перед server release
 
-1. `APP_ENV=prod` + `DATABASE_URL` (после H4 — обязателен).  
+1. `APP_ENV=prod` + `DATABASE_URL` (обязателен).
 2. Migrate applied.  
-3. grant/confirm-test недоступны (после H5).  
+3. grant/confirm-test недоступны вне APP_ENV=test.
 4. `/health` → store=postgres.  
 5. Идемпотентность claim/summon проверена.  
 

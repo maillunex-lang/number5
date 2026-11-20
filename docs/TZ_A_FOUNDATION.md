@@ -199,20 +199,9 @@ content_bindings(account_id PK, package_version, schema)
 
 ---
 
-## 11. Блокеры до Postgres (прод Lunex)
+## 11. Развёртывание Android 0.5.5
 
-| Блокер | Нужно |
-|---|---|
-| Изолированная БД Lunex | Отдельный Postgres 16 (+ Docker compose сервиса API). **Не** использовать БД Nexus AI на том же VPS. |
-| H4 | `APP_ENV=prod` без memory fallback (утверждено; код — отдельная задача) |
-| H5 | test-only grant/confirm (утверждено; код — отдельная задача) |
-| Email | SMTP / magic-link — для AUTH-04 |
-| Keystore | позже APK-03 |
-| OTA-2 | HTTPS CDN пакетов |
-
-**Сейчас:** default **memory** + код `store/postgres`. VPS с Docker/PG/Nginx уже существует инфраструктурно; блокером остаётся **выделенный** стек Lunex, не «отсутствие VPS». SQLite как прод **не** используем.
-
----
+На VPS действуют отдельная PostgreSQL, Go API и Nginx с HTTPS CDN. В prod запуск требует работающей БД. Тестовые grant/confirm включены только для test. Готовность к чистому развёртыванию, выпуску release APK и полной приёмке экономики отслеживается в ROADMAP.md.
 
 ## 12. Документы-соседи
 
@@ -222,4 +211,4 @@ content_bindings(account_id PK, package_version, schema)
 - OTA: `docs/CONTENT_OTA.md`  
 - Канон API деталей: `docs/content/*.md`
 
-**Следующий шаг:** Postgres adapter на `store.Store` при появлении Docker/VPS.
+**Следующий шаг:** проверить миграции профиля и авторизации на пустой PostgreSQL.

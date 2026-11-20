@@ -1,10 +1,10 @@
-# Сборка Android APK — Lunex AFK v0.1
+# Сборка Android APK — Lunex AFK 0.5.5
 
 ## Требования
 
 - Godot 4.7.2
 - Export Templates 4.7.2.stable
-- Android SDK (platform 34, build-tools 34, NDK 27+)
+- Android SDK (platform 36, build-tools 36, NDK 27+)
 - JDK 17+ (проверено на 21)
 - Debug keystore (стандартный `~/.android/debug.keystore` или путь из editor settings)
 
@@ -20,16 +20,18 @@
 
 ```bash
 mkdir -p builds
-godot --headless --path . --export-debug "Android" builds/lunex_afk_v0.1_debug.apk
+godot --headless --path . --export-debug "Android" builds/lunex-afk-online-v0.5.5-debug.apk
 ```
 
 Пресет: `export_presets.cfg` (Android, arm64-v8a, package `com.lunex.afk`).
 
 ## Результат проверки (2026-11-20)
 
-- APK успешно собран: `builds/lunex_afk_v0.1_debug.apk` (~28 МБ, debug-подпись).
+- APK успешно собран: `builds/lunex-afk-online-v0.5.5-debug.apk` (33 198 218 байт, debug-подпись).
 - Каталог `builds/` в `.gitignore` — бинарники в git не коммитятся.
 - Keystore и пароли release не хранятся в репозитории.
-- Запуск на физическом устройстве: `adb install -r builds/lunex_afk_v0.1_debug.apk`.
+- Запуск на физическом устройстве: `adb install -r builds/lunex-afk-online-v0.5.5-debug.apk`.
 
-Ориентация: портрет 9:16. Онлайн-сервер не требуется для прототипа.
+Ориентация: портрет 9:16. Для входа и сохранения прогресса требуется доступ к API. Установка на физическом устройстве ожидает проверки.
+
+SHA-256 опубликованного APK: `39c47e3d20aca16584b2648dd9589bffb358b8942ee4ca21584ea389cd8568bb`.

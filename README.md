@@ -1,7 +1,7 @@
 # Lunex AFK
 
 Мобильная онлайн AFK/Idle RPG «Башкортостан: Разлом эпох».  
-Стек: **Godot 4.7.2** · **Go CORE-01** · **PostgreSQL 16** (цель) · **Admin Studio** · контент-пакеты.
+Стек: **Godot 4.7.2** · **Go CORE-01** · **PostgreSQL 16** · **Admin Studio** · контент-пакеты.
 
 ## С чего начать
 
@@ -24,7 +24,7 @@ tools/validate_content_package.sh
 python3 tools/check_repo_refs.py
 ```
 
-`ApiClient` → `LUNEX_API_BASE` или `http://127.0.0.1:8080` (иначе DEMO).
+`ApiClient` → `LUNEX_API_BASE` или встроенный адрес `https://rikagro.ru/afkgame`.
 
 ## Admin Studio
 
@@ -43,11 +43,9 @@ cd server && go test ./... && go run ./cmd/api
 
 Утверждено: в **prod** memory fallback запрещён (H4); test-grant только `APP_ENV=test` (H5) — см. TECH_DEBT.
 
-## Блокеры / next
+## Публикация
 
-Блокеры: изолированный Lunex Postgres · CDN HTTPS · ART-05.  
-Без инфра: **H5** → logout clear → **H6** (см. `docs/ROADMAP.md`).  
-H4/H5/H6 утверждены; код ещё не внедрён.
+Android 0.5.5 доступен на [странице игры](https://rikagro.ru/afkgame/). Публичный Web отключён. Приоритеты — физический Android, миграции PostgreSQL и атомарность экономики. [Дорожная карта](docs/ROADMAP.md)
 
 ## Лицензии
 

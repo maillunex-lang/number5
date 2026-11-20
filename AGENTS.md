@@ -8,7 +8,7 @@
 
 ## 1. Кратко о проекте
 
-Вертикальная (9:16) Anime Fantasy AFK/Idle RPG. Клиент Godot 4.7.2, сервер Go modular monolith, целевое хранилище PostgreSQL 16, контент версионированными JSON-пакетами, Lunex Admin Studio (React/TS).
+Вертикальная (9:16) Anime Fantasy AFK/Idle RPG. Клиент Godot 4.7.2 для Android, сервер Go modular monolith, хранилище PostgreSQL 16 на VPS Lunex, контент версионированными JSON-пакетами, Lunex Admin Studio (React/TS).
 
 ## 2. Стек
 

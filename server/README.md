@@ -8,7 +8,7 @@
 |---|---|
 | POST | `/api/v1/auth/guest` |
 | GET | `/api/v1/wallet` |
-| POST | `/api/v1/wallet/grant-test` (dev) |
+| POST | `/api/v1/wallet/grant-test` (test) |
 | GET | `/api/v1/heroes/collection` |
 | GET/PUT | `/api/v1/formations/{mode}` |
 | GET | `/api/v1/campaign/progress` |
@@ -27,4 +27,4 @@ CONTENT_PACKAGES_ROOT=../content/packages APP_ENV=dev go run ./cmd/api
 # DATABASE_URL=postgres://user:pass@localhost:5432/lunex?sslmode=disable go run ./cmd/api
 ```
 
-Клиент Godot: `ApiClient` → `LUNEX_API_BASE` или `http://127.0.0.1:8080` (fallback DEMO).
+Клиент Godot: `ApiClient` → `LUNEX_API_BASE` или `https://rikagro.ru/afkgame`.
