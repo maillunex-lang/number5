@@ -22,6 +22,7 @@ var _restore_checked := false
 var _bg_offset := Vector2.ZERO
 var _tab_register := false
 var _load_tween: Tween = null
+var _load_watch: SceneTreeTimer = null
 
 func _ready() -> void:
 	_guest_btn.disabled = true
@@ -109,11 +110,26 @@ func _show_loading(title: String, hint: String) -> void:
 	_load_tween = create_tween().set_loops()
 	_load_tween.tween_property(_loading_bar, "value", 0.85, 1.1)
 	_load_tween.tween_property(_loading_bar, "value", 0.2, 1.1)
+	# Hard UI watchdog: never leave the overlay stuck if a request hangs.
+	_load_watch = get_tree().create_timer(18.0)
+	_load_watch.timeout.connect(func():
+		if not is_inside_tree() or not _loading.visible:
+			return
+		_hide_loading()
+		_restore_checked = true
+		_guest_btn.disabled = false
+		_login.disabled = false
+		_register.disabled = false
+		_status.text = "Долгое ожидание сервера. Попробуй войти снова или как гость."
+		_server_chip.text = "● Таймаут"
+		NotificationManager.warn("Сервер не ответил вовремя")
+	, CONNECT_ONE_SHOT)
 
 func _hide_loading() -> void:
 	if _load_tween != null and is_instance_valid(_load_tween):
 		_load_tween.kill()
 		_load_tween = null
+	_load_watch = null
 	_loading.visible = false
 
 func _on_sync_progress(step: String) -> void:

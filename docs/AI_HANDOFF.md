@@ -1,15 +1,12 @@
-# Передача · UX loading + faster sync/claim
+# Передача · fix sync hang on login overlay
 
-Срез 20 ноября 2026. Ветка: `cursor/ux-loading-claim-feedback-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/fix-sync-hang-parallel-d5fe`.
 
-**Проблема:** вход ~5с (6 serial HTTP); после боя ~3с claim+wallet+campaign с пустым экраном.
+**Баг:** `_parallel_authed_gets` — лямбда захватывала общий `http` из цикла → `queue_free` чужого запроса → `pending` не доходил до 0 → оверлей «С возвращением» навечно.
 
-**Сделано:**
-- `sync_player` — параллельные GET (`_parallel_authed_gets`); heartbeat после входа.
-- Auth: LoadingOverlay + progress; health не гоняет restore.
-- Battle result: награды сразу после claim; wallet/campaign в фоне; progress bar на ожидании claim.
+**Сделано:** nodes[] по индексу; CONNECT_ONE_SHOT; deadline timeout; auth watchdog 18с.
 
 ## Next
 
-1. Merge → APK → проверить вход и экран победы.
-2. Wave5 UI / optional bootstrap API bundle.
+1. Merge → срочный APK → проверить restore/login.
+2. Wave5 UI.

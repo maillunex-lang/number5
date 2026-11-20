@@ -277,21 +277,28 @@ func _heartbeat_after_sync() -> void:
 	await _authed("POST", "/api/v1/player/heartbeat")
 
 func _parallel_authed_gets(paths: PackedStringArray) -> Array:
+	## Fan-out GETs. Lambdas must not capture the loop `http` var (shared ref → hang).
 	var n := paths.size()
 	var results: Array = []
 	results.resize(n)
-	var pending := n
-	var gate := { "done": false }
+	if n == 0:
+		return results
+	var pending := {"left": n}
+	var nodes: Array = []
+	nodes.resize(n)
 	for i in n:
 		var idx := i
-		var path := paths[i]
+		var path := str(paths[i])
 		var headers := PackedStringArray(["Content-Type: application/json", "Accept: application/json"])
 		if access_token != "":
 			headers.append("Authorization: Bearer %s" % access_token)
 		var http := HTTPRequest.new()
 		http.timeout = TIMEOUT_SEC
 		add_child(http)
+		nodes[idx] = http
 		http.request_completed.connect(func(http_result: int, code: int, _headers: PackedStringArray, body: PackedByteArray):
+			if results[idx] != null:
+				return
 			var response_body := body.get_string_from_utf8()
 			var parsed: Variant = {}
 			if response_body != "":
@@ -304,20 +311,29 @@ func _parallel_authed_gets(paths: PackedStringArray) -> Array:
 				results[idx] = {"ok": false, "error": last_error, "code": code, "data": parsed}
 			else:
 				results[idx] = {"ok": true, "code": code, "data": parsed}
-			http.queue_free()
-			pending -= 1
-			if pending <= 0:
-				gate["done"] = true
-		)
+			var node: Variant = nodes[idx]
+			if node != null and is_instance_valid(node):
+				(node as HTTPRequest).queue_free()
+			nodes[idx] = null
+			pending["left"] = int(pending["left"]) - 1
+		, CONNECT_ONE_SHOT)
 		var err := http.request(base_url + path, headers, HTTPClient.METHOD_GET, "")
 		if err != OK:
-			http.queue_free()
 			results[idx] = {"ok": false, "error": "request_error_%d" % err, "code": 0}
-			pending -= 1
-			if pending <= 0:
-				gate["done"] = true
-	while not gate["done"]:
+			http.queue_free()
+			nodes[idx] = null
+			pending["left"] = int(pending["left"]) - 1
+	var deadline := Time.get_ticks_msec() + int((TIMEOUT_SEC + 3.0) * 1000.0)
+	while int(pending["left"]) > 0 and Time.get_ticks_msec() < deadline:
 		await get_tree().process_frame
+	for i in n:
+		if results[i] == null:
+			results[i] = {"ok": false, "error": "timeout", "code": 0}
+			last_error = "parallel_get_timeout"
+		var node: Variant = nodes[i]
+		if node != null and is_instance_valid(node):
+			(node as HTTPRequest).queue_free()
+			nodes[i] = null
 	return results
 
 func sync_wallet() -> bool:
