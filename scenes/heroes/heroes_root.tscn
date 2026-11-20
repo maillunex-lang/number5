@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexheroesroot"]
+
+[ext_resource type="Script" path="res://scenes/heroes/heroes_root.gd" id="1"]
+
+[node name="HeroesRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.07, 0.12, 1)
+mouse_filter = 2
+
+[node name="Col" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 8
+
+[node name="Top" type="HBoxContainer" parent="Col"]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PortraitHost" type="Control" parent="Col/Top"]
+custom_minimum_size = Vector2(280, 300)
+layout_mode = 2
+
+[node name="Info" type="VBoxContainer" parent="Col/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Actions" type="VBoxContainer" parent="Col/Top"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DetailsBtn" type="Button" parent="Col/Top/Actions"]
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+text = "Карточка"
+
+[node name="SquadBtn" type="Button" parent="Col/Top/Actions"]
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+text = "Отряды"
+
+[node name="Filters" type="HBoxContainer" parent="Col"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Col"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Grid" type="GridContainer" parent="Col/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12

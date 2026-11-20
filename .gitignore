@@ -1,0 +1,37 @@
+# Godot 4
+.godot/
+*.translation
+export.cfg
+export_credentials.cfg
+*.apk
+*.aab
+*.ipa
+*.pck
+*.zip
+.import/
+android/
+.mono/
+data_*/
+*.tmp
+
+# Local secrets / keystores
+*.keystore
+*.jks
+*.pem
+secrets/
+.env
+.env.*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.user
+*~
+
+# Build artifacts
+builds/
+dist/
+/tmp/

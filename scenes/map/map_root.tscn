@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexmaproot01"]
+
+[ext_resource type="Script" path="res://scenes/map/map_root.gd" id="1"]
+
+[node name="MapRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.1, 0.09, 1)
+mouse_filter = 2
+
+[node name="Header" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 160.0
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.772, 0.416, 1)
+theme_override_font_sizes/font_size = 36
+text = "Карта мира"
+horizontal_alignment = 1
+
+[node name="BackHint" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.722, 0.753, 0.816, 1)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 1
+
+[node name="ContinueBtn" type="Button" parent="Header"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Продолжить"
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 160.0
+horizontal_scroll_mode = 0
+
+[node name="World" type="Control" parent="Scroll"]
+custom_minimum_size = Vector2(1080, 1600)
+layout_mode = 2
+
+[node name="Parallax" type="Control" parent="Scroll/World"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Regions" type="Control" parent="Scroll/World"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0

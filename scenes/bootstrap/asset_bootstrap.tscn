@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexassets001"]
+
+[ext_resource type="Script" path="res://scenes/bootstrap/asset_bootstrap.gd" id="1"]
+
+[node name="AssetBootstrap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.043, 0.071, 0.125, 1)
+mouse_filter = 2
+
+[node name="Art" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 0.45
+color = Color(0.12, 0.22, 0.32, 1)
+mouse_filter = 2
+
+[node name="Safe" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 100
+
+[node name="VBox" type="VBoxContainer" parent="Safe"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 2
+
+[node name="Tip" type="Label" parent="Safe/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.772, 0.416, 1)
+theme_override_font_sizes/font_size = 28
+text = "Совет: отряд из пяти героев решает исход автобоя."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Op" type="Label" parent="Safe/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.722, 0.753, 0.816, 1)
+theme_override_font_sizes/font_size = 24
+text = "Подготовка ресурсов…"
+horizontal_alignment = 1
+
+[node name="Bar" type="ProgressBar" parent="Safe/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+show_percentage = false
