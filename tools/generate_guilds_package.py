@@ -268,13 +268,8 @@ def main() -> None:
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    active = {
-        "version": "0.5.0",
-        "source": "content-c-guilds",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }
-    (ROOT / "content/packages/active.json").write_text(json.dumps(active, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Не трогаем active.json: активный пакет — последний (см. generate_meta_package.py).
+    print("Note: active.json не изменён (пересборка исторического 0.5.0).")
     print(f"Wrote {OUT}")
     print(f" raids={len(guilds['raids']['tiers'])} shop={len(guilds['shop']['offers'])} quests={len(guilds['daily_quests'])}")
 

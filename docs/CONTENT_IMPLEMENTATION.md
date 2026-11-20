@@ -45,7 +45,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 
 | ID | Статус | Критерий |
 |---|---|---|
-| C0–C3 | **Готово** | Пакет 0.2.0 / активный мир в 0.3.0 |
+| C0–C3 | **Готово** | Spine+CH01 с `0.2.0`; активный пакет сейчас **`0.6.0`** |
 | C4 | Дальше | CH02–CH06 данные |
 | C5–C7 | Дальше | навыки / арт / OTA-2 |
 
@@ -59,8 +59,9 @@ CH0y-nn      ←── loot_tables.stage_bindings / unlock gates
 sku / sub_*  ←── economy.offers / subscriptions (payable_price_rub=0)
 ```
 
-Генераторы: `tools/generate_razlom_package.py`, `tools/generate_economy_package.py`.  
-Валидатор: `tools/validate_content_package.sh 0.3.0`.
+Генераторы:  
+`tools/generate_razlom_package.py` → `generate_economy_package.py` → `generate_pve_package.py` → `generate_guilds_package.py` → **`generate_meta_package.py`** (пишет `active.json`).  
+Валидатор: `tools/validate_content_package.sh 0.6.0` · ссылки: `tools/check_repo_refs.py`.
 
 ## Порядок PvE (P) — после экономики, не ждать C4
 

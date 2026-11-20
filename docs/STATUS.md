@@ -15,5 +15,6 @@
 
 ```bash
 tools/validate_content_package.sh 0.6.0
-python3 tools/generate_meta_package.py
+python3 tools/check_repo_refs.py
+python3 tools/generate_meta_package.py   # единственный генератор, пишущий active.json
 ```

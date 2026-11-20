@@ -6,14 +6,16 @@ on:
     paths:
       - "content/**"
       - "admin-studio/**"
-      - "tools/validate_content_package.sh"
+      - "docs/**"
+      - "tools/**"
       - ".github/workflows/content-and-studio.yml"
   pull_request:
     branches: [main]
     paths:
       - "content/**"
       - "admin-studio/**"
-      - "tools/validate_content_package.sh"
+      - "docs/**"
+      - "tools/**"
       - ".github/workflows/content-and-studio.yml"
 
 jobs:
@@ -23,6 +25,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate active content package
         run: tools/validate_content_package.sh
+      - name: Check repo path references
+        run: python3 tools/check_repo_refs.py
 
   admin-studio:
     runs-on: ubuntu-latest

@@ -729,13 +729,8 @@ def main() -> None:
     }
     write_json(OUT / "manifest.json", manifest)
 
-    active = {
-        "version": "0.3.0",
-        "source": "content-c-economy",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }
-    write_json(ROOT / "content/packages/active.json", active)
+    # Не трогаем active.json: активный пакет — последний (см. generate_meta_package.py).
+    print("Note: active.json не изменён (пересборка исторического 0.3.0).")
     print(f"Wrote {OUT}")
     print(f" offers={len(economy['offers'])} sets={len(equipment['sets'])} loot={len(loot['stage_bindings'])} "
           f"banners={len(gacha['banners'])} missions={len(liveops['expeditions']['missions'])}")

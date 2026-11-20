@@ -11,11 +11,11 @@
 |---|---|---|
 | Документы D (GDD / MVP / STRUCTURE / ARCHITECTURE / CONTENT-01) | Зафиксированы | `docs/` |
 | UI Prototype v0.1 (Godot 4.7.2) | **Готово** | `project.godot`, `scenes/`, smoke |
-| Пакеты schema 2/3 (клиент только читает) | **Готово** `0.1.0` (демо) + **`0.2.0` (Разлом эпох)** | `content/packages/` |
+| Пакеты schema 2→7 (клиент только читает) | **Готово** `0.1.0`…`0.6.0`, active=`0.6.0` | `content/packages/` |
 | Admin Studio комбайн | **Готово** | `admin-studio/` |
 | OTA контента без переустановки APK | **Готово** (dev CDN) | `docs/CONTENT_OTA.md` |
-| **CONTENT-C канон** (6 глав / 45 героев / бестиарий) | **В репо** | `docs/content/*.md` |
-| **CONTENT-C вертикальный срез гл.1** | **В коде** (C0–C3) | пакет `0.2.0`, `docs/CONTENT_IMPLEMENTATION.md` |
+| **CONTENT-C канон** (6 глав / 45 героев / бестиарий + meta) | **В репо** | `docs/content/*.md` |
+| **CONTENT-C вертикальный срез** | **В коде** (C0–C3, E/P/G, M→V) | active `0.6.0`, `docs/CONTENT_IMPLEMENTATION.md` |
 | HTTPS CDN / VPS (OTA-2) | Не развёрнуто | хост + `cdn_base` |
 | CORE-01 (Go + PostgreSQL + CI) | Не начато | этап A |
 | Серверный бой / прогресс / платежи | Не начато | после AUTH/BATTLE |
@@ -30,7 +30,7 @@
 | C0 | Канон в `docs/content/` + фазы | **Готово** | Три спецификации в репо |
 | C1 | Spine: F01–F06, H01–H45, E**/B**, 6 ригов | **Готово** | `heroes.json` + `enemies.json`, кросс-валидация |
 | C2 | Кампания CH01 (30 этапов + encounters) | **Готово** | `campaign.json` ссылается на E/B |
-| C3 | Клиент на `0.2.0` | **Готово** | Loader/DemoData/фильтры, active → 0.2.0 |
+| C3 | Клиент на spine+CH01 | **Готово** | Loader/DemoData; active эволюционировал до `0.6.0` |
 | C4 | Данные CH02–CH06 | Дальше | По главе, тот же spine |
 | C5 | Навыки / диалоги / улики в runtime | Дальше | skill ids + story keys |
 | C6 | Арт ригов/героев + экономика | Параллельно ART-05 | placeholder → ассеты |
@@ -111,7 +111,7 @@ Claim/TTL серверные — после CORE-01.
 | STUDIO-2 | Visual Editor 2.0 + комбайн | **Готово** | PKG-PROTO | Theme/Shell/Hub 9:16 |
 | OTA-1 | Hot-reload контента | **Готово (dev)** | PKG-PROTO | Save→Publish→клиент |
 | OTA-2 | Прод CDN (HTTPS) | Ожидает | OTA-1, хост | Телефоны с публичным URL |
-| CONTENT-C | Игровой контент C | **В работе** (C0–C3 ✓, E0–E4 ✓) | DOC-D | C4–C7, E5 сервер |
+| CONTENT-C | Игровой контент C | **В работе** (C0–C3 ✓, E/P/G ✓, M→V ✓) | DOC-D | C4–C7, сервер claim |
 | TZ-A | ТЗ фундамента | Ожидает | CONTENT-C (минимум C3) | API/БД/протокол боя |
 | CORE-01 | Go + Postgres + CI | Ожидает | TZ-A, доступы | Сервисы изолированно |
 | UI-02 | UI Kit на реальных API | Частично | CORE-01 | Серверные данные |
@@ -141,19 +141,20 @@ Claim/TTL серверные — после CORE-01.
 
 ## Ближайший рабочий порядок
 
-1. **E5 / CORE-01** — серверный wallet, дроп, pity (после TZ-A).
+1. **CORE-01** — серверный wallet / claim / TTL почты (после TZ-A).
 2. **C4** — данные глав 2–6 + loot bindings.
 3. UI вертикали: инвентарь экипировки, доска экспедиций.
 4. **OTA-2** — HTTPS CDN.
-5. Admin Studio economy editors.
+5. Admin Studio editors для meta/economy.
 
 ## Тестовые ворота
 
 1. Smoke навигации — обязателен после смены пакета
-2. `tools/validate_content_package.sh 0.2.0` — кросс-ID PASS
-3. OTA Publish → `/cdn` → hot-reload — PASS локально
-4. Functional бой/награды — демо до CORE-01
+2. `tools/validate_content_package.sh 0.6.0` — кросс-ID PASS
+3. `python3 tools/check_repo_refs.py` — пути в доках/коде
+4. OTA Publish → `/cdn` → hot-reload — PASS локально
+5. Functional бой/награды — демо до CORE-01
 
 ## Управление изменениями
 
-Канон правится в `docs/content/`, пакет пересобирается `tools/generate_razlom_package.py`, валидируется скриптом, публикуется новой версией (`0.2.x`), не in-place rewrite `0.1.0`.
+Канон правится в `docs/content/`. Исторические генераторы (`generate_razlom`…`generate_guilds`) **не** двигают `active.json`. Активный пакет пишет только `tools/generate_meta_package.py` (сейчас `0.6.0`). Не rewrite старых версий на месте.

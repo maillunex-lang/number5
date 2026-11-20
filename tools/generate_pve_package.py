@@ -324,13 +324,8 @@ def main() -> None:
     manifest["integrity"]["hashes"]["manifest.json"] = hashlib.sha256((OUT / "manifest.json").read_bytes()).hexdigest()
     # Don't rewrite to avoid hash churn of self — leave without self-hash like prior packages
 
-    active = {
-        "version": "0.4.0",
-        "source": "content-c-pve",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    }
-    (ROOT / "content/packages/active.json").write_text(json.dumps(active, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Не трогаем active.json: активный пакет — последний (см. generate_meta_package.py).
+    print("Note: active.json не изменён (пересборка исторического 0.4.0).")
     print(f"Wrote {OUT}")
     print(f" tower floors={len(pve['tower']['floors'])} hunt days={len(pve['anomaly_hunt']['schedule'])} "
           f"gates={len(pve['faction_gates']['factions'])} dungeons={len(pve['rift_dungeons']['dungeons'])}")

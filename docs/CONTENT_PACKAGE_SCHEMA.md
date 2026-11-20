@@ -31,7 +31,9 @@
 | `battle_modes.json` | Порталы битвы |
 | `features.json` | Демо-фичи |
 
-`DemoData` / `ThemeManager` / Shell / `ContentUpdateService` читают пакет. Прогресс игрока сюда не пишется.  
-OTA список файлов берётся из `manifest.files` / `integrity.hashes` (+ `enemies.json`).
+`DemoData` / `ThemeManager` / Shell / `ContentUpdateService` / `ContentPackageLoader` читают пакет. Прогресс игрока сюда не пишется.  
+OTA: обязательные файлы + optional (`enemies`…`live_events`) из `manifest.files` / `integrity.hashes`.
 
-Studio: publish обновляет `active.json` и `publish_history.json`; rollback возвращает указатель.
+Studio: publish обновляет `active.json` и `publish_history.json`; rollback возвращает указатель.  
+Исторические генераторы (`0.2`…`0.5`) пакеты пересобирают, но **не** меняют `active.json` — это делает только `tools/generate_meta_package.py` (текущий active).
+
