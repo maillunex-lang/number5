@@ -8,7 +8,7 @@
 
 Документы: `docs/STATUS.md` (срез), `docs/ROADMAP.md`, `docs/CONTENT_HANDOFF.md`, `docs/CONTENT_IMPLEMENTATION.md`, `docs/CONTENT_OTA.md`, `docs/ADMIN_STUDIO.md`, `docs/STRUCTURE.md`.
 
-Активный контент-пакет: **`0.6.0`** (`content/packages/active.json`) — канон «Разлом эпох» + экономика/PvE/гильдии/meta.
+Активный контент-пакет: **`0.7.0`** (`content/packages/active.json`) — канон «Разлом эпох» + экономика/PvE/гильдии/meta.
 
 ## Запуск клиента
 
@@ -44,7 +44,7 @@ UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — см. `docs/ADMIN_STUD
 - Карта → глава → этап → подготовка → автобой 5v5 → результат
 - Коллекция героев, отряды, пресеты
 - Демо-экраны: магазин/квесты/AFK/почта/календарь/профиль/достижения/события (данные пакета)
-- Версионные контент-пакеты `0.1.0`…`0.6.0` + Admin Studio
+- Версионные контент-пакеты `0.1.0`…`0.7.0` + Admin Studio
 
 - Пресеты графики Low/Med/High/Ultra
 - Android debug APK (см. `docs/ANDROID_BUILD.md`)

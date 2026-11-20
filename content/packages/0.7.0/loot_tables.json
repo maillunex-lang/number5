@@ -1,0 +1,2687 @@
+{
+  "schema_version": 1,
+  "quality_tables": {
+    "normal": {
+      "any_item_bp": 1800,
+      "common": 60,
+      "uncommon": 30,
+      "rare": 10,
+      "epic": 0,
+      "legendary": 0,
+      "relic": 0
+    },
+    "elite": {
+      "any_item_bp": 3200,
+      "common": 15,
+      "uncommon": 40,
+      "rare": 35,
+      "epic": 10,
+      "legendary": 0,
+      "relic": 0
+    },
+    "boss": {
+      "any_item_bp": 5500,
+      "common": 0,
+      "uncommon": 10,
+      "rare": 40,
+      "epic": 35,
+      "legendary": 14,
+      "relic": 1
+    },
+    "secret": {
+      "any_item_bp": 3500,
+      "common": 0,
+      "uncommon": 25,
+      "rare": 45,
+      "epic": 25,
+      "legendary": 5,
+      "relic": 0
+    }
+  },
+  "pity": {
+    "no_item_streak": 8,
+    "guarantee_item": true
+  },
+  "replay_item_cap_per_day": 20,
+  "chapter_sets": {
+    "1": [
+      "SET01",
+      "SET02"
+    ],
+    "2": [
+      "SET03",
+      "SET04"
+    ],
+    "3": [
+      "SET05",
+      "SET06"
+    ],
+    "4": [
+      "SET07",
+      "SET08"
+    ],
+    "5": [
+      "SET09",
+      "SET10"
+    ],
+    "6": [
+      "SET11",
+      "SET12"
+    ]
+  },
+  "stage_bindings": [
+    {
+      "stage_id": "CH01-01",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2480,
+        "hero_xp": 970
+      }
+    },
+    {
+      "stage_id": "CH01-02",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2560,
+        "hero_xp": 990
+      }
+    },
+    {
+      "stage_id": "CH01-03",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2640,
+        "hero_xp": 1010
+      }
+    },
+    {
+      "stage_id": "CH01-04",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2720,
+        "hero_xp": 1030
+      }
+    },
+    {
+      "stage_id": "CH01-05",
+      "loot_table_id": "loot_ch01_elite",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 3919,
+        "hero_xp": 1365
+      }
+    },
+    {
+      "stage_id": "CH01-06",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2880,
+        "hero_xp": 1070
+      }
+    },
+    {
+      "stage_id": "CH01-07",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2960,
+        "hero_xp": 1090
+      }
+    },
+    {
+      "stage_id": "CH01-08",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3040,
+        "hero_xp": 1110
+      }
+    },
+    {
+      "stage_id": "CH01-09",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3120,
+        "hero_xp": 1130
+      }
+    },
+    {
+      "stage_id": "CH01-10",
+      "loot_table_id": "loot_ch01_boss",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 7040,
+        "hero_xp": 2300
+      }
+    },
+    {
+      "stage_id": "CH01-11",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3280,
+        "hero_xp": 1170
+      }
+    },
+    {
+      "stage_id": "CH01-12",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3360,
+        "hero_xp": 1190
+      }
+    },
+    {
+      "stage_id": "CH01-13",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3440,
+        "hero_xp": 1210
+      }
+    },
+    {
+      "stage_id": "CH01-14",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3520,
+        "hero_xp": 1230
+      }
+    },
+    {
+      "stage_id": "CH01-15",
+      "loot_table_id": "loot_ch01_elite",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1625
+      }
+    },
+    {
+      "stage_id": "CH01-16",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3680,
+        "hero_xp": 1270
+      }
+    },
+    {
+      "stage_id": "CH01-17",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3760,
+        "hero_xp": 1290
+      }
+    },
+    {
+      "stage_id": "CH01-18",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3840,
+        "hero_xp": 1310
+      }
+    },
+    {
+      "stage_id": "CH01-19",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3920,
+        "hero_xp": 1330
+      }
+    },
+    {
+      "stage_id": "CH01-20",
+      "loot_table_id": "loot_ch01_boss",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 8800,
+        "hero_xp": 2700
+      }
+    },
+    {
+      "stage_id": "CH01-21",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4080,
+        "hero_xp": 1370
+      }
+    },
+    {
+      "stage_id": "CH01-22",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4160,
+        "hero_xp": 1390
+      }
+    },
+    {
+      "stage_id": "CH01-23",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4240,
+        "hero_xp": 1410
+      }
+    },
+    {
+      "stage_id": "CH01-24",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4320,
+        "hero_xp": 1430
+      }
+    },
+    {
+      "stage_id": "CH01-25",
+      "loot_table_id": "loot_ch01_elite",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6160,
+        "hero_xp": 1885
+      }
+    },
+    {
+      "stage_id": "CH01-26",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1470
+      }
+    },
+    {
+      "stage_id": "CH01-27",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1490
+      }
+    },
+    {
+      "stage_id": "CH01-28",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1510
+      }
+    },
+    {
+      "stage_id": "CH01-29",
+      "loot_table_id": "loot_ch01_normal",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1530
+      }
+    },
+    {
+      "stage_id": "CH01-30",
+      "loot_table_id": "loot_ch01_boss",
+      "equipment_tier": 1,
+      "featured_sets": [
+        "SET01",
+        "SET02"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 10560,
+        "hero_xp": 3100
+      }
+    },
+    {
+      "stage_id": "CH02-01",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2880,
+        "hero_xp": 1120
+      }
+    },
+    {
+      "stage_id": "CH02-02",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 2960,
+        "hero_xp": 1140
+      }
+    },
+    {
+      "stage_id": "CH02-03",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3040,
+        "hero_xp": 1160
+      }
+    },
+    {
+      "stage_id": "CH02-04",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3120,
+        "hero_xp": 1180
+      }
+    },
+    {
+      "stage_id": "CH02-05",
+      "loot_table_id": "loot_ch02_elite",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1560
+      }
+    },
+    {
+      "stage_id": "CH02-06",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3280,
+        "hero_xp": 1220
+      }
+    },
+    {
+      "stage_id": "CH02-07",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3360,
+        "hero_xp": 1240
+      }
+    },
+    {
+      "stage_id": "CH02-08",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3440,
+        "hero_xp": 1260
+      }
+    },
+    {
+      "stage_id": "CH02-09",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3520,
+        "hero_xp": 1280
+      }
+    },
+    {
+      "stage_id": "CH02-10",
+      "loot_table_id": "loot_ch02_boss",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 7920,
+        "hero_xp": 2600
+      }
+    },
+    {
+      "stage_id": "CH02-11",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3680,
+        "hero_xp": 1320
+      }
+    },
+    {
+      "stage_id": "CH02-12",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3760,
+        "hero_xp": 1340
+      }
+    },
+    {
+      "stage_id": "CH02-13",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3840,
+        "hero_xp": 1360
+      }
+    },
+    {
+      "stage_id": "CH02-14",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3920,
+        "hero_xp": 1380
+      }
+    },
+    {
+      "stage_id": "CH02-15",
+      "loot_table_id": "loot_ch02_elite",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 5600,
+        "hero_xp": 1820
+      }
+    },
+    {
+      "stage_id": "CH02-16",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4080,
+        "hero_xp": 1420
+      }
+    },
+    {
+      "stage_id": "CH02-17",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4160,
+        "hero_xp": 1440
+      }
+    },
+    {
+      "stage_id": "CH02-18",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4240,
+        "hero_xp": 1460
+      }
+    },
+    {
+      "stage_id": "CH02-19",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4320,
+        "hero_xp": 1480
+      }
+    },
+    {
+      "stage_id": "CH02-20",
+      "loot_table_id": "loot_ch02_boss",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 9680,
+        "hero_xp": 3000
+      }
+    },
+    {
+      "stage_id": "CH02-21",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1520
+      }
+    },
+    {
+      "stage_id": "CH02-22",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1540
+      }
+    },
+    {
+      "stage_id": "CH02-23",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1560
+      }
+    },
+    {
+      "stage_id": "CH02-24",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1580
+      }
+    },
+    {
+      "stage_id": "CH02-25",
+      "loot_table_id": "loot_ch02_elite",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6720,
+        "hero_xp": 2080
+      }
+    },
+    {
+      "stage_id": "CH02-26",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4880,
+        "hero_xp": 1620
+      }
+    },
+    {
+      "stage_id": "CH02-27",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4960,
+        "hero_xp": 1640
+      }
+    },
+    {
+      "stage_id": "CH02-28",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1660
+      }
+    },
+    {
+      "stage_id": "CH02-29",
+      "loot_table_id": "loot_ch02_normal",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5120,
+        "hero_xp": 1680
+      }
+    },
+    {
+      "stage_id": "CH02-30",
+      "loot_table_id": "loot_ch02_boss",
+      "equipment_tier": 2,
+      "featured_sets": [
+        "SET03",
+        "SET04"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 11440,
+        "hero_xp": 3400
+      }
+    },
+    {
+      "stage_id": "CH03-01",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3280,
+        "hero_xp": 1270
+      }
+    },
+    {
+      "stage_id": "CH03-02",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3360,
+        "hero_xp": 1290
+      }
+    },
+    {
+      "stage_id": "CH03-03",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3440,
+        "hero_xp": 1310
+      }
+    },
+    {
+      "stage_id": "CH03-04",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3520,
+        "hero_xp": 1330
+      }
+    },
+    {
+      "stage_id": "CH03-05",
+      "loot_table_id": "loot_ch03_elite",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1755
+      }
+    },
+    {
+      "stage_id": "CH03-06",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3680,
+        "hero_xp": 1370
+      }
+    },
+    {
+      "stage_id": "CH03-07",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3760,
+        "hero_xp": 1390
+      }
+    },
+    {
+      "stage_id": "CH03-08",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3840,
+        "hero_xp": 1410
+      }
+    },
+    {
+      "stage_id": "CH03-09",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3920,
+        "hero_xp": 1430
+      }
+    },
+    {
+      "stage_id": "CH03-10",
+      "loot_table_id": "loot_ch03_boss",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 8800,
+        "hero_xp": 2900
+      }
+    },
+    {
+      "stage_id": "CH03-11",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4080,
+        "hero_xp": 1470
+      }
+    },
+    {
+      "stage_id": "CH03-12",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4160,
+        "hero_xp": 1490
+      }
+    },
+    {
+      "stage_id": "CH03-13",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4240,
+        "hero_xp": 1510
+      }
+    },
+    {
+      "stage_id": "CH03-14",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4320,
+        "hero_xp": 1530
+      }
+    },
+    {
+      "stage_id": "CH03-15",
+      "loot_table_id": "loot_ch03_elite",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6160,
+        "hero_xp": 2015
+      }
+    },
+    {
+      "stage_id": "CH03-16",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1570
+      }
+    },
+    {
+      "stage_id": "CH03-17",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1590
+      }
+    },
+    {
+      "stage_id": "CH03-18",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1610
+      }
+    },
+    {
+      "stage_id": "CH03-19",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1630
+      }
+    },
+    {
+      "stage_id": "CH03-20",
+      "loot_table_id": "loot_ch03_boss",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 10560,
+        "hero_xp": 3300
+      }
+    },
+    {
+      "stage_id": "CH03-21",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4880,
+        "hero_xp": 1670
+      }
+    },
+    {
+      "stage_id": "CH03-22",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4960,
+        "hero_xp": 1690
+      }
+    },
+    {
+      "stage_id": "CH03-23",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1710
+      }
+    },
+    {
+      "stage_id": "CH03-24",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5120,
+        "hero_xp": 1730
+      }
+    },
+    {
+      "stage_id": "CH03-25",
+      "loot_table_id": "loot_ch03_elite",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 7279,
+        "hero_xp": 2275
+      }
+    },
+    {
+      "stage_id": "CH03-26",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5280,
+        "hero_xp": 1770
+      }
+    },
+    {
+      "stage_id": "CH03-27",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5360,
+        "hero_xp": 1790
+      }
+    },
+    {
+      "stage_id": "CH03-28",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5440,
+        "hero_xp": 1810
+      }
+    },
+    {
+      "stage_id": "CH03-29",
+      "loot_table_id": "loot_ch03_normal",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5520,
+        "hero_xp": 1830
+      }
+    },
+    {
+      "stage_id": "CH03-30",
+      "loot_table_id": "loot_ch03_boss",
+      "equipment_tier": 3,
+      "featured_sets": [
+        "SET05",
+        "SET06"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 12320,
+        "hero_xp": 3700
+      }
+    },
+    {
+      "stage_id": "CH04-01",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3680,
+        "hero_xp": 1420
+      }
+    },
+    {
+      "stage_id": "CH04-02",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3760,
+        "hero_xp": 1440
+      }
+    },
+    {
+      "stage_id": "CH04-03",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3840,
+        "hero_xp": 1460
+      }
+    },
+    {
+      "stage_id": "CH04-04",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 3920,
+        "hero_xp": 1480
+      }
+    },
+    {
+      "stage_id": "CH04-05",
+      "loot_table_id": "loot_ch04_elite",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 5600,
+        "hero_xp": 1950
+      }
+    },
+    {
+      "stage_id": "CH04-06",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4080,
+        "hero_xp": 1520
+      }
+    },
+    {
+      "stage_id": "CH04-07",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4160,
+        "hero_xp": 1540
+      }
+    },
+    {
+      "stage_id": "CH04-08",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4240,
+        "hero_xp": 1560
+      }
+    },
+    {
+      "stage_id": "CH04-09",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4320,
+        "hero_xp": 1580
+      }
+    },
+    {
+      "stage_id": "CH04-10",
+      "loot_table_id": "loot_ch04_boss",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 9680,
+        "hero_xp": 3200
+      }
+    },
+    {
+      "stage_id": "CH04-11",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1620
+      }
+    },
+    {
+      "stage_id": "CH04-12",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1640
+      }
+    },
+    {
+      "stage_id": "CH04-13",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1660
+      }
+    },
+    {
+      "stage_id": "CH04-14",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1680
+      }
+    },
+    {
+      "stage_id": "CH04-15",
+      "loot_table_id": "loot_ch04_elite",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6720,
+        "hero_xp": 2210
+      }
+    },
+    {
+      "stage_id": "CH04-16",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4880,
+        "hero_xp": 1720
+      }
+    },
+    {
+      "stage_id": "CH04-17",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4960,
+        "hero_xp": 1740
+      }
+    },
+    {
+      "stage_id": "CH04-18",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1760
+      }
+    },
+    {
+      "stage_id": "CH04-19",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5120,
+        "hero_xp": 1780
+      }
+    },
+    {
+      "stage_id": "CH04-20",
+      "loot_table_id": "loot_ch04_boss",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 11440,
+        "hero_xp": 3600
+      }
+    },
+    {
+      "stage_id": "CH04-21",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5280,
+        "hero_xp": 1820
+      }
+    },
+    {
+      "stage_id": "CH04-22",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5360,
+        "hero_xp": 1840
+      }
+    },
+    {
+      "stage_id": "CH04-23",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5440,
+        "hero_xp": 1860
+      }
+    },
+    {
+      "stage_id": "CH04-24",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5520,
+        "hero_xp": 1880
+      }
+    },
+    {
+      "stage_id": "CH04-25",
+      "loot_table_id": "loot_ch04_elite",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 7839,
+        "hero_xp": 2470
+      }
+    },
+    {
+      "stage_id": "CH04-26",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5680,
+        "hero_xp": 1920
+      }
+    },
+    {
+      "stage_id": "CH04-27",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5760,
+        "hero_xp": 1940
+      }
+    },
+    {
+      "stage_id": "CH04-28",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5840,
+        "hero_xp": 1960
+      }
+    },
+    {
+      "stage_id": "CH04-29",
+      "loot_table_id": "loot_ch04_normal",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5920,
+        "hero_xp": 1980
+      }
+    },
+    {
+      "stage_id": "CH04-30",
+      "loot_table_id": "loot_ch04_boss",
+      "equipment_tier": 4,
+      "featured_sets": [
+        "SET07",
+        "SET08"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 13200,
+        "hero_xp": 4000
+      }
+    },
+    {
+      "stage_id": "CH05-01",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4080,
+        "hero_xp": 1570
+      }
+    },
+    {
+      "stage_id": "CH05-02",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4160,
+        "hero_xp": 1590
+      }
+    },
+    {
+      "stage_id": "CH05-03",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4240,
+        "hero_xp": 1610
+      }
+    },
+    {
+      "stage_id": "CH05-04",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4320,
+        "hero_xp": 1630
+      }
+    },
+    {
+      "stage_id": "CH05-05",
+      "loot_table_id": "loot_ch05_elite",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6160,
+        "hero_xp": 2145
+      }
+    },
+    {
+      "stage_id": "CH05-06",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1670
+      }
+    },
+    {
+      "stage_id": "CH05-07",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1690
+      }
+    },
+    {
+      "stage_id": "CH05-08",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1710
+      }
+    },
+    {
+      "stage_id": "CH05-09",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1730
+      }
+    },
+    {
+      "stage_id": "CH05-10",
+      "loot_table_id": "loot_ch05_boss",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 10560,
+        "hero_xp": 3500
+      }
+    },
+    {
+      "stage_id": "CH05-11",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4880,
+        "hero_xp": 1770
+      }
+    },
+    {
+      "stage_id": "CH05-12",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4960,
+        "hero_xp": 1790
+      }
+    },
+    {
+      "stage_id": "CH05-13",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1810
+      }
+    },
+    {
+      "stage_id": "CH05-14",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5120,
+        "hero_xp": 1830
+      }
+    },
+    {
+      "stage_id": "CH05-15",
+      "loot_table_id": "loot_ch05_elite",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 7279,
+        "hero_xp": 2405
+      }
+    },
+    {
+      "stage_id": "CH05-16",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5280,
+        "hero_xp": 1870
+      }
+    },
+    {
+      "stage_id": "CH05-17",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5360,
+        "hero_xp": 1890
+      }
+    },
+    {
+      "stage_id": "CH05-18",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5440,
+        "hero_xp": 1910
+      }
+    },
+    {
+      "stage_id": "CH05-19",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5520,
+        "hero_xp": 1930
+      }
+    },
+    {
+      "stage_id": "CH05-20",
+      "loot_table_id": "loot_ch05_boss",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 12320,
+        "hero_xp": 3900
+      }
+    },
+    {
+      "stage_id": "CH05-21",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5680,
+        "hero_xp": 1970
+      }
+    },
+    {
+      "stage_id": "CH05-22",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5760,
+        "hero_xp": 1990
+      }
+    },
+    {
+      "stage_id": "CH05-23",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5840,
+        "hero_xp": 2010
+      }
+    },
+    {
+      "stage_id": "CH05-24",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5920,
+        "hero_xp": 2030
+      }
+    },
+    {
+      "stage_id": "CH05-25",
+      "loot_table_id": "loot_ch05_elite",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 8400,
+        "hero_xp": 2665
+      }
+    },
+    {
+      "stage_id": "CH05-26",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6080,
+        "hero_xp": 2070
+      }
+    },
+    {
+      "stage_id": "CH05-27",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6160,
+        "hero_xp": 2090
+      }
+    },
+    {
+      "stage_id": "CH05-28",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6240,
+        "hero_xp": 2110
+      }
+    },
+    {
+      "stage_id": "CH05-29",
+      "loot_table_id": "loot_ch05_normal",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6320,
+        "hero_xp": 2130
+      }
+    },
+    {
+      "stage_id": "CH05-30",
+      "loot_table_id": "loot_ch05_boss",
+      "equipment_tier": 5,
+      "featured_sets": [
+        "SET09",
+        "SET10"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 14080,
+        "hero_xp": 4300
+      }
+    },
+    {
+      "stage_id": "CH06-01",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4480,
+        "hero_xp": 1720
+      }
+    },
+    {
+      "stage_id": "CH06-02",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4560,
+        "hero_xp": 1740
+      }
+    },
+    {
+      "stage_id": "CH06-03",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4640,
+        "hero_xp": 1760
+      }
+    },
+    {
+      "stage_id": "CH06-04",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4720,
+        "hero_xp": 1780
+      }
+    },
+    {
+      "stage_id": "CH06-05",
+      "loot_table_id": "loot_ch06_elite",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 6720,
+        "hero_xp": 2340
+      }
+    },
+    {
+      "stage_id": "CH06-06",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4880,
+        "hero_xp": 1820
+      }
+    },
+    {
+      "stage_id": "CH06-07",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 4960,
+        "hero_xp": 1840
+      }
+    },
+    {
+      "stage_id": "CH06-08",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5040,
+        "hero_xp": 1860
+      }
+    },
+    {
+      "stage_id": "CH06-09",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5120,
+        "hero_xp": 1880
+      }
+    },
+    {
+      "stage_id": "CH06-10",
+      "loot_table_id": "loot_ch06_boss",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 11440,
+        "hero_xp": 3800
+      }
+    },
+    {
+      "stage_id": "CH06-11",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5280,
+        "hero_xp": 1920
+      }
+    },
+    {
+      "stage_id": "CH06-12",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5360,
+        "hero_xp": 1940
+      }
+    },
+    {
+      "stage_id": "CH06-13",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5440,
+        "hero_xp": 1960
+      }
+    },
+    {
+      "stage_id": "CH06-14",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5520,
+        "hero_xp": 1980
+      }
+    },
+    {
+      "stage_id": "CH06-15",
+      "loot_table_id": "loot_ch06_elite",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 7839,
+        "hero_xp": 2600
+      }
+    },
+    {
+      "stage_id": "CH06-16",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5680,
+        "hero_xp": 2020
+      }
+    },
+    {
+      "stage_id": "CH06-17",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5760,
+        "hero_xp": 2040
+      }
+    },
+    {
+      "stage_id": "CH06-18",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5840,
+        "hero_xp": 2060
+      }
+    },
+    {
+      "stage_id": "CH06-19",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 5920,
+        "hero_xp": 2080
+      }
+    },
+    {
+      "stage_id": "CH06-20",
+      "loot_table_id": "loot_ch06_boss",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 13200,
+        "hero_xp": 4200
+      }
+    },
+    {
+      "stage_id": "CH06-21",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6080,
+        "hero_xp": 2120
+      }
+    },
+    {
+      "stage_id": "CH06-22",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6160,
+        "hero_xp": 2140
+      }
+    },
+    {
+      "stage_id": "CH06-23",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6240,
+        "hero_xp": 2160
+      }
+    },
+    {
+      "stage_id": "CH06-24",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6320,
+        "hero_xp": 2180
+      }
+    },
+    {
+      "stage_id": "CH06-25",
+      "loot_table_id": "loot_ch06_elite",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "elite",
+      "first_clear": {
+        "gold": 8960,
+        "hero_xp": 2860
+      }
+    },
+    {
+      "stage_id": "CH06-26",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6480,
+        "hero_xp": 2220
+      }
+    },
+    {
+      "stage_id": "CH06-27",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6560,
+        "hero_xp": 2240
+      }
+    },
+    {
+      "stage_id": "CH06-28",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6640,
+        "hero_xp": 2260
+      }
+    },
+    {
+      "stage_id": "CH06-29",
+      "loot_table_id": "loot_ch06_normal",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "normal",
+      "first_clear": {
+        "gold": 6720,
+        "hero_xp": 2280
+      }
+    },
+    {
+      "stage_id": "CH06-30",
+      "loot_table_id": "loot_ch06_boss",
+      "equipment_tier": 6,
+      "featured_sets": [
+        "SET11",
+        "SET12"
+      ],
+      "stage_kind": "boss",
+      "first_clear": {
+        "gold": 14960,
+        "hero_xp": 4600
+      }
+    }
+  ],
+  "note": "CH01 полные привязки; CH02–06 добавляются в C4/E1b.",
+  "tables": {
+    "loot_ch01_normal": {
+      "id": "loot_ch01_normal",
+      "quality_key": "normal",
+      "chapter": 1
+    },
+    "loot_ch01_elite": {
+      "id": "loot_ch01_elite",
+      "quality_key": "elite",
+      "chapter": 1
+    },
+    "loot_ch01_boss": {
+      "id": "loot_ch01_boss",
+      "quality_key": "boss",
+      "chapter": 1
+    },
+    "loot_ch02_normal": {
+      "id": "loot_ch02_normal",
+      "quality_key": "normal",
+      "chapter": 2
+    },
+    "loot_ch02_elite": {
+      "id": "loot_ch02_elite",
+      "quality_key": "elite",
+      "chapter": 2
+    },
+    "loot_ch02_boss": {
+      "id": "loot_ch02_boss",
+      "quality_key": "boss",
+      "chapter": 2
+    },
+    "loot_ch03_normal": {
+      "id": "loot_ch03_normal",
+      "quality_key": "normal",
+      "chapter": 3
+    },
+    "loot_ch03_elite": {
+      "id": "loot_ch03_elite",
+      "quality_key": "elite",
+      "chapter": 3
+    },
+    "loot_ch03_boss": {
+      "id": "loot_ch03_boss",
+      "quality_key": "boss",
+      "chapter": 3
+    },
+    "loot_ch04_normal": {
+      "id": "loot_ch04_normal",
+      "quality_key": "normal",
+      "chapter": 4
+    },
+    "loot_ch04_elite": {
+      "id": "loot_ch04_elite",
+      "quality_key": "elite",
+      "chapter": 4
+    },
+    "loot_ch04_boss": {
+      "id": "loot_ch04_boss",
+      "quality_key": "boss",
+      "chapter": 4
+    },
+    "loot_ch05_normal": {
+      "id": "loot_ch05_normal",
+      "quality_key": "normal",
+      "chapter": 5
+    },
+    "loot_ch05_elite": {
+      "id": "loot_ch05_elite",
+      "quality_key": "elite",
+      "chapter": 5
+    },
+    "loot_ch05_boss": {
+      "id": "loot_ch05_boss",
+      "quality_key": "boss",
+      "chapter": 5
+    },
+    "loot_ch06_normal": {
+      "id": "loot_ch06_normal",
+      "quality_key": "normal",
+      "chapter": 6
+    },
+    "loot_ch06_elite": {
+      "id": "loot_ch06_elite",
+      "quality_key": "elite",
+      "chapter": 6
+    },
+    "loot_ch06_boss": {
+      "id": "loot_ch06_boss",
+      "quality_key": "boss",
+      "chapter": 6
+    }
+  }
+}

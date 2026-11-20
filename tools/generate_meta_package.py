@@ -722,13 +722,8 @@ def main() -> None:
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    active = {
-        "version": "0.6.0",
-        "source": "content-c-meta",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": now,
-    }
-    (ROOT / "content/packages/active.json").write_text(json.dumps(active, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Не трогаем active.json: активный пакет пишет generate_campaign_c4_package.py (0.7.0+).
+    print("Note: active.json не изменён (пересборка исторического 0.6.0).")
 
     print(f"Wrote {OUT}")
     print(

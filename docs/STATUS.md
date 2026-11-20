@@ -1,20 +1,21 @@
 # Lunex AFK — текущий статус репозитория
 
-Дата: 2026-11-20 · активный пакет: **`0.6.0`**
+Дата: 2026-11-20 · активный пакет: **`0.7.0`**
 
 ## Сейчас есть
 
-- `0.6.0`: почта, календари 7/14/30, профиль/косметика, 48+6 достижений, 30 сюжетных дней, 6 live-событий (+ всё из 0.5.0).
-- Порядок meta: **M → L → R → A → S → V** (после E/P/G).
-- UI: SOCIAL-04 / PROFILE-01 / PROFILE-03 / HUB-04 (вкладки ивенты·календарь·сюжет).
+- `0.7.0`: **C4** — 180 этапов CH01–CH06 + encounters + loot; главы 2–6 locked до `*-30`.
+- Meta/гильдии/PvE/экономика из `0.6.0`.
+- UI: инвентарь (`WORKSHOP`), доска экспедиций (`EXPEDITIONS`), карта фильтрует главу по региону.
 
-## Сейчас нет
+## Сейчас нет / блокер
 
-- Серверный claim, TTL почты, idempotency (CORE-01).
-- Реальные даты ротации ивентов (админ).
+- **CORE-01** (Go/Postgres, claim/TTL) — нужны доступы + TZ-A.
+- **OTA-2** HTTPS CDN — нужен хост.
+- C5 навыки/диалоги runtime, C6 арт ригов.
 
 ```bash
-tools/validate_content_package.sh 0.6.0
+tools/validate_content_package.sh 0.7.0
 python3 tools/check_repo_refs.py
-python3 tools/generate_meta_package.py   # единственный генератор, пишущий active.json
+python3 tools/generate_campaign_c4_package.py
 ```

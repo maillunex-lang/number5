@@ -253,6 +253,23 @@ if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ve
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 
+if ver.startswith("0.7") or (d/"manifest.json").exists() and json.loads((d/"manifest.json").read_text()).get("version","").startswith("0.7"):
+    assert len(heroes["heroes"]) >= 45
+    assert len(camp["stages"]) == 180, len(camp["stages"])
+    for ch in range(1, 7):
+        n = len([s for s in camp["stages"] if str(s["id"]).startswith(f"CH{ch:02d}-")])
+        assert n == 30, f"CH{ch:02d} stages={n}"
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        assert len(en.get("encounters", [])) == 180
+        enc_stages = {e["stage_id"] for e in en["encounters"]}
+        for s in camp["stages"]:
+            assert s["id"] in enc_stages, s["id"]
+    if (d/"loot_tables.json").exists():
+        loot = json.loads((d/"loot_tables.json").read_text())
+        assert len(loot.get("stage_bindings", [])) == 180
+    print("C4 campaign 180 OK")
+
 print(f"PASS {ver}")
 PY
 echo "PASS $VER"

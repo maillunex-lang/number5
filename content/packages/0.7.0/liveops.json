@@ -1,0 +1,939 @@
+{
+  "schema_version": 1,
+  "timezone": "Europe/Moscow",
+  "day_reset_hour": 6,
+  "afk": {
+    "unlock_stage": "CH01-03",
+    "cap_hours": 12,
+    "min_claim_seconds": 60,
+    "rates_by_chapter": [
+      {
+        "chapter": 1,
+        "gold_per_hour": 1800,
+        "hero_xp_per_hour": 700,
+        "essence_per_hour": 30,
+        "ore_per_hour": 3,
+        "equip_tier": 1,
+        "equip_after": "CH01-20"
+      },
+      {
+        "chapter": 2,
+        "gold_per_hour": 3200,
+        "hero_xp_per_hour": 1300,
+        "essence_per_hour": 50,
+        "ore_per_hour": 5,
+        "equip_tier": 1
+      },
+      {
+        "chapter": 3,
+        "gold_per_hour": 5200,
+        "hero_xp_per_hour": 2100,
+        "essence_per_hour": 80,
+        "ore_per_hour": 8,
+        "equip_tier": 2
+      },
+      {
+        "chapter": 4,
+        "gold_per_hour": 8000,
+        "hero_xp_per_hour": 3400,
+        "essence_per_hour": 125,
+        "ore_per_hour": 12,
+        "equip_tier": 3
+      },
+      {
+        "chapter": 5,
+        "gold_per_hour": 12000,
+        "hero_xp_per_hour": 5200,
+        "essence_per_hour": 190,
+        "ore_per_hour": 17,
+        "equip_tier": 4
+      },
+      {
+        "chapter": 6,
+        "gold_per_hour": 17500,
+        "hero_xp_per_hour": 7800,
+        "essence_per_hour": 280,
+        "ore_per_hour": 24,
+        "equip_tier": 5
+      }
+    ],
+    "equipment_roll_every_hours": 4,
+    "equipment_roll_chance_bp": 2500,
+    "afk_hour_coupon_daily_cap": 4,
+    "no_diamonds": true,
+    "no_ssr_ur_heroes": true
+  },
+  "daily_quests": [
+    {
+      "id": "dq_login",
+      "name": "Первый свет Уфы",
+      "condition": "login_1",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 1500
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 500
+        }
+      ],
+      "unlock": "always"
+    },
+    {
+      "id": "dq_campaign_3",
+      "name": "Три шага через Разлом",
+      "condition": "campaign_wins_3",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 3000
+        },
+        {
+          "resource_id": "essence",
+          "amount": 60
+        }
+      ],
+      "unlock": "CH01-05"
+    },
+    {
+      "id": "dq_campaign_5",
+      "name": "Дорога не кончается",
+      "condition": "campaign_wins_5",
+      "rewards": [
+        {
+          "resource_id": "hero_xp",
+          "amount": 1500
+        },
+        {
+          "resource_id": "gold",
+          "amount": 2000
+        }
+      ],
+      "unlock": "CH01-05"
+    },
+    {
+      "id": "dq_afk",
+      "name": "Сбор без суеты",
+      "condition": "afk_claim_1",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 2000
+        },
+        {
+          "resource_id": "essence",
+          "amount": 40
+        }
+      ],
+      "unlock": "CH01-05"
+    },
+    {
+      "id": "dq_upgrade_hero",
+      "name": "Герой растёт",
+      "condition": "hero_level_up_1",
+      "rewards": [
+        {
+          "resource_id": "hero_xp",
+          "amount": 1200
+        },
+        {
+          "resource_id": "gold",
+          "amount": 1000
+        }
+      ],
+      "unlock": "CH01-05"
+    },
+    {
+      "id": "dq_upgrade_gear",
+      "name": "Пыль кузницы",
+      "condition": "equipment_upgrade_1",
+      "rewards": [
+        {
+          "resource_id": "ore",
+          "amount": 5
+        },
+        {
+          "resource_id": "gold",
+          "amount": 1500
+        }
+      ],
+      "unlock": "CH01-10"
+    },
+    {
+      "id": "dq_summon",
+      "name": "Зов Плетения",
+      "condition": "summon_1",
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 25
+        },
+        {
+          "resource_id": "gold",
+          "amount": 1500
+        }
+      ],
+      "unlock": "altar"
+    },
+    {
+      "id": "dq_expedition",
+      "name": "Послать разведку",
+      "condition": "expedition_1",
+      "rewards": [
+        {
+          "resource_id": "essence",
+          "amount": 80
+        },
+        {
+          "resource_id": "gold",
+          "amount": 1000
+        }
+      ],
+      "unlock": "CH01-10"
+    },
+    {
+      "id": "dq_boss",
+      "name": "Разговор с начальством",
+      "condition": "boss_win_1",
+      "rewards": [
+        {
+          "resource_id": "essence",
+          "amount": 100
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 1000
+        }
+      ],
+      "unlock": "CH01-10"
+    },
+    {
+      "id": "dq_equipment",
+      "name": "Найти применение",
+      "condition": "equip_1",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 1000
+        },
+        {
+          "resource_id": "ore",
+          "amount": 3
+        }
+      ],
+      "unlock": "first_item"
+    },
+    {
+      "id": "dq_collect",
+      "name": "Учёт ценностей",
+      "condition": "claim_3_sources",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 2500
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 1000
+        }
+      ],
+      "unlock": "CH01-05"
+    },
+    {
+      "id": "dq_team",
+      "name": "Перестановка кадров",
+      "condition": "squad_preset_1",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 1500
+        },
+        {
+          "resource_id": "essence",
+          "amount": 40
+        }
+      ],
+      "unlock": "presets"
+    }
+  ],
+  "daily_activity": {
+    "points_per_quest": 10,
+    "max_points": 120,
+    "chests": [
+      {
+        "at": 20,
+        "rewards": [
+          {
+            "resource_id": "gold",
+            "amount": 3000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "at": 50,
+        "rewards": [
+          {
+            "resource_id": "essence",
+            "amount": 150
+          },
+          {
+            "resource_id": "diamonds",
+            "amount": 30
+          }
+        ]
+      },
+      {
+        "at": 80,
+        "rewards": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          },
+          {
+            "resource_id": "ore",
+            "amount": 8
+          }
+        ]
+      },
+      {
+        "at": 100,
+        "rewards": [
+          {
+            "resource_id": "diamonds",
+            "amount": 70
+          },
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  "weekly_quests": [
+    {
+      "id": "wq_battles_20",
+      "condition": "campaign_wins_20",
+      "rewards": [
+        {
+          "resource_id": "gold",
+          "amount": 12000
+        },
+        {
+          "resource_id": "essence",
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": "wq_boss_3",
+      "condition": "boss_wins_3",
+      "rewards": [
+        {
+          "resource_id": "hero_xp",
+          "amount": 8000
+        },
+        {
+          "resource_id": "ore",
+          "amount": 20
+        }
+      ]
+    },
+    {
+      "id": "wq_summon_5",
+      "condition": "summon_results_5",
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        },
+        {
+          "resource_id": "gold",
+          "amount": 5000
+        }
+      ]
+    },
+    {
+      "id": "wq_afk_24h",
+      "condition": "afk_hours_24",
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 80
+        },
+        {
+          "resource_id": "essence",
+          "amount": 250
+        }
+      ]
+    },
+    {
+      "id": "wq_expeditions_8",
+      "condition": "expeditions_8",
+      "rewards": [
+        {
+          "resource_id": "faction_scroll",
+          "amount": 1
+        },
+        {
+          "resource_id": "gold",
+          "amount": 10000
+        }
+      ]
+    },
+    {
+      "id": "wq_upgrades_10",
+      "condition": "upgrades_10",
+      "rewards": [
+        {
+          "resource_id": "ore",
+          "amount": 25
+        },
+        {
+          "resource_id": "hero_xp",
+          "amount": 5000
+        }
+      ]
+    },
+    {
+      "id": "wq_campaign_new_5",
+      "condition": "first_clear_5",
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 100
+        },
+        {
+          "resource_id": "summon_scroll",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "id": "wq_faction_3",
+      "condition": "faction_expeditions_3",
+      "rewards": [
+        {
+          "resource_id": "essence",
+          "amount": 400
+        },
+        {
+          "resource_id": "gold",
+          "amount": 8000
+        }
+      ]
+    }
+  ],
+  "weekly_chests": [
+    {
+      "at_completed": 3,
+      "rewards": [
+        {
+          "resource_id": "summon_scroll",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "at_completed": 5,
+      "rewards": [
+        {
+          "resource_id": "diamonds",
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "at_completed": 7,
+      "rewards": [
+        {
+          "resource_id": "faction_scroll",
+          "amount": 1
+        }
+      ]
+    }
+  ],
+  "expeditions": {
+    "unlock_stage": "CH01-10",
+    "base_slots": 2,
+    "sub_moon_extra_slot": 1,
+    "max_slots": 3,
+    "heroes_per_mission": [
+      1,
+      3
+    ],
+    "board_size": 6,
+    "free_refresh_per_day": 1,
+    "paid_refresh_per_day": 2,
+    "paid_refresh_gold": 2000,
+    "missions": [
+      {
+        "id": "EXP-01-01",
+        "name": "Фонари на набережной",
+        "chapter": 1,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F01",
+        "class_hint": "ranger",
+        "min_power": 1300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 2500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 900
+          }
+        ],
+        "special_resource": "summon_scroll",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH01-10"
+      },
+      {
+        "id": "EXP-01-02",
+        "name": "Потерянная ведомость",
+        "chapter": 1,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F01",
+        "class_hint": "tank",
+        "min_power": 1600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 6000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2200
+          },
+          {
+            "resource_id": "essence",
+            "amount": 90
+          }
+        ],
+        "special_resource": "summon_scroll",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH01-10"
+      },
+      {
+        "id": "EXP-01-03",
+        "name": "Ночная опись",
+        "chapter": 1,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F01",
+        "class_hint": "warrior",
+        "min_power": 1900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 14000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5200
+          },
+          {
+            "resource_id": "essence",
+            "amount": 240
+          }
+        ],
+        "special_resource": "summon_scroll",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH01-10"
+      },
+      {
+        "id": "EXP-02-01",
+        "name": "Руническая тропа",
+        "chapter": 2,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F02",
+        "class_hint": "tank",
+        "min_power": 2300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 3500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1260
+          }
+        ],
+        "special_resource": "class_seal",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH02-10"
+      },
+      {
+        "id": "EXP-02-02",
+        "name": "Каменные дозорные",
+        "chapter": 2,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F02",
+        "class_hint": "warrior",
+        "min_power": 2600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 8400
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3080
+          },
+          {
+            "resource_id": "essence",
+            "amount": 125
+          }
+        ],
+        "special_resource": "class_seal",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH02-10"
+      },
+      {
+        "id": "EXP-02-03",
+        "name": "Шёпот пластов",
+        "chapter": 2,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F02",
+        "class_hint": "mage",
+        "min_power": 2900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 19600
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7279
+          },
+          {
+            "resource_id": "essence",
+            "amount": 336
+          }
+        ],
+        "special_resource": "class_seal",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH02-10"
+      },
+      {
+        "id": "EXP-03-01",
+        "name": "Угольный маршрут",
+        "chapter": 3,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F04",
+        "class_hint": "warrior",
+        "min_power": 3300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 4500
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 1620
+          }
+        ],
+        "special_resource": "skill_book",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH03-10"
+      },
+      {
+        "id": "EXP-03-02",
+        "name": "Сломанный пресс",
+        "chapter": 3,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F04",
+        "class_hint": "mage",
+        "min_power": 3600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 10800
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3960
+          },
+          {
+            "resource_id": "essence",
+            "amount": 162
+          }
+        ],
+        "special_resource": "skill_book",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH03-10"
+      },
+      {
+        "id": "EXP-03-03",
+        "name": "Смена без конца",
+        "chapter": 3,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F04",
+        "class_hint": "assassin",
+        "min_power": 3900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 25200
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 9360
+          },
+          {
+            "resource_id": "essence",
+            "amount": 432
+          }
+        ],
+        "special_resource": "skill_book",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH03-10"
+      },
+      {
+        "id": "EXP-04-01",
+        "name": "Сбой терминала",
+        "chapter": 4,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F03",
+        "class_hint": "mage",
+        "min_power": 4300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 5750
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2070
+          }
+        ],
+        "special_resource": "reforge_stone",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH04-10"
+      },
+      {
+        "id": "EXP-04-02",
+        "name": "Архивный дрон",
+        "chapter": 4,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F03",
+        "class_hint": "assassin",
+        "min_power": 4600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 13799
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 5060
+          },
+          {
+            "resource_id": "essence",
+            "amount": 206
+          }
+        ],
+        "special_resource": "reforge_stone",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH04-10"
+      },
+      {
+        "id": "EXP-04-03",
+        "name": "Тихий протокол",
+        "chapter": 4,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F03",
+        "class_hint": "healer",
+        "min_power": 4900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 32199
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 11959
+          },
+          {
+            "resource_id": "essence",
+            "amount": 552
+          }
+        ],
+        "special_resource": "reforge_stone",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH04-10"
+      },
+      {
+        "id": "EXP-05-01",
+        "name": "Снежная печать",
+        "chapter": 5,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F05",
+        "class_hint": "assassin",
+        "min_power": 5300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 7250
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 2610
+          }
+        ],
+        "special_resource": "faction_scroll",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH05-10"
+      },
+      {
+        "id": "EXP-05-02",
+        "name": "Следы на перевале",
+        "chapter": 5,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F05",
+        "class_hint": "healer",
+        "min_power": 5600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 17400
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 6380
+          },
+          {
+            "resource_id": "essence",
+            "amount": 261
+          }
+        ],
+        "special_resource": "faction_scroll",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH05-10"
+      },
+      {
+        "id": "EXP-05-03",
+        "name": "Холодный караул",
+        "chapter": 5,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F05",
+        "class_hint": "ranger",
+        "min_power": 5900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 40600
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 15080
+          },
+          {
+            "resource_id": "essence",
+            "amount": 696
+          }
+        ],
+        "special_resource": "faction_scroll",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH05-10"
+      },
+      {
+        "id": "EXP-06-01",
+        "name": "Секунда до полуночи",
+        "chapter": 6,
+        "tier": "short",
+        "duration_sec": 7200,
+        "faction_id": "F06",
+        "class_hint": "healer",
+        "min_power": 6300,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 9000
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 3240
+          }
+        ],
+        "special_resource": "artifact_fragment",
+        "special_chance_bp": 800,
+        "unlock_stage": "CH06-10"
+      },
+      {
+        "id": "EXP-06-02",
+        "name": "Потерянная эпоха",
+        "chapter": 6,
+        "tier": "medium",
+        "duration_sec": 14400,
+        "faction_id": "F06",
+        "class_hint": "ranger",
+        "min_power": 6600,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 21600
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 7920
+          },
+          {
+            "resource_id": "essence",
+            "amount": 324
+          }
+        ],
+        "special_resource": "artifact_fragment",
+        "special_chance_bp": 1600,
+        "unlock_stage": "CH06-10"
+      },
+      {
+        "id": "EXP-06-03",
+        "name": "Парадоксальная вахта",
+        "chapter": 6,
+        "tier": "long",
+        "duration_sec": 28800,
+        "faction_id": "F06",
+        "class_hint": "tank",
+        "min_power": 6900,
+        "rewards_success": [
+          {
+            "resource_id": "gold",
+            "amount": 50400
+          },
+          {
+            "resource_id": "hero_xp",
+            "amount": 18720
+          },
+          {
+            "resource_id": "essence",
+            "amount": 864
+          }
+        ],
+        "special_resource": "artifact_fragment",
+        "special_chance_bp": 2800,
+        "unlock_stage": "CH06-10"
+      }
+    ]
+  }
+}

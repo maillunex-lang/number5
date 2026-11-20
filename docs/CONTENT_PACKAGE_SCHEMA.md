@@ -1,4 +1,4 @@
-# Схема контент-пакета (schema 2 → 7)
+# Схема контент-пакета (schema 2 → 8)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
@@ -11,7 +11,7 @@
 | `motion.json` | Motion / FX budget |
 | `assets.json` | Реестр + bindings (+ `media/`) |
 | `hub.json` | Хаб 2.5D + look |
-| `campaign.json` | Кампания (CH*, regions) |
+| `campaign.json` | Кампания (CH01–CH06 ×30 с `0.7.0`) |
 | `heroes.json` | Фракции + герои / отряд |
 | `enemies.json` | **schema 3:** риги, E*/B*, encounters по stage_id |
 | `economy.json` | **schema 4:** валюты, SKU VIRTUAL_FREE, VIP, BP, подписки |
@@ -35,5 +35,5 @@
 OTA: обязательные файлы + optional (`enemies`…`live_events`) из `manifest.files` / `integrity.hashes`.
 
 Studio: publish обновляет `active.json` и `publish_history.json`; rollback возвращает указатель.  
-Исторические генераторы (`0.2`…`0.5`) пакеты пересобирают, но **не** меняют `active.json` — это делает только `tools/generate_meta_package.py` (текущий active).
+Исторические генераторы (`0.2`…`0.5`) пакеты пересобирают, но **не** меняют `active.json` — это делает `tools/generate_campaign_c4_package.py` (active `0.7.0`).
 

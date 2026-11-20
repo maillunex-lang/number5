@@ -1,0 +1,32 @@
+{
+  "top_bar": {
+    "show_profile": true,
+    "show_gold": true,
+    "show_diamonds": true,
+    "show_vip": true,
+    "show_shop": true,
+    "show_settings": true,
+    "shop_label": "Магазин",
+    "height": 96,
+    "bg": "#132038",
+    "border": "#3A4A68"
+  },
+  "bottom_nav": {
+    "height": 110,
+    "bg": "#101A2C",
+    "border": "#3A4A68",
+    "tabs": [
+      { "id": "map", "label": "Карта", "icon": "🗺", "enabled": true },
+      { "id": "heroes", "label": "Герои", "icon": "⚔", "enabled": true },
+      { "id": "hub", "label": "Главная", "icon": "🏛", "enabled": true },
+      { "id": "battle", "label": "Битва", "icon": "🔥", "enabled": true }
+    ]
+  },
+  "safe_area": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+  },
+  "welcome_toast": "Добро пожаловать в Lunex AFK (локальный прототип)"
+}

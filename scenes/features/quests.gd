@@ -42,6 +42,9 @@ func _rebuild() -> void:
 			go.pressed.connect(func(): ScreenRouter.go(goto_route))
 			v.add_child(go)
 		root.add_child(p)
+	var exp := UIFactory.fantasy_button("Экспедиции")
+	exp.pressed.connect(func(): ScreenRouter.go("EXPEDITIONS"))
+	root.add_child(exp)
 	var claim := UIFactory.gold_button("Собрать готовые награды")
 	claim.pressed.connect(func():
 		ModalManager.push_rewards("Задания", ["Золото ×400", "Опыт активности"])

@@ -9,7 +9,14 @@ func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
-	_title.text = str(DemoData.campaign_progress["chapter_name"])
+	var region := str(_payload.get("region_id", DemoData.campaign_progress.get("chapter_id", "CH01")))
+	var chapters: Array = DemoData.campaign_progress.get("chapters", [])
+	var title := str(DemoData.campaign_progress.get("chapter_name", "Глава"))
+	for ch in chapters:
+		if str(ch.get("id", "")) == region:
+			title = str(ch.get("name", title))
+			break
+	_title.text = title
 	$Safe/Col/Header/ContinueBtn.pressed.connect(_continue)
 	$Safe/Col/Header/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
 	_rebuild()
@@ -17,10 +24,14 @@ func _ready() -> void:
 func _rebuild() -> void:
 	for c in _list.get_children():
 		c.queue_free()
-	_list.add_child(UIFactory.muted("Основной путь · доп. этапы · секреты", 22))
+	var region := str(_payload.get("region_id", DemoData.campaign_progress.get("chapter_id", "CH01")))
+	_list.add_child(UIFactory.muted("%s · основной путь · доп. · секреты" % region, 22))
 	var stages: Array = DemoData.campaign_progress["stages"]
 	for s_variant in stages:
 		var s: Dictionary = s_variant
+		var cid := str(s.get("chapter_id", ""))
+		if cid != "" and cid != region and not str(s.get("id", "")).begins_with(region):
+			continue
 		var card: PanelContainer = _stage_row(s)
 		_list.add_child(card)
 
