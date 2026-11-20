@@ -9,6 +9,7 @@
 | P1 | H6 — device verify | Чеклист `docs/H6_DEVICE_VERIFY.md` на свежем APK; API-контракт уже зелёный. Закрыть после «H6 device OK» от владельца |
 | P1 | AUTH-04 и UI-SYNC-HEROES | Код: Memory+PG register/login/link/logout, link_guest sync, settings bind; API tests + `docs/AUTH_04_DEVICE_VERIFY.md`. Закрыть после «AUTH-04 device OK» |
 | P1 | ART-05 | Код: placeholder webp + BattleUnit atlas clips + HUD/HeroCard portraits; `docs/ART_05_DEVICE_VERIFY.md`. Закрыть после «ART-05 device OK» |
+| P1 | MAP-01 list bind/scroll/power | StageListItem bind + DragPad scroll + client squad power; device: имена этапов, сила ≠ 0, скролл |
 
 ## Закрыто в этом срезе
 

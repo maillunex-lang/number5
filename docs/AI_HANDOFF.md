@@ -1,11 +1,15 @@
-# Передача · ART-05 battle portraits/atlases
+# Передача · MAP-01 stage list / squad power / scroll
 
-Срез 20 ноября 2026. Ветка: `cursor/art-05-battle-portraits-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/fix-stage-list-bind-scroll-d5fe`.
 
-**Сделано:** `tools/generate_art05_placeholders.py` → media heroes/rigs webp (force-add в git); `AssetLoader` package textures; `BattleUnit` atlas clips; playback attack/hit/death; HUD + FormationSlot + HeroCard portraits; checklist `docs/ART_05_DEVICE_VERIFY.md`. Headless: H01 portrait+atlas + E01-01 enemy atlas/skin OK; Android export APK ~35MB с `.ctex` в assets. `ops/deploy-vps.sh` regenerate перед export.
+**Причина бага:** `StageListItem.set_stage()` вызывался до `add_child` → `@onready` null → плейсхолдеры «Основной · Этап». `apply_server_player` писал `power = 0`. Полная ширина кнопки «Карточка» блокировала drag-scroll.
+
+**Сделано:** bind после add_child + pending apply; клиентская оценка power по пакету; DragPad + mouse_filter IGNORE на chrome строки; FightBtn для `current`.
+
+Headless: 30 уникальных CH01 строк, squad_power>0.
 
 ## Next
 
-1. Merge → VPS APK → **ART-05 device OK** (`docs/ART_05_DEVICE_VERIFY.md`).
-2. Владелец: H6 / AUTH-04 device.
-3. Финальный арт Studio вместо placeholder; wave4 UI (hero_details / squad / auth).
+1. Merge → VPS APK → проверить список этапов / силу отряда / скролл.
+2. Владелец: ART-05 / H6 / AUTH-04 device OK.
+3. Wave4 UI (hero_details / squad / auth).
