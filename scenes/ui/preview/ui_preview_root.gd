@@ -20,6 +20,7 @@ const PAGES := {
 	"Wave5 VIP/Social/Result": "_show_wave5",
 	"Wave5+ Chat/Friends/Rank": "_show_wave5_plus",
 	"Wave6 demos": "_show_wave6",
+	"Mail/Shop/AFK": "_show_online_lists",
 }
 
 func _ready() -> void:
@@ -282,6 +283,29 @@ func _show_wave6() -> void:
 		"res://scenes/features/rewards_panel.tscn",
 		"res://scenes/features/sys_download.tscn",
 		"res://scenes/features/sys_error.tscn",
+	]:
+		var btn := UIFactory.fantasy_button(path.get_file(), 56)
+		var p: String = path
+		btn.pressed.connect(func():
+			_clear_host()
+			_hint.text = p
+			var sc: Control = (load(p) as PackedScene).instantiate()
+			sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			_host.add_child(sc)
+		)
+		col.add_child(btn)
+
+func _show_online_lists() -> void:
+	_clear_host()
+	_hint.text = "Online lists: Mail · Shop · AFK Theme chrome"
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(col)
+	for path in [
+		"res://scenes/features/mail.tscn",
+		"res://scenes/features/shop.tscn",
+		"res://scenes/features/afk_rewards.tscn",
 	]:
 		var btn := UIFactory.fantasy_button(path.get_file(), 56)
 		var p: String = path
