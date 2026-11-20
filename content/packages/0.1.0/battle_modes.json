@@ -1,0 +1,73 @@
+{
+  "portals": [
+    {
+      "id": "campaign",
+      "name": "Кампания",
+      "route": "MAP-01",
+      "x": 200,
+      "y": 180,
+      "color": "#E8C56A",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "tower",
+      "name": "Башня",
+      "route": "PVE-01",
+      "payload": { "mode": "tower" },
+      "x": 620,
+      "y": 160,
+      "color": "#C4454A",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "boss",
+      "name": "Боссы",
+      "route": "PVE-01",
+      "payload": { "mode": "boss" },
+      "x": 180,
+      "y": 480,
+      "color": "#E05A5A",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "dungeon",
+      "name": "Подземелья",
+      "route": "PVE-01",
+      "payload": { "mode": "dungeon" },
+      "x": 640,
+      "y": 460,
+      "color": "#5A7AD8",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "expedition",
+      "name": "Экспедиции",
+      "route": "PVE-01",
+      "payload": { "mode": "expedition" },
+      "x": 200,
+      "y": 780,
+      "color": "#3DBE7A",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "faction",
+      "name": "Испытания фракций",
+      "route": "PVE-01",
+      "payload": { "mode": "faction" },
+      "x": 600,
+      "y": 760,
+      "color": "#B06AE8",
+      "size": { "w": 280, "h": 150 }
+    },
+    {
+      "id": "pvp",
+      "name": "PvP-арена",
+      "route": "PVP-01",
+      "x": 400,
+      "y": 1080,
+      "color": "#E09A3E",
+      "size": { "w": 280, "h": 150 }
+    }
+  ],
+  "world": { "width": 1080, "height": 1400 }
+}

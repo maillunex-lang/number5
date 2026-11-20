@@ -10,13 +10,19 @@ func setup(payload: Dictionary = {}) -> void:
 func _ready() -> void:
 	_rebuild()
 
+func _summon_cfg() -> Dictionary:
+	return ContentPackageLoader.features.get("summon", {})
+
 func _rebuild() -> void:
 	var root := $Safe/Scroll/VBox
 	for c in root.get_children():
 		c.queue_free()
+	var cfg := _summon_cfg()
+	var banner := str(cfg.get("banner", "Баннер"))
+	var w: Dictionary = cfg.get("weights", {"common": 70, "rare": 22, "epic": 7, "legendary": 1})
 	root.add_child(UIFactory.section_header("Алтарь призыва"))
-	root.add_child(UIFactory.label("Баннер: Сердца Предела", 26, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("Результат локальный · не серверный генератор", 20))
+	root.add_child(UIFactory.label("Баннер: %s" % banner, 26, LunexColors.GOLD))
+	root.add_child(UIFactory.muted("%s · локальная демо-симуляция" % ContentPackageLoader.package_label(), 20))
 	var art := Panel.new()
 	art.custom_minimum_size = Vector2(0, 220)
 	art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color("1A2840"), LunexColors.CYAN, 18, 2))
@@ -25,7 +31,12 @@ func _rebuild() -> void:
 	root.add_child(row)
 	var info := UIFactory.fantasy_button("Шансы и правила")
 	info.pressed.connect(func():
-		ModalManager.push_info("Правила призыва", "Обычный 70%\nРедкий 22%\nЭпический 7%\nЛегендарный 1%\n\nГарантии и история — на сервере (здесь демо).")
+		ModalManager.push_info(
+			"Правила призыва",
+			"Обычный %s%%\nРедкий %s%%\nЭпический %s%%\nЛегендарный %s%%\n\nГарантии и история — на сервере (здесь демо)." % [
+				str(w.get("common", 70)), str(w.get("rare", 22)), str(w.get("epic", 7)), str(w.get("legendary", 1))
+			]
+		)
 	)
 	row.add_child(info)
 	var x1 := UIFactory.gold_button("Призыв ×1")
@@ -49,7 +60,8 @@ func _do_summon(count: int) -> void:
 	if _busy:
 		return
 	_busy = true
-	var cost := 300 * count
+	var cfg := _summon_cfg()
+	var cost := int(cfg.get("cost_x1", 300)) * count
 	if not AppState.spend_demo_gold(cost):
 		NotificationManager.warn("Недостаточно золота (демо)")
 		_busy = false
@@ -58,7 +70,8 @@ func _do_summon(count: int) -> void:
 	await get_tree().create_timer(0.45).timeout
 	var results: Array = []
 	var rarities := ["common", "rare", "epic", "legendary"]
-	var weights := [70, 22, 7, 1]
+	var w: Dictionary = cfg.get("weights", {})
+	var weights := [int(w.get("common", 70)), int(w.get("rare", 22)), int(w.get("epic", 7)), int(w.get("legendary", 1))]
 	for i in count:
 		var roll := randi() % 100
 		var acc := 0

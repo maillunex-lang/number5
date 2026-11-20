@@ -1,12 +1,14 @@
 extends Node
-## Демонстрационные данные прототипа. Помечены как локальные, не серверные.
+## Игровые данные прототипа из контент-пакета.
+## Локальный прогресс сессии (отряд, AFK-таймер) — не серверный источник истины.
 
 signal heroes_changed
 signal squad_changed
+signal content_reloaded
 
 var heroes: Array[Dictionary] = []
 var equipment_pool: Array[Dictionary] = []
-var squad_slots: Array[String] = ["", "", "", "", ""] # hero ids
+var squad_slots: Array[String] = ["", "", "", "", ""]
 var squad_presets: Array[Dictionary] = []
 var selected_hero_id: String = ""
 var campaign_progress: Dictionary = {}
@@ -15,81 +17,97 @@ var mail_unread: int = 2
 var quest_ready: int = 3
 
 func _ready() -> void:
-	_seed_heroes()
-	_seed_equipment()
-	_seed_presets()
-	_seed_campaign()
-	selected_hero_id = heroes[0]["id"]
-	for i in mini(5, heroes.size()):
-		squad_slots[i] = heroes[i]["id"]
+	_apply_from_package()
+	ContentPackageLoader.package_loaded.connect(func(_v):
+		_apply_from_package()
+		content_reloaded.emit()
+	)
 
-func _seed_heroes() -> void:
-	heroes = [
-		_hero("h_aria", "Ария Света", "Страж", "Империя Порядка", "legendary", Color("F2D48A"), 42, 5, 12800, ["heal", "shield", "smite"]),
-		_hero("h_kael", "Каэль Тень", "Убийца", "Сумрачные", "epic", Color("7A6AD8"), 38, 4, 11200, ["bleed", "dash", "execute"]),
-		_hero("h_mira", "Мира Лист", "Стрелок", "Лесные", "epic", Color("5FBF7A"), 36, 4, 10500, ["volley", "trap", "mark"]),
-		_hero("h_tor", "Тор Камень", "Танк", "Клановые кузнецы", "rare", Color("C47A4A"), 40, 3, 9800, ["taunt", "slam", "fortify"]),
-		_hero("h_nyx", "Никс Искра", "Маг", "Арканисты", "legendary", Color("5EC8E8"), 35, 5, 13100, ["nova", "freeze", "rift"]),
-		_hero("h_rena", "Рена Ветер", "Поддержка", "Вольные города", "rare", Color("E8A0C0"), 30, 3, 8600, ["haste", "cleanse", "song"]),
-		_hero("h_drak", "Драк Пепел", "Воин", "Сумрачные", "epic", Color("C4454A"), 33, 4, 10100, ["cleave", "rage", "burn"]),
-	]
+func reload_from_package() -> void:
+	ContentPackageLoader.reload()
+	_apply_from_package()
+	content_reloaded.emit()
 
-func _hero(id: String, name: String, cls: String, faction: String, rarity: String, tint: Color, level: int, stars: int, power: int, skills: Array) -> Dictionary:
-	return {
-		"id": id,
-		"name": name,
-		"class": cls,
-		"faction": faction,
-		"rarity": rarity,
-		"tint": tint,
-		"level": level,
-		"stars": stars,
-		"power": power,
-		"hp": 1000 + level * 80 + stars * 200,
-		"atk": 120 + level * 12 + stars * 30,
-		"def": 80 + level * 8,
-		"favorite": id in ["h_aria", "h_nyx"],
-		"skills": skills,
-		"equip": {"weapon": "", "armor": "", "acc": ""},
-	}
+func _apply_from_package() -> void:
+	_load_heroes()
+	_load_equipment()
+	_load_presets()
+	_load_campaign()
+	_load_features_defaults()
+	if heroes.size() > 0 and selected_hero_id == "":
+		selected_hero_id = str(heroes[0]["id"])
+	if squad_slots[0] == "" and heroes.size() > 0:
+		var defaults: Array = ContentPackageLoader.heroes_pack.get("default_squad", [])
+		for i in 5:
+			if i < defaults.size():
+				squad_slots[i] = str(defaults[i])
+			elif i < heroes.size():
+				squad_slots[i] = str(heroes[i]["id"])
+			else:
+				squad_slots[i] = ""
+	heroes_changed.emit()
+	squad_changed.emit()
 
-func _seed_equipment() -> void:
-	equipment_pool = [
-		{"id": "w1", "slot": "weapon", "name": "Клинок Рассвета", "power": 420, "rarity": "epic"},
-		{"id": "w2", "slot": "weapon", "name": "Жезл Искры", "power": 510, "rarity": "legendary"},
-		{"id": "a1", "slot": "armor", "name": "Латы Стража", "power": 380, "rarity": "rare"},
-		{"id": "a2", "slot": "armor", "name": "Мантия Разлома", "power": 450, "rarity": "epic"},
-		{"id": "c1", "slot": "acc", "name": "Амулет Плетения", "power": 260, "rarity": "rare"},
-		{"id": "c2", "slot": "acc", "name": "Кольцо Сердца", "power": 340, "rarity": "epic"},
-	]
+func _load_heroes() -> void:
+	heroes.clear()
+	var raw: Array = ContentPackageLoader.heroes_pack.get("heroes", [])
+	for item in raw:
+		var h: Dictionary = item
+		var level := int(h.get("level", 1))
+		var stars := int(h.get("stars", 1))
+		var tint := Color(str(h.get("tint", "#888888")))
+		heroes.append({
+			"id": str(h.get("id", "")),
+			"name": str(h.get("name", "")),
+			"class": str(h.get("class", "")),
+			"faction": str(h.get("faction", "")),
+			"rarity": str(h.get("rarity", "common")),
+			"tint": tint,
+			"level": level,
+			"stars": stars,
+			"power": int(h.get("power", 1000)),
+			"hp": 1000 + level * 80 + stars * 200,
+			"atk": 120 + level * 12 + stars * 30,
+			"def": 80 + level * 8,
+			"favorite": bool(h.get("favorite", false)),
+			"skills": h.get("skills", []),
+			"equip": {"weapon": "", "armor": "", "acc": ""},
+		})
 
-func _seed_presets() -> void:
-	squad_presets = [
-		{"id": "p1", "name": "Баланс", "slots": ["h_aria", "h_tor", "h_mira", "h_kael", "h_nyx"]},
-		{"id": "p2", "name": "Магия", "slots": ["h_nyx", "h_aria", "h_rena", "h_mira", "h_kael"]},
-		{"id": "p3", "name": "Фронт", "slots": ["h_tor", "h_drak", "h_aria", "h_kael", "h_mira"]},
-	]
+func _load_equipment() -> void:
+	equipment_pool.clear()
+	for e in ContentPackageLoader.heroes_pack.get("equipment", []):
+		equipment_pool.append(e)
 
-func _seed_campaign() -> void:
-	campaign_progress = {
-		"chapter_id": "ch1",
-		"chapter_name": "Сумерки Святилища",
-		"current_stage": "s1_3",
-		"stages": [
-			{"id": "s1_1", "name": "Тропа осколков", "power": 8000, "type": "main", "state": "cleared", "rewards": ["Золото", "Опыт"]},
-			{"id": "s1_2", "name": "Сломанный алтарь", "power": 9500, "type": "main", "state": "cleared", "rewards": ["Золото", "Пыль"]},
-			{"id": "s1_3", "name": "Стражи врат", "power": 11000, "type": "main", "state": "available", "rewards": ["Золото", "Свиток"]},
-			{"id": "s1_4", "name": "Эхо Раскола", "power": 12500, "type": "main", "state": "locked", "rewards": ["Алмазы", "Осколок"]},
-			{"id": "s1_5", "name": "Сердце пепла", "power": 14000, "type": "main", "state": "locked", "rewards": ["Герой?", "Золото"]},
-			{"id": "s1_2b", "name": "Скрытая роща", "power": 10000, "type": "side", "state": "available", "rewards": ["Материалы"]},
-			{"id": "s1_3s", "name": "Тайный разлом", "power": 13000, "type": "secret", "state": "locked", "rewards": ["Артефакт?"], "reveal_hint": "Откроется после этапа 1-4"},
-		],
-		"regions": [
-			{"id": "r1", "name": "Земли Плетения", "unlocked": true},
-			{"id": "r2", "name": "Пепельные Степи", "unlocked": false, "req": "Глава 2"},
-			{"id": "r3", "name": "Кристальный Берег", "unlocked": false, "req": "Глава 3"},
-		],
-	}
+func _load_presets() -> void:
+	squad_presets.clear()
+	for p in ContentPackageLoader.heroes_pack.get("squad_presets", []):
+		squad_presets.append(p)
+
+func _load_campaign() -> void:
+	campaign_progress = ContentPackageLoader.campaign.duplicate(true)
+
+func _load_features_defaults() -> void:
+	var afk: Dictionary = ContentPackageLoader.features.get("afk", {})
+	if afk.has("seconds_default"):
+		afk_seconds_accumulated = int(afk["seconds_default"])
+	var mail: Array = ContentPackageLoader.features.get("mail", [])
+	mail_unread = 0
+	for m in mail:
+		if bool(m.get("unread", false)):
+			mail_unread += 1
+	quest_ready = 0
+	var quests: Dictionary = ContentPackageLoader.features.get("quests", {})
+	for key in quests.keys():
+		var list: Array = quests[key]
+		for q in list:
+			var prog := str(q.get("progress", ""))
+			if "/" in prog:
+				var parts := prog.split("/")
+				if parts.size() == 2 and parts[0] == parts[1]:
+					quest_ready += 1
+			elif prog == "готово":
+				quest_ready += 1
 
 func get_hero(id: String) -> Dictionary:
 	for h in heroes:
@@ -143,7 +161,6 @@ func squad_power() -> int:
 func set_squad_slot(index: int, hero_id: String) -> void:
 	if index < 0 or index >= 5:
 		return
-	# Remove duplicates
 	for i in squad_slots.size():
 		if squad_slots[i] == hero_id:
 			squad_slots[i] = ""
@@ -170,11 +187,11 @@ func auto_equip(hero_id: String) -> void:
 	for slot in ["weapon", "armor", "acc"]:
 		if best[slot] != null:
 			h["equip"][slot] = best[slot]["id"]
-			h["power"] = int(h["power"]) + 50 # demo bump
+			h["power"] = int(h["power"]) + 50
 	heroes_changed.emit()
 
 func get_stage(stage_id: String) -> Dictionary:
-	for s in campaign_progress["stages"]:
+	for s in campaign_progress.get("stages", []):
 		if s["id"] == stage_id:
 			return s
 	return {}

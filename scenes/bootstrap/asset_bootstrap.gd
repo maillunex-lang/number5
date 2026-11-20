@@ -6,7 +6,8 @@ extends Control
 func _ready() -> void:
 	AssetLoader.load_progress.connect(_on_progress)
 	AssetLoader.load_finished.connect(_on_done)
-	AssetLoader.preload_essentials()
+	$Safe/VBox/Tip.text = "Контент: %s" % ContentPackageLoader.package_label()
+	AssetLoader.preload_essentials(PackedStringArray(["Тема", "Шрифты", "Пакет %s" % ContentPackageLoader.version, "Оболочка", "Хаб"]))
 
 func _on_progress(done: int, total: int, label: String) -> void:
 	_bar.max_value = total

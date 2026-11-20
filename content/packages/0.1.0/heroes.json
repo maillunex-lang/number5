@@ -1,0 +1,109 @@
+{
+  "heroes": [
+    {
+      "id": "h_aria",
+      "name": "Ария Света",
+      "class": "Страж",
+      "faction": "Империя Порядка",
+      "rarity": "legendary",
+      "tint": "#F2D48A",
+      "level": 42,
+      "stars": 5,
+      "power": 12800,
+      "skills": ["heal", "shield", "smite"],
+      "favorite": true
+    },
+    {
+      "id": "h_kael",
+      "name": "Каэль Тень",
+      "class": "Убийца",
+      "faction": "Сумрачные",
+      "rarity": "epic",
+      "tint": "#7A6AD8",
+      "level": 38,
+      "stars": 4,
+      "power": 11200,
+      "skills": ["bleed", "dash", "execute"],
+      "favorite": false
+    },
+    {
+      "id": "h_mira",
+      "name": "Мира Лист",
+      "class": "Стрелок",
+      "faction": "Лесные",
+      "rarity": "epic",
+      "tint": "#5FBF7A",
+      "level": 36,
+      "stars": 4,
+      "power": 10500,
+      "skills": ["volley", "trap", "mark"],
+      "favorite": false
+    },
+    {
+      "id": "h_tor",
+      "name": "Тор Камень",
+      "class": "Танк",
+      "faction": "Клановые кузнецы",
+      "rarity": "rare",
+      "tint": "#C47A4A",
+      "level": 40,
+      "stars": 3,
+      "power": 9800,
+      "skills": ["taunt", "slam", "fortify"],
+      "favorite": false
+    },
+    {
+      "id": "h_nyx",
+      "name": "Никс Искра",
+      "class": "Маг",
+      "faction": "Арканисты",
+      "rarity": "legendary",
+      "tint": "#5EC8E8",
+      "level": 35,
+      "stars": 5,
+      "power": 13100,
+      "skills": ["nova", "freeze", "rift"],
+      "favorite": true
+    },
+    {
+      "id": "h_rena",
+      "name": "Рена Ветер",
+      "class": "Поддержка",
+      "faction": "Вольные города",
+      "rarity": "rare",
+      "tint": "#E8A0C0",
+      "level": 30,
+      "stars": 3,
+      "power": 8600,
+      "skills": ["haste", "cleanse", "song"],
+      "favorite": false
+    },
+    {
+      "id": "h_drak",
+      "name": "Драк Пепел",
+      "class": "Воин",
+      "faction": "Сумрачные",
+      "rarity": "epic",
+      "tint": "#C4454A",
+      "level": 33,
+      "stars": 4,
+      "power": 10100,
+      "skills": ["cleave", "rage", "burn"],
+      "favorite": false
+    }
+  ],
+  "equipment": [
+    { "id": "w1", "slot": "weapon", "name": "Клинок Рассвета", "power": 420, "rarity": "epic" },
+    { "id": "w2", "slot": "weapon", "name": "Жезл Искры", "power": 510, "rarity": "legendary" },
+    { "id": "a1", "slot": "armor", "name": "Латы Стража", "power": 380, "rarity": "rare" },
+    { "id": "a2", "slot": "armor", "name": "Мантия Разлома", "power": 450, "rarity": "epic" },
+    { "id": "c1", "slot": "acc", "name": "Амулет Плетения", "power": 260, "rarity": "rare" },
+    { "id": "c2", "slot": "acc", "name": "Кольцо Сердца", "power": 340, "rarity": "epic" }
+  ],
+  "squad_presets": [
+    { "id": "p1", "name": "Баланс", "slots": ["h_aria", "h_tor", "h_mira", "h_kael", "h_nyx"] },
+    { "id": "p2", "name": "Магия", "slots": ["h_nyx", "h_aria", "h_rena", "h_mira", "h_kael"] },
+    { "id": "p3", "name": "Фронт", "slots": ["h_tor", "h_drak", "h_aria", "h_kael", "h_mira"] }
+  ],
+  "default_squad": ["h_aria", "h_kael", "h_mira", "h_tor", "h_nyx"]
+}

@@ -19,6 +19,12 @@
 
 Призыв, AFK-сбор, задания, магазин/VIP/пропуск, гильдия, соцфункции, PvP, рейтинги, почта, награды — UI с локальными данными и явной пометкой «Демо».
 
+## Контент-пакеты + Admin Studio
+
+Клиент читает только `content/packages/{version}/` (указатель `active.json`) через `ContentPackageLoader` → `DemoData` / экраны. Редактирование — `admin-studio/` (React/TS), см. `docs/ADMIN_STUDIO.md`. Прогресс игрока в пакет не пишется.
+
+Проверка: `tools/validate_content_package.sh`.
+
 ## Запуск
 
 ```bash

@@ -35,3 +35,8 @@ Thumbs.db
 builds/
 dist/
 /tmp/
+
+# Admin Studio
+admin-studio/node_modules/
+admin-studio/dist/
+*.log

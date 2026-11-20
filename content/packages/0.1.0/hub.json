@@ -1,0 +1,106 @@
+{
+  "world": { "width": 1080, "height": 2400 },
+  "parallax": {
+    "far_bands": 4,
+    "mid_hills": 6,
+    "path_width": 160
+  },
+  "buildings": [
+    {
+      "id": "summon",
+      "name": "Алтарь призыва",
+      "x": 540,
+      "y": 380,
+      "route": "HUB-01",
+      "locked": false,
+      "req": "",
+      "color": "#E8C56A",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "guild",
+      "name": "Гильдия",
+      "x": 220,
+      "y": 280,
+      "route": "HUB-05",
+      "locked": false,
+      "req": "",
+      "color": "#5EC8E8",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "shop",
+      "name": "Торговая площадь",
+      "x": 780,
+      "y": 620,
+      "route": "HUB-06",
+      "locked": false,
+      "req": "",
+      "color": "#E09A3E",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "tower",
+      "name": "Башня испытаний",
+      "x": 820,
+      "y": 180,
+      "route": "TOWER",
+      "locked": false,
+      "req": "",
+      "color": "#C4454A",
+      "payload": { "mode": "tower" },
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "quests",
+      "name": "Доска заданий",
+      "x": 300,
+      "y": 760,
+      "route": "HUB-03",
+      "locked": false,
+      "req": "",
+      "color": "#3DBE7A",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "afk",
+      "name": "AFK-сокровищница",
+      "x": 540,
+      "y": 1100,
+      "route": "HUB-02",
+      "locked": false,
+      "req": "",
+      "color": "#FFE29A",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "workshop",
+      "name": "Мастерская",
+      "x": 240,
+      "y": 1280,
+      "route": "WORKSHOP",
+      "locked": true,
+      "req": "Откроется на 20 уровне командира",
+      "color": "#A8893E",
+      "size": { "w": 200, "h": 160 }
+    },
+    {
+      "id": "portal",
+      "name": "Портал приключений",
+      "x": 540,
+      "y": 200,
+      "route": "ROOT-01",
+      "locked": false,
+      "req": "",
+      "color": "#7A6AD8",
+      "size": { "w": 200, "h": 160 }
+    }
+  ],
+  "side_rail": [
+    { "id": "events", "icon": "✦", "tip": "События", "route": "HUB-04", "color": "#E8C56A" },
+    { "id": "mail", "icon": "✉", "tip": "Почта", "route": "SOCIAL-04", "color": "#5EC8E8" },
+    { "id": "quests", "icon": "☰", "tip": "Задания", "route": "HUB-03", "color": "#3DBE7A" },
+    { "id": "rewards", "icon": "★", "tip": "Награды", "route": "GLOBAL-01", "color": "#E09A3E" },
+    { "id": "social", "icon": "☺", "tip": "Соц.", "route": "SOCIAL-01", "color": "#2A9B8F" }
+  ]
+}

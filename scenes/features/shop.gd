@@ -8,26 +8,23 @@ func setup(payload: Dictionary = {}) -> void:
 func _ready() -> void:
 	var root := $Safe/Scroll/VBox
 	root.add_child(UIFactory.section_header("Торговая площадь"))
-	root.add_child(UIFactory.muted("Фэнтезийная лавка · без реальных платежей", 22))
-	var offers := [
-		{"name": "Набор странника", "desc": "Золото ×5000, ключи ×3", "limit": "1/1", "demo": true},
-		{"name": "Сундук осколков", "desc": "Осколки героев ×10", "limit": "3/день", "demo": true},
-		{"name": "Ежедневная скидка", "desc": "Таймер 12:00", "limit": "таймер", "demo": true},
-	]
-	for o in offers:
+	root.add_child(UIFactory.muted("%s · без реальных платежей" % ContentPackageLoader.package_label(), 22))
+	var offers: Array = ContentPackageLoader.features.get("shop_offers", [])
+	for o_raw in offers:
+		var o: Dictionary = o_raw
 		var p := UIFactory.panel()
 		var v := UIFactory.vbox(8)
 		p.add_child(v)
-		v.add_child(UIFactory.label(str(o.name), 28, LunexColors.GOLD))
-		v.add_child(UIFactory.label(str(o.desc), 22))
-		v.add_child(UIFactory.muted("Лимит: %s" % o.limit, 20))
+		v.add_child(UIFactory.label(str(o.get("name", "")), 28, LunexColors.GOLD))
+		v.add_child(UIFactory.label(str(o.get("desc", "")), 22))
+		v.add_child(UIFactory.muted("Лимит: %s" % str(o.get("limit", "")), 20))
 		var buy := UIFactory.fantasy_button("Подробнее")
-		var name: String = o.name
+		var offer_name: String = str(o.get("name", ""))
 		buy.pressed.connect(func():
 			ModalManager.push_confirm(
 				"Покупка (демо)",
-				"%s\n\nРеальные платежи отключены.\nПоказать демо-результат?" % name,
-				func(): ModalManager.push_rewards("Получено (демо)", [name, "Без списания средств"])
+				"%s\n\nРеальные платежи отключены.\nПоказать демо-результат?" % offer_name,
+				func(): ModalManager.push_rewards("Получено (демо)", [offer_name, "Без списания средств"])
 			)
 		)
 		v.add_child(buy)

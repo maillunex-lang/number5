@@ -14,6 +14,7 @@ func _rebuild() -> void:
 	for c in root.get_children():
 		c.queue_free()
 	root.add_child(UIFactory.section_header("Журнал заданий"))
+	root.add_child(UIFactory.muted(ContentPackageLoader.package_label(), 18))
 	var tabs := UIFactory.hbox(8)
 	root.add_child(tabs)
 	for t in [["daily", "Ежедневные"], ["weekly", "Недельные"], ["story", "Сюжет"], ["special", "Особые"]]:
@@ -27,27 +28,18 @@ func _rebuild() -> void:
 		)
 		tabs.add_child(b)
 	root.add_child(UIFactory.label("Активность: 60/100 · сундуки за пороги", 22, LunexColors.CYAN))
-	var quests := {
-		"daily": [["Победить 3 боя", "2/3", true], ["Собрать AFK", "0/1", true], ["Зайти в гильдию", "1/1", false]],
-		"weekly": [["Башня 10 этажей", "3/10", true], ["Призыв ×20", "0/20", true]],
-		"story": [["Глава 1-3", "в процессе", true]],
-		"special": [["Событие: осколки", "скоро", false]],
-	}
-	for q in quests.get(_tab, []):
+	var quests_doc: Dictionary = ContentPackageLoader.features.get("quests", {})
+	var list: Array = quests_doc.get(_tab, [])
+	for q_raw in list:
+		var q: Dictionary = q_raw
 		var p := UIFactory.panel()
 		var v := UIFactory.vbox(6)
 		p.add_child(v)
-		v.add_child(UIFactory.label("%s · %s" % [q[0], q[1]], 24))
-		if q[2]:
+		v.add_child(UIFactory.label("%s · %s" % [str(q.get("title", "")), str(q.get("progress", ""))], 24))
+		var goto_route: String = str(q.get("goto", ""))
+		if goto_route != "":
 			var go := UIFactory.fantasy_button("Перейти")
-			go.pressed.connect(func():
-				if "AFK" in str(q[0]):
-					ScreenRouter.go("HUB-02")
-				elif "гильд" in str(q[0]).to_lower():
-					ScreenRouter.go("HUB-05")
-				else:
-					ScreenRouter.go("ROOT-04")
-			)
+			go.pressed.connect(func(): ScreenRouter.go(goto_route))
 			v.add_child(go)
 		root.add_child(p)
 	var claim := UIFactory.gold_button("Собрать готовые награды")

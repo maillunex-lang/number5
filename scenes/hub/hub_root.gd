@@ -17,27 +17,45 @@ var _building_defs: Array[Dictionary] = []
 var _pulse_nodes: Array[Control] = []
 
 func _ready() -> void:
-	_building_defs = [
-		{"id": "summon", "name": "Алтарь призыва", "y": 380, "x": 540, "route": "HUB-01", "locked": false, "req": "", "color": Color("E8C56A")},
-		{"id": "guild", "name": "Гильдия", "y": 280, "x": 220, "route": "HUB-05", "locked": false, "req": "", "color": Color("5EC8E8")},
-		{"id": "shop", "name": "Торговая площадь", "y": 620, "x": 780, "route": "HUB-06", "locked": false, "req": "", "color": Color("E09A3E")},
-		{"id": "tower", "name": "Башня испытаний", "y": 180, "x": 820, "route": "TOWER", "locked": false, "req": "", "color": Color("C4454A"), "payload": {"mode": "tower"}},
-		{"id": "quests", "name": "Доска заданий", "y": 760, "x": 300, "route": "HUB-03", "locked": false, "req": "", "color": Color("3DBE7A")},
-		{"id": "afk", "name": "AFK-сокровищница", "y": 1100, "x": 540, "route": "HUB-02", "locked": false, "req": "", "color": Color("FFE29A")},
-		{"id": "workshop", "name": "Мастерская", "y": 1280, "x": 240, "route": "WORKSHOP", "locked": true, "req": "Откроется на 20 уровне командира", "color": Color("A8893E")},
-		{"id": "portal", "name": "Портал приключений", "y": 200, "x": 540, "route": "ROOT-01", "locked": false, "req": "", "color": Color("7A6AD8")},
-	]
-	_world.custom_minimum_size = Vector2(WORLD_W, WORLD_H)
+	_load_layout_from_package()
 	_build_parallax()
 	_build_buildings()
 	_build_quick()
 	_scroll.scroll_vertical = int(UIStateManager.hub_scroll_y)
 	_scroll.gui_input.connect(_on_scroll_input)
-	# Restore scroll after layout
 	await get_tree().process_frame
 	_scroll.scroll_vertical = int(UIStateManager.hub_scroll_y)
 	ThemeManager.preset_changed.connect(func(_p): _apply_quality())
+	DemoData.content_reloaded.connect(_on_content_reloaded)
 	_apply_quality()
+	_start_ambient()
+
+func _load_layout_from_package() -> void:
+	var world: Dictionary = ContentPackageLoader.get_hub_world()
+	var ww := float(world.get("width", WORLD_W))
+	var wh := float(world.get("height", WORLD_H))
+	_world.custom_minimum_size = Vector2(ww, wh)
+	_building_defs.clear()
+	for raw in ContentPackageLoader.get_hub_buildings():
+		var b: Dictionary = raw
+		_building_defs.append({
+			"id": str(b.get("id", "")),
+			"name": str(b.get("name", "")),
+			"x": float(b.get("x", 0)),
+			"y": float(b.get("y", 0)),
+			"route": str(b.get("route", "")),
+			"locked": bool(b.get("locked", false)),
+			"req": str(b.get("req", "")),
+			"color": Color(str(b.get("color", "#E8C56A"))),
+			"payload": b.get("payload", {}),
+		})
+
+func _on_content_reloaded() -> void:
+	_load_layout_from_package()
+	_clear(_buildings)
+	_clear(_fx)
+	_build_buildings()
+	_build_quick()
 	_start_ambient()
 
 func _notification(what: int) -> void:
@@ -147,39 +165,34 @@ func _build_buildings() -> void:
 		_fx.add_child(glow)
 
 func _build_quick() -> void:
-	# Vertical icon rail, top-right (HUB-ACCESS-001 B quick entries).
+	# Vertical icon rail from content package (HUB-ACCESS-001 B).
 	for c in _side_rail.get_children():
 		c.queue_free()
 	$SideRail.add_theme_stylebox_override(
 		"panel",
 		UIFactory.panel_style(Color(0.07, 0.1, 0.16, 0.82), LunexColors.FRAME_OUTER, 18, 1)
 	)
-	var items := [
-		{"icon": "✦", "tip": "События", "r": "HUB-04", "color": LunexColors.GOLD},
-		{"icon": "✉", "tip": "Почта", "r": "SOCIAL-04", "color": LunexColors.CYAN},
-		{"icon": "☰", "tip": "Задания", "r": "HUB-03", "color": LunexColors.EMERALD},
-		{"icon": "★", "tip": "Награды", "r": "GLOBAL-01", "color": LunexColors.AMBER},
-		{"icon": "☺", "tip": "Соц.", "r": "SOCIAL-01", "color": LunexColors.TEAL},
-	]
-	for it in items:
+	var items: Array = ContentPackageLoader.get_side_rail()
+	for it_raw in items:
+		var it: Dictionary = it_raw
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(64, 64)
-		b.text = str(it.icon)
-		b.tooltip_text = str(it.tip)
+		b.text = str(it.get("icon", "•"))
+		b.tooltip_text = str(it.get("tip", ""))
 		b.focus_mode = Control.FOCUS_NONE
 		b.add_theme_font_size_override("font_size", 30)
 		var st := UIFactory.button_styles()
-		var accent: Color = it.color
-		var normal: StyleBoxFlat = st.normal.duplicate()
+		var accent := Color(str(it.get("color", "#E8C56A")))
+		var normal: StyleBoxFlat = (st["normal"] as StyleBoxFlat).duplicate()
 		normal.border_color = accent
 		normal.set_corner_radius_all(16)
 		b.add_theme_stylebox_override("normal", normal)
-		b.add_theme_stylebox_override("hover", st.hover)
-		b.add_theme_stylebox_override("pressed", st.pressed)
+		b.add_theme_stylebox_override("hover", st["hover"])
+		b.add_theme_stylebox_override("pressed", st["pressed"])
 		b.add_theme_color_override("font_color", accent)
 		b.add_theme_color_override("font_hover_color", LunexColors.GOLD_BRIGHT)
-		var route: String = it.r
-		var tip: String = it.tip
+		var route: String = str(it.get("route", ""))
+		var tip: String = str(it.get("tip", ""))
 		b.pressed.connect(func():
 			AudioManager.play_ui_tap()
 			NotificationManager.info(tip)
