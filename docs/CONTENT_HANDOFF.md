@@ -48,8 +48,8 @@
 | Кампания | **180 этапов** | C6 ✓ · дальше ART-05 / C7 OTA |
 | Бестиарий | **36+18 ID + 6 ригов** | Слоты анимаций в `0.9.0` |
 | ТЗ фундамента (TZ-A) | **Готово** | `docs/TZ_A_FOUNDATION.md` |
-| Сервер claim/wallet | Скелет | `server/` · модули после доступов |
-| Доступы CORE-01 | Открыто | Docker/VPS/email/keystore |
+| Сервер claim/wallet | **Memory ✓** (auth…store) | Postgres — Docker/VPS |
+| Доступы CORE-01 PG | Открыто | Docker/VPS |
 
 ## Пересборка
 

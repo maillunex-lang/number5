@@ -45,7 +45,7 @@ Godot 4.7.2 → HTTPS /api/v1 → Go modular monolith → PostgreSQL 16
 | Deploy | Docker Compose: `api` + `postgres` (+ Caddy позже для OTA-2) |
 | CI | `go test ./...`, migrate up на ephemeral PG |
 
-Каталог кода (скелет): `server/` в корне репозитория.
+Каталог кода: `server/` (memory MVP §4; Postgres adapter — следующий шаг).
 
 ---
 
@@ -199,16 +199,16 @@ content_bindings(account_id PK, package_version, schema)
 
 ---
 
-## 11. Блокеры до кода CORE-01
+## 11. Блокеры до Postgres (прод)
 
 | Блокер | Нужно |
 |---|---|
 | Доступы | VPS/Docker host или CI secrets для PG |
-| Email | SMTP / magic-link провайдер (или stub в dev) |
+| Email | SMTP / magic-link (или stub в dev) — для AUTH-04 |
 | Keystore | позже для APK-03, не блокер API |
-| OTA-2 | HTTPS CDN — параллельно, не блокер wallet |
+| OTA-2 | HTTPS CDN — параллельно |
 
-Пока Docker/VPS нет: `server/` работает на **in-memory** `store.Memory` — полный MVP-срез §4 (auth…store VIRTUAL_FREE) + CI smoke. Это dev/CI путь, не прод. Postgres adapter подключится к тому же `store.Store` без смены HTTP-контракта (`migrations/0001_init.sql` готов). SQLite как прод-путь **не** используем.
+**Сейчас:** `server/` на **in-memory** `store.Memory` — полный MVP §4 (auth…store) + CI. Dev/CI, не прод. Postgres adapter → тот же `store.Store` (`migrations/0001_init.sql`). SQLite как прод **не** используем.
 
 ---
 
@@ -220,4 +220,4 @@ content_bindings(account_id PK, package_version, schema)
 - OTA: `docs/CONTENT_OTA.md`  
 - Канон API деталей: `docs/content/*.md`
 
-**Следующий шаг после утверждения TZ-A:** реализация CORE-01 по §4 при появлении доступов.
+**Следующий шаг:** Postgres adapter на `store.Store` при появлении Docker/VPS.

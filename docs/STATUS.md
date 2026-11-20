@@ -1,25 +1,27 @@
-# Lunex AFK — текущий статус репозитория
+# Lunex AFK — статус
 
-Дата: 2026-11-20 · активный пакет: **`0.9.0`**
+Дата: **2026-11-20** · ветка истины: **`main`** · пакет: **`0.9.0`**
 
-## Сейчас есть
+## Есть
 
-- `0.9.0` **C6**: `assets.json` schema 2 (реестр ригов/героев/глав) + `media/` descriptors + UI `ART-01`.
-- `0.8.0` C5: skills + dialogs; `0.7.0` C4: 180 этапов.
-- UI: карточка героя → Навыки / Арт; хаб → реестр арта; этап → диалог → бой.
-- Admin Studio: `/economy`, `/meta` (M→V), `/catalog` + фильтр ассетов C6.
-- **TZ-A:** `docs/TZ_A_FOUNDATION.md`.
-- **CORE-01 memory slice (полный TZ-A §4):** auth, wallet, heroes, campaign, battle, summon, afk, mail, **store VIRTUAL_FREE**.
-- Клиент: `ApiClient` autoload → guest login к `127.0.0.1:8080` с fallback в офлайн-демо.
-- SQL: `server/migrations/0001_init.sql` (полный каркас таблиц под PG).
+- Контент **C0–C6** (пакеты `0.2.0`…`0.9.0`): кампания 180, skills/dialogs, арт-реестр, E/P/G/meta.
+- Godot UI Prototype v0.1 + Admin Studio (`/economy`, `/meta`, `/catalog`).
+- OTA hot-reload (dev).
+- **TZ-A** + **CORE-01 memory**: auth, wallet, heroes, campaign, battle, summon, afk, mail, store VIRTUAL_FREE.
+- Клиент `ApiClient` → `127.0.0.1:8080` (иначе офлайн-демо).
+- SQL-каркас: `server/migrations/0001_init.sql`.
 
-## Сейчас нет / блокер
+## Блокеры
 
-- **CORE-01 Postgres adapter** — (**блокер:** Docker/VPS).
-- **OTA-2** — HTTPS-хост.
-- **ART-05** — бинарные webp/атласы (слоты уже в `0.9.0`).
+| Что | Нужно |
+|---|---|
+| Postgres adapter | Docker / VPS |
+| OTA-2 | HTTPS-хост |
+| ART-05 | Бинарные webp/атласы (слоты уже в `0.9.0`) |
 
 ```bash
 tools/validate_content_package.sh 0.9.0
 cd server && go test ./... && go run ./cmd/api
 ```
+
+Подробности: `docs/ROADMAP.md`.

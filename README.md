@@ -1,29 +1,24 @@
 # Lunex AFK
 
-Мобильная онлайн AFK/Idle RPG. Репозиторий: клиентский **UI Prototype v0.1** на Godot 4.7.2 + контент-пакеты + Admin Studio + ТЗ/скелет CORE-01.
+Мобильная онлайн AFK/Idle RPG. Репозиторий: Godot **4.7.2** UI Prototype v0.1, контент-пакеты, Admin Studio, CORE-01 API (memory).
 
 ## Статус
 
-Локальный игровой прототип интерфейса. **Онлайн-режим не реализован** (скелет API в `server/`). Данные демо хранятся локально и не выдаются за серверные.
+Активный пакет **`0.9.0`**. Локальный UI + memory API; прод-онлайн ждёт Postgres/VPS и HTTPS.
 
-Документы: `docs/STATUS.md`, `docs/ROADMAP.md`, `docs/TZ_A_FOUNDATION.md`, `docs/CONTENT_HANDOFF.md`, `docs/ADMIN_STUDIO.md`.
+Документы: [`docs/STATUS.md`](docs/STATUS.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md) · [`docs/TZ_A_FOUNDATION.md`](docs/TZ_A_FOUNDATION.md).
 
-Активный контент-пакет: **`0.9.0`** (`content/packages/active.json`) — C6 арт-реестр + C5/C4 и стек ниже.
-
-## Запуск клиента
+## Клиент
 
 ```bash
 godot --path .
-```
-
-Требуется Godot **4.7.2**. Портрет 1080×1920 (9:16).
-
-```bash
-tools/validate_content_package.sh          # active package
+tools/validate_content_package.sh
 python3 tools/check_repo_refs.py
 ```
 
-## Lunex Admin Studio
+Портрет 1080×1920. Гостевой вход пробует CORE-01 (`ApiClient` / `LUNEX_API_BASE`), иначе офлайн-демо.
+
+## Admin Studio
 
 ```bash
 cd admin-studio && npm install && npm run dev
@@ -31,24 +26,20 @@ cd admin-studio && npm install && npm run dev
 
 UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — `docs/ADMIN_STUDIO.md`.
 
-## CORE-01 (memory slice)
-
-ТЗ: `docs/TZ_A_FOUNDATION.md`. Auth…store на memory; Postgres — после Docker/VPS.
+## CORE-01
 
 ```bash
 cd server && go test ./... && go run ./cmd/api
-# guest → wallet → battle → summon → afk → mail → store
 ```
 
-Godot: `ApiClient` (guest → `127.0.0.1:8080`, иначе офлайн-демо).
+Memory: guest → wallet → battle → summon → afk → mail → store. Postgres — после Docker/VPS (`migrations/0001_init.sql`).
 
-## Что включено в v0.1
+## Включено
 
-- GameShell: TopBar, 4 вкладки, Router, модалки
-- Хаб / кампания / герои / DEMO-бой 5v5
+- GameShell, хаб / кампания / герои / DEMO-бой
 - Пакеты `0.1.0`…`0.9.0` + Studio economy/meta/catalog
-- TZ-A + CORE-01 memory API + `ApiClient`
+- TZ-A + CORE-01 memory + `ApiClient`
 
 ## Лицензии
 
-См. `THIRD_PARTY_LICENSES.md` и `docs/ASSETS_REGISTRY.md`.
+`THIRD_PARTY_LICENSES.md` · `docs/ASSETS_REGISTRY.md`.

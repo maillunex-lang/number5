@@ -2,7 +2,7 @@
 
 Канон сюжета/героев/бестиария: `docs/content/STORY_*.md`, `FACTIONS_*.md`, `BESTIARY_*.md`.  
 Канон экономики: `MONETIZATION_VIP.md`, `PROGRESSION_EQUIPMENT_LOOT.md`, `GACHA_45_HEROES.md`, `AFK_DAILY_QUESTS_EXPEDITIONS.md`.  
-Пакеты: `0.2.0`…`0.8.0` · **`0.9.0` (C6 арт-реестр)** · не rewrite старых на месте.
+Пакеты: `0.2.0`…**`0.9.0` (active, C6)** · не rewrite старых на месте.
 
 ## Порядок мира (C): не «только кампания»
 
@@ -11,7 +11,7 @@
 | Сначала только кампания | Этапы → несуществующие H/E/B |
 | Полный параллель 6×45×180 | Расходятся ID |
 
-**C0→C3 готовы** (spine + CH01). Дальше C4–C7 по главам/арту.
+**C0→C6 готовы** (spine → 180 этапов → skills/dialogs → арт-реестр). Дальше **C7** = OTA-2.
 
 ## Порядок экономики (E): решено по зависимостям
 
@@ -39,7 +39,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | **E3** | AFK / 12+8 квестов / 18 экспедиций | **Готово** | `liveops.json` + AFK UI |
 | **E4** | Магазин SKU / 3 подписки / VIP 0–11 / BP 30 | **Готово (данные+UI демо)** | `economy.json` offers… · без реальных платежей |
 | **E5** | Сервер wallet/ledger/RNG | **Memory ✓** (PG next) | `server/` CORE-01 |
-| **E6** | Admin Studio economy editors | После E5 | publish/rollback |
+| **E6** | Admin Studio economy editors | Частично (`/economy`) | publish/rollback на CDN |
 
 ## Этапы сюжета (C)
 
@@ -72,10 +72,10 @@ sku / sub_*  ←── economy.offers / subscriptions (payable_price_rub=0)
 | Нужны валюты E0 и материалы E1 | Без `gold`/`boss_core`/`skill_book` некуда класть награды |
 | Нужны `B*`/`E*`/`F*` из C1 | Башня/охота ссылаются на бестиарий |
 | Unlock `CHxx` можно как gate | Не ждать полные stages CH02–06 (C4) — режимы просто «закрыты» |
-| До сервера E5/CORE-01 | UI+каталог DEMO; попытки авторитетны позже |
+| Сервер E5/P3 | Memory ✓; PG — после Docker/VPS |
 
 ```
-E0–E4 экономика ✓ → P0–P2 PvE каталог+UI ✓ → C4 главы → E5/P3 сервер
+E0–E4 ✓ → P0–P2 ✓ → C4–C6 ✓ → E5/P3 memory ✓ → PG adapter
 ```
 
 | ID | Этап | Статус | Артефакты |
@@ -126,7 +126,7 @@ M mail → L login calendars → R profile → A achievements → S daily storie
 | **S** 30 сюжетных дней | Главы + E* бой; не путать с EVENT-01 |
 | **V** 6 live-событий | Самый тяжёлый: event_token, гильдия, PvE, магазин |
 
-Сервер claim / TTL / idempotency — после CORE-01 (фазы M3+/L3+/…).
+Mail claim (memory) уже в CORE-01; остальные M3+/L3+/… — после Postgres.
 
 | ID | Этап | Статус |
 |---|---|---|
@@ -136,11 +136,12 @@ M mail → L login calendars → R profile → A achievements → S daily storie
 | **A0–A2** | Канон + `achievements.json` + UI | **Готово** |
 | **S0–S2** | Канон + `daily_stories.json` + UI | **Готово** |
 | **V0–V2** | Канон + `live_events.json` + UI | **Готово** |
-| **M3+/…** | Сервер | После CORE-01 |
+| **M3** | Mail claim (сервер) | **Memory ✓** · PG next |
+| **L3+/…** | Календарь / профиль / … | После PG |
 
 ## Отложено сознательно
 
-- Авторитетный кошелёк / дроп / pity (CORE-01).
+- Postgres persistence (Docker/VPS).
 - Реальные IAP / billing SDK.
-- Полный UI инвентаря экипировки и экранов экспедиций (данные есть; экраны — следующий вертикальный срез).
-- Лут привязки CH02–CH06 (после C4).
+- Полный UI инвентаря экипировки и экранов экспедиций (данные есть).
+- Гильдии / live-events / daily-story сервер (G3+, V3+, S3+).
