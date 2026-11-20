@@ -60,10 +60,10 @@
 | Chat | `features/chat.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
 | Friends | `features/friends.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
 | Rankings | `features/rankings.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
-| Battle pass / PvP / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
-| PvE / Guild / Events / Profile | `features/*` | 5 | высокая | пакет | CODE_HEAVY | скелет | карточки/рейды | средний |
+| Battle pass / PvP / Profile / Rewards / Sys | `features/*.tscn` | ~12 | низкая | пакет/демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
+| PvE / Guild / Events (online) | `features/*` | 5 | высокая | пакет/API | CODE_HEAVY | скелет | карточки/рейды | средний |
 
-\*HIGH по `.tscn`, но наполнение DEMO всё равно в коде через `DemoScreenBuilder`.
+\*MED: chrome в `.tscn`, секции через `FeatureSectionHost` (не полный visual-edit содержимого панели).
 
 ## 4. Повторно используемые куски (сейчас в коде)
 
@@ -99,6 +99,7 @@
 | Wave4 | Hero details chrome+tabs; Squad FormationSlot+HeroCard; Auth form Theme; settings account Theme buttons |
 | Wave5 | BattleResult ClaimProgress/Status; VIP + SocialHub off DemoScreenBuilder |
 | Wave5+ | Chat / Friends / Rankings Theme hosts; FeatureSectionHost helper |
+| Wave6 | BattlePass/PvP/Profile/Rewards/Sys off DemoScreenBuilder (builder unused) |
 
 ## 7. Критерии «экран модернизирован»
 

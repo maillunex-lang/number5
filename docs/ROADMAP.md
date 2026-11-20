@@ -6,8 +6,8 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | UX hang-fix + wave4/5 device | APK после #28: вход без зависания; wave4–5+ chrome smoke |
-| P2 | UI-VISUAL remainder | battle_pass/PvP/profile/sys off DemoScreenBuilder; TopBar/BottomNav MED→HIGH |
+| P1 | UX hang-fix + wave4–6 device | APK после #28: вход; chrome VIP/Social/Result/demos |
+| P2 | UI-VISUAL shell | TopBar/BottomNav MED→HIGH; deprecate DemoScreenBuilder |
 
 ## Закрыто в этом срезе
 
@@ -25,6 +25,7 @@
 | UI-VISUAL wave4 code | HeroDetails + SquadManager + Auth form Theme (merge #25) |
 | UI-VISUAL wave5 code | BattleResult ClaimProgress; VIP + SocialHub Theme hosts (off DemoScreenBuilder) |
 | UI-VISUAL wave5+ code | Chat/Friends/Rankings Theme + FeatureSectionHost |
+| UI-VISUAL wave6 demos | BattlePass/PvP/Profile/Rewards/Sys Theme hosts; DemoScreenBuilder unused |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
 | mail ClaimAll atomic | ClaimAll в одной TX |

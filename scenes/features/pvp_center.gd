@@ -1,12 +1,18 @@
 extends Control
-## Auto-generated demo feature screen
+## PVP-01 center: chrome в .tscn; DynamicHost — без DemoScreenBuilder.
 
 var _payload: Dictionary = {}
-const CONFIG := {
-	"title": "PvP-центр",
-	"status": "Демо",
-	"subtitle": "Асинхронная арена",
-	"sections": [
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _host: VBoxContainer = $Safe/Scroll/VBox/DynamicHost
+
+func setup(payload: Dictionary = {}) -> void:
+	_payload = payload
+
+func _ready() -> void:
+	$Safe/Scroll/VBox/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
+	_title.text = str(_payload.get("title_override", "PvP-центр"))
+	FeatureSectionHost.fill(_host, [
 		{
 			"title": "Сезон арены",
 			"lines": [
@@ -15,36 +21,10 @@ const CONFIG := {
 				"Соперников: 3 (демо)",
 			],
 			"actions": [
-				{
-					"label": "Выбрать соперника",
-					"kind": "route",
-					"route": "COMBAT-01",
-				},
-				{
-					"label": "Отряд защиты",
-					"kind": "route",
-					"route": "PVP-02",
-				},
-				{
-					"label": "Рейтинги",
-					"kind": "route",
-					"route": "RANK-01",
-				},
-				{
-					"label": "История",
-					"kind": "info",
-					"msg": "История боёв пуста (демо)",
-				},
+				{"label": "Выбрать соперника", "kind": "route", "route": "COMBAT-01"},
+				{"label": "Отряд защиты", "kind": "route", "route": "PVP-02"},
+				{"label": "Рейтинги", "kind": "route", "route": "RANK-01"},
+				{"label": "История", "kind": "info", "msg": "История боёв пуста (демо)"},
 			],
 		},
-	],
-}
-
-func setup(payload: Dictionary = {}) -> void:
-	_payload = payload
-
-func _ready() -> void:
-	var cfg := CONFIG.duplicate(true)
-	if _payload.has("title_override"):
-		cfg["title"] = _payload["title_override"]
-	DemoScreenBuilder.build($Safe/Scroll/VBox, cfg)
+	])
