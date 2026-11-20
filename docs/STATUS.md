@@ -1,28 +1,28 @@
 # Lunex AFK — текущий статус репозитория
 
-Дата: 2026-11-20 · ветка истины: **`main`**
+Дата: 2026-11-20 · ветка истины: **`main`** @ `34c99cf`
 
 ## Сейчас есть
 
-- Godot **4.7.2** клиентский UI-прототип (локальные демо-данные).
-- Версионные пакеты `content/packages/0.1.0/` + `ContentPackageLoader` (клиент только читает).
-- Lunex Admin Studio (`admin-studio/`) — комбайн + **OTA CDN** (`/cdn`): Save→Publish → клиент качает пакет без новой APK.
-- Документы: GDD, MVP, STRUCTURE, ARCHITECTURE, CONTENT-01, ROADMAP, ADMIN_STUDIO.
+- Godot **4.7.2** UI-прототип (локальные демо-данные).
+- Пакеты schema 2: hub / campaign / heroes / battle / features / **theme / shell / strings / motion / assets**.
+- Admin Studio-комбайн: Theme, Shell, Strings, Motion, Assets, Hub Editor 2.0 (9:16), кампания/герои/битва, publish / diff / rollback.
+- **OTA:** Save → Publish → CDN `/cdn` → `ContentUpdateService` → `user://content_cache` без новой APK (`docs/CONTENT_OTA.md`).
+- CI валидации пакета + сборки Studio.
 
-## Сейчас нет (и это ожидаемо)
+## Сейчас нет (ожидаемо)
 
-- Go API / PostgreSQL / Docker Compose игрового сервера.
-- Серверный бой, прогресс, призыв, AFK-выдача, платежи.
-- Утверждённый CONTENT-02+ (фракции, полный ростер, 30 этапов, экономика).
-- Боевой арт-пайплайн (GLB → атласы) и релизная подпись APK.
-- Публикация на домен / изменения VPS.
+- Утверждённый CONTENT-02+ (фракции, ростер, 30 этапов, экономика).
+- HTTPS CDN / VPS для OTA на телефонах (`127.0.0.1` только для ПК).
+- Go API / PostgreSQL / серверный бой / прогресс / платежи.
+- Боевой арт-пайплайн и release-подпись APK.
 
-## Как запускать
+## Запуск
 
 ```bash
-godot --path .                                 # клиент
-cd admin-studio && npm install && npm run dev  # Studio :5173 + API :8787
-tools/validate_content_package.sh              # проверка пакета
+godot --path .
+cd admin-studio && npm install && npm run dev   # UI :5173 · API/CDN :8787
+tools/validate_content_package.sh
 ```
 
-Подробности: `README.md`, `docs/ROADMAP.md`, `docs/ADMIN_STUDIO.md`.
+Дорожная карта: `docs/ROADMAP.md`. Что утвердить дальше: `docs/CONTENT_HANDOFF.md`.
