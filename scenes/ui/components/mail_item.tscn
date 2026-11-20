@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexmailitem"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/mail_item.gd" id="1"]
+
+[node name="MailItem" type="PanelContainer"]
+theme_type_variation = &"GamePanel"
+script = ExtResource("1")
+
+[node name="Pad" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Col" type="VBoxContainer" parent="Pad"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Subject" type="Label" parent="Pad/Col"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.909804, 0.772549, 0.415686, 1)
+theme_override_font_sizes/font_size = 22
+text = "● [reward] Тема"
+autowrap_mode = 3
+
+[node name="Body" type="Label" parent="Pad/Col"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.478431, 0.517647, 0.6, 1)
+theme_override_font_sizes/font_size = 16
+text = "Текст письма"
+autowrap_mode = 3
+
+[node name="Attachments" type="Label" parent="Pad/Col"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "gold×100"
+
+[node name="ClaimBtn" type="Button" parent="Pad/Col"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_type_variation = &"GoldButton"
+text = "Забрать"
+
+[node name="Status" type="Label" parent="Pad/Col"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.478431, 0.517647, 0.6, 1)
+theme_override_font_sizes/font_size = 16
+text = "Уже получено"

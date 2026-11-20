@@ -106,33 +106,14 @@ func _add_offer(root: VBoxContainer, offer: Dictionary) -> void:
 	var title := str(offer.get("title", offer.get("name", "Предложение")))
 	var sku := str(offer.get("sku", offer.get("id", title)))
 	var grants: Array = offer.get("grants", [])
-	var panel := UIFactory.panel()
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	root.add_child(panel)
-	var card := UIFactory.vbox(12)
+	var card: ShopOfferCard = (load("res://scenes/ui/components/shop_offer_card.tscn") as PackedScene).instantiate()
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.add_child(card)
-	var art := PanelContainer.new()
-	art.custom_minimum_size = Vector2(0, 140)
-	art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color(0.13, 0.18, 0.28), LunexColors.GOLD, 12, 1))
-	card.add_child(art)
-	var art_label := _shop_text("✦ ИЛЛЮСТРАЦИЯ НАБОРА ✦", 22, LunexColors.GOLD)
-	art_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	art_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	art.add_child(art_label)
-	card.add_child(_shop_text(title, 29, LunexColors.GOLD))
-	var parts: PackedStringArray = []
-	for grant in grants:
-		if typeof(grant) == TYPE_DICTIONARY:
-			parts.append("%s ×%s" % [str(grant.get("resource_id", "")), str(grant.get("amount", 0))])
-	card.add_child(_shop_text(", ".join(parts) if not parts.is_empty() else str(offer.get("desc", "Награды будут показаны здесь")), 22))
-	card.add_child(_shop_text("Лимит: %s · Номинал %s ₽ · К оплате 0 ₽" % [str(offer.get("limits", offer.get("limit", "—"))), str(offer.get("nominal_price_rub", 0))], 19, LunexColors.TEXT_MUTED))
-	var buy := UIFactory.gold_button("Получить бесплатно (тест)")
-	buy.custom_minimum_size = Vector2(0, 88)
-	buy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.set_offer(offer)
 	var disclaimer := str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Без списаний"))
-	buy.pressed.connect(func(): _buy(sku, title, disclaimer, grants))
-	card.add_child(buy)
+	card.buy_pressed.connect(func(_sku):
+		_buy(sku, title, disclaimer, grants)
+	)
+	root.add_child(card)
 
 func _buy(sku: String, title: String, disclaimer: String, grants: Array) -> void:
 	if _busy:

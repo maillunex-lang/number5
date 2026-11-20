@@ -57,6 +57,7 @@ func _rebuild() -> void:
 		tabs.add_child(b)
 
 	var shown := 0
+	var item_scene: PackedScene = load("res://scenes/ui/components/mail_item.tscn")
 	for m_raw in _messages:
 		var m: Dictionary = m_raw
 		var cat := str(m.get("category", ""))
@@ -65,30 +66,15 @@ func _rebuild() -> void:
 		if _filter == "system" and cat != "system":
 			continue
 		shown += 1
-		var p := UIFactory.panel()
-		var v := UIFactory.vbox(4)
-		p.add_child(v)
-		var status := str(m.get("status", "unread"))
-		var subject := str(m.get("subject", m.get("title", "")))
-		var mark := "●" if status == "unread" else ("✓" if status == "claimed" else "○")
-		v.add_child(UIFactory.label("%s [%s] %s" % [mark, cat, subject], 22, LunexColors.GOLD))
-		v.add_child(UIFactory.muted(str(m.get("body", "")), 16))
+		var item: MailItem = item_scene.instantiate()
+		item.set_mail(m)
 		var atts: Array = m.get("attachments", [])
-		if atts.size() > 0:
-			var parts: PackedStringArray = []
-			for a in atts:
-				parts.append("%s×%s" % [str(a.get("resource_id", "")), str(a.get("amount", 0))])
-			v.add_child(UIFactory.label(", ".join(parts), 18))
-			if status != "claimed":
-				var mid := str(m.get("id", ""))
-				var claim := UIFactory.gold_button("Забрать")
-				claim.pressed.connect(func(): _claim_one(mid, parts))
-				v.add_child(claim)
-			else:
-				v.add_child(UIFactory.muted("Уже получено", 16))
-		else:
-			v.add_child(UIFactory.muted("Без вложений", 16))
-		root.add_child(p)
+		var parts: PackedStringArray = []
+		for a in atts:
+			parts.append("%s×%s" % [str(a.get("resource_id", "")), str(a.get("amount", 0))])
+		var mid := str(m.get("id", ""))
+		item.claim_pressed.connect(func(_id): _claim_one(mid, parts))
+		root.add_child(item)
 
 	if shown == 0:
 		root.add_child(UIFactory.muted("Пусто", 20))

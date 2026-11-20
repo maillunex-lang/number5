@@ -72,28 +72,16 @@ func _refresh() -> void:
 	var available_width: float = maxf(_grid.size.x, get_viewport_rect().size.x - 24.0)
 	var cell_width: float = floorf((available_width - 24.0) / 3.0)
 	var list := DemoData.get_filtered_heroes(UIStateManager.hero_filter_faction, UIStateManager.hero_filter_rarity, UIStateManager.hero_filter_class, UIStateManager.hero_search, UIStateManager.hero_sort)
+	var card_scene: PackedScene = load("res://scenes/ui/components/hero_card.tscn")
 	for h in list:
-		var cell := Button.new()
-		cell.custom_minimum_size = Vector2(cell_width, 286)
-		cell.toggle_mode = true
-		cell.button_pressed = h.id == selected_id
-		var v := UIFactory.vbox(6)
-		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		v.alignment = BoxContainer.ALIGNMENT_CENTER
-		cell.add_child(v)
-		var mini := UIFactory.hero_portrait(h.tint, Vector2(145, 165))
-		mini.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		v.add_child(mini)
-		var nm := UIFactory.label(str(h.name), 20, LunexColors.TEXT_PRIMARY)
-		nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		v.add_child(nm)
-		var pw := UIFactory.muted(str(h.power), 18)
-		pw.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		v.add_child(pw)
+		var card: HeroCard = card_scene.instantiate()
+		card.card_size = Vector2(cell_width, 286)
+		card.set_hero(h)
+		if h.id == selected_id:
+			card.modulate = Color(1.15, 1.1, 0.95, 1)
 		var hid: String = h.id
-		cell.pressed.connect(func():
+		card.selected.connect(func(_id):
 			UIStateManager.set_hero_selection(hid)
 			_refresh()
 		)
-		_grid.add_child(cell)
+		_grid.add_child(card)

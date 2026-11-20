@@ -4,23 +4,19 @@
 
 **Сделано ранее:** P0 device OK · H6 code · фикс rewind «В хаб».
 
-**Сделано в visual-editor PR:**
+**Сделано в visual-editor PR + wave2:**
 
-- Аудит `docs/UI_VISUAL_AUDIT.md`
-- Theme StyleBox в `theme/styles/` + обновлённый `theme/lunex_theme.tres` (GameButton/GoldButton/GamePanel)
-- Библиотека `scenes/ui/components/*`
-- `UIFactory` → инстанс визуальных кнопок
-- COMBAT-03 chrome в `.tscn`; TopBar/BottomNav `@export`
-- Preview `scenes/ui/preview/ui_preview_root.tscn`
-- `docs/HOW_TO_EDIT_UI_IN_GODOT.md`, `docs/UI_DEVELOPMENT_RULES.md`, правила в `AGENTS.md`
+- Аудит, Theme StyleBox, библиотека компонентов, preview, docs, AGENTS UI rules
+- Wave2 шаблоны: `HubBuilding`, `BattleUnit`, `MailItem`, `ShopOfferCard`; wiring hub/playback/heroes/mail/shop
+- `DemoScreenBuilder` секции → `GamePanel`
 
 **Процесс:** после зелёного CI **merge в `main` по умолчанию**.
 
 ## Next
 
-1. APK с H6 + visual chrome → device verify playback и «В хаб».
-2. Продолжить миграцию CODE_HEAVY экранов (hub buildings остаются из JSON; списки → HeroCard/RewardCard).
-3. ATOMIC-ECONOMY / TD-PG-RACE.
-4. AUTH-04, ART-05.
+1. APK с H6 + visual wave1/2 → device verify.
+2. ATOMIC-ECONOMY / TD-PG-RACE.
+3. AUTH-04, ART-05.
+4. Дальше visual: formation slots, settings tabs chrome, map nodes template.
 
 Godot headless в cloud-агенте может отсутствовать — проверять локально F6 preview + export по `docs/ANDROID_BUILD.md`.

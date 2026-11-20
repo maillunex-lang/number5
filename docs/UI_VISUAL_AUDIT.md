@@ -42,16 +42,16 @@
 | Game shell | `shell/game_shell.tscn` | 19 | средняя | — | CODE_HEAVY | слои, fade | вкладки, overlays | safe-area |
 | Top bar | `shell/top_bar.tscn` | 11 | низкая | wallet | MED | кнопки, отступы, подписи | тексты валют, стили из пакета | hit area |
 | Bottom nav | `shell/bottom_nav.tscn` | 7 | низкая | shell.json | MED | 4 вкладки, высота | иконки/лейблы из пакета | hit area ≥ |
-| Hub | `hub/hub_root.tscn` | 10 | высокая | hub.json | CODE_HEAVY | SideRail, Scroll/World | здания, parallax, rail-кнопки | WORLD 1080×2400 |
+| Hub | `hub/hub_root.tscn` | 10 | высокая | hub.json | LOW* | SideRail, Scroll/World | здания через `HubBuilding` + JSON позиции | WORLD 1080×2400 |
 | Map root | `map/map_root.tscn` | 10 | средняя | campaign | LOW | фон/скролл | регионы | средний |
 | Chapter map | `map/chapter_map.tscn` | 10 | средняя | campaign | LOW | контейнеры | узлы этапов | средний |
 | Stage card | `map/stage_card.tscn` | 12 | низкая | stage | MED | карточка layout | тексты/кнопки боя | низкий |
-| Heroes root | `heroes/heroes_root.tscn` | 12 | высокая | heroes | CODE_HEAVY | фильтры/хост | сетка героев | списки |
+| Heroes root | `heroes/heroes_root.tscn` | 12 | высокая | heroes | MED* | фильтры/хост | сетка через `HeroCard` | списки |
 | Hero details | `heroes/hero_details.tscn` | 5 | высокая | hero | CODE_HEAVY | Safe/Scroll | весь контент | средний |
 | Squad | `heroes/squad_manager.tscn` | 5 | высокая | formation | CODE_HEAVY | скелет | слоты | средний |
 | Battle modes | `battle/battle_modes_root.tscn` | 7 | средняя | — | LOW | список режимов-хост | кнопки режимов | низкий |
 | Formation | `battle/formation.tscn` | 5 | высокая | battle API | CODE_HEAVY | Safe/Scroll | отряд, старт | средний |
-| Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | CODE_HEAVY | Field/HUD/Controls | юниты, FX | полный экран |
+| Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | MED* | Field/HUD/Controls | юниты через `BattleUnit` + timeline | полный экран |
 | Result | `battle/battle_result.tscn` | 4 | высокая | claim | CODE_HEAVY | BG/Safe | title+nav кодом → миграция | низкий |
 | Settings | `features/settings.tscn` | 8 | высокая | local | CODE_HEAVY | Header/Tabs/Scroll | содержимое вкладок | средний |
 | Shop / Summon / AFK / Mail / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки/кнопки | списки |
