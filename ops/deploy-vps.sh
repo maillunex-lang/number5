@@ -81,6 +81,10 @@ p.write_text(s[:m.start(1)] + str(code) + s[m.end(1):])
 print(re.search(r'^version/name="([^"]+)"$', s, re.M)[1])
 PY
 )
+# ART-05: ensure package media webp exist (gitignored binaries).
+if command -v python3 >/dev/null 2>&1; then
+  python3 tools/generate_art05_placeholders.py >/dev/null 2>&1 || true
+fi
 "$godot" --headless --editor --import >"$stage/godot-import.log" 2>&1
 "$godot" --headless --path . --export-debug Android "$stage/latest.apk" >"$stage/android.log" 2>&1
 if grep -E 'SCRIPT ERROR|Parse Error|(^| )ERROR:' "$stage/godot-import.log" "$stage/android.log"; then exit 1; fi

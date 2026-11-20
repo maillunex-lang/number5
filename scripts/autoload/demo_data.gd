@@ -302,6 +302,7 @@ func enemy_squad_for_stage(stage_id: String) -> Array[Dictionary]:
 		for i in 5:
 			out.append({
 				"id": "e_%s_%d" % [stage_id, i],
+				"enemy_id": "E01-01",
 				"name": "Враг разлома",
 				"tint": Color("6A5A50"),
 				"hp": 800 + base_power / 12 + i * 40,

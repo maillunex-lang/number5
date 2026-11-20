@@ -1,5 +1,5 @@
 extends Control
-## ART-01: реестр арта из assets.json (C6 DEMO · без бинарных файлов).
+## ART-01: реестр арта из assets.json (C6 + ART-05 placeholder webp в media/).
 
 var _tab: String = "budget"
 
@@ -19,7 +19,7 @@ func _rebuild() -> void:
 	root.add_child(UIFactory.section_header(ContentPackageLoader.tr_key("art.title", "Реестр арта")))
 	root.add_child(UIFactory.muted("%s · %s" % [
 		ContentPackageLoader.package_label(),
-		ContentPackageLoader.tr_key("c6.demo", "C6 DEMO · слоты арта без бинарных файлов"),
+		ContentPackageLoader.tr_key("c6.demo", "ART-05 · placeholder webp в media/heroes|rigs"),
 	], 18))
 
 	var tabs := UIFactory.hbox(8)

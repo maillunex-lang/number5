@@ -120,6 +120,7 @@ func _unit_from_snapshot(raw: Variant, side: String) -> Dictionary:
 		"id": str(u.get("id", "")),
 		"name": str(u.get("name", u.get("id", "?"))),
 		"side": side,
+		"enemy_id": str(u.get("enemy_id", "")),
 		"max_hp": max_hp,
 		"hp": max_hp,
 		"atk": float(u.get("atk", 100)),
@@ -188,10 +189,24 @@ func _build_portraits() -> void:
 		c.queue_free()
 	for u in _allies:
 		var p := PanelContainer.new()
-		p.custom_minimum_size = Vector2(160, 90)
+		p.custom_minimum_size = Vector2(160, 110)
+		p.theme_type_variation = &"GamePanel"
 		var v := UIFactory.vbox(4)
 		p.add_child(v)
-		v.add_child(UIFactory.label(str(u.name), 18))
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 6)
+		v.add_child(row)
+		var face := TextureRect.new()
+		face.custom_minimum_size = Vector2(48, 48)
+		face.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		face.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		var tex: Texture2D = AssetLoader.hero_portrait(str(u.id))
+		if tex != null:
+			face.texture = tex
+		else:
+			face.modulate = u.get("tint", Color.GRAY)
+		row.add_child(face)
+		row.add_child(UIFactory.label(str(u.name), 18))
 		var hp := ProgressBar.new()
 		hp.name = "HP"
 		hp.max_value = u.max_hp
@@ -254,6 +269,8 @@ func _apply_event(ev: Dictionary) -> void:
 			var actor_id: String = str(ev.get("actor", ""))
 			var dmg: float = float(ev.get("damage", 0))
 			var is_skill: bool = bool(ev.get("skill", false))
+			_play_unit_clip(actor_id, "attack")
+			_play_unit_clip(target_id, "hit")
 			var unit: Dictionary = _find_unit(target_id)
 			if not unit.is_empty():
 				if ev.has("hp"):
@@ -306,6 +323,13 @@ func _find_unit(uid: String) -> Dictionary:
 		if str(u.id) == uid:
 			return u
 	return {}
+
+func _play_unit_clip(uid: String, clip: String) -> void:
+	if uid == "" or not _units_ui.has(uid):
+		return
+	var view: Variant = (_units_ui[uid] as Dictionary).get("unit_view")
+	if view is BattleUnit:
+		(view as BattleUnit).play_clip(clip)
 
 func _sim_tick_demo() -> void:
 	var attackers: Array[Dictionary] = []

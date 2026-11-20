@@ -31,6 +31,14 @@ offset_right = 120.0
 offset_bottom = 140.0
 color = Color(0.2, 0.4, 0.5, 1)
 
+[node name="Sprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 140.0
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
 offset_top = 130.0

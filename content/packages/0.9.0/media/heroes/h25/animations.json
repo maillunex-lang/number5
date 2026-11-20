@@ -2,48 +2,36 @@
   "hero_id": "H25",
   "pivot": "feet",
   "facing": "right",
+  "frame_size": [
+    128,
+    128
+  ],
   "clips": [
     {
       "id": "idle",
+      "frame_index": 0,
       "frames": 1,
-      "duration_hint_sec": 1.5
+      "duration_hint_sec": 1.2
     },
     {
       "id": "attack",
+      "frame_index": 1,
       "frames": 1,
-      "duration_hint_sec": 0.8
-    },
-    {
-      "id": "skill_1",
-      "frames": 1,
-      "duration_hint_sec": 0.8
-    },
-    {
-      "id": "skill_2",
-      "frames": 1,
-      "duration_hint_sec": 0.8
-    },
-    {
-      "id": "ultimate",
-      "frames": 1,
-      "duration_hint_sec": 0.8
+      "duration_hint_sec": 0.35
     },
     {
       "id": "hit",
+      "frame_index": 2,
       "frames": 1,
-      "duration_hint_sec": 0.8
+      "duration_hint_sec": 0.35
     },
     {
       "id": "death",
+      "frame_index": 3,
       "frames": 1,
-      "duration_hint_sec": 0.8
-    },
-    {
-      "id": "victory",
-      "frames": 1,
-      "duration_hint_sec": 0.8
+      "duration_hint_sec": 0.35
     }
   ],
-  "status": "planned",
-  "note": "C6 descriptor · ART-05 fills atlas frames"
+  "status": "art05_placeholder",
+  "note": "ART-05 procedural placeholder atlas (idle/attack/hit/death)"
 }
