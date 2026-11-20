@@ -1,61 +1,64 @@
 extends Control
-## HERO-02 / часть PREBATTLE — менеджер отрядов, 5 слотов, пресеты
+## HERO-02: chrome в .tscn; слоты FormationSlot; сетка HeroCard.
 
 var _payload: Dictionary = {}
 var _selected_slot: int = 0
+
+const HERO_CARD := "res://scenes/ui/components/hero_card.tscn"
+
+@onready var _power: Label = $Safe/Scroll/VBox/PowerLabel
+@onready var _presets: HBoxContainer = $Safe/Scroll/VBox/PresetsHost
+@onready var _heroes: GridContainer = $Safe/Scroll/VBox/HeroesHost
+@onready var _slots_row: HBoxContainer = $Safe/Scroll/VBox/SlotsRow
+var _slots: Array[FormationSlot] = []
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
+	_slots.clear()
+	for c in _slots_row.get_children():
+		if c is FormationSlot:
+			_slots.append(c)
+	for i in _slots.size():
+		var idx := i
+		_slots[i].pressed.connect(func():
+			_selected_slot = idx
+			_refresh_selection()
+		)
+	$Safe/Scroll/VBox/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
 	_rebuild()
 	DemoData.squad_changed.connect(_rebuild)
 
 func _rebuild() -> void:
-	var root := $Safe/Scroll/VBox
-	for c in root.get_children():
-		c.queue_free()
-	root.add_child(UIFactory.section_header("Менеджер отрядов"))
-	root.add_child(UIFactory.label("Сила отряда: %d" % DemoData.squad_power(), 28, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("Выберите слот, затем героя. Состав отряда хранится на сервере. Изменение состава пока недоступно.", 22))
-	var slots := UIFactory.hbox(8)
-	root.add_child(slots)
+	_power.text = "Сила отряда: %d" % DemoData.squad_power()
 	for i in 5:
-		var hid: String = DemoData.squad_slots[i]
+		var hid: String = DemoData.squad_slots[i] if i < DemoData.squad_slots.size() else ""
 		var h := DemoData.get_hero(hid)
-		var b := Button.new()
-		b.custom_minimum_size = Vector2(160, 180)
-		b.text = ("#%d\n%s" % [i + 1, h.name]) if not h.is_empty() else ("#%d\nПусто" % [i + 1])
-		b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		if i == _selected_slot:
-			b.modulate = Color(1.2, 1.1, 0.9)
-		var idx := i
-		b.pressed.connect(func():
-			_selected_slot = idx
-			_rebuild()
-		)
-		slots.add_child(b)
-	root.add_child(UIFactory.title("Пресеты", 28))
-	var prow := UIFactory.hbox(8)
-	root.add_child(prow)
+		if h.is_empty():
+			_slots[i].clear_slot()
+		else:
+			_slots[i].set_hero(h)
+	_refresh_selection()
+	for c in _presets.get_children():
+		c.queue_free()
 	for p in DemoData.squad_presets:
-		var pb := UIFactory.fantasy_button(str(p.name), 52)
-		var pid: String = p.id
-		pb.disabled = true
-		prow.add_child(pb)
-	root.add_child(UIFactory.title("Герои", 28))
-	var grid := GridContainer.new()
-	grid.columns = 3
-	grid.add_theme_constant_override("h_separation", 10)
-	grid.add_theme_constant_override("v_separation", 10)
-	root.add_child(grid)
-	for h in DemoData.heroes:
 		var b := Button.new()
-		b.custom_minimum_size = Vector2(200, 100)
-		b.text = "%s\n%d" % [h.name, h.power]
-		var hid: String = h.id
+		b.text = str(p.name)
+		b.custom_minimum_size = Vector2(0, 52)
+		b.theme_type_variation = &"GameButton"
 		b.disabled = true
-		grid.add_child(b)
-	var back := UIFactory.fantasy_button("Назад")
-	back.pressed.connect(func(): ScreenRouter.handle_back())
-	root.add_child(back)
+		_presets.add_child(b)
+	for c in _heroes.get_children():
+		c.queue_free()
+	var card_scene: PackedScene = load(HERO_CARD)
+	for h in DemoData.heroes:
+		var card: HeroCard = card_scene.instantiate()
+		card.card_size = Vector2(200, 260)
+		card.set_hero(h)
+		card.modulate = Color(0.75, 0.75, 0.78, 1) # assign disabled until server API
+		_heroes.add_child(card)
+
+func _refresh_selection() -> void:
+	for i in _slots.size():
+		_slots[i].modulate = Color(1.15, 1.08, 0.9) if i == _selected_slot else Color.WHITE

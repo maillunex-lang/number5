@@ -3,6 +3,8 @@ class_name FormationSlot
 extends PanelContainer
 ## Слот отряда на экране подготовки. Данные — set_hero / clear_slot.
 
+signal pressed
+
 @export_category("Lunex Formation Slot")
 @export var empty_label: String = "Пусто":
 	set(v):
@@ -23,6 +25,14 @@ func _ready() -> void:
 		clear_slot()
 		if _empty:
 			_empty.text = empty_label
+		return
+	if not gui_input.is_connected(_on_gui):
+		gui_input.connect(_on_gui)
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+func _on_gui(ev: InputEvent) -> void:
+	if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+		pressed.emit()
 
 func _ensure_face() -> void:
 	if _face != null or _portrait == null:

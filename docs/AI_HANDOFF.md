@@ -1,15 +1,11 @@
-# Передача · MAP-01 stage list / squad power / scroll
+# Передача · UI-VISUAL wave4
 
-Срез 20 ноября 2026. Ветка: `cursor/fix-stage-list-bind-scroll-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave4-d5fe`.
 
-**Причина бага:** `StageListItem.set_stage()` вызывался до `add_child` → `@onready` null → плейсхолдеры «Основной · Этап». `apply_server_player` писал `power = 0`. Полная ширина кнопки «Карточка» блокировала drag-scroll.
-
-**Сделано:** bind после add_child + pending apply; клиентская оценка power по пакету; DragPad + mouse_filter IGNORE на chrome строки; FightBtn для `current`.
-
-Headless: 30 уникальных CH01 строк, squad_power>0.
+**Сделано:** HERO-01 chrome (portrait/tabs/TabContentHost); HERO-02 FormationSlot + HeroCard grid; Auth form в `.tscn` + Theme (без inline StyleBox); settings account → Theme buttons; preview «Wave4 Heroes/Auth».
 
 ## Next
 
-1. Merge → VPS APK → проверить список этапов / силу отряда / скролл.
-2. Владелец: ART-05 / H6 / AUTH-04 device OK.
-3. Wave4 UI (hero_details / squad / auth).
+1. Merge → APK: проверить auth guest/login, HERO-01/02, MAP-01 (предыдущий фикс).
+2. Владелец: ART-05 / H6 / AUTH-04 / MAP-01 device OK.
+3. Wave5 кандидаты: battle_result chrome, feature DemoScreenBuilder screens, TopBar/BottomNav MED→HIGH.

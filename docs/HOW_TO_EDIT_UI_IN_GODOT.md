@@ -48,6 +48,8 @@
 | Здание хаба | `scenes/ui/components/hub_building.tscn` (позиции из `hub.json`) |
 | Юнит боя | `scenes/ui/components/battle_unit.tscn` |
 | Слот отряда / этап / регион | `formation_slot.tscn` / `stage_list_item.tscn` / `map_region_button.tscn` |
+| Карточка героя / менеджер отряда | `heroes/hero_details.tscn` / `heroes/squad_manager.tscn` |
+| Экран входа | `bootstrap/auth.tscn` (поля и кнопки в сцене) |
 | Письмо / оффер магазина | `mail_item.tscn` / `shop_offer_card.tscn` |
 | Цвета кнопок (на всех экранах) | `theme/styles/*.tres` и `theme/lunex_theme.tres` |
 | Предпросмотр без сервера | `scenes/ui/preview/ui_preview_root.tscn` |

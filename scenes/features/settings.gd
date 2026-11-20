@@ -45,6 +45,14 @@ func _panel(bg: Color = INK, edge: Color = LINE, radius: int = 18) -> StyleBoxFl
 	st.content_margin_bottom = 12
 	return st
 
+func _theme_button(label_text: String, gold: bool = false, height: int = 66) -> Button:
+	var b := Button.new()
+	b.text = label_text
+	b.custom_minimum_size.y = height
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	b.theme_type_variation = &"GoldButton" if gold else &"GameButton"
+	return b
+
 func _button(label_text: String, active: bool = false, height: int = 66) -> Button:
 	var b := Button.new()
 	b.text = label_text
@@ -132,7 +140,7 @@ func _rebuild_content() -> void:
 				password_edit.custom_minimum_size.y = 56
 				password_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				_host.add_child(password_edit)
-				var link := _button("Привязать аккаунт")
+				var link := _theme_button("Привязать аккаунт", true)
 				link.pressed.connect(func():
 					link.disabled = true
 					var ok := await ApiClient.link_guest(email_edit.text.strip_edges(), password_edit.text)
@@ -145,7 +153,7 @@ func _rebuild_content() -> void:
 						NotificationManager.warn("Не удалось привязать · проверь email/пароль")
 				)
 				_host.add_child(link)
-			var logout := _button("Выйти из аккаунта")
+			var logout := _theme_button("Выйти из аккаунта", false)
 			logout.pressed.connect(func():
 				ModalManager.push_confirm("Выйти из аккаунта?", "Вернуться на экран входа. Сессия на сервере будет отозвана.", _logout_confirmed)
 			)
