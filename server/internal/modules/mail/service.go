@@ -100,68 +100,94 @@ func (s *Service) ClaimAll(accountID domain.AccountID, idempotencyKey string) (s
 		return 422, errJSON("invalid", "idempotency_key required"), nil
 	}
 	hash := hashKey("claim-all|" + idempotencyKey)
-	if rec, e := s.Store.GetIdempotency(accountID, idempotencyKey); e == nil {
-		if rec.RequestHash != hash {
-			return 409, errJSON("conflict", "idempotency key reused"), nil
-		}
-		var cached ClaimAllResponse
-		_ = json.Unmarshal(rec.ResponseJSON, &cached)
-		cached.Replayed = true
-		return rec.StatusCode, mustJSON(cached), nil
-	}
 	_ = s.SeedDemo(accountID)
-	msgs, err := s.Store.ListMail(accountID)
+	listed, err := s.Store.ListMail(accountID)
 	if err != nil {
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	claimed := []ClaimResponse{}
-	entries := []domain.LedgerEntry{}
-	for _, msg := range msgs {
-		if msg.Status == "claimed" {
-			continue
+	ids := make([]string, 0, len(listed))
+	for _, m := range listed {
+		ids = append(ids, m.ID)
+	}
+
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(idempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused")
+				return nil
+			}
+			var cached ClaimAllResponse
+			_ = json.Unmarshal(rec.ResponseJSON, &cached)
+			cached.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(cached)
+			return nil
 		}
-		rewards := map[string]int64{}
-		has := false
-		for i, a := range msg.Attachments {
-			if a.Claimed || a.Amount <= 0 {
+
+		claimed := []ClaimResponse{}
+		entries := []domain.LedgerEntry{}
+		toSave := []domain.MailMessage{}
+		for _, id := range ids {
+			msg, e := ops.GetMail(id)
+			if e != nil {
 				continue
 			}
-			has = true
-			rewards[a.ResourceID] += a.Amount
-			entries = append(entries, domain.LedgerEntry{
-				ResourceID: a.ResourceID, Delta: a.Amount,
-				SourceType: "mail_claim_all", SourceID: msg.ID,
-				ConfigVersion: s.Catalog.Version,
-			})
-			msg.Attachments[i].Claimed = true
-		}
-		if !has && len(msg.Attachments) == 0 {
+			if msg.Status == "claimed" {
+				continue
+			}
+			rewards := map[string]int64{}
+			has := false
+			for i, a := range msg.Attachments {
+				if a.Claimed || a.Amount <= 0 {
+					continue
+				}
+				has = true
+				rewards[a.ResourceID] += a.Amount
+				entries = append(entries, domain.LedgerEntry{
+					ResourceID: a.ResourceID, Delta: a.Amount,
+					SourceType: "mail_claim_all", SourceID: msg.ID,
+					ConfigVersion: s.Catalog.Version,
+				})
+				msg.Attachments[i].Claimed = true
+			}
+			if !has && len(msg.Attachments) == 0 {
+				msg.Status = "claimed"
+				toSave = append(toSave, msg)
+				continue
+			}
+			if !has {
+				continue
+			}
 			msg.Status = "claimed"
-			_ = s.Store.SaveMail(accountID, msg)
-			continue
+			toSave = append(toSave, msg)
+			claimed = append(claimed, ClaimResponse{MailID: msg.ID, Rewards: rewards})
 		}
-		if !has {
-			continue
+		// Ledger first, then mail status — one TX (never mark claimed without grant).
+		if _, e := ops.ApplyLedger(entries, idempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
 		}
-		msg.Status = "claimed"
-		_ = s.Store.SaveMail(accountID, msg)
-		claimed = append(claimed, ClaimResponse{MailID: msg.ID, Rewards: rewards})
-	}
-	_, err = s.Store.ApplyLedger(accountID, entries, idempotencyKey, hash, []byte(`{}`), 200)
+		for _, msg := range toSave {
+			if e := ops.SaveMail(msg); e != nil {
+				return e
+			}
+		}
+		out := ClaimAllResponse{Claimed: claimed, Count: len(claimed)}
+		body = mustJSON(out)
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(idempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrConflict {
 			return 409, errJSON("conflict", err.Error()), nil
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	out := ClaimAllResponse{Claimed: claimed, Count: len(claimed)}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
+	if outStatus == 0 {
+		outStatus = 200
 	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func (s *Service) Claim(accountID domain.AccountID, mailID, idempotencyKey string) (status int, body []byte, err error) {
