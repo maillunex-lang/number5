@@ -42,3 +42,6 @@ admin-studio/dist/
 *.log
 content/packages/publish_history.json
 content/packages/*/media/
+
+__pycache__/
+*.pyc
