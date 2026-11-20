@@ -21,9 +21,12 @@ npm run dev
 | Shell / Nav | `shell.json` | TopBar, вкладки, welcome |
 | Строки | `strings.json` | UI-тексты / ключи |
 | Motion | `motion.json` | Параллакс, pulse, FX |
-| Ассеты | `assets.json` + `media/` | Реестр и upload |
+| Ассеты | `assets.json` + `media/` | C6 реестр, фильтр, upload |
 | Хаб 2.0 | `hub.json` | Здания, фон, свет, side-rail |
 | Кампания / герои / битва / фичи | соответствующие JSON | Контент экранов |
+| **Экономика** | `economy.json` | Валюты / SKU / VIP / подписки |
+| **Meta M→V** | `mail`…`live_events` | Почта → календари → … → ивенты |
+| **Каталог** | gacha / PvE / skills… | Остальные CONTENT-C JSON |
 | Пакеты | `active.json` + history | publish / diff / rollback |
 
 Клиент: `ContentPackageLoader` → `ThemeManager` / Shell / экраны **только читают**.

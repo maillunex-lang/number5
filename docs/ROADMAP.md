@@ -147,9 +147,9 @@ Claim/TTL серверные — после CORE-01.
 1. **CORE-01** — серверный wallet / claim / TTL почты (**блокер:** доступы + TZ-A).
 2. **ART-05** — бинарные webp/атласы в слоты `0.9.0`.
 3. **OTA-2** — HTTPS CDN (**блокер:** хост).
-4. Admin Studio editors для meta/economy.
+4. Admin Studio editors для meta/economy — **готово** (`/economy`, `/meta`, `/catalog`).
 
-Готово: C4 · C5 · C6 · UI инвентаря/экспедиций/навыков/диалогов/арт-реестра.
+Готово: C4 · C5 · C6 · Studio economy/meta/catalog · UI инвентаря/экспедиций/навыков/диалогов/арт-реестра.
 
 ## Тестовые ворота
 

@@ -11,6 +11,9 @@ import ShellEditor from "./pages/ShellEditor";
 import StringsEditor from "./pages/StringsEditor";
 import MotionEditor from "./pages/MotionEditor";
 import AssetsLibrary from "./pages/AssetsLibrary";
+import EconomyEditor from "./pages/EconomyEditor";
+import MetaEditor from "./pages/MetaEditor";
+import CatalogEditor from "./pages/CatalogEditor";
 import { PackageProvider } from "./state/PackageContext";
 
 export default function App() {
@@ -57,6 +60,16 @@ export default function App() {
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/features">
             Фичи
           </NavLink>
+          <div className="nav-group">CONTENT-C</div>
+          <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/economy">
+            Экономика
+          </NavLink>
+          <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/meta">
+            Meta M→V
+          </NavLink>
+          <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/catalog">
+            Каталог
+          </NavLink>
           <div className="nav-group">Релиз</div>
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/packages">
             Пакеты
@@ -78,6 +91,9 @@ export default function App() {
             <Route path="/heroes" element={<HeroesEditor />} />
             <Route path="/battle" element={<BattleModesEditor />} />
             <Route path="/features" element={<FeaturesEditor />} />
+            <Route path="/economy" element={<EconomyEditor />} />
+            <Route path="/meta" element={<MetaEditor />} />
+            <Route path="/catalog" element={<CatalogEditor />} />
             <Route path="/packages" element={<PackagesPage />} />
           </Routes>
         </main>
