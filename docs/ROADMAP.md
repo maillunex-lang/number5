@@ -6,8 +6,8 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | UX hang-fix + wave4–9 device | APK после #28: вход; summon/mail/shop/AFK + shell |
-| P2 | UI-VISUAL remainder | game_shell safe-area; quests/guild chrome |
+| P1 | UX hang-fix + wave4–10 device | APK после #28: вход; hub features smoke |
+| P2 | UI-VISUAL remainder | Guild/Events chrome; game_shell safe-area |
 
 ## Закрыто в этом срезе
 
@@ -29,6 +29,7 @@
 | UI-VISUAL wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
 | UI-VISUAL wave8 lists | Mail/Shop/AFK Theme chrome + ListHost |
 | UI-VISUAL wave9 summon | Summon altar Theme chrome; roll/pity intact |
+| UI-VISUAL wave10 quests | Quests + Expeditions Theme chrome + ListHost |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
 | mail ClaimAll atomic | ClaimAll в одной TX |

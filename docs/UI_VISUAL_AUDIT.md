@@ -64,7 +64,9 @@
 | Friends | `features/friends.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
 | Rankings | `features/rankings.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
 | Battle pass / PvP / Profile / Rewards / Sys | `features/*.tscn` | ~12 | низкая | пакет/демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
-| PvE / Guild / Events (online) | `features/*` | 5 | высокая | пакет/API | CODE_HEAVY | скелет | карточки/рейды | средний |
+| Quests | `features/quests.tscn` | ~14 | средняя | пакет | MED* | Title/Tabs/ListHost | quest cards | средний |
+| Expeditions | `features/expeditions.tscn` | ~12 | низкая | пакет | MED* | Title/ListHost | mission cards | низкий |
+| Guild / Events | `features/*` | 5 | высокая | пакет | CODE_HEAVY | скелет | карточки/рейды | средний |
 
 \*MED: chrome в `.tscn`, секции через `FeatureSectionHost` (не полный visual-edit содержимого панели).
 
@@ -106,6 +108,7 @@
 | Wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
 | Wave8 lists | Mail/Shop/AFK Theme chrome + ListHost (claim/buy API intact) |
 | Wave9 summon | Summon altar Theme chrome; roll/pity API intact |
+| Wave10 quests | Quests + Expeditions Theme chrome + ListHost |
 
 ## 7. Критерии «экран модернизирован»
 
