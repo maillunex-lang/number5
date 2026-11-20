@@ -1,14 +1,17 @@
-# Передача · battle replay no-farm (+ H6 device)
+# Передача · после merge #18+#19
 
-Срез 20 ноября 2026. Ветка: `cursor/battle-no-replay-farm-d5fe`. AUTH-04 смержен в `main` (#18).
+Срез 20 ноября 2026. `main` = `fdd4f82` (AUTH-04 + battle no-farm).
 
-**Баг владельца:** повтор уже пройденного этапа кампании снова давал награду (hardcoded 500 gold / 200 xp).
+**Сделано сегодня:** AUTH-04 code; баг «повтор боя = снова награда» закрыт (claim только first clear).
 
-**Фикс:** claim без first-clear → пустые rewards; UI «тренировка»; тест `TestBattleClearedStageClaimGivesNoRewards`.
+## Блокер на владельце (телефон)
 
-## Next
+1. **Деплой API** с `main` (если VPS auto — уже), перепроверить: повтор cleared-этапа → без наград.
+2. **H6 device OK** — `docs/H6_DEVICE_VERIFY.md` (+ шаг 5b).
+3. **AUTH-04 device OK** — `docs/AUTH_04_DEVICE_VERIFY.md` (нужен свежий APK с link UI).
 
-1. Merge + деплой API → владелец перепроверит повтор боя без награды.
-2. Ждать **H6 device OK** / **AUTH-04 device OK**.
-3. Позже: replay loot + daily cap по `PROGRESSION_EQUIPMENT_LOOT.md`.
-4. ART-05; visual wave3.
+## Next для агента (пока ждут device)
+
+1. **ART-05** — аудит портретов/атласов/анимаций в боевой сцене (код/контент), чеклист на устройство.
+2. Или UI-VISUAL wave3 (formation/settings/map nodes).
+3. Replay loot + daily cap — только после явного приоритета (канон PROGRESSION).
