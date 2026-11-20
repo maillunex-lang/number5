@@ -6,8 +6,8 @@
 
 | ID | Тип | Описание | Риск | Файлы | Доказательство | Исправление | Prio | Критерий закрытия |
 |---|---|---|---|---|---|---|---|---|
-| TD-ATOMIC | BUG | Ledger и heroes/pity/mail/campaign не в одной TX | Высокий | summon/mail/battle/shop services | код | Одна транзакция store | P1 | crash mid-op безопасен |
-| TD-PG-RACE | RISK | PG ApplyLedger без FOR UPDATE | Высокий | `store/postgres` | код | row lock / serializable | P1 | concurrent debit test |
+| TD-ATOMIC | BUG | ~~Ledger и side-effects не в одной TX~~ | — | battle/afk/mail/shop/summon + `store.RunAtomic` | закрыто | Memory rollback + PG TX | P1 | ✅ crash mid-op откатывает |
+| TD-PG-RACE | RISK | ~~PG ApplyLedger без FOR UPDATE~~ | — | `store/postgres` advisory+row lock | закрыто | concurrent debit test | P1 | ✅ |
 | TD-ID | RISK | Memory IDs `acc_*` ≠ UUID PG | Средний | memory vs postgres | CreateGuest | единый UUID ID gen | P1 | один формат ID |
 | TD-PUBHIST | IMPROVE | publish_history до 0.6.0 | Низкий | admin-studio publish | файл | дописать 0.7–0.9 | P2 | history полный |
 | TD-NILMOD | RISK | Catalog fail → nil Battle/Summon panic | Средний | `cmd/api/main.go` | код | fail boot / 503 | P1 | — |

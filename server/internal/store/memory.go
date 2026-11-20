@@ -141,6 +141,10 @@ func (m *Memory) WalletBalances(accountID domain.AccountID) ([]domain.Balance, e
 func (m *Memory) GetIdempotency(accountID domain.AccountID, key string) (domain.IdempotencyRecord, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
+	return m.getIdempotencyLocked(accountID, key)
+}
+
+func (m *Memory) getIdempotencyLocked(accountID domain.AccountID, key string) (domain.IdempotencyRecord, error) {
 	rec, ok := m.idem[idemKey(accountID, key)]
 	if !ok {
 		return domain.IdempotencyRecord{}, ErrNotFound
@@ -151,6 +155,10 @@ func (m *Memory) GetIdempotency(accountID domain.AccountID, key string) (domain.
 func (m *Memory) ApplyLedger(accountID domain.AccountID, entries []domain.LedgerEntry, idempotencyKey, requestHash string, response []byte, statusCode int) (bool, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
+	return m.applyLedgerLocked(accountID, entries, idempotencyKey, requestHash, response, statusCode)
+}
+
+func (m *Memory) applyLedgerLocked(accountID domain.AccountID, entries []domain.LedgerEntry, idempotencyKey, requestHash string, response []byte, statusCode int) (bool, error) {
 	ik := idemKey(accountID, idempotencyKey)
 	if rec, ok := m.idem[ik]; ok {
 		if rec.RequestHash != requestHash {
@@ -192,6 +200,10 @@ func (m *Memory) ApplyLedger(accountID domain.AccountID, entries []domain.Ledger
 func (m *Memory) PatchIdempotencyResponse(accountID domain.AccountID, key string, body []byte, status int) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()
+	return m.patchIdempotencyLocked(accountID, key, body, status)
+}
+
+func (m *Memory) patchIdempotencyLocked(accountID domain.AccountID, key string, body []byte, status int) error {
 	ik := idemKey(accountID, key)
 	rec, ok := m.idem[ik]
 	if !ok {

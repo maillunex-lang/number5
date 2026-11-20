@@ -169,53 +169,67 @@ func (s *Service) Claim(accountID domain.AccountID, mailID, idempotencyKey strin
 		return 422, errJSON("invalid", "mail id and idempotency_key required"), nil
 	}
 	hash := hashKey(mailID + "|" + idempotencyKey)
-	if rec, e := s.Store.GetIdempotency(accountID, idempotencyKey); e == nil {
-		if rec.RequestHash != hash {
-			return 409, errJSON("conflict", "idempotency key reused"), nil
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(idempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused")
+				return nil
+			}
+			var cached ClaimResponse
+			_ = json.Unmarshal(rec.ResponseJSON, &cached)
+			cached.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(cached)
+			return nil
 		}
-		var cached ClaimResponse
-		_ = json.Unmarshal(rec.ResponseJSON, &cached)
-		cached.Replayed = true
-		return rec.StatusCode, mustJSON(cached), nil
-	}
-	msg, err := s.Store.GetMail(accountID, mailID)
-	if err != nil {
-		return 404, errJSON("not_found", "mail"), nil
-	}
-	if msg.Status == "claimed" {
-		return 409, errJSON("conflict", "already claimed"), nil
-	}
-	rewards := map[string]int64{}
-	entries := []domain.LedgerEntry{}
-	for i, a := range msg.Attachments {
-		if a.Claimed || a.Amount <= 0 {
-			continue
+		msg, e := ops.GetMail(mailID)
+		if e != nil {
+			outStatus = 404
+			body = errJSON("not_found", "mail")
+			return nil
 		}
-		rewards[a.ResourceID] += a.Amount
-		entries = append(entries, domain.LedgerEntry{
-			ResourceID: a.ResourceID, Delta: a.Amount,
-			SourceType: "mail_claim", SourceID: mailID,
-			ConfigVersion: s.Catalog.Version,
-		})
-		msg.Attachments[i].Claimed = true
-	}
-	_, err = s.Store.ApplyLedger(accountID, entries, idempotencyKey, hash, []byte(`{}`), 200)
+		if msg.Status == "claimed" {
+			outStatus = 409
+			body = errJSON("conflict", "already claimed")
+			return nil
+		}
+		rewards := map[string]int64{}
+		entries := []domain.LedgerEntry{}
+		for i, a := range msg.Attachments {
+			if a.Claimed || a.Amount <= 0 {
+				continue
+			}
+			rewards[a.ResourceID] += a.Amount
+			entries = append(entries, domain.LedgerEntry{
+				ResourceID: a.ResourceID, Delta: a.Amount,
+				SourceType: "mail_claim", SourceID: mailID,
+				ConfigVersion: s.Catalog.Version,
+			})
+			msg.Attachments[i].Claimed = true
+		}
+		if _, e := ops.ApplyLedger(entries, idempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
+		}
+		msg.Status = "claimed"
+		if e := ops.SaveMail(msg); e != nil {
+			return e
+		}
+		body = mustJSON(ClaimResponse{MailID: mailID, Rewards: rewards})
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(idempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrConflict {
 			return 409, errJSON("conflict", err.Error()), nil
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	msg.Status = "claimed"
-	_ = s.Store.SaveMail(accountID, msg)
-	out := ClaimResponse{MailID: mailID, Rewards: rewards}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
+	if outStatus == 0 {
+		outStatus = 200
 	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func hashKey(key string) string {

@@ -44,6 +44,18 @@ func (s *Service) Status(accountID domain.AccountID) (StatusResponse, error) {
 	if err != nil {
 		return StatusResponse{}, err
 	}
+	return s.statusFromState(st), nil
+}
+
+func (s *Service) statusFrom(ops store.Ops, _ domain.AccountID) (StatusResponse, error) {
+	st, err := ops.GetAFK()
+	if err != nil {
+		return StatusResponse{}, err
+	}
+	return s.statusFromState(st), nil
+}
+
+func (s *Service) statusFromState(st domain.AFKState) StatusResponse {
 	cfg := s.Catalog.Liveops.AFK
 	capSec := int64(cfg.CapHours * 3600)
 	elapsed := int64(s.now().Sub(st.LastClaimAt).Seconds())
@@ -55,9 +67,9 @@ func (s *Service) Status(accountID domain.AccountID) (StatusResponse, error) {
 	}
 	rate := s.rateFor(st.Chapter)
 	preview := map[string]int64{
-		"gold":     rate.GoldPerHour * elapsed / 3600,
-		"hero_xp":  rate.HeroXPPerHour * elapsed / 3600,
-		"essence":  rate.EssencePerHour * elapsed / 3600,
+		"gold":    rate.GoldPerHour * elapsed / 3600,
+		"hero_xp": rate.HeroXPPerHour * elapsed / 3600,
+		"essence": rate.EssencePerHour * elapsed / 3600,
 	}
 	return StatusResponse{
 		AccumulatedSec: elapsed,
@@ -66,7 +78,7 @@ func (s *Service) Status(accountID domain.AccountID) (StatusResponse, error) {
 		Chapter:        st.Chapter,
 		LastClaimAt:    st.LastClaimAt.Format(time.RFC3339),
 		CanClaim:       elapsed >= int64(cfg.MinClaimSeconds),
-	}, nil
+	}
 }
 
 func (s *Service) Claim(accountID domain.AccountID, idempotencyKey string) (status int, body []byte, err error) {
@@ -74,16 +86,8 @@ func (s *Service) Claim(accountID domain.AccountID, idempotencyKey string) (stat
 		return 422, errJSON("invalid", "idempotency_key required"), nil
 	}
 	hash := hashKey(idempotencyKey)
-	if rec, e := s.Store.GetIdempotency(accountID, idempotencyKey); e == nil {
-		if rec.RequestHash != hash {
-			return 409, errJSON("conflict", "idempotency key reused"), nil
-		}
-		var cached ClaimResponse
-		_ = json.Unmarshal(rec.ResponseJSON, &cached)
-		cached.Replayed = true
-		return rec.StatusCode, mustJSON(cached), nil
-	}
 
+	// Preview outside TX (time-based); mutations below are atomic.
 	stStatus, err := s.Status(accountID)
 	if err != nil {
 		return 500, errJSON("internal", err.Error()), nil
@@ -92,35 +96,59 @@ func (s *Service) Claim(accountID domain.AccountID, idempotencyKey string) (stat
 		return 422, errJSON("too_early", "min claim interval not reached"), nil
 	}
 	rewards := stStatus.Preview
-	entries := make([]domain.LedgerEntry, 0, len(rewards))
-	for rid, amt := range rewards {
-		if amt <= 0 {
-			continue
+
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(idempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused")
+				return nil
+			}
+			var cached ClaimResponse
+			_ = json.Unmarshal(rec.ResponseJSON, &cached)
+			cached.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(cached)
+			return nil
 		}
-		entries = append(entries, domain.LedgerEntry{
-			ResourceID: rid, Delta: amt, SourceType: "afk_claim", SourceID: idempotencyKey,
-			ConfigVersion: s.Catalog.Version,
-		})
-	}
-	_, err = s.Store.ApplyLedger(accountID, entries, idempotencyKey, hash, []byte(`{}`), 200)
+		entries := make([]domain.LedgerEntry, 0, len(rewards))
+		for rid, amt := range rewards {
+			if amt <= 0 {
+				continue
+			}
+			entries = append(entries, domain.LedgerEntry{
+				ResourceID: rid, Delta: amt, SourceType: "afk_claim", SourceID: idempotencyKey,
+				ConfigVersion: s.Catalog.Version,
+			})
+		}
+		if _, e := ops.ApplyLedger(entries, idempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
+		}
+		st, e := ops.GetAFK()
+		if e != nil {
+			return e
+		}
+		st.LastClaimAt = s.now()
+		if e := ops.SetAFK(st); e != nil {
+			return e
+		}
+		newStatus, _ := s.statusFrom(ops, accountID)
+		out := ClaimResponse{Rewards: rewards, Status: newStatus}
+		body = mustJSON(out)
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(idempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrConflict {
 			return 409, errJSON("conflict", err.Error()), nil
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	st, _ := s.Store.GetAFK(accountID)
-	st.LastClaimAt = s.now()
-	_ = s.Store.SetAFK(accountID, st)
-	newStatus, _ := s.Status(accountID)
-	out := ClaimResponse{Rewards: rewards, Status: newStatus}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
+	if outStatus == 0 {
+		outStatus = 200
 	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func (s *Service) rateFor(chapter int) content.AFKRate {

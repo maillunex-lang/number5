@@ -150,85 +150,105 @@ func (s *Service) Claim(accountID domain.AccountID, battleID, idempotencyKey str
 		return 422, errJSON("invalid", "battle id and idempotency_key required"), nil
 	}
 	hash := hashClaim(battleID, idempotencyKey)
-	if rec, e := s.Store.GetIdempotency(accountID, idempotencyKey); e == nil {
-		if rec.RequestHash != hash {
-			return 409, errJSON("conflict", "idempotency key reused with different payload"), nil
+
+	var out ClaimResponse
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(idempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused with different payload")
+				return nil
+			}
+			_ = json.Unmarshal(rec.ResponseJSON, &out)
+			out.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(out)
+			return nil
 		}
-		var cached ClaimResponse
-		_ = json.Unmarshal(rec.ResponseJSON, &cached)
-		cached.Replayed = true
-		return rec.StatusCode, mustJSON(cached), nil
-	}
 
-	b, err := s.Store.GetBattle(battleID)
-	if err != nil {
-		return 404, errJSON("not_found", "battle not found"), nil
-	}
-	if b.AccountID != accountID {
-		return 403, errJSON("forbidden", "not your battle"), nil
-	}
-	if !b.Victory {
-		return 422, errJSON("invalid", "cannot claim defeat"), nil
-	}
-	if b.Claimed {
-		return 409, errJSON("conflict", "already claimed"), nil
-	}
-
-	rewards := map[string]int64{}
-	loot, ok := s.Catalog.StageLoot(b.StageID)
-	prog, _ := s.Store.GetCampaign(accountID)
-	first := true
-	if st, ok2 := prog.Stages[b.StageID]; ok2 && st.FirstClearClaimed {
-		first = false
-	}
-	if ok && first {
-		for k, v := range loot.FirstClear {
-			rewards[k] = int64(v)
+		b, e := ops.GetBattle(battleID)
+		if e != nil {
+			outStatus = 404
+			body = errJSON("not_found", "battle not found")
+			return nil
 		}
-	} else {
-		rewards["gold"] = 500
-		rewards["hero_xp"] = 200
-	}
+		if b.AccountID != accountID {
+			outStatus = 403
+			body = errJSON("forbidden", "not your battle")
+			return nil
+		}
+		if !b.Victory {
+			outStatus = 422
+			body = errJSON("invalid", "cannot claim defeat")
+			return nil
+		}
+		if b.Claimed {
+			outStatus = 409
+			body = errJSON("conflict", "already claimed")
+			return nil
+		}
 
-	entries := make([]domain.LedgerEntry, 0, len(rewards))
-	for rid, amt := range rewards {
-		entries = append(entries, domain.LedgerEntry{
-			ResourceID: rid, Delta: amt, SourceType: "battle_claim", SourceID: battleID,
-			ConfigVersion: s.Catalog.Version,
-		})
-	}
-	bodyPlaceholder := []byte(`{}`)
-	_, err = s.Store.ApplyLedger(accountID, entries, idempotencyKey, hash, bodyPlaceholder, 200)
+		rewards := map[string]int64{}
+		loot, ok := s.Catalog.StageLoot(b.StageID)
+		prog, _ := ops.GetCampaign()
+		first := true
+		if st, ok2 := prog.Stages[b.StageID]; ok2 && st.FirstClearClaimed {
+			first = false
+		}
+		if ok && first {
+			for k, v := range loot.FirstClear {
+				rewards[k] = int64(v)
+			}
+		} else {
+			rewards["gold"] = 500
+			rewards["hero_xp"] = 200
+		}
+
+		entries := make([]domain.LedgerEntry, 0, len(rewards))
+		for rid, amt := range rewards {
+			entries = append(entries, domain.LedgerEntry{
+				ResourceID: rid, Delta: amt, SourceType: "battle_claim", SourceID: battleID,
+				ConfigVersion: s.Catalog.Version,
+			})
+		}
+		if _, e := ops.ApplyLedger(entries, idempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
+		}
+		if e := ops.MarkBattleClaimed(battleID); e != nil {
+			return e
+		}
+
+		st := prog.Stages[b.StageID]
+		st.StageID = b.StageID
+		st.Clears++
+		st.Stars = 3
+		st.FirstClearClaimed = true
+		prog.Stages[b.StageID] = st
+		if b.StageID == prog.CurrentStage {
+			prog.CurrentStage = s.Catalog.NextStage(b.StageID)
+		}
+		if e := ops.SaveCampaign(prog); e != nil {
+			return e
+		}
+
+		out = ClaimResponse{
+			BattleID: battleID, Rewards: rewards, Progress: campaignLite{CurrentStage: prog.CurrentStage},
+		}
+		body = mustJSON(out)
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(idempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrConflict {
 			return 409, errJSON("conflict", err.Error()), nil
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	_ = s.Store.MarkBattleClaimed(battleID)
-
-	// update campaign
-	st := prog.Stages[b.StageID]
-	st.StageID = b.StageID
-	st.Clears++
-	st.Stars = 3
-	st.FirstClearClaimed = true
-	prog.Stages[b.StageID] = st
-	if b.StageID == prog.CurrentStage {
-		prog.CurrentStage = s.Catalog.NextStage(b.StageID)
+	if outStatus == 0 {
+		outStatus = 200
 	}
-	_ = s.Store.SaveCampaign(accountID, prog)
-
-	out := ClaimResponse{
-		BattleID: battleID, Rewards: rewards, Progress: campaignLite{CurrentStage: prog.CurrentStage},
-	}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
-	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func seedFrom(accountID domain.AccountID, stageID, key string) int64 {
