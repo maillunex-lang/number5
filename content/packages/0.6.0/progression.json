@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "level_cap_default": 100,
+  "level_cap_by_rarity": {
+    "common": 60,
+    "rare": 80,
+    "epic": 100,
+    "legendary": 100,
+    "mythic": 100
+  },
+  "level_up": {
+    "hero_xp_cost": "round(70 + 12*L + 0.65*L^2)",
+    "gold_cost": "round(30 + 8*L + 0.28*L^2)"
+  },
+  "base_stat_growth": {
+    "hp": "round(HP1*(1+0.075*(L-1)))",
+    "atk": "round(ATK1*(1+0.060*(L-1)))",
+    "def": "round(DEF1*(1+0.055*(L-1)))",
+    "spd": "flat"
+  },
+  "breakthroughs": [
+    {
+      "at_level": 20,
+      "essence": 150,
+      "gold": 3000,
+      "class_seal": 1
+    },
+    {
+      "at_level": 40,
+      "essence": 450,
+      "gold": 9000,
+      "class_seal": 2
+    },
+    {
+      "at_level": 60,
+      "essence": 1100,
+      "gold": 24000,
+      "class_seal": 3
+    },
+    {
+      "at_level": 80,
+      "essence": 2600,
+      "gold": 60000,
+      "class_seal": 5
+    }
+  ],
+  "stars": {
+    "max": 5,
+    "shard_per_dupe": 30,
+    "costs": [
+      {
+        "from": 1,
+        "to": 2,
+        "shards": 30,
+        "gold": 2000
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "shards": 60,
+        "gold": 5000
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "shards": 100,
+        "gold": 12000
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "shards": 160,
+        "gold": 30000
+      }
+    ],
+    "stat_mult": {
+      "1": 1.0,
+      "2": 1.05,
+      "3": 1.11,
+      "4": 1.18,
+      "5": 1.26
+    }
+  },
+  "skills": {
+    "max_level": 5,
+    "coefficient_per_level_bp": 400,
+    "costs": [
+      {
+        "from": 1,
+        "to": 2,
+        "skill_book": 2,
+        "gold": 1000
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "skill_book": 4,
+        "gold": 3000
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "skill_book": 8,
+        "gold": 8000
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "skill_book": 15,
+        "gold": 18000
+      }
+    ]
+  },
+  "unlocks": {
+    "equipment": "CH01-05",
+    "stars": "CH01-10",
+    "skills": "CH01-15",
+    "sets": "CH02-01",
+    "talents": "CH03-01",
+    "bonds": "CH03-10",
+    "artifact": "CH04-01"
+  },
+  "replay_rewards_per_day": 20,
+  "replay_soft_cap_after": {
+    "gold_bp": 2500,
+    "xp_bp": 2500,
+    "equipment": false
+  },
+  "day_reset_timezone": "Europe/Moscow",
+  "day_reset_hour": 6
+}

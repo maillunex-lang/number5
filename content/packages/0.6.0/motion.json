@@ -1,0 +1,11 @@
+{
+  "transition_ms": 280,
+  "parallax_enabled": true,
+  "hub_pulse": true,
+  "hub_pulse_sec": 1.1,
+  "particle_scale": 1.0,
+  "max_active_fx": 24,
+  "hub_decor_layers": 3,
+  "building_float": true,
+  "toast_ms": 2200
+}

@@ -15,6 +15,8 @@ const DOC_FILES := [
 	"features.json", "theme.json", "shell.json", "motion.json", "strings.json", "assets.json",
 	"enemies.json", "economy.json", "progression.json", "equipment.json", "loot_tables.json",
 	"gacha.json", "liveops.json", "pve_modes.json", "guilds.json",
+	"mail.json", "login_calendars.json", "profile.json", "achievements.json",
+	"daily_stories.json", "live_events.json",
 ]
 
 var enabled: bool = true
@@ -229,6 +231,8 @@ func _handle_manifest(body: PackedByteArray) -> void:
 			"optional": fname in [
 				"enemies.json", "economy.json", "progression.json", "equipment.json",
 				"loot_tables.json", "gacha.json", "liveops.json", "pve_modes.json", "guilds.json",
+				"mail.json", "login_calendars.json", "profile.json", "achievements.json",
+				"daily_stories.json", "live_events.json",
 			],
 		})
 	_pump()

@@ -33,6 +33,12 @@ var gacha: Dictionary = {}
 var liveops: Dictionary = {}
 var pve_modes: Dictionary = {}
 var guilds: Dictionary = {}
+var mail_pack: Dictionary = {}
+var login_calendars: Dictionary = {}
+var profile_pack: Dictionary = {}
+var achievements_pack: Dictionary = {}
+var daily_stories: Dictionary = {}
+var live_events: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -105,6 +111,12 @@ func _load_docs(base: String) -> void:
 	liveops = _read_json("%s/liveops.json" % base)
 	pve_modes = _read_json("%s/pve_modes.json" % base)
 	guilds = _read_json("%s/guilds.json" % base)
+	mail_pack = _read_json("%s/mail.json" % base)
+	login_calendars = _read_json("%s/login_calendars.json" % base)
+	profile_pack = _read_json("%s/profile.json" % base)
+	achievements_pack = _read_json("%s/achievements.json" % base)
+	daily_stories = _read_json("%s/daily_stories.json" % base)
+	live_events = _read_json("%s/live_events.json" % base)
 
 func reload() -> bool:
 	return load_active_package()

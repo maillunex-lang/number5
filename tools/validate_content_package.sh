@@ -13,7 +13,7 @@ for f in "${REQUIRED[@]}"; do
   test -f "$DIR/$f"
   python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
 done
-OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json guilds.json)
+OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json guilds.json mail.json login_calendars.json profile.json achievements.json daily_stories.json live_events.json)
 for f in "${OPTIONAL[@]}"; do
   if [[ -f "$DIR/$f" ]]; then
     python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
@@ -174,7 +174,82 @@ if (d/"guilds.json").exists():
             assert t["boss_id"] in foe_ids, t["boss_id"]
     print("Guilds / raids OK")
 
-if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ver.startswith("0.5"):
+if (d/"mail.json").exists():
+    mail = json.loads((d/"mail.json").read_text())
+    assert len(mail["templates"]) == 8
+    assert mail["player_to_player"] is False
+    assert any(t["id"] == "MAIL_LOGIN_UNCLAIMED" for t in mail["templates"])
+    print("Mail OK")
+
+if (d/"login_calendars.json").exists():
+    lc = json.loads((d/"login_calendars.json").read_text())
+    assert lc["unlock_stage"] == "CH01-03"
+    assert lc["premium_calendar"] is False
+    ids = {c["id"] for c in lc["calendars"]}
+    assert ids == {"LOGIN_7", "LOGIN_30", "NEWCOMER_14"}
+    for c in lc["calendars"]:
+        assert len(c["entries"]) == c["days"]
+        for e in c["entries"]:
+            for r in e["rewards"]:
+                assert r["amount"] > 0
+    assert lc["rollover"]["unclaimed_to_mail_template"] == "MAIL_LOGIN_UNCLAIMED"
+    print("Login calendars OK")
+
+if (d/"profile.json").exists():
+    pr = json.loads((d/"profile.json").read_text())
+    assert len(pr["cosmetics"]["avatars"]) == 12
+    assert len(pr["cosmetics"]["frames"]) >= 8
+    assert len([t for t in pr["cosmetics"]["titles"] if not t.get("secret")]) == 12
+    assert pr["privacy_defaults"]["show_collection_summary"] is False
+    print("Profile OK")
+
+if (d/"achievements.json").exists():
+    ach = json.loads((d/"achievements.json").read_text())
+    assert len(ach["achievements"]) == 48
+    assert len(ach["secrets"]) == 6
+    assert ach["combat_bonus"] is False
+    ids = [a["id"] for a in ach["achievements"]]
+    assert len(ids) == len(set(ids))
+    print("Achievements OK")
+
+if (d/"daily_stories.json").exists():
+    ds = json.loads((d/"daily_stories.json").read_text())
+    assert len(ds["stories"]) == 30
+    assert ds["unlock_stage"] == "CH01-10"
+    assert ds["pass_xp"] is False
+    foe_ids = set()
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        foe_ids = {e["id"] for e in en.get("enemies", [])} | {b["id"] for b in en.get("bosses", [])}
+    for s in ds["stories"]:
+        assert len(s["choices"]) == 2
+        for c in s["choices"]:
+            if c.get("enemy_hint") and foe_ids:
+                assert c["enemy_hint"] in foe_ids, c["enemy_hint"]
+    print("Daily stories OK")
+
+if (d/"live_events.json").exists():
+    le = json.loads((d/"live_events.json").read_text())
+    assert len(le["events"]) == 6
+    assert le["currency_id"] == "event_token"
+    assert le["shop"]["real_money_enabled"] is False
+    assert le["one_active_large_event"] is True
+    formats = {e["format"] for e in le["events"]}
+    assert formats == {"COLLECTION", "BOSS_RUSH", "FACTION_WEEK", "EXPEDITION", "MINI_CAMPAIGN", "GUILD_COOP"}
+    if (d/"economy.json").exists():
+        eco = json.loads((d/"economy.json").read_text())
+        assert any(c["id"] == "event_token" for c in eco["currencies"])
+    foe_ids = set()
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        foe_ids = {b["id"] for b in en.get("bosses", [])}
+    for e in le["events"]:
+        if e["format"] == "BOSS_RUSH" and foe_ids:
+            for bid in e.get("bosses", []):
+                assert bid in foe_ids, bid
+    print("Live events OK")
+
+if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ver.startswith("0.5") or ver.startswith("0.6"):
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 

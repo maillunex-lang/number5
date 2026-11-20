@@ -15,6 +15,12 @@
 | `docs/content/AFK_DAILY_QUESTS_EXPEDITIONS.md` | AFK, квесты, 18 миссий |
 | `docs/content/PVE_MODES.md` | Башня, охота, врата, подземелья |
 | `docs/content/GUILDS_COOP_RAIDS.md` | Гильдии, асинхр. рейды, жетоны |
+| `docs/content/GAME_MAIL.md` | Почта / вложения |
+| `docs/content/LOGIN_CALENDAR.md` | Календари 7/14/30 |
+| `docs/content/PLAYER_PROFILE.md` | Профиль / косметика |
+| `docs/content/ACHIEVEMENTS_48.md` | 48+6 достижений |
+| `docs/content/DAILY_STORY_EVENTS_30.md` | 30 сюжетных дней |
+| `docs/content/LIVE_EVENTS_6.md` | 6 live-событий |
 | `docs/CONTENT_IMPLEMENTATION.md` | Фазы C0–C7 и инварианты ID |
 
 ## Что уже в игре (C0–C3 + E0–E4)
@@ -22,7 +28,7 @@
 - Пакет `content/packages/0.2.0/` + `active.json` → `0.2.0`
 - Герои/фракции/враги/CH01 связаны по ID
 - Клиент: `enemies_pack` + `economy`/`gacha`/`liveops`; бой из encounters; магазин 0 ₽; алтарь; AFK ставки
-- Активный пакет **0.5.0** (+ гильдии)
+- Активный пакет **0.6.0** (+ meta M→V)
 
 ## Что ещё нужно решить / доделать
 

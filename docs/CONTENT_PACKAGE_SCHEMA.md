@@ -1,4 +1,4 @@
-# Схема контент-пакета (schema 2 → 6)
+# Схема контент-пакета (schema 2 → 7)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
@@ -22,6 +22,12 @@
 | `liveops.json` | AFK, daily/weekly, экспедиции |
 | `pve_modes.json` | **schema 5:** башня/охота/врата/подземелья |
 | `guilds.json` | **schema 6:** гильдии, асинхр. рейды, магазин жетонов |
+| `mail.json` | **schema 7:** шаблоны почты, DEMO inbox |
+| `login_calendars.json` | **schema 7:** LOGIN_7 / LOGIN_30 / NEWCOMER_14 |
+| `profile.json` | **schema 7:** косметика, приватность |
+| `achievements.json` | **schema 7:** 48 + 6 секретов |
+| `daily_stories.json` | **schema 7:** 30 сюжетных карточек |
+| `live_events.json` | **schema 7:** 6 форматов + event_token shop |
 | `battle_modes.json` | Порталы битвы |
 | `features.json` | Демо-фичи |
 

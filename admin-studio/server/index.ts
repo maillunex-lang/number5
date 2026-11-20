@@ -30,6 +30,12 @@ const DOC_FILES = [
   "liveops",
   "pve_modes",
   "guilds",
+  "mail",
+  "login_calendars",
+  "profile",
+  "achievements",
+  "daily_stories",
+  "live_events",
 ] as const;
 
 const app = express();

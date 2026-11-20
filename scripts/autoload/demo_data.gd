@@ -104,11 +104,21 @@ func _load_features_defaults() -> void:
 	var afk: Dictionary = ContentPackageLoader.features.get("afk", {})
 	if afk.has("seconds_default"):
 		afk_seconds_accumulated = int(afk["seconds_default"])
-	var mail: Array = ContentPackageLoader.features.get("mail", [])
 	mail_unread = 0
-	for m in mail:
-		if bool(m.get("unread", false)):
-			mail_unread += 1
+	var mail_pack: Dictionary = ContentPackageLoader.mail_pack
+	if not mail_pack.is_empty():
+		for m_raw in mail_pack.get("demo_inbox", []):
+			var m: Dictionary = m_raw
+			if str(m.get("status", "")) == "unread":
+				mail_unread += 1
+	else:
+		var mail_feat = ContentPackageLoader.features.get("mail", [])
+		if typeof(mail_feat) == TYPE_ARRAY:
+			for m in mail_feat:
+				if bool(m.get("unread", false)):
+					mail_unread += 1
+		elif typeof(mail_feat) == TYPE_DICTIONARY:
+			mail_unread = int(mail_feat.get("unread_demo", 0))
 	quest_ready = 0
 	var quests: Dictionary = ContentPackageLoader.features.get("quests", {})
 	for key in quests.keys():
