@@ -14,7 +14,7 @@ const DOC_FILES := [
 	"manifest.json", "hub.json", "campaign.json", "heroes.json", "battle_modes.json",
 	"features.json", "theme.json", "shell.json", "motion.json", "strings.json", "assets.json",
 	"enemies.json", "economy.json", "progression.json", "equipment.json", "loot_tables.json",
-	"gacha.json", "liveops.json",
+	"gacha.json", "liveops.json", "pve_modes.json",
 ]
 
 var enabled: bool = true
@@ -228,7 +228,7 @@ func _handle_manifest(body: PackedByteArray) -> void:
 			"url": "%s/packages/%s/%s" % [cdn_base, remote_version, fname],
 			"optional": fname in [
 				"enemies.json", "economy.json", "progression.json", "equipment.json",
-				"loot_tables.json", "gacha.json", "liveops.json",
+				"loot_tables.json", "gacha.json", "liveops.json", "pve_modes.json",
 			],
 		})
 	_pump()

@@ -13,7 +13,7 @@ for f in "${REQUIRED[@]}"; do
   test -f "$DIR/$f"
   python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
 done
-OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json)
+OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json)
 for f in "${OPTIONAL[@]}"; do
   if [[ -f "$DIR/$f" ]]; then
     python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
@@ -133,7 +133,30 @@ if (d/"liveops.json").exists():
     assert lo["afk"]["cap_hours"] == 12
     print("Liveops AFK/quests/expeditions OK")
 
-if ver.startswith("0.2") or ver.startswith("0.3"):
+if (d/"pve_modes.json").exists():
+    pve = json.loads((d/"pve_modes.json").read_text())
+    assert {m["id"] for m in pve["modes"]} >= {"tower", "anomaly_hunt", "faction_gates", "rift_dungeons"}
+    floors = pve["tower"]["floors"]
+    assert len(floors) == 120
+    foe_ids = set()
+    if (d/"enemies.json").exists():
+        en = json.loads((d/"enemies.json").read_text())
+        foe_ids = {e["id"] for e in en.get("enemies", [])} | {b["id"] for b in en.get("bosses", [])}
+    for fl in floors:
+        assert fl["id"] == f"TWR-{fl['floor']:03d}"
+        for slot in fl.get("enemy_squad", []):
+            if foe_ids:
+                assert slot["enemy_id"] in foe_ids, f"{fl['id']} bad {slot['enemy_id']}"
+    for day, bosses in pve["anomaly_hunt"]["schedule"].items():
+        assert len(bosses) == 3, day
+        if foe_ids:
+            for bid in bosses:
+                assert bid in foe_ids, f"hunt {day} bad {bid}"
+    assert len(pve["faction_gates"]["factions"]) == 6
+    assert len(pve["rift_dungeons"]["dungeons"]) == 4
+    print("PvE modes OK")
+
+if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4"):
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 

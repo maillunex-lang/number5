@@ -1,4 +1,4 @@
-# Схема контент-пакета (schema 2 → 4)
+# Схема контент-пакета (schema 2 → 5)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
@@ -20,6 +20,7 @@
 | `loot_tables.json` | дроп по stage_id |
 | `gacha.json` | 4 баннера, rates/pity, пулы H* |
 | `liveops.json` | AFK, daily/weekly, экспедиции |
+| `pve_modes.json` | **schema 5:** башня/охота/врата/подземелья |
 | `battle_modes.json` | Порталы битвы |
 | `features.json` | Демо-фичи |
 

@@ -1,28 +1,24 @@
 # Lunex AFK — текущий статус репозитория
 
-Дата: 2026-11-20 · активный пакет: **`0.3.0`** (Разлом эпох + экономика E0–E4)
+Дата: 2026-11-20 · активный пакет: **`0.4.0`** (Разлом эпох + экономика + PvE)
 
 ## Сейчас есть
 
-- Пакет **0.3.0**: мир CH01 + 45 героев + бестиарий + `economy` / `progression` / `equipment` / `loot_tables` / `gacha` / `liveops`.
-- Пакеты **0.1.0** (демо) и **0.2.0** (spine) сохранены.
-- Канон: `docs/content/` (сюжет + 4 эконом-спеки).
-- Порядок внедрения экономики: валюты → прогресс/лут → гача → AFK → VIRTUAL_FREE магазин.
-- UI демо: магазин 0 ₽, алтарь 4 баннера, AFK по ставкам гл.1.
-- Валидатор кросс-ID: `tools/validate_content_package.sh 0.3.0`.
+- Пакет **0.4.0**: всё из 0.3.0 + `pve_modes.json` (Башня 120, Охота, Врата F01–F06, 4 подземелья).
+- Порядок: C spine → E0–E4 экономика → **P0–P2 PvE** (не ждать C4).
+- UI: порталы битвы + экран «Испытания» читают пакет (DEMO).
+- Канон: `docs/content/PVE_MODES.md`.
 
-## Сейчас нет (ожидаемо)
+## Сейчас нет
 
-- Серверный кошелёк / авторитетный дроп и pity (E5 / CORE-01).
-- Полный UI инвентаря экипировки и экспедиций.
-- Лут CH02–CH06, реальные платежи, HTTPS OTA-2.
+- Серверные попытки/урон/claim (P3 / CORE-01).
+- Полные stages CH02–06 (C4) — режимы с unlock CH02 пока закрыты по условию.
+- HTTPS OTA-2.
 
 ## Запуск
 
 ```bash
 godot --path .
-tools/validate_content_package.sh 0.3.0
-python3 tools/generate_economy_package.py   # пересборка 0.3.0 из канона
+tools/validate_content_package.sh 0.4.0
+python3 tools/generate_pve_package.py
 ```
-
-Дорожная карта: `docs/ROADMAP.md`. Фазы: `docs/CONTENT_IMPLEMENTATION.md`.

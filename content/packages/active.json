@@ -1,6 +1,6 @@
 {
-  "version": "0.3.0",
-  "source": "content-c-economy",
+  "version": "0.4.0",
+  "source": "content-c-pve",
   "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-  "published_at": "2026-11-20T08:16:01Z"
+  "published_at": "2026-11-20T08:23:31Z"
 }

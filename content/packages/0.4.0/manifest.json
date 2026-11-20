@@ -1,0 +1,93 @@
+{
+  "id": "lunex-core",
+  "version": "0.4.0",
+  "schema": 5,
+  "client_min": "0.1.0",
+  "title": "Razlom Epoh · PvE modes (tower/hunt/gates/dungeons)",
+  "locale": "ru",
+  "created_at": "2026-11-20T08:23:31Z",
+  "updated_at": "2026-11-20T08:23:31Z",
+  "notes": "P0–P2: pve_modes после E0–E4. Не серверные попытки.",
+  "files": {
+    "assets.json": {
+      "role": "assets"
+    },
+    "battle_modes.json": {
+      "role": "battle_modes"
+    },
+    "campaign.json": {
+      "role": "campaign"
+    },
+    "economy.json": {
+      "role": "economy"
+    },
+    "enemies.json": {
+      "role": "enemies"
+    },
+    "equipment.json": {
+      "role": "equipment"
+    },
+    "features.json": {
+      "role": "features"
+    },
+    "gacha.json": {
+      "role": "gacha"
+    },
+    "heroes.json": {
+      "role": "heroes"
+    },
+    "hub.json": {
+      "role": "hub"
+    },
+    "liveops.json": {
+      "role": "liveops"
+    },
+    "loot_tables.json": {
+      "role": "loot_tables"
+    },
+    "motion.json": {
+      "role": "motion"
+    },
+    "progression.json": {
+      "role": "progression"
+    },
+    "pve_modes.json": {
+      "role": "pve_modes"
+    },
+    "shell.json": {
+      "role": "shell"
+    },
+    "strings.json": {
+      "role": "strings"
+    },
+    "theme.json": {
+      "role": "theme"
+    },
+    "manifest.json": {
+      "role": "manifest"
+    }
+  },
+  "integrity": {
+    "algo": "sha256",
+    "hashes": {
+      "assets.json": "95b2eb879f3884e8b7bc6d917813c86487b9467d461178aa35ee38c694cc5ce9",
+      "battle_modes.json": "f03381b395a4fa0ee00d25be3f854f564427273dd3338ed21e30e2304aa4b00e",
+      "campaign.json": "b53a070320ffeaaac3494bb6fe0632b4b53e8de5b40df5cd3595731c2d24f272",
+      "economy.json": "94a50f7e3913df161be946df585e16559ed1a319a438d4f2d68f0ba5c3733cf9",
+      "enemies.json": "623e2aafc125e2600f1c8895081fb4059a758e7135305ea2b2a66b1d7cc076e4",
+      "equipment.json": "193afbaa4a1ab03b3674dadda068384e89b51b1e58c87b87821477adaf597145",
+      "features.json": "21880dc4ad1a6ab1c5260c8ea7adfa9ad8d1c5cad458b4d3b5c8294dc31e9958",
+      "gacha.json": "856e0ae2a75245deb7529a0e0ec35dd35cf4e24f108aa652d400b294d55d2d72",
+      "heroes.json": "760dfbed90875cae84483865cf9502be1f6821bb72f9817f56f04d0d9fcd2743",
+      "hub.json": "36799ec2f2dfb7d17fd7e22971e89dab2b91d0030bdfb14268950621cac441cf",
+      "liveops.json": "5fea958703d8cb2094dabb0f5def46924ceabea5b42bba1ba8302fad6cc2ae66",
+      "loot_tables.json": "00eeed243539689d5c34bbc0b3d5086fd4beff9c7cd5c887692c471b65ed6509",
+      "motion.json": "cbd90ad7bd3ac090ffe5d5d61176abf3ffbe7bb04691940deee05dc322659eaf",
+      "progression.json": "6b671cea94620bbe00cad16dc4a9ab780d367e6193fed719003f7ff962aa9668",
+      "pve_modes.json": "08871cfbb54aeac19f1fa105bf2c6d3bd8e74bcbd58e441de7143081d00ac988",
+      "shell.json": "f879d4da1f60e717b89f8f30be6daedae9b1d282fd0658c5be6e0d127553b8c0",
+      "strings.json": "49c256814cf92c6beae57a01e0ff82a86a0af3802f65d829337e33443bc32336",
+      "theme.json": "44a5e985fe4564e976119811241b8431ff839291cfcfc8df1cdaec54439bcdd2"
+    }
+  }
+}
