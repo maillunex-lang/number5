@@ -67,7 +67,7 @@
 | Quests | `features/quests.tscn` | ~14 | средняя | пакет | MED* | Title/Tabs/ListHost | quest cards | средний |
 | Expeditions | `features/expeditions.tscn` | ~12 | низкая | пакет | MED* | Title/ListHost | mission cards | низкий |
 | Guild | `features/guild.tscn` | ~16 | средняя | пакет | MED* | Title/Tabs/ListHost | hub/quests/raids/shop | средний |
-| Events | `features/events.tscn` | 5 | высокая | пакет | CODE_HEAVY | скелет | вкладки calendar/story | средний |
+| Events | `features/events.tscn` | ~16 | средняя | пакет | MED* | Header/Tabs/ListHost/Footer | events/calendar/story | средний |
 
 \*MED: chrome в `.tscn`, секции через `FeatureSectionHost` (не полный visual-edit содержимого панели).
 
@@ -111,6 +111,7 @@
 | Wave9 summon | Summon altar Theme chrome; roll/pity API intact |
 | Wave10 quests | Quests + Expeditions Theme chrome + ListHost |
 | Wave11 guild | Guild Theme chrome + Tabs/ListHost (demo intact) |
+| Wave12 events | Events Header/Tabs + ListHost Scroll (shop scroll pattern) |
 
 ## 7. Критерии «экран модернизирован»
 

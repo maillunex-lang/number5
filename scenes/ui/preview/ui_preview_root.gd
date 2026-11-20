@@ -23,6 +23,7 @@ const PAGES := {
 	"Mail/Shop/AFK": "_show_online_lists",
 	"Summon": "_show_summon",
 	"Quests/Expeditions": "_show_quests_exp",
+	"Events": "_show_events",
 }
 
 func _ready() -> void:
@@ -348,3 +349,10 @@ func _show_quests_exp() -> void:
 			_host.add_child(sc)
 		)
 		col.add_child(btn)
+
+func _show_events() -> void:
+	_clear_host()
+	_hint.text = "HUB-04 Events Theme chrome (tabs + ListHost scroll)"
+	var sc: Control = (load("res://scenes/features/events.tscn") as PackedScene).instantiate()
+	sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(sc)

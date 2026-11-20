@@ -1,10 +1,10 @@
-# Передача · device OK после shop fix
+# Передача · UI-VISUAL wave12 Events
 
-Срез 20 ноября 2026. `main` @ shop fix #37.
+Срез 20 ноября 2026. Ветка: `cursor/ui-visual-events-d5fe`.
 
-**Владелец:** «Все ок» — shop scroll + VIRTUAL_FREE / вход после #28.
+**Сделано:** Events — Header/Tabs + ListHost Scroll + Footer (паттерн shop scroll). Вкладки Ивенты / Календарь / Сюжет дня; демо-логика без смены контракта.
 
 ## Next
 
-1. UI-VISUAL Events chrome (P1).
+1. Merge → device smoke HUB-04.
 2. game_shell safe-area (P2).
