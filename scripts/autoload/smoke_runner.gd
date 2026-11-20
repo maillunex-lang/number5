@@ -11,6 +11,15 @@ func _run() -> void:
 	print("SMOKE: flag detected, waiting splash pipeline…")
 	# Skip bootstrap: jump after a short wait if still on splash
 	await get_tree().create_timer(0.1).timeout
+	if not ContentPackageLoader.loaded:
+		push_error("SMOKE: ContentPackage not loaded")
+		get_tree().quit(2)
+		return
+	print("SMOKE: package ", ContentPackageLoader.version, " heroes=", DemoData.heroes.size())
+	if DemoData.heroes.is_empty() or DemoData.campaign_progress.get("stages", []).is_empty():
+		push_error("SMOKE: package data empty")
+		get_tree().quit(2)
+		return
 	AppState.enter_as_guest("SmokeTester")
 	get_tree().change_scene_to_file("res://scenes/shell/game_shell.tscn")
 	await get_tree().create_timer(1.2).timeout

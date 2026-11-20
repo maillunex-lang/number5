@@ -1,0 +1,53 @@
+name: content-and-studio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "admin-studio/**"
+      - "tools/validate_content_package.sh"
+      - ".github/workflows/content-and-studio.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "admin-studio/**"
+      - "tools/validate_content_package.sh"
+      - ".github/workflows/content-and-studio.yml"
+
+jobs:
+  validate-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate active content package
+        run: tools/validate_content_package.sh
+
+  admin-studio:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: admin-studio/package-lock.json
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - name: API health smoke
+        run: |
+          npx tsx server/index.ts &
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -fsS http://127.0.0.1:8787/api/health >/tmp/health.json; then
+              cat /tmp/health.json
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "API did not become ready"
+          exit 1

@@ -6,7 +6,7 @@
 
 Локальный игровой прототип интерфейса. **Онлайн-режим не реализован.** Данные демо хранятся локально и не выдаются за серверные.
 
-Документы: `docs/STRUCTURE.md` (реестр UI), `docs/PROTOTYPE_v0.1.md`, `docs/PROTOTYPE_AUDIT_v0.1.md`, `docs/ADMIN_STUDIO.md`.
+Документы: `docs/STATUS.md` (срез), `docs/ROADMAP.md`, `docs/STRUCTURE.md`, `docs/PROTOTYPE_v0.1.md`, `docs/ADMIN_STUDIO.md`, `docs/CONTENT_HANDOFF.md` (что утвердить дальше).
 
 ## Запуск клиента
 

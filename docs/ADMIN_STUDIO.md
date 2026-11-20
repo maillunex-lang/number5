@@ -19,7 +19,7 @@ Admin Studio (React/TS)  --publish-->  content/packages/{version}/
 
 ## Пакет
 
-Путь: `content/packages/0.1.0/`
+Путь: `content/packages/0.1.0/` · схема: `docs/CONTENT_PACKAGE_SCHEMA.md`
 
 | Файл | Назначение |
 |---|---|
@@ -30,6 +30,8 @@ Admin Studio (React/TS)  --publish-->  content/packages/{version}/
 | `battle_modes.json` | Порталы вкладки «Битва» |
 | `features.json` | Магазин/квесты/AFK/ивенты (демо-контент) |
 | `../active.json` | Какую версию читает клиент |
+
+Новая версия: `tools/create_content_version.sh 0.1.0 0.1.1`
 
 ## Запуск Studio
 
