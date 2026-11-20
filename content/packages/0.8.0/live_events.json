@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · одно активное крупное событие; даты назначает админ; без реальных платежей",
+  "currency_id": "event_token",
+  "grace_hours_after_end": 48,
+  "warn_hours_before_expire": 24,
+  "one_active_large_event": true,
+  "global_ranking_mvp": false,
+  "shop": {
+    "currency_id": "event_token",
+    "real_money_enabled": false,
+    "offers": [
+      {
+        "sku": "evt_gold",
+        "price_event_token": 20,
+        "grants": [
+          {
+            "resource_id": "gold",
+            "amount": 20000
+          }
+        ],
+        "limit_per_event": 10
+      },
+      {
+        "sku": "evt_essence",
+        "price_event_token": 40,
+        "grants": [
+          {
+            "resource_id": "essence",
+            "amount": 400
+          }
+        ],
+        "limit_per_event": 5
+      },
+      {
+        "sku": "evt_skill",
+        "price_event_token": 50,
+        "grants": [
+          {
+            "resource_id": "skill_book",
+            "amount": 2
+          }
+        ],
+        "limit_per_event": 3
+      },
+      {
+        "sku": "evt_scroll",
+        "price_event_token": 60,
+        "grants": [
+          {
+            "resource_id": "summon_scroll",
+            "amount": 1
+          }
+        ],
+        "limit_per_event": 5
+      },
+      {
+        "sku": "evt_faction_scroll",
+        "price_event_token": 120,
+        "grants": [
+          {
+            "resource_id": "faction_scroll",
+            "amount": 1
+          }
+        ],
+        "limit_per_event": 2
+      },
+      {
+        "sku": "evt_cosmetic_frame",
+        "price_event_token": 180,
+        "grants": [
+          {
+            "resource_id": "cosmetic_token",
+            "amount": 1,
+            "item_id": "frame_event"
+          }
+        ],
+        "limit_per_event": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "EVT_001",
+      "name": "Неделя исчезнувших минут",
+      "format": "COLLECTION",
+      "theme": "Уфа",
+      "duration_days": 7,
+      "unlock_stage": "CH01-10",
+      "milestones": [
+        {
+          "tokens": 20,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 15000
+            },
+            {
+              "resource_id": "event_token",
+              "amount": 30
+            }
+          ]
+        },
+        {
+          "tokens": 50,
+          "rewards": [
+            {
+              "resource_id": "essence",
+              "amount": 300
+            },
+            {
+              "resource_id": "event_token",
+              "amount": 40
+            }
+          ]
+        },
+        {
+          "tokens": 90,
+          "rewards": [
+            {
+              "resource_id": "summon_scroll",
+              "amount": 1
+            },
+            {
+              "resource_id": "event_token",
+              "amount": 60
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "campaign_3",
+          "cap_per_day": 10,
+          "tokens": 1
+        },
+        {
+          "id": "afk_claim",
+          "cap_per_day": 5,
+          "tokens": 1
+        },
+        {
+          "id": "expedition",
+          "cap_per_day": 5,
+          "tokens": 1
+        }
+      ]
+    },
+    {
+      "id": "EVT_002",
+      "name": "Каменная тревога",
+      "format": "BOSS_RUSH",
+      "theme": "Шиханы",
+      "duration_days": 7,
+      "unlock_stage": "CH02-10",
+      "bosses": [
+        "B02-01",
+        "B02-02",
+        "B01-01"
+      ],
+      "daily_rewarded_attempts": 2,
+      "difficulties": 3
+    },
+    {
+      "id": "EVT_003",
+      "name": "Неделя кузнечного завета",
+      "format": "FACTION_WEEK",
+      "theme": "Кузни",
+      "duration_days": 7,
+      "unlock_stage": "CH03-01",
+      "faction_id": "F04",
+      "tasks": [
+        {
+          "id": "fw_battles",
+          "need": 5,
+          "heroes_of_faction_min": 3
+        },
+        {
+          "id": "fw_upgrade",
+          "need": 2
+        },
+        {
+          "id": "fw_trial",
+          "need": 1
+        }
+      ]
+    },
+    {
+      "id": "EVT_004",
+      "name": "Маршрут из 2050-го",
+      "format": "EXPEDITION",
+      "theme": "Стерлитамак будущего",
+      "duration_days": 10,
+      "unlock_stage": "CH04-01",
+      "chain_hours": [
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "max_concurrent": 1
+    },
+    {
+      "id": "EVT_005",
+      "name": "Эхо Иремеля",
+      "format": "MINI_CAMPAIGN",
+      "theme": "Иремель",
+      "duration_days": 14,
+      "unlock_stage": "CH05-01",
+      "stages": [
+        "EVT_005-ST01",
+        "EVT_005-ST02",
+        "EVT_005-ST03",
+        "EVT_005-ST04",
+        "EVT_005-ST05",
+        "EVT_005-ST06",
+        "EVT_005-ST07",
+        "EVT_005-ST08",
+        "EVT_005-ST09",
+        "EVT_005-ST10"
+      ],
+      "boss_stages": {
+        "ST05": "B02-01",
+        "ST10": "B02-02"
+      },
+      "dialog_inserts": 3
+    },
+    {
+      "id": "EVT_006",
+      "name": "Общий час",
+      "format": "GUILD_COOP",
+      "theme": "Совместный прогресс",
+      "duration_days": 7,
+      "unlock_stage": "CH01-20",
+      "requires_guild": true,
+      "guild_targets": {
+        "personal_quests": 30,
+        "raid_fights": 15,
+        "expeditions": 20
+      }
+    }
+  ],
+  "demo": {
+    "active_instance": {
+      "definition_id": "EVT_001",
+      "starts_at": "2026-11-18T03:00:00Z",
+      "ends_at": "2026-11-25T03:00:00Z",
+      "claim_deadline": "2026-11-27T03:00:00Z",
+      "tokens": 42,
+      "milestones_claimed": [
+        20
+      ]
+    }
+  }
+}

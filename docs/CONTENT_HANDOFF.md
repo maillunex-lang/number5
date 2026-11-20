@@ -2,7 +2,7 @@
 
 Канон **«Башкортостан: Разлом эпох»** принят в репозиторий. Рабочее имя «Элиориан» из CONTENT-01 больше **не** используется в активном пакете.
 
-**Активный пакет:** `content/packages/active.json` → **`0.7.0`**.
+**Активный пакет:** `content/packages/active.json` → **`0.8.0`**.
 
 ## Источники (канон)
 
@@ -35,7 +35,7 @@
 | `0.3.0` | Экономика E0–E4 | Сохранён |
 | `0.4.0` | PvE P0–P2 | Сохранён |
 | `0.5.0` | Гильдии G0–G2 | Сохранён |
-| **`0.7.0`** | Meta M→V (+ всё выше) | **Активный** |
+| **`0.8.0`** | Meta M→V (+ всё выше) | **Активный** |
 
 Клиент: `ContentPackageLoader` читает optional JSON (enemies…live_events); UI DEMO без серверного claim.
 
@@ -45,7 +45,7 @@
 |---|---|---|
 | Фракции (6) | **В данных** | Бонусы 2/3/5 — проект, не в бою |
 | 45 героев | **Реестр + L1 статы** | Полные skill cards → C5 |
-| Кампания | **180 этапов** | C5 навыки/диалоги |
+| Кампания | **180 этапов** | C5 ✓ · дальше C6 арт |
 | Бестиарий | **36+18 ID** | Арт ригов → C6 |
 | Сервер claim/wallet | Открыто | CORE-01 |
 | Доступы CORE-01 | Открыто | Docker/VPS/email/keystore |
@@ -64,7 +64,7 @@ python3 tools/generate_guilds_package.py      # 0.5.0
 Активный пакет:
 
 ```bash
-python3 tools/generate_campaign_c4_package.py  # 0.7.0 + active.json
-tools/validate_content_package.sh 0.7.0
+python3 tools/generate_skills_dialogs_package.py  # 0.8.0 + active.json
+tools/validate_content_package.sh 0.8.0
 python3 tools/check_repo_refs.py
 ```

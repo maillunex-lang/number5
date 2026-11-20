@@ -2,7 +2,7 @@
 
 Канон сюжета/героев/бестиария: `docs/content/STORY_*.md`, `FACTIONS_*.md`, `BESTIARY_*.md`.  
 Канон экономики: `MONETIZATION_VIP.md`, `PROGRESSION_EQUIPMENT_LOOT.md`, `GACHA_45_HEROES.md`, `AFK_DAILY_QUESTS_EXPEDITIONS.md`.  
-Пакеты: `0.2.0`…`0.6.0` · **`0.7.0` (C4 · 180 этапов)** · не rewrite старых на месте.
+Пакеты: `0.2.0`…`0.7.0` · **`0.8.0` (C5 навыки/диалоги)** · не rewrite старых на месте.
 
 ## Порядок мира (C): не «только кампания»
 
@@ -46,8 +46,9 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | ID | Статус | Критерий |
 |---|---|---|
 | C0–C3 | **Готово** | Spine+CH01 с `0.2.0` |
-| C4 | **Готово** | CH01–CH06 ×30 в `0.7.0` (active) |
-| C5–C7 | Дальше | навыки / арт / OTA-2 |
+| C4 | **Готово** | CH01–CH06 ×30 в `0.7.0` |
+| C5 | **Готово** | skills + dialogs в `0.8.0` (active) |
+| C6–C7 | Дальше | арт / OTA-2 |
 
 ## Связи ID
 
@@ -60,8 +61,8 @@ sku / sub_*  ←── economy.offers / subscriptions (payable_price_rub=0)
 ```
 
 Генераторы:  
-`generate_razlom` → `economy` → `pve` → `guilds` → `meta` → **`generate_campaign_c4_package.py`** (пишет `active.json` = `0.7.0`).  
-Валидатор: `tools/validate_content_package.sh 0.7.0` · ссылки: `tools/check_repo_refs.py`.
+`…` → `generate_campaign_c4` → **`generate_skills_dialogs_package.py`** (active=`0.8.0`).  
+Валидатор: `tools/validate_content_package.sh 0.8.0` · ссылки: `tools/check_repo_refs.py`.
 
 ## Порядок PvE (P) — после экономики, не ждать C4
 

@@ -65,6 +65,7 @@ func _register_routes() -> void:
 		"GLOBAL-01": "res://scenes/features/rewards_panel.tscn",
 		"WORKSHOP": "res://scenes/features/workshop.tscn",
 		"EXPEDITIONS": "res://scenes/features/expeditions.tscn",
+		"DIALOG-01": "res://scenes/features/story_dialog.tscn",
 		"TOWER": "res://scenes/features/pve_mode.tscn",
 	}
 

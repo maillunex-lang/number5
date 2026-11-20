@@ -13,7 +13,7 @@ for f in "${REQUIRED[@]}"; do
   test -f "$DIR/$f"
   python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
 done
-OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json guilds.json mail.json login_calendars.json profile.json achievements.json daily_stories.json live_events.json)
+OPTIONAL=(enemies.json economy.json progression.json equipment.json loot_tables.json gacha.json liveops.json pve_modes.json guilds.json mail.json login_calendars.json profile.json achievements.json daily_stories.json live_events.json skills.json dialogs.json)
 for f in "${OPTIONAL[@]}"; do
   if [[ -f "$DIR/$f" ]]; then
     python3 -c "import json; json.load(open('$DIR/$f')); print(' OK', '$f')"
@@ -253,7 +253,7 @@ if ver.startswith("0.2") or ver.startswith("0.3") or ver.startswith("0.4") or ve
     assert len(heroes["heroes"]) >= 45
     assert len([s for s in camp["stages"] if str(s["id"]).startswith("CH01")]) == 30
 
-if ver.startswith("0.7") or (d/"manifest.json").exists() and json.loads((d/"manifest.json").read_text()).get("version","").startswith("0.7"):
+if ver.startswith("0.7") or ver.startswith("0.8"):
     assert len(heroes["heroes"]) >= 45
     assert len(camp["stages"]) == 180, len(camp["stages"])
     for ch in range(1, 7):
@@ -269,6 +269,32 @@ if ver.startswith("0.7") or (d/"manifest.json").exists() and json.loads((d/"mani
         loot = json.loads((d/"loot_tables.json").read_text())
         assert len(loot.get("stage_bindings", [])) == 180
     print("C4 campaign 180 OK")
+
+if (d/"skills.json").exists():
+    sk = json.loads((d/"skills.json").read_text())
+    assert len(sk.get("heroes", {})) >= 45
+    assert len(sk.get("cards", [])) >= 225
+    hero_ids = {h["id"] for h in heroes["heroes"]}
+    for hid, entry in sk["heroes"].items():
+        assert hid in hero_ids, hid
+        assert len(entry.get("skill_ids", [])) == 5, hid
+    card_ids = {c["id"] for c in sk["cards"]}
+    for h in heroes["heroes"]:
+        for sid in h.get("skills", []):
+            if str(sid).startswith(h["id"] + "_"):
+                assert sid in card_ids, sid
+    print("C5 skills OK")
+
+if (d/"dialogs.json").exists():
+    dg = json.loads((d/"dialogs.json").read_text())
+    assert len(dg.get("dialogs", [])) >= 48
+    stage_ids = {s["id"] for s in camp["stages"]}
+    for dialog in dg["dialogs"]:
+        assert dialog.get("lines"), dialog.get("id")
+        sid = dialog.get("stage_id")
+        if sid:
+            assert sid in stage_ids, sid
+    print("C5 dialogs OK")
 
 print(f"PASS {ver}")
 PY

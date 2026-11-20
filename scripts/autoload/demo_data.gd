@@ -84,6 +84,8 @@ func _load_heroes() -> void:
 			"energy": int(base.get("energy", 0)),
 			"favorite": bool(h.get("favorite", false)),
 			"skills": h.get("skills", []),
+			"quote": str(h.get("quote", "")),
+			"personality": str(h.get("personality", "")),
 			"equip": {"weapon": "", "armor": "", "acc": ""},
 		})
 

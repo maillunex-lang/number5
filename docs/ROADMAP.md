@@ -1,6 +1,6 @@
 # Lunex AFK - Roadmap
 
-Статус: **живая карта**. Обновлено 2026-11-20 · истина: ветка `cursor/content-c-razlom-epoh-9d0b` → merge в **`main`**. Пакет **`0.7.0`** (C4 кампания 180 + meta).
+Статус: **живая карта**. Обновлено 2026-11-20 · истина: ветка `cursor/content-c-razlom-epoh-9d0b` → merge в **`main`**. Пакет **`0.8.0`** (C5 навыки/диалоги + C4).
 
 Последовательность: **D** (документы) → **C** (контент) → **A** (ТЗ фундамента) → онлайн.  
 Локальный UI + Admin Studio + OTA **не заменяют** CORE-01.
@@ -11,11 +11,11 @@
 |---|---|---|
 | Документы D (GDD / MVP / STRUCTURE / ARCHITECTURE / CONTENT-01) | Зафиксированы | `docs/` |
 | UI Prototype v0.1 (Godot 4.7.2) | **Готово** | `project.godot`, `scenes/`, smoke |
-| Пакеты schema 2→7 (клиент только читает) | **Готово** `0.1.0`…`0.6.0`, active=`0.7.0` | `content/packages/` |
+| Пакеты schema 2→7 (клиент только читает) | **Готово** `0.1.0`…`0.6.0`, active=`0.8.0` | `content/packages/` |
 | Admin Studio комбайн | **Готово** | `admin-studio/` |
 | OTA контента без переустановки APK | **Готово** (dev CDN) | `docs/CONTENT_OTA.md` |
 | **CONTENT-C канон** (6 глав / 45 героев / бестиарий + meta) | **В репо** | `docs/content/*.md` |
-| **CONTENT-C вертикальный срез** | **В коде** (C0–C3, E/P/G, M→V) | active `0.7.0`, `docs/CONTENT_IMPLEMENTATION.md` |
+| **CONTENT-C вертикальный срез** | **В коде** (C0–C3, E/P/G, M→V) | active `0.8.0`, `docs/CONTENT_IMPLEMENTATION.md` |
 | HTTPS CDN / VPS (OTA-2) | Не развёрнуто | хост + `cdn_base` |
 | CORE-01 (Go + PostgreSQL + CI) | Не начато | этап A |
 | Серверный бой / прогресс / платежи | Не начато | после AUTH/BATTLE |
@@ -32,7 +32,7 @@
 | C2 | Кампания CH01 (30 этапов + encounters) | **Готово** | `campaign.json` ссылается на E/B |
 | C3 | Клиент на spine+CH01 | **Готово** | Loader/DemoData; active эволюционировал до `0.6.0` |
 | C4 | Данные CH02–CH06 | **Готово** (`0.7.0`) | 180 этапов + encounters + loot |
-| C5 | Навыки / диалоги / улики в runtime | Дальше | skill ids + story keys |
+| C5 | Навыки / диалоги / улики в runtime | **Готово** (`0.8.0`) | skills.json + dialogs.json + UI |
 | C6 | Арт ригов/героев + экономика | Параллельно ART-05 | placeholder → ассеты |
 | C7 | OTA publish 0.2.x | После C3; прод = OTA-2 | CDN без новой APK |
 
@@ -137,27 +137,27 @@ Claim/TTL серверные — после CORE-01.
 | пакет **0.4.0** | + PvE режимы P0–P2 | Сохранён |
 | пакет **0.5.0** | + гильдии / асинхр. рейды | Сохранён |
 | пакет **0.6.0** | + meta (почта→ивенты) | Сохранён |
-| пакет **0.7.0** | C4: CH01–CH06 ×30 + loot/encounters | **Активный** (`active.json`) |
+| пакет **0.7.0** | C4: CH01–CH06 ×30 + loot/encounters | Сохранён |
+| пакет **0.8.0** | C5: skills + dialogs | **Активный** (`active.json`) |
 | v0.1 Alpha | Расширенный MVP | Дальше: C4–C7 → TZ-A → CORE-01 |
 
 ## Ближайший рабочий порядок
 
 1. **CORE-01** — серверный wallet / claim / TTL почты (**блокер:** доступы + TZ-A).
-2. **C5** — навыки / диалоги в runtime.
-3. **C6** — арт ригов/героев (placeholder → ассеты).
-4. **OTA-2** — HTTPS CDN (**блокер:** хост).
-5. Admin Studio editors для meta/economy.
+2. **C6** — арт ригов/героев (placeholder → ассеты).
+3. **OTA-2** — HTTPS CDN (**блокер:** хост).
+4. Admin Studio editors для meta/economy.
 
-Готово в этой ветке: C4 (180 этапов) · UI инвентаря · UI экспедиций.
+Готово: C4 · C5 · UI инвентаря/экспедиций/навыков/диалогов.
 
 ## Тестовые ворота
 
 1. Smoke навигации — обязателен после смены пакета
-2. `tools/validate_content_package.sh 0.7.0` — кросс-ID PASS
+2. `tools/validate_content_package.sh 0.8.0` — кросс-ID PASS
 3. `python3 tools/check_repo_refs.py` — пути в доках/коде
 4. OTA Publish → `/cdn` → hot-reload — PASS локально
 5. Functional бой/награды — демо до CORE-01
 
 ## Управление изменениями
 
-Канон правится в `docs/content/`. Исторические генераторы (`generate_razlom`…`generate_guilds`) **не** двигают `active.json`. Активный пакет пишет `tools/generate_campaign_c4_package.py` (сейчас `0.7.0`); более ранние генераторы active не трогают. Не rewrite старых версий на месте.
+Канон правится в `docs/content/`. Исторические генераторы (`generate_razlom`…`generate_guilds`) **не** двигают `active.json`. Активный пакет пишет `tools/generate_skills_dialogs_package.py` (сейчас `0.8.0`); более ранние генераторы active не трогают. Не rewrite старых версий на месте.

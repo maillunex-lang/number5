@@ -1,0 +1,1649 @@
+{
+  "schema": 1,
+  "disclaimer": "DEMO · одна карточка/день; тексты черновые для редакторского согласования",
+  "unlock_stage": "CH01-10",
+  "daily_reset": "06:00 Europe/Moscow",
+  "anti_repeat_days": 7,
+  "pass_xp": false,
+  "mail_rollover_template": "MAIL_EVENT_REWARD",
+  "mail_ttl_days": 7,
+  "stories": [
+    {
+      "id": "DSE-01-01",
+      "chapter": 1,
+      "territory": "Уфа",
+      "unlock_stage": "CH01-01",
+      "title": "Очередь за временем",
+      "hook": "В архиве Уфы исчезли три минуты из журнала.",
+      "intro_lines": [
+        "В архиве Уфы исчезли три минуты из журнала.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 40
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E01-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 1600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-01-02",
+      "chapter": 1,
+      "territory": "Уфа",
+      "unlock_stage": "CH01-01",
+      "title": "Печать без адреса",
+      "hook": "Курьер доставил печать, на которой нет адресата.",
+      "intro_lines": [
+        "Курьер доставил печать, на которой нет адресата.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 40
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E01-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 1600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-01-03",
+      "chapter": 1,
+      "territory": "Уфа",
+      "unlock_stage": "CH01-01",
+      "title": "Часы идут назад",
+      "hook": "Уличные часы спорят с городским календарём.",
+      "intro_lines": [
+        "Уличные часы спорят с городским календарём.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 40
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E01-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 1600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-01-04",
+      "chapter": 1,
+      "territory": "Уфа",
+      "unlock_stage": "CH01-01",
+      "title": "Трамвай вне расписания",
+      "hook": "Старый маршрут внезапно отмечен в будущем.",
+      "intro_lines": [
+        "Старый маршрут внезапно отмечен в будущем.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 40
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E01-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 1600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-01-05",
+      "chapter": 1,
+      "territory": "Уфа",
+      "unlock_stage": "CH01-01",
+      "title": "Протокол потерянного утра",
+      "hook": "Писарь утверждает, что сегодня было два рассвета.",
+      "intro_lines": [
+        "Писарь утверждает, что сегодня было два рассвета.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 40
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E01-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 1600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 3000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-02-01",
+      "chapter": 2,
+      "territory": "Шиханы",
+      "unlock_stage": "CH02-01",
+      "title": "Камень с памятью",
+      "hook": "Шихан отвечает на забытое слово.",
+      "intro_lines": [
+        "Шихан отвечает на забытое слово.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 50
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E02-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2200
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-02-02",
+      "chapter": 2,
+      "territory": "Шиханы",
+      "unlock_stage": "CH02-01",
+      "title": "Тихая трещина",
+      "hook": "В каменной стене слышны голоса прошлых эпох.",
+      "intro_lines": [
+        "В каменной стене слышны голоса прошлых эпох.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 50
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E02-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2200
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-02-03",
+      "chapter": 2,
+      "territory": "Шиханы",
+      "unlock_stage": "CH02-01",
+      "title": "Путь без следов",
+      "hook": "Дорога исчезает с карты при каждом повороте.",
+      "intro_lines": [
+        "Дорога исчезает с карты при каждом повороте.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 50
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E02-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2200
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-02-04",
+      "chapter": 2,
+      "territory": "Шиханы",
+      "unlock_stage": "CH02-01",
+      "title": "Песок свидетелей",
+      "hook": "Песок хранит следы ещё не случившегося боя.",
+      "intro_lines": [
+        "Песок хранит следы ещё не случившегося боя.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 50
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E02-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2200
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-02-05",
+      "chapter": 2,
+      "territory": "Шиханы",
+      "unlock_stage": "CH02-01",
+      "title": "Страж без приказа",
+      "hook": "Древний страж забыл, что именно охраняет.",
+      "intro_lines": [
+        "Древний страж забыл, что именно охраняет.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 50
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E02-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2200
+            },
+            {
+              "resource_id": "gold",
+              "amount": 4000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-03-01",
+      "chapter": 3,
+      "territory": "Белорецк",
+      "unlock_stage": "CH03-01",
+      "title": "Кузня последней искры",
+      "hook": "Мастерская получает металл, которого нет в природе.",
+      "intro_lines": [
+        "Мастерская получает металл, которого нет в природе.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 60
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E03-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2800
+            },
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-03-02",
+      "chapter": 3,
+      "territory": "Белорецк",
+      "unlock_stage": "CH03-01",
+      "title": "Письмо в шестерне",
+      "hook": "В механизме найдено письмо без даты.",
+      "intro_lines": [
+        "В механизме найдено письмо без даты.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 60
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E03-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2800
+            },
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-03-03",
+      "chapter": 3,
+      "territory": "Белорецк",
+      "unlock_stage": "CH03-01",
+      "title": "Незаконченный клинок",
+      "hook": "Клинок отказывается принимать клеймо.",
+      "intro_lines": [
+        "Клинок отказывается принимать клеймо.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 60
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E03-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2800
+            },
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-03-04",
+      "chapter": 3,
+      "territory": "Белорецк",
+      "unlock_stage": "CH03-01",
+      "title": "Смена без конца",
+      "hook": "Рабочие часы кузницы не доходят до полуночи.",
+      "intro_lines": [
+        "Рабочие часы кузницы не доходят до полуночи.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 60
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E03-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2800
+            },
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-03-05",
+      "chapter": 3,
+      "territory": "Белорецк",
+      "unlock_stage": "CH03-01",
+      "title": "Зеркало в руде",
+      "hook": "Руда показывает отражение другого времени.",
+      "intro_lines": [
+        "Руда показывает отражение другого времени.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 60
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E03-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 2800
+            },
+            {
+              "resource_id": "gold",
+              "amount": 5000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-04-01",
+      "chapter": 4,
+      "territory": "Стерлитамак 2050",
+      "unlock_stage": "CH04-01",
+      "title": "Сбой протокола",
+      "hook": "Терминал 2050 года требует бумажную справку.",
+      "intro_lines": [
+        "Терминал 2050 года требует бумажную справку.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 70
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E04-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 3400
+            },
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-04-02",
+      "chapter": 4,
+      "territory": "Стерлитамак 2050",
+      "unlock_stage": "CH04-01",
+      "title": "Память квартала",
+      "hook": "Квартал помнит улицу, которой больше нет.",
+      "intro_lines": [
+        "Квартал помнит улицу, которой больше нет.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 70
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E04-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 3400
+            },
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-04-03",
+      "chapter": 4,
+      "territory": "Стерлитамак 2050",
+      "unlock_stage": "CH04-01",
+      "title": "Невидимая очередь",
+      "hook": "Робот обслуживает людей из прошлого.",
+      "intro_lines": [
+        "Робот обслуживает людей из прошлого.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 70
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E04-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 3400
+            },
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-04-04",
+      "chapter": 4,
+      "territory": "Стерлитамак 2050",
+      "unlock_stage": "CH04-01",
+      "title": "Нулевой сигнал",
+      "hook": "Радиостанция получает сообщение из завтрашнего дня.",
+      "intro_lines": [
+        "Радиостанция получает сообщение из завтрашнего дня.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 70
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E04-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 3400
+            },
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-04-05",
+      "chapter": 4,
+      "territory": "Стерлитамак 2050",
+      "unlock_stage": "CH04-01",
+      "title": "Пропуск в вчера",
+      "hook": "Турникет пропускает только вчерашние билеты.",
+      "intro_lines": [
+        "Турникет пропускает только вчерашние билеты.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 70
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E04-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 3400
+            },
+            {
+              "resource_id": "gold",
+              "amount": 6000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-05-01",
+      "chapter": 5,
+      "territory": "Иремель",
+      "unlock_stage": "CH05-01",
+      "title": "Тень на перевале",
+      "hook": "Тень движется против солнца.",
+      "intro_lines": [
+        "Тень движется против солнца.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 80
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E05-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-05-02",
+      "chapter": 5,
+      "territory": "Иремель",
+      "unlock_stage": "CH05-01",
+      "title": "Снежная записка",
+      "hook": "В снегу лежит записка, написанная огнём.",
+      "intro_lines": [
+        "В снегу лежит записка, написанная огнём.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 80
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E05-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-05-03",
+      "chapter": 5,
+      "territory": "Иремель",
+      "unlock_stage": "CH05-01",
+      "title": "Эхо без голоса",
+      "hook": "Эхо отвечает раньше вопроса.",
+      "intro_lines": [
+        "Эхо отвечает раньше вопроса.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 80
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E05-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-05-04",
+      "chapter": 5,
+      "territory": "Иремель",
+      "unlock_stage": "CH05-01",
+      "title": "Два следа",
+      "hook": "На тропе две цепочки следов одного путника.",
+      "intro_lines": [
+        "На тропе две цепочки следов одного путника.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 80
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E05-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-05-05",
+      "chapter": 5,
+      "territory": "Иремель",
+      "unlock_stage": "CH05-01",
+      "title": "Тропа к звезде",
+      "hook": "Свет в ущелье показывает путь в небо.",
+      "intro_lines": [
+        "Свет в ущелье показывает путь в небо.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 80
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E05-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4000
+            },
+            {
+              "resource_id": "gold",
+              "amount": 7000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-06-01",
+      "chapter": 6,
+      "territory": "Сердце Разлома",
+      "unlock_stage": "CH06-01",
+      "title": "Секунда до нуля",
+      "hook": "В Разломе все часы показывают разные секунды.",
+      "intro_lines": [
+        "В Разломе все часы показывают разные секунды.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 90
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E06-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-06-02",
+      "chapter": 6,
+      "territory": "Сердце Разлома",
+      "unlock_stage": "CH06-01",
+      "title": "Долг Хранителя",
+      "hook": "Древняя печать требует исполнить обещание.",
+      "intro_lines": [
+        "Древняя печать требует исполнить обещание.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 90
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E06-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-06-03",
+      "chapter": 6,
+      "territory": "Сердце Разлома",
+      "unlock_stage": "CH06-01",
+      "title": "Сломанная развилка",
+      "hook": "Две временные дороги сходятся в одну.",
+      "intro_lines": [
+        "Две временные дороги сходятся в одну.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 90
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E06-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-06-04",
+      "chapter": 6,
+      "territory": "Сердце Разлома",
+      "unlock_stage": "CH06-01",
+      "title": "Тень финала",
+      "hook": "Силуэт повторяет последнее решение отряда.",
+      "intro_lines": [
+        "Силуэт повторяет последнее решение отряда.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 90
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E06-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    },
+    {
+      "id": "DSE-06-05",
+      "chapter": 6,
+      "territory": "Сердце Разлома",
+      "unlock_stage": "CH06-01",
+      "title": "Письмо из завтра",
+      "hook": "Письмо благодарит за ещё не совершённый поступок.",
+      "intro_lines": [
+        "Письмо благодарит за ещё не совершённый поступок.",
+        "Разлом шепчет два пути — и оба ведут к правде.",
+        "Выбор не меняет канон кампании."
+      ],
+      "choices": [
+        {
+          "id": "A",
+          "label": "Исследовать след",
+          "battle": false,
+          "rewards": [
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            },
+            {
+              "resource_id": "essence",
+              "amount": 90
+            }
+          ],
+          "outro_lines": [
+            "След записан в архив. Награда выдана."
+          ]
+        },
+        {
+          "id": "B",
+          "label": "Устранить аномалию",
+          "battle": true,
+          "enemy_hint": "E06-01",
+          "rewards": [
+            {
+              "resource_id": "hero_xp",
+              "amount": 4600
+            },
+            {
+              "resource_id": "gold",
+              "amount": 8000
+            }
+          ],
+          "outro_lines": [
+            "Аномалия погашена. Ожидаемая ценность близка к A."
+          ],
+          "lose_partial_gold_pct": 50,
+          "retry_once": true
+        }
+      ]
+    }
+  ],
+  "demo": {
+    "period_key": "2026-11-20",
+    "story_id": "DSE-01-01",
+    "status": "available",
+    "history": [
+      {
+        "story_id": "DSE-01-02",
+        "choice_id": "A",
+        "period_key": "2026-11-19"
+      },
+      {
+        "story_id": "DSE-01-03",
+        "choice_id": "B",
+        "period_key": "2026-11-18"
+      }
+    ]
+  }
+}

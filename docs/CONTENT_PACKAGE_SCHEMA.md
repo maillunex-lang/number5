@@ -1,4 +1,4 @@
-# Схема контент-пакета (schema 2 → 8)
+# Схема контент-пакета (schema 2 → 9)
 
 Корень: `content/packages/{semver}/` · указатель: `content/packages/active.json`.
 
@@ -28,6 +28,8 @@
 | `achievements.json` | **schema 7:** 48 + 6 секретов |
 | `daily_stories.json` | **schema 7:** 30 сюжетных карточек |
 | `live_events.json` | **schema 7:** 6 форматов + event_token shop |
+| `skills.json` | **schema 9:** 45×5 карточек навыков |
+| `dialogs.json` | **schema 9:** сюжетные сцены Dxx-* |
 | `battle_modes.json` | Порталы битвы |
 | `features.json` | Демо-фичи |
 
@@ -35,5 +37,5 @@
 OTA: обязательные файлы + optional (`enemies`…`live_events`) из `manifest.files` / `integrity.hashes`.
 
 Studio: publish обновляет `active.json` и `publish_history.json`; rollback возвращает указатель.  
-Исторические генераторы (`0.2`…`0.5`) пакеты пересобирают, но **не** меняют `active.json` — это делает `tools/generate_campaign_c4_package.py` (active `0.7.0`).
+Исторические генераторы (`0.2`…`0.5`) пакеты пересобирают, но **не** меняют `active.json` — это делает `tools/generate_skills_dialogs_package.py` (active `0.8.0`).
 

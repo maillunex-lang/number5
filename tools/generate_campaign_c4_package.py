@@ -329,15 +329,7 @@ def main() -> None:
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    active = {
-        "version": "0.7.0",
-        "source": "content-c-c4",
-        "note": "Клиент читает только опубликованный пакет. Прогресс игрока сюда не пишется.",
-        "published_at": now,
-    }
-    (ROOT / "content/packages/active.json").write_text(json.dumps(active, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-    # stop meta generator from being the only active writer — document in meta too later
+    print("Note: active.json не изменён (пересборка исторического 0.7.0; active пишет generate_skills_dialogs_package.py).")
     print(f"Wrote {OUT}")
     print(f" stages={len(stages)} encounters={len(enc_list)} loot={len(loot['stage_bindings'])}")
 

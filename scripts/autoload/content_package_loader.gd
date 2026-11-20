@@ -39,6 +39,8 @@ var profile_pack: Dictionary = {}
 var achievements_pack: Dictionary = {}
 var daily_stories: Dictionary = {}
 var live_events: Dictionary = {}
+var skills_pack: Dictionary = {}
+var dialogs_pack: Dictionary = {}
 var loaded: bool = false
 
 func _ready() -> void:
@@ -117,6 +119,8 @@ func _load_docs(base: String) -> void:
 	achievements_pack = _read_json("%s/achievements.json" % base)
 	daily_stories = _read_json("%s/daily_stories.json" % base)
 	live_events = _read_json("%s/live_events.json" % base)
+	skills_pack = _read_json("%s/skills.json" % base)
+	dialogs_pack = _read_json("%s/dialogs.json" % base)
 
 func reload() -> bool:
 	return load_active_package()

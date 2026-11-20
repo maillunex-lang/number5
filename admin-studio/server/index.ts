@@ -36,6 +36,8 @@ const DOC_FILES = [
   "achievements",
   "daily_stories",
   "live_events",
+  "skills",
+  "dialogs",
 ] as const;
 
 const app = express();
