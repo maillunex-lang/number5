@@ -19,6 +19,7 @@ const PAGES := {
 	"Wave4 Heroes/Auth": "_show_wave4",
 	"Wave5 VIP/Social/Result": "_show_wave5",
 	"Wave5+ Chat/Friends/Rank": "_show_wave5_plus",
+	"Wave6 demos": "_show_wave6",
 }
 
 func _ready() -> void:
@@ -254,6 +255,33 @@ func _show_wave5_plus() -> void:
 		"res://scenes/features/chat.tscn",
 		"res://scenes/features/friends.tscn",
 		"res://scenes/features/rankings.tscn",
+	]:
+		var btn := UIFactory.fantasy_button(path.get_file(), 56)
+		var p: String = path
+		btn.pressed.connect(func():
+			_clear_host()
+			_hint.text = p
+			var sc: Control = (load(p) as PackedScene).instantiate()
+			sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			_host.add_child(sc)
+		)
+		col.add_child(btn)
+
+func _show_wave6() -> void:
+	_clear_host()
+	_hint.text = "Wave6: BattlePass · PvP · Profile · Rewards · Sys"
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(col)
+	for path in [
+		"res://scenes/features/battle_pass.tscn",
+		"res://scenes/features/pvp_center.tscn",
+		"res://scenes/features/pvp_defense.tscn",
+		"res://scenes/features/profile_public.tscn",
+		"res://scenes/features/rewards_panel.tscn",
+		"res://scenes/features/sys_download.tscn",
+		"res://scenes/features/sys_error.tscn",
 	]:
 		var btn := UIFactory.fantasy_button(path.get_file(), 56)
 		var p: String = path

@@ -1,38 +1,26 @@
 extends Control
-## Auto-generated demo feature screen
+## PVP-02 defense: chrome в .tscn; DynamicHost — без DemoScreenBuilder.
 
 var _payload: Dictionary = {}
-const CONFIG := {
-	"title": "Отряд защиты",
-	"status": "Демо",
-	"subtitle": "Сохранённый состав для асинхронного PvP",
-	"sections": [
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _host: VBoxContainer = $Safe/Scroll/VBox/DynamicHost
+
+func setup(payload: Dictionary = {}) -> void:
+	_payload = payload
+
+func _ready() -> void:
+	$Safe/Scroll/VBox/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
+	_title.text = str(_payload.get("title_override", "Отряд защиты"))
+	FeatureSectionHost.fill(_host, [
 		{
 			"title": "Защита",
 			"lines": [
 				"Использует текущий пресет отряда",
 			],
 			"actions": [
-				{
-					"label": "Открыть менеджер",
-					"kind": "route",
-					"route": "HERO-02",
-				},
-				{
-					"label": "Сохранить защиту",
-					"kind": "toast",
-					"msg": "Защита сохранена локально (демо)",
-				},
+				{"label": "Открыть менеджер", "kind": "route", "route": "HERO-02"},
+				{"label": "Сохранить защиту", "kind": "toast", "msg": "Защита сохранена локально (демо)"},
 			],
 		},
-	],
-}
-
-func setup(payload: Dictionary = {}) -> void:
-	_payload = payload
-
-func _ready() -> void:
-	var cfg := CONFIG.duplicate(true)
-	if _payload.has("title_override"):
-		cfg["title"] = _payload["title_override"]
-	DemoScreenBuilder.build($Safe/Scroll/VBox, cfg)
+	])

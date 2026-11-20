@@ -1,12 +1,18 @@
 extends Control
-## Auto-generated demo feature screen
+## Rewards hub: chrome в .tscn; DynamicHost — без DemoScreenBuilder.
 
 var _payload: Dictionary = {}
-const CONFIG := {
-	"title": "Доступные награды",
-	"status": "Демо",
-	"subtitle": "Красные точки и переходы",
-	"sections": [
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _host: VBoxContainer = $Safe/Scroll/VBox/DynamicHost
+
+func setup(payload: Dictionary = {}) -> void:
+	_payload = payload
+
+func _ready() -> void:
+	$Safe/Scroll/VBox/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
+	_title.text = str(_payload.get("title_override", "Доступные награды"))
+	FeatureSectionHost.fill(_host, [
 		{
 			"title": "Готово к получению",
 			"lines": [
@@ -15,31 +21,9 @@ const CONFIG := {
 				"Почта ×2",
 			],
 			"actions": [
-				{
-					"label": "К AFK",
-					"kind": "route",
-					"route": "HUB-02",
-				},
-				{
-					"label": "К заданиям",
-					"kind": "route",
-					"route": "HUB-03",
-				},
-				{
-					"label": "К почте",
-					"kind": "route",
-					"route": "SOCIAL-04",
-				},
+				{"label": "К AFK", "kind": "route", "route": "HUB-02"},
+				{"label": "К заданиям", "kind": "route", "route": "HUB-03"},
+				{"label": "К почте", "kind": "route", "route": "SOCIAL-04"},
 			],
 		},
-	],
-}
-
-func setup(payload: Dictionary = {}) -> void:
-	_payload = payload
-
-func _ready() -> void:
-	var cfg := CONFIG.duplicate(true)
-	if _payload.has("title_override"):
-		cfg["title"] = _payload["title_override"]
-	DemoScreenBuilder.build($Safe/Scroll/VBox, cfg)
+	])
