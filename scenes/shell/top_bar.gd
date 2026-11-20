@@ -10,9 +10,7 @@ func setup(shell: Node) -> void:
 	_shell = shell
 	_profile_btn.pressed.connect(func(): ScreenRouter.go("PROFILE-01"))
 	$Pad/Row/ShopBtn.pressed.connect(func(): ScreenRouter.go("HUB-06"))
-	$Pad/Row/MailBtn.pressed.connect(func(): ScreenRouter.go("SOCIAL-04"))
 	$Pad/Row/SettingsBtn.pressed.connect(func(): ScreenRouter.go("SETTINGS-01"))
-	$Pad/Row/RewardsBtn.pressed.connect(func(): ScreenRouter.go("GLOBAL-01"))
 	AppState.currencies_changed.connect(refresh)
 	refresh()
 

@@ -44,16 +44,6 @@ theme_override_font_sizes/font_size = 22
 text = "◆ 0"
 vertical_alignment = 1
 
-[node name="RewardsBtn" type="Button" parent="Pad/Row"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-text = "★"
-
-[node name="MailBtn" type="Button" parent="Pad/Row"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-text = "✉"
-
 [node name="ShopBtn" type="Button" parent="Pad/Row"]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2

@@ -8,7 +8,7 @@ extends Control
 @onready var _near: Control = $Scroll/World/Near
 @onready var _buildings: Control = $Scroll/World/Buildings
 @onready var _fx: Control = $Scroll/World/FX
-@onready var _quick: HBoxContainer = $QuickBar/Row
+@onready var _side_rail: VBoxContainer = $SideRail/Col
 
 const WORLD_H := 2400.0
 const WORLD_W := 1080.0
@@ -147,21 +147,45 @@ func _build_buildings() -> void:
 		_fx.add_child(glow)
 
 func _build_quick() -> void:
-	for c in _quick.get_children():
+	# Vertical icon rail, top-right (HUB-ACCESS-001 B quick entries).
+	for c in _side_rail.get_children():
 		c.queue_free()
+	$SideRail.add_theme_stylebox_override(
+		"panel",
+		UIFactory.panel_style(Color(0.07, 0.1, 0.16, 0.82), LunexColors.FRAME_OUTER, 18, 1)
+	)
 	var items := [
-		{"t": "События", "r": "HUB-04"},
-		{"t": "Почта", "r": "SOCIAL-04"},
-		{"t": "Задания", "r": "HUB-03"},
-		{"t": "Награды", "r": "GLOBAL-01"},
-		{"t": "Соц.", "r": "SOCIAL-01"},
+		{"icon": "✦", "tip": "События", "r": "HUB-04", "color": LunexColors.GOLD},
+		{"icon": "✉", "tip": "Почта", "r": "SOCIAL-04", "color": LunexColors.CYAN},
+		{"icon": "☰", "tip": "Задания", "r": "HUB-03", "color": LunexColors.EMERALD},
+		{"icon": "★", "tip": "Награды", "r": "GLOBAL-01", "color": LunexColors.AMBER},
+		{"icon": "☺", "tip": "Соц.", "r": "SOCIAL-01", "color": LunexColors.TEAL},
 	]
 	for it in items:
-		var b := UIFactory.fantasy_button(it.t, 52)
-		b.custom_minimum_size = Vector2(140, 52)
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(64, 64)
+		b.text = str(it.icon)
+		b.tooltip_text = str(it.tip)
+		b.focus_mode = Control.FOCUS_NONE
+		b.add_theme_font_size_override("font_size", 30)
+		var st := UIFactory.button_styles()
+		var accent: Color = it.color
+		var normal: StyleBoxFlat = st.normal.duplicate()
+		normal.border_color = accent
+		normal.set_corner_radius_all(16)
+		b.add_theme_stylebox_override("normal", normal)
+		b.add_theme_stylebox_override("hover", st.hover)
+		b.add_theme_stylebox_override("pressed", st.pressed)
+		b.add_theme_color_override("font_color", accent)
+		b.add_theme_color_override("font_hover_color", LunexColors.GOLD_BRIGHT)
 		var route: String = it.r
-		b.pressed.connect(func(): ScreenRouter.go(route))
-		_quick.add_child(b)
+		var tip: String = it.tip
+		b.pressed.connect(func():
+			AudioManager.play_ui_tap()
+			NotificationManager.info(tip)
+			ScreenRouter.go(route)
+		)
+		_side_rail.add_child(b)
 
 func _on_building(def: Dictionary) -> void:
 	if def.locked:
