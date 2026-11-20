@@ -70,10 +70,8 @@ func show_tab(tab: String) -> void:
 		_tabs[k].visible = (k == tab)
 	_bottom_nav.set_active(tab)
 	_top_bar.refresh()
-	# Nested overlays closed when switching tabs via nav
-	while has_overlay():
-		var n: Control = _overlay_stack.pop_back()
-		n.queue_free()
+	# Nested overlays closed when switching tabs via nav — без покадрового rewind.
+	clear_overlays()
 	_update_chrome()
 
 func _update_chrome() -> void:
@@ -94,6 +92,14 @@ func _is_fullscreen_overlay() -> bool:
 
 func has_overlay() -> bool:
 	return _overlay_stack.size() > 0
+
+## Сбросить весь стек оверлеев сразу, не показывая промежуточные экраны.
+func clear_overlays() -> void:
+	while not _overlay_stack.is_empty():
+		var n: Control = _overlay_stack.pop_back()
+		n.hide()
+		n.queue_free()
+	_update_chrome()
 
 func open_overlay(route_id: String, scene_path: String, payload: Dictionary = {}) -> void:
 	if scene_path == "" or not ResourceLoader.exists(scene_path):

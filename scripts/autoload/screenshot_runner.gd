@@ -101,8 +101,8 @@ func _run() -> void:
 		var route: String = item[1]
 		var payload: Dictionary = item[2]
 		# Close overlays back to hub first for cleaner shots
-		while ScreenRouter._shell != null and ScreenRouter._shell.has_method("has_overlay") and ScreenRouter._shell.has_overlay():
-			await ScreenRouter._shell.close_overlay()
+		if ScreenRouter._shell != null and ScreenRouter._shell.has_method("clear_overlays"):
+			ScreenRouter._shell.clear_overlays()
 		ScreenRouter.switch_tab("hub")
 		await get_tree().create_timer(0.25).timeout
 		await ScreenRouter.go(route, payload)
@@ -110,8 +110,8 @@ func _run() -> void:
 		await _shot(fname)
 
 	# Battle playback + result
-	while ScreenRouter._shell != null and ScreenRouter._shell.has_overlay():
-		await ScreenRouter._shell.close_overlay()
+	if ScreenRouter._shell != null and ScreenRouter._shell.has_method("clear_overlays"):
+		ScreenRouter._shell.clear_overlays()
 	UIStateManager.set_combat_context({"mode": "campaign", "stage_id": "s1_3", "return_route": "MAP-01"})
 	await ScreenRouter.go("COMBAT-02", {"stage_id": "s1_3", "mode": "campaign"})
 	await get_tree().create_timer(1.2).timeout
@@ -127,8 +127,6 @@ func _run() -> void:
 	ModalManager.close_top()
 
 	# Settings graphics tab already covered; show locked building modal from hub
-	while ScreenRouter._shell != null and ScreenRouter._shell.has_overlay():
-		await ScreenRouter._shell.close_overlay()
 	ScreenRouter.switch_tab("hub")
 	await get_tree().create_timer(0.3).timeout
 	ModalManager.push_locked("Мастерская", "Откроется на 20 уровне командира")

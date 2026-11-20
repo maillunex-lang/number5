@@ -102,6 +102,9 @@ func go(route_id: String, payload: Dictionary = {}, push_history: bool = true) -
 func switch_tab(tab: String) -> void:
 	if tab not in TABS:
 		return
+	# Модалки поверх оверлеев не должны переживать смену вкладки.
+	while ModalManager.is_open():
+		ModalManager.close_top()
 	UIStateManager.remember_tab(tab)
 	if _shell and _shell.has_method("show_tab"):
 		_shell.show_tab(tab)
