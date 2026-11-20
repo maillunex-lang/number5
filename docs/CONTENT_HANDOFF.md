@@ -1,5 +1,7 @@
 # CONTENT-C — статус передачи
 
+> **Аудит 2026-11-20:** оперативный статус — `docs/STATUS.md` / `docs/AI_HANDOFF.md`. Этот файл — карта канона и пакетов.
+
 Канон **«Башкортостан: Разлом эпох»** принят в репозиторий. Рабочее имя «Элиориан» из CONTENT-01 больше **не** используется в активном пакете.
 
 **Активный пакет:** `content/packages/active.json` → **`0.9.0`**.
@@ -37,7 +39,7 @@
 | `0.8.0` | C5: skills + dialogs | Сохранён |
 | **`0.9.0`** | **C6: арт-реестр + media/** | **Активный** |
 
-Клиент: `ContentPackageLoader` читает optional JSON; UI DEMO без серверного claim.
+Клиент: `ContentPackageLoader` читает пакет; при guest API — claim через CORE-01 (summon/AFK/shop/mail/battle); иначе DEMO.
 
 ## Что ещё нужно решить / доделать
 
@@ -48,8 +50,8 @@
 | Кампания | **180 этапов** | C6 ✓ · дальше ART-05 / C7 OTA |
 | Бестиарий | **36+18 ID + 6 ригов** | Слоты анимаций в `0.9.0` |
 | ТЗ фундамента (TZ-A) | **Готово** | `docs/TZ_A_FOUNDATION.md` |
-| Сервер claim/wallet | **Memory ✓** (auth…store) | Postgres — Docker/VPS |
-| Доступы CORE-01 PG | Открыто | Docker/VPS |
+| Сервер claim/wallet | **Memory ✓** (auth…store) | Изолированный Lunex PG (не Nexus AI) |
+| Доступы CORE-01 PG | Открыто | Отдельная БД на VPS + H4 |
 
 ## Пересборка
 

@@ -1,5 +1,9 @@
 # CONTENT-C — внедрение «Башкортостан: Разлом эпох»
 
+> **Статус данных:** C0–C6 + E0–E4 в пакете **`0.9.0`**. **E5:** CORE-01 memory ✓; PG adapter код ✓ / runtime BLOCKED.  
+> **Бой (H6):** серверный timeline → playback → claim — **NOT_STARTED** (см. ROADMAP BATTLE-*).  
+> Канон в `docs/content/*.md` — сюжет/баланс; шапки = статус внедрения. Не путать с Eliorian `CONTENT.md`.
+
 Канон сюжета/героев/бестиария: `docs/content/STORY_*.md`, `FACTIONS_*.md`, `BESTIARY_*.md`.  
 Канон экономики: `MONETIZATION_VIP.md`, `PROGRESSION_EQUIPMENT_LOOT.md`, `GACHA_45_HEROES.md`, `AFK_DAILY_QUESTS_EXPEDITIONS.md`.  
 Пакеты: `0.2.0`…**`0.9.0` (active, C6)** · не rewrite старых на месте.
@@ -38,7 +42,7 @@ E0 валюты          ← общий кошелёк (MONETIZATION §2)
 | **E2** | 4 баннера гачи + пулы H01–H45 | **Готово** | `gacha.json` + UI алтаря |
 | **E3** | AFK / 12+8 квестов / 18 экспедиций | **Готово** | `liveops.json` + AFK UI |
 | **E4** | Магазин SKU / 3 подписки / VIP 0–11 / BP 30 | **Готово (данные+UI демо)** | `economy.json` offers… · без реальных платежей |
-| **E5** | Сервер wallet/ledger/RNG | **Memory ✓** (PG next) | `server/` CORE-01 |
+| **E5** | Сервер wallet/ledger/RNG | **Memory ✓** · PG adapter код · runtime **BLOCKED** (изолир. Lunex PG) | `server/` · H4/H5 в ROADMAP |
 | **E6** | Admin Studio economy editors | Частично (`/economy`) | publish/rollback на CDN |
 
 ## Этапы сюжета (C)

@@ -199,16 +199,18 @@ content_bindings(account_id PK, package_version, schema)
 
 ---
 
-## 11. Блокеры до Postgres (прод)
+## 11. Блокеры до Postgres (прод Lunex)
 
 | Блокер | Нужно |
 |---|---|
-| Доступы | VPS/Docker host или CI secrets для PG |
-| Email | SMTP / magic-link (или stub в dev) — для AUTH-04 |
-| Keystore | позже для APK-03, не блокер API |
-| OTA-2 | HTTPS CDN — параллельно |
+| Изолированная БД Lunex | Отдельный Postgres 16 (+ Docker compose сервиса API). **Не** использовать БД Nexus AI на том же VPS. |
+| H4 | `APP_ENV=prod` без memory fallback (утверждено; код — отдельная задача) |
+| H5 | test-only grant/confirm (утверждено; код — отдельная задача) |
+| Email | SMTP / magic-link — для AUTH-04 |
+| Keystore | позже APK-03 |
+| OTA-2 | HTTPS CDN пакетов |
 
-**Сейчас:** `server/` на **in-memory** `store.Memory` — полный MVP §4 (auth…store) + CI. Dev/CI, не прод. Postgres adapter → тот же `store.Store` (`migrations/0001_init.sql`). SQLite как прод **не** используем.
+**Сейчас:** default **memory** + код `store/postgres`. VPS с Docker/PG/Nginx уже существует инфраструктурно; блокером остаётся **выделенный** стек Lunex, не «отсутствие VPS». SQLite как прод **не** используем.
 
 ---
 
