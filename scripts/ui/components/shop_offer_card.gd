@@ -26,6 +26,8 @@ var sku: String = ""
 
 func _ready() -> void:
 	theme_type_variation = &"GamePanel"
+	# PASS: жест прокрутки списка не съедается карточкой (только BuyBtn ловит тап).
+	mouse_filter = Control.MOUSE_FILTER_PASS
 	if Engine.is_editor_hint():
 		if _title:
 			_title.text = title_text

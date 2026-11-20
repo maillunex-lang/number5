@@ -1,17 +1,19 @@
-# Передача · UI-VISUAL wave11 guild + пауза device
+# Передача · fix shop scroll + VIRTUAL_FREE copy
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-guild-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/fix-shop-scroll-copy-d5fe`.
 
-**Сделано (пока владелец на APK hang-fix #28):**
-- #29–#35 merged (wave5…quests).
-- Guild — chrome + Tabs/ListHost в `.tscn`.
+**Баг владельца:** магазин не скроллится; тексты «демо» путали с «не сделано».
 
-## Стоп-линия для следующего ИИ
+**Фикс:**
+- Список офферов в отдельном `Scroll`; шапка/вкладки/футер вне него (как chapter_map).
+- `ShopOfferCard` `mouse_filter=PASS` — жест прокрутки не съедается карточкой.
+- Копирайт: VIRTUAL_FREE / «Получено (сервер)» вместо «демо» при успехе; fallback явно «локальная выдача».
 
-Владелец тестирует APK. **Не плодить новые UI-волны** без его OK по входу (#28) и без свежей APK на wave5–11.
+## Для владельца
 
-## Next (после device OK)
+Магазин **сделан**: бесплатные выдачи через `store/orders` + `confirm` (реальные платежи выключены по канону). «Только чтение» в шапке — про пакет контента OTA, не про магазин.
 
-1. Свежая APK → smoke shell/mail/shop/AFK/summon/quests/guild.
-2. Events chrome.
-3. game_shell safe-area.
+## Next
+
+1. Merge → свежая APK → smoke скролл + «Получить».
+2. Device OK по #28 hang-fix.

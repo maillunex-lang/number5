@@ -1,21 +1,22 @@
 extends Control
-## HUB-06: chrome/banner в .tscn; ListHost — ShopOfferCard; buy API без изменений.
+## HUB-06: VIRTUAL_FREE магазин. Список в Scroll; chrome вне Scroll (скролл не едят вкладки).
 
 var _payload: Dictionary = {}
 var _busy: bool = false
 var _offers: Array = []
 var _nav_bound: bool = false
+var _online_catalog: bool = false
 
 const CATEGORIES: Array[String] = ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
 var _selected_category: String = "Рекомендуем"
 
-@onready var _title: Label = $Safe/Scroll/VBox/Title
-@onready var _subtitle: Label = $Safe/Scroll/VBox/Subtitle
-@onready var _tabs: HBoxContainer = $Safe/Scroll/VBox/TabsScroll/TabsHost
-@onready var _category: Label = $Safe/Scroll/VBox/CategoryLabel
-@onready var _list: VBoxContainer = $Safe/Scroll/VBox/ListHost
-@onready var _links: HBoxContainer = $Safe/Scroll/VBox/LinksHost
-@onready var _back: Button = $Safe/Scroll/VBox/BackBtn
+@onready var _title: Label = $Safe/Col/Header/Title
+@onready var _subtitle: Label = $Safe/Col/Header/Subtitle
+@onready var _tabs: HBoxContainer = $Safe/Col/Header/TabsScroll/TabsHost
+@onready var _category: Label = $Safe/Col/Header/CategoryLabel
+@onready var _list: VBoxContainer = $Safe/Col/Scroll/ListHost
+@onready var _links: HBoxContainer = $Safe/Col/Footer/LinksHost
+@onready var _back: Button = $Safe/Col/Footer/BackBtn
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
@@ -32,6 +33,7 @@ func _ready() -> void:
 			var remote: Array = data.get("offers", []) as Array
 			if not remote.is_empty():
 				_offers = remote
+				_online_catalog = true
 	_rebuild()
 
 func _bind_nav() -> void:
@@ -63,10 +65,16 @@ func _category_of(offer: Dictionary) -> String:
 		return "Алмазы"
 	return "Наборы"
 
+func _mode_label() -> String:
+	if ApiClient.online and _online_catalog:
+		return "ONLINE · VIRTUAL_FREE"
+	if ApiClient.online:
+		return "ONLINE · каталог из пакета"
+	return "офлайн · пакет"
+
 func _rebuild() -> void:
-	var mode := "ONLINE" if ApiClient.online else "DEMO"
 	_title.text = "✦ ТОРГОВАЯ ПЛОЩАДЬ"
-	_subtitle.text = "Фэнтезийная лавка · %s · %s" % [ContentPackageLoader.package_label(), mode]
+	_subtitle.text = "Тестовый магазин · Бесплатно · %s" % _mode_label()
 	_category.text = _selected_category
 
 	for child in _tabs.get_children():
@@ -91,6 +99,7 @@ func _rebuild() -> void:
 		hist.add_theme_font_size_override("font_size", 23)
 		hist.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		hist.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		hist.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_list.add_child(hist)
 	else:
 		var shown := 0
@@ -107,6 +116,7 @@ func _rebuild() -> void:
 			empty.text = "В этой категории пока нет предложений."
 			empty.add_theme_font_size_override("font_size", 23)
 			empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			empty.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			_list.add_child(empty)
 
 func _add_offer(offer: Dictionary) -> void:
@@ -115,8 +125,9 @@ func _add_offer(offer: Dictionary) -> void:
 	var grants: Array = offer.get("grants", []) as Array
 	var card: ShopOfferCard = (load("res://scenes/ui/components/shop_offer_card.tscn") as PackedScene).instantiate()
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.mouse_filter = Control.MOUSE_FILTER_PASS
 	card.set_offer(offer)
-	var disclaimer: String = str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Без списаний"))
+	var disclaimer: String = str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Бесплатно · Реальные деньги не списываются"))
 	card.buy_pressed.connect(func(_sku: String) -> void:
 		_buy(sku, title, disclaimer, grants)
 	)
@@ -126,8 +137,8 @@ func _buy(sku: String, title: String, disclaimer: String, grants: Array) -> void
 	if _busy:
 		return
 	ModalManager.push_confirm(
-		"Тестовая выдача",
-		"%s\n\n%s\nSKU: %s\nРеальные платежи отключены." % [title, disclaimer, sku],
+		"Бесплатная выдача",
+		"%s\n\n%s\nSKU: %s\nРеальные платежи отключены (VIRTUAL_FREE)." % [title, disclaimer, sku],
 		func(): _confirm_buy(sku, title, grants)
 	)
 
@@ -146,14 +157,14 @@ func _confirm_buy(sku: String, title: String, grants: Array) -> void:
 					if typeof(g) == TYPE_DICTIONARY:
 						lines.append("%s ×%s" % [str(g.get("resource_id", "")), str(g.get("amount", 0))])
 				await ApiClient.sync_wallet()
-				ModalManager.push_rewards("Получено (ONLINE)", lines)
+				ModalManager.push_rewards("Получено (сервер)", lines)
 				_busy = false
 				return
-		NotificationManager.warn("Магазин online недоступен · демо")
-	var lines2: Array = ["Источник: virtual_free DEMO", "SKU %s" % sku]
+		NotificationManager.warn("Сервер магазина не ответил · локальная выдача")
+	var lines2: Array = ["Источник: локальный VIRTUAL_FREE", "SKU %s" % sku]
 	for g in grants:
 		lines2.append("%s ×%s" % [str(g.get("resource_id", "")), str(g.get("amount", 0))])
 	if lines2.size() == 2:
 		lines2.append(title)
-	ModalManager.push_rewards("Получено бесплатно (тест)", lines2)
+	ModalManager.push_rewards("Получено бесплатно", lines2)
 	_busy = false
