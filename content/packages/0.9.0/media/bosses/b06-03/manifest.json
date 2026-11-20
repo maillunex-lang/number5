@@ -1,0 +1,11 @@
+{
+  "boss_id": "B06-03",
+  "rig_id": "RIG-WISP",
+  "skin_id": "skin_a",
+  "scale": 1.35,
+  "assets": {
+    "portrait": "portrait.webp"
+  },
+  "status": "placeholder",
+  "note": "Boss reuses rig animations; unique portrait + overlays"
+}

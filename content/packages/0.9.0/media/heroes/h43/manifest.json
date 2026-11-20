@@ -1,0 +1,11 @@
+{
+  "hero_id": "H43",
+  "name": "Норэль",
+  "assets": {
+    "portrait": "portrait.webp",
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "ultimate_vfx": "ultimate_vfx.webp"
+  },
+  "status": "placeholder"
+}

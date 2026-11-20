@@ -1,0 +1,12 @@
+{
+  "rig_id": "RIG-WISP",
+  "name": "Фантом",
+  "role": "controller",
+  "assets": {
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "skin_a": "skin_a.webp",
+    "skin_b": "skin_b.webp"
+  },
+  "status": "placeholder"
+}

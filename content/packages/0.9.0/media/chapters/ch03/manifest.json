@@ -1,0 +1,55 @@
+{
+  "chapter": 3,
+  "name": "Белорецк",
+  "map": "ch03_map.webp",
+  "zones": [
+    {
+      "zone": 1,
+      "bg": "ch03_z01_bg.webp",
+      "mid": "ch03_z01_mid.webp",
+      "fg": "ch03_z01_fg.webp"
+    },
+    {
+      "zone": 2,
+      "bg": "ch03_z02_bg.webp",
+      "mid": "ch03_z02_mid.webp",
+      "fg": "ch03_z02_fg.webp"
+    },
+    {
+      "zone": 3,
+      "bg": "ch03_z03_bg.webp",
+      "mid": "ch03_z03_mid.webp",
+      "fg": "ch03_z03_fg.webp"
+    },
+    {
+      "zone": 4,
+      "bg": "ch03_z04_bg.webp",
+      "mid": "ch03_z04_mid.webp",
+      "fg": "ch03_z04_fg.webp"
+    },
+    {
+      "zone": 5,
+      "bg": "ch03_z05_bg.webp",
+      "mid": "ch03_z05_mid.webp",
+      "fg": "ch03_z05_fg.webp"
+    },
+    {
+      "zone": 6,
+      "bg": "ch03_z06_bg.webp",
+      "mid": "ch03_z06_mid.webp",
+      "fg": "ch03_z06_fg.webp"
+    }
+  ],
+  "arenas": [
+    "ch03_arena_01.webp",
+    "ch03_arena_02.webp",
+    "ch03_arena_03.webp"
+  ],
+  "audio": {
+    "map_theme": "ch03_map_theme.ogg",
+    "battle_a": "ch03_battle_a.ogg",
+    "battle_b": "ch03_battle_b.ogg"
+  },
+  "status": "placeholder",
+  "note": "Art pack per STORY_6_CHAPTERS · files planned for ART-05"
+}

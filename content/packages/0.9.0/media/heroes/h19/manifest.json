@@ -1,0 +1,11 @@
+{
+  "hero_id": "H19",
+  "name": "Орвик",
+  "assets": {
+    "portrait": "portrait.webp",
+    "atlas": "atlas.webp",
+    "animations": "animations.json",
+    "ultimate_vfx": "ultimate_vfx.webp"
+  },
+  "status": "placeholder"
+}

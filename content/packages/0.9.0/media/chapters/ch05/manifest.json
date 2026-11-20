@@ -1,0 +1,55 @@
+{
+  "chapter": 5,
+  "name": "Иремель",
+  "map": "ch05_map.webp",
+  "zones": [
+    {
+      "zone": 1,
+      "bg": "ch05_z01_bg.webp",
+      "mid": "ch05_z01_mid.webp",
+      "fg": "ch05_z01_fg.webp"
+    },
+    {
+      "zone": 2,
+      "bg": "ch05_z02_bg.webp",
+      "mid": "ch05_z02_mid.webp",
+      "fg": "ch05_z02_fg.webp"
+    },
+    {
+      "zone": 3,
+      "bg": "ch05_z03_bg.webp",
+      "mid": "ch05_z03_mid.webp",
+      "fg": "ch05_z03_fg.webp"
+    },
+    {
+      "zone": 4,
+      "bg": "ch05_z04_bg.webp",
+      "mid": "ch05_z04_mid.webp",
+      "fg": "ch05_z04_fg.webp"
+    },
+    {
+      "zone": 5,
+      "bg": "ch05_z05_bg.webp",
+      "mid": "ch05_z05_mid.webp",
+      "fg": "ch05_z05_fg.webp"
+    },
+    {
+      "zone": 6,
+      "bg": "ch05_z06_bg.webp",
+      "mid": "ch05_z06_mid.webp",
+      "fg": "ch05_z06_fg.webp"
+    }
+  ],
+  "arenas": [
+    "ch05_arena_01.webp",
+    "ch05_arena_02.webp",
+    "ch05_arena_03.webp"
+  ],
+  "audio": {
+    "map_theme": "ch05_map_theme.ogg",
+    "battle_a": "ch05_battle_a.ogg",
+    "battle_b": "ch05_battle_b.ogg"
+  },
+  "status": "placeholder",
+  "note": "Art pack per STORY_6_CHAPTERS · files planned for ART-05"
+}

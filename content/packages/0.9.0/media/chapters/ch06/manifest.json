@@ -1,0 +1,55 @@
+{
+  "chapter": 6,
+  "name": "Сердце Разлома",
+  "map": "ch06_map.webp",
+  "zones": [
+    {
+      "zone": 1,
+      "bg": "ch06_z01_bg.webp",
+      "mid": "ch06_z01_mid.webp",
+      "fg": "ch06_z01_fg.webp"
+    },
+    {
+      "zone": 2,
+      "bg": "ch06_z02_bg.webp",
+      "mid": "ch06_z02_mid.webp",
+      "fg": "ch06_z02_fg.webp"
+    },
+    {
+      "zone": 3,
+      "bg": "ch06_z03_bg.webp",
+      "mid": "ch06_z03_mid.webp",
+      "fg": "ch06_z03_fg.webp"
+    },
+    {
+      "zone": 4,
+      "bg": "ch06_z04_bg.webp",
+      "mid": "ch06_z04_mid.webp",
+      "fg": "ch06_z04_fg.webp"
+    },
+    {
+      "zone": 5,
+      "bg": "ch06_z05_bg.webp",
+      "mid": "ch06_z05_mid.webp",
+      "fg": "ch06_z05_fg.webp"
+    },
+    {
+      "zone": 6,
+      "bg": "ch06_z06_bg.webp",
+      "mid": "ch06_z06_mid.webp",
+      "fg": "ch06_z06_fg.webp"
+    }
+  ],
+  "arenas": [
+    "ch06_arena_01.webp",
+    "ch06_arena_02.webp",
+    "ch06_arena_03.webp"
+  ],
+  "audio": {
+    "map_theme": "ch06_map_theme.ogg",
+    "battle_a": "ch06_battle_a.ogg",
+    "battle_b": "ch06_battle_b.ogg"
+  },
+  "status": "placeholder",
+  "note": "Art pack per STORY_6_CHAPTERS · files planned for ART-05"
+}

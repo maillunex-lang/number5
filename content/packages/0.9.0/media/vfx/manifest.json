@@ -1,0 +1,18 @@
+{
+  "items": [
+    "shield",
+    "strike",
+    "beam",
+    "slow",
+    "mark",
+    "heal",
+    "explosion",
+    "teleport",
+    "runes",
+    "fire",
+    "ice",
+    "rift"
+  ],
+  "status": "placeholder",
+  "count": 12
+}
