@@ -1,19 +1,13 @@
-# Передача проекта · H6 device verify
+# Передача · mail ClaimAll atomic (+ пока H6 device)
 
-Срез от 20 ноября 2026. Ветка: `cursor/h6-device-verify-prep-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/mail-claim-all-atomic-d5fe`.
 
-**Сделано в коде (prep):**
+**Сейчас:** владелец тестирует H6 на устройстве (`docs/H6_DEVICE_VERIFY.md`).
 
-- Стабильный claim idempotency: `claim:{battle_id}` в `ApiClient.battle_claim` (replay после обрыва сети)
-- API-тесты: GET reconnect timeline, claim replay + stage advance
-- `docs/H6_DEVICE_VERIFY.md` + `tools/h6_verify_api.sh`
-- Smoke: online → `battle_start` + COMBAT-02 с server timeline
+**Сделано параллельно:** `mail.ClaimAll` — ledger затем SaveMail в одной `RunAtomic` TX (больше нет «claimed без награды»).
 
-**Владельцу:** пройти чеклист в `docs/H6_DEVICE_VERIFY.md` на свежем APK и написать **H6 device OK**.
+## Next
 
-## Next после device OK
-
-1. AUTH-04 / UI-SYNC-HEROES  
-2. ART-05  
-3. mail ClaimAll → RunAtomic (остаток TD-ATOMIC)  
-4. Visual wave3  
+1. Ждать **H6 device OK** → закрыть пункт в STATUS.
+2. **AUTH-04** — email register / bind guest / session expiry (код в `server/internal/modules/auth`, UI auth scene); device verify на Android.
+3. ART-05; visual wave3.

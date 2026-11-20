@@ -20,6 +20,7 @@
 | UI-VISUAL wave2 | HubBuilding, BattleUnit, HeroCard grid, MailItem, ShopOfferCard, DemoScreenBuilder→GamePanel |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK (owner confirmed) |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic`: ledger+side-effects в одной TX; PG FOR UPDATE + advisory lock; concurrent debit tests |
+| mail ClaimAll atomic | ClaimAll: ledger → SaveMail в одной TX (без «claimed без награды») |
 
 ## Реализовано и проверено
 

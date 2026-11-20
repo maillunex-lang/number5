@@ -250,4 +250,13 @@ func TestFullLoopBattleSummonAfkMail(t *testing.T) {
 	if rr.Code != 200 {
 		t.Fatalf("mail claim-all %d %s", rr.Code, rr.Body.String())
 	}
+	rr = authH(http.MethodPost, "/api/v1/mail/claim-all", []byte(`{"idempotency_key":"mall1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("mail claim-all replay %d %s", rr.Code, rr.Body.String())
+	}
+	var mallReplay map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &mallReplay)
+	if mallReplay["replayed"] != true {
+		t.Fatalf("expected claim-all replayed, got %#v", mallReplay)
+	}
 }
