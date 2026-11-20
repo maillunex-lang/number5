@@ -7,7 +7,6 @@
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
 | P1 | H6 — device verify | APK с playback timeline: анимация соответствует серверной последовательности, reconnect через GET battle, повтор claim с тем же idempotency_key |
-| P1 | ATOMIC-ECONOMY / TD-PG-RACE | При параллельном запросе и при сбое между записями награда, кошелёк и этап согласованы |
 | P1 | AUTH-04 и UI-SYNC-HEROES | На Android проверить email-регистрацию, привязку гостя, истечение сессии, смену аккаунта и восстановление после обрыва сети |
 | P1 | ART-05 | Проверить реальные портреты, атласы и анимации героев в боевой сцене на целевом устройстве |
 
@@ -20,6 +19,7 @@
 | UI-VISUAL foundation | Аудит, Theme styles, component library, preview, docs; частичная миграция chrome |
 | UI-VISUAL wave2 | HubBuilding, BattleUnit, HeroCard grid, MailItem, ShopOfferCard, DemoScreenBuilder→GamePanel |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK (owner confirmed) |
+| ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic`: ledger+side-effects в одной TX; PG FOR UPDATE + advisory lock; concurrent debit tests |
 
 ## Реализовано и проверено
 

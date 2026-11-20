@@ -97,8 +97,74 @@ func (s *Service) Roll(accountID domain.AccountID, req RollRequest) (status int,
 		})
 	}
 
-	// Debit first — fail closed before mutating collection.
-	_, err = s.Store.ApplyLedger(accountID, entries, req.IdempotencyKey, hash, []byte(`{}`), 200)
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(req.IdempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused with different payload")
+				return nil
+			}
+			var cached RollResponse
+			_ = json.Unmarshal(rec.ResponseJSON, &cached)
+			cached.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(cached)
+			return nil
+		}
+		if _, e := ops.ApplyLedger(entries, req.IdempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
+		}
+
+		pity, _ := ops.GetPity(req.BannerID)
+		pity.BannerID = req.BannerID
+
+		seedBytes := sha256.Sum256([]byte(string(accountID) + "|" + req.IdempotencyKey))
+		rng := rand.New(rand.NewSource(int64(binary.BigEndian.Uint64(seedBytes[:8]))))
+
+		owned, _ := ops.ListHeroes()
+		own := map[string]domain.HeroOwned{}
+		for _, h := range owned {
+			own[h.HeroID] = h
+		}
+
+		results := make([]RollResult, 0, req.Count)
+		for i := 0; i < req.Count; i++ {
+			rarity := rollRarity(rng, banner, &pity, i, req.Count)
+			heroID := pickHero(rng, banner.Pools[rarity])
+			if heroID == "" {
+				heroID = "H16"
+				rarity = "N"
+			}
+			res := RollResult{HeroID: heroID, Rarity: rarity, Position: i + 1}
+			if h, ok := own[heroID]; ok {
+				res.IsNew = false
+				res.Shards = s.Catalog.Gacha.DupeTo
+				h.Shards += res.Shards
+				own[heroID] = h
+				if e := ops.UpsertHero(h); e != nil {
+					return e
+				}
+			} else {
+				res.IsNew = true
+				h := domain.HeroOwned{HeroID: heroID, Stars: 1, Level: 1}
+				own[heroID] = h
+				if e := ops.UpsertHero(h); e != nil {
+					return e
+				}
+			}
+			results = append(results, res)
+		}
+		if e := ops.SetPity(pity); e != nil {
+			return e
+		}
+
+		orderID := store.NewID("sum")
+		out := RollResponse{OrderID: orderID, BannerID: req.BannerID, Results: results, Pity: pity}
+		body = mustJSON(out)
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(req.IdempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrInsufficient {
 			return 422, errJSON("insufficient", "not enough resources"), nil
@@ -108,53 +174,10 @@ func (s *Service) Roll(accountID domain.AccountID, req RollRequest) (status int,
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-
-	pity, _ := s.Store.GetPity(accountID, req.BannerID)
-	pity.BannerID = req.BannerID
-
-	seedBytes := sha256.Sum256([]byte(string(accountID) + "|" + req.IdempotencyKey))
-	rng := rand.New(rand.NewSource(int64(binary.BigEndian.Uint64(seedBytes[:8]))))
-
-	owned, _ := s.Store.ListHeroes(accountID)
-	own := map[string]domain.HeroOwned{}
-	for _, h := range owned {
-		own[h.HeroID] = h
+	if outStatus == 0 {
+		outStatus = 200
 	}
-
-	results := make([]RollResult, 0, req.Count)
-	for i := 0; i < req.Count; i++ {
-		rarity := rollRarity(rng, banner, &pity, i, req.Count)
-		heroID := pickHero(rng, banner.Pools[rarity])
-		if heroID == "" {
-			heroID = "H16"
-			rarity = "N"
-		}
-		res := RollResult{HeroID: heroID, Rarity: rarity, Position: i + 1}
-		if h, ok := own[heroID]; ok {
-			res.IsNew = false
-			res.Shards = s.Catalog.Gacha.DupeTo
-			h.Shards += res.Shards
-			own[heroID] = h
-			_ = s.Store.UpsertHero(accountID, h)
-		} else {
-			res.IsNew = true
-			h := domain.HeroOwned{HeroID: heroID, Stars: 1, Level: 1}
-			own[heroID] = h
-			_ = s.Store.UpsertHero(accountID, h)
-		}
-		results = append(results, res)
-	}
-	_ = s.Store.SetPity(accountID, pity)
-
-	orderID := store.NewID("sum")
-	out := RollResponse{OrderID: orderID, BannerID: req.BannerID, Results: results, Pity: pity}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, req.IdempotencyKey, body, 200)
-	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func rollRarity(rng *rand.Rand, banner content.Banner, pity *domain.PityState, idx, count int) string {

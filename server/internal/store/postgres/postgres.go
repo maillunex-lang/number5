@@ -225,57 +225,17 @@ func (s *Store) ApplyLedger(accountID domain.AccountID, entries []domain.LedgerE
 		return false, err
 	}
 	defer tx.Rollback(ctx)
-
-	var existingHash string
-	err = tx.QueryRow(ctx,
-		`SELECT request_hash FROM idempotency_keys WHERE account_id = $1::uuid AND key = $2`,
-		string(accountID), idempotencyKey).Scan(&existingHash)
-	if err == nil {
-		if existingHash != requestHash {
-			return false, store.ErrConflict
-		}
-		return true, nil
-	}
-
-	for _, e := range entries {
-		var amt int64
-		err = tx.QueryRow(ctx,
-			`SELECT amount FROM wallet_balances WHERE account_id = $1::uuid AND resource_id = $2`,
-			string(accountID), e.ResourceID).Scan(&amt)
-		if err != nil {
-			amt = 0
-		}
-		if amt+e.Delta < 0 {
-			return false, store.ErrInsufficient
-		}
-	}
-	now := s.now()
-	for _, e := range entries {
-		_, err = tx.Exec(ctx, `
-			INSERT INTO wallet_balances (account_id, resource_id, amount, version)
-			VALUES ($1::uuid, $2, $3, 1)
-			ON CONFLICT (account_id, resource_id) DO UPDATE
-			SET amount = wallet_balances.amount + EXCLUDED.amount, version = wallet_balances.version + 1`,
-			string(accountID), e.ResourceID, e.Delta)
-		if err != nil {
-			return false, err
-		}
-		_, err = tx.Exec(ctx, `
-			INSERT INTO wallet_ledger (account_id, resource_id, delta, source_type, source_id, period_key, config_version, idempotency_key, created_at)
-			VALUES ($1::uuid, $2, $3, $4, $5, $6, $7, $8, $9)`,
-			string(accountID), e.ResourceID, e.Delta, e.SourceType, e.SourceID, e.PeriodKey, e.ConfigVersion, idempotencyKey, now)
-		if err != nil {
-			return false, err
-		}
-	}
-	_, err = tx.Exec(ctx, `
-		INSERT INTO idempotency_keys (account_id, key, request_hash, response_json, status_code, created_at)
-		VALUES ($1::uuid, $2, $3, $4, $5, $6)`,
-		string(accountID), idempotencyKey, requestHash, response, statusCode, now)
+	replayed, err := applyLedgerTx(ctx, tx, s.now(), accountID, entries, idempotencyKey, requestHash, response, statusCode)
 	if err != nil {
 		return false, err
 	}
-	return false, tx.Commit(ctx)
+	if replayed {
+		return true, nil
+	}
+	if err := tx.Commit(ctx); err != nil {
+		return false, err
+	}
+	return false, nil
 }
 
 func (s *Store) ListHeroes(accountID domain.AccountID) ([]domain.HeroOwned, error) {

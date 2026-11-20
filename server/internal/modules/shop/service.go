@@ -123,63 +123,78 @@ func (s *Service) ConfirmTest(accountID domain.AccountID, orderID, idempotencyKe
 		return 422, errJSON("invalid", "order id and idempotency_key required"), nil
 	}
 	hash := hashKey("confirm|" + orderID + "|" + idempotencyKey)
-	if rec, e := s.Store.GetIdempotency(accountID, idempotencyKey); e == nil {
-		if rec.RequestHash != hash {
-			return 409, errJSON("conflict", "idempotency key reused"), nil
+	var outStatus int
+	err = store.Run(s.Store, accountID, func(ops store.Ops) error {
+		if rec, e := ops.GetIdempotency(idempotencyKey); e == nil {
+			if rec.RequestHash != hash {
+				outStatus = 409
+				body = errJSON("conflict", "idempotency key reused")
+				return nil
+			}
+			var cached OrderResponse
+			_ = json.Unmarshal(rec.ResponseJSON, &cached)
+			cached.Replayed = true
+			outStatus = rec.StatusCode
+			body = mustJSON(cached)
+			return nil
 		}
-		var cached OrderResponse
-		_ = json.Unmarshal(rec.ResponseJSON, &cached)
-		cached.Replayed = true
-		return rec.StatusCode, mustJSON(cached), nil
-	}
-	order, err := s.GetOrder(accountID, orderID)
-	if err != nil {
-		if err == store.ErrForbidden {
-			return 403, errJSON("forbidden", "order"), nil
+		order, e := ops.GetStoreOrder(orderID)
+		if e != nil {
+			outStatus = 404
+			body = errJSON("not_found", "order")
+			return nil
 		}
-		return 404, errJSON("not_found", "order"), nil
-	}
-	if order.Status == "confirmed" {
-		out := OrderResponse{Order: order}
-		return 200, mustJSON(out), nil
-	}
-	entries := make([]domain.LedgerEntry, 0, len(order.Grants)+1)
-	for _, g := range order.Grants {
-		if g.Amount <= 0 {
-			continue
+		if order.AccountID != accountID {
+			outStatus = 403
+			body = errJSON("forbidden", "order")
+			return nil
 		}
-		entries = append(entries, domain.LedgerEntry{
-			ResourceID: g.ResourceID, Delta: g.Amount,
-			SourceType: "store_confirm", SourceID: order.ID,
-			ConfigVersion: s.Catalog.Version,
-		})
-	}
-	if order.VipXP > 0 {
-		entries = append(entries, domain.LedgerEntry{
-			ResourceID: "vip_xp", Delta: int64(order.VipXP),
-			SourceType: "store_confirm", SourceID: order.ID,
-			ConfigVersion: s.Catalog.Version,
-		})
-	}
-	_, err = s.Store.ApplyLedger(accountID, entries, idempotencyKey, hash, []byte(`{}`), 200)
+		if order.Status == "confirmed" {
+			outStatus = 200
+			body = mustJSON(OrderResponse{Order: order})
+			return nil
+		}
+		entries := make([]domain.LedgerEntry, 0, len(order.Grants)+1)
+		for _, g := range order.Grants {
+			if g.Amount <= 0 {
+				continue
+			}
+			entries = append(entries, domain.LedgerEntry{
+				ResourceID: g.ResourceID, Delta: g.Amount,
+				SourceType: "store_confirm", SourceID: order.ID,
+				ConfigVersion: s.Catalog.Version,
+			})
+		}
+		if order.VipXP > 0 {
+			entries = append(entries, domain.LedgerEntry{
+				ResourceID: "vip_xp", Delta: int64(order.VipXP),
+				SourceType: "store_confirm", SourceID: order.ID,
+				ConfigVersion: s.Catalog.Version,
+			})
+		}
+		if _, e := ops.ApplyLedger(entries, idempotencyKey, hash, []byte(`{}`), 200); e != nil {
+			return e
+		}
+		now := s.now()
+		order.Status = "confirmed"
+		order.ConfirmedAt = &now
+		if e := ops.SaveStoreOrder(order); e != nil {
+			return e
+		}
+		body = mustJSON(OrderResponse{Order: order})
+		outStatus = 200
+		return ops.PatchIdempotencyResponse(idempotencyKey, body, 200)
+	})
 	if err != nil {
 		if err == store.ErrConflict {
 			return 409, errJSON("conflict", err.Error()), nil
 		}
 		return 500, errJSON("internal", err.Error()), nil
 	}
-	now := s.now()
-	order.Status = "confirmed"
-	order.ConfirmedAt = &now
-	_ = s.Store.SaveStoreOrder(order)
-	out := OrderResponse{Order: order}
-	body = mustJSON(out)
-	if patcher, ok := s.Store.(interface {
-		PatchIdempotencyResponse(domain.AccountID, string, []byte, int) error
-	}); ok {
-		_ = patcher.PatchIdempotencyResponse(accountID, idempotencyKey, body, 200)
+	if outStatus == 0 {
+		outStatus = 200
 	}
-	return 200, body, nil
+	return outStatus, body, nil
 }
 
 func hashKey(key string) string {

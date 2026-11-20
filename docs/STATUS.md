@@ -10,6 +10,7 @@
 | Бой H6 | Сервер считает детерминированную timeline (start/hit/death/end). Клиент COMBAT-02 воспроизводит timeline; при обрыве — `GET /battle/{id}`. Claim идемпотентен | Нужна APK с новым клиентом и проверка на устройстве: анимация ↔ timeline, reconnect, повтор claim |
 | UI visual-edit | Theme + компоненты; HubBuilding/BattleUnit/HeroCard/MailItem/ShopOfferCard; DemoScreenBuilder на GamePanel; preview F6 | Formation/settings/map nodes ещё частично code; см. `docs/UI_VISUAL_AUDIT.md` |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
+| ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail + ledger в одной TX; PG row lock; concurrent debit tests | mail `ClaimAll` ещё не в одной TX; device smoke после деплоя API |
 | Инфраструктура | Nginx, Go API в prod и отдельный PostgreSQL. Health подтверждал соединение с БД | Чистый запуск и перезапуск проверены на отдельной PostgreSQL 16 |
 | Контент | 27 файлов из манифеста совпали с копией на VPS. Проверены HTTPS CDN, загрузка диалогов и активация OTA-кэша | Новый код, сцены и встроенные пиктограммы распространяются в APK |
 
