@@ -167,7 +167,7 @@ func _build_story(root: VBoxContainer) -> void:
 		v.add_child(UIFactory.label("%s · %s" % [str(ch.get("id", "")), str(ch.get("label", ""))], 22, LunexColors.GOLD))
 		v.add_child(UIFactory.muted(", ".join(parts) + (" · бой" if bool(ch.get("battle", false)) else ""), 16))
 		var go := UIFactory.gold_button("Выбрать (демо)")
-		var choice := ch
+		var choice: Dictionary = ch
 		go.pressed.connect(func():
 			if bool(choice.get("battle", false)):
 				UIStateManager.set_combat_context({"mode": "daily_story", "stage_id": str(story.get("id", "")), "return_route": "HUB-04"})

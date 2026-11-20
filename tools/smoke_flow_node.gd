@@ -1,12 +1,13 @@
 extends Node
 
 func _ready() -> void:
-	await _run()
+	_run.call_deferred()
 
 func _run() -> void:
 	print("SMOKE: start")
 	AppState.enter_as_guest("SmokeTester")
-	get_tree().change_scene_to_file("res://scenes/shell/game_shell.tscn")
+	var shell := preload("res://scenes/shell/game_shell.tscn").instantiate()
+	get_tree().root.add_child(shell)
 	await get_tree().create_timer(1.0).timeout
 	print("SMOKE: shell loaded, tab=", UIStateManager.current_tab)
 	ScreenRouter.switch_tab("map")
@@ -23,7 +24,7 @@ func _run() -> void:
 	await get_tree().create_timer(0.5).timeout
 	await ScreenRouter.go("MAP-01")
 	await get_tree().create_timer(0.5).timeout
-	var stage_id := str(DemoData.campaign_progress.get("current_stage", "CH01-03"))
+	var stage_id := "CH01-01"
 	await ScreenRouter.go("MAP-02", {"stage_id": stage_id})
 	await get_tree().create_timer(0.5).timeout
 	await ScreenRouter.go("COMBAT-01", {"stage_id": stage_id, "mode": "campaign"})

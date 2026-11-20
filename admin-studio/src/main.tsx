@@ -6,7 +6,7 @@ import "./styles/studio.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/afkgame/admin">
       <App />
     </BrowserRouter>
   </React.StrictMode>

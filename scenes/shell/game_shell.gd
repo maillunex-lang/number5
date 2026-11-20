@@ -9,6 +9,7 @@ extends Control
 @onready var _top_bar = $SafeArea/Col/TopBar
 @onready var _bottom_nav = $SafeArea/Col/BottomNav
 @onready var _blocker: ColorRect = $BlockerLayer/Blocker
+@onready var _safe_area: MarginContainer = $SafeArea
 
 var _tabs: Dictionary = {}
 var _overlay_stack: Array[Control] = []
@@ -23,19 +24,26 @@ func _ready() -> void:
 	_blocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_transition.modulate.a = 0.0
 	_transition.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_apply_android_safe_area()
 	_load_tabs()
 	_top_bar.setup(self)
 	_bottom_nav.setup(self)
-	show_tab(UIStateManager.current_tab if UIStateManager.current_tab != "" else "hub")
-	ScreenRouter._current = "ROOT-03"
-	ScreenRouter._history = ["ROOT-03"]
-	var welcome := ContentPackageLoader.tr_key(
-		"app.name",
-		str(ContentPackageLoader.shell.get("welcome_toast", "Добро пожаловать в Lunex AFK (локальный прототип)"))
-	)
-	if ContentPackageLoader.shell.has("welcome_toast"):
-		welcome = str(ContentPackageLoader.shell["welcome_toast"])
-	NotificationManager.info(welcome)
+	ScreenRouter.switch_tab(UIStateManager.current_tab if UIStateManager.current_tab != "" else "hub")
+
+func _apply_android_safe_area() -> void:
+	# Android display safe-area is in physical screen pixels; Godot UI is in logical viewport units.
+	var window_size := DisplayServer.window_get_size()
+	var viewport_size := get_viewport_rect().size
+	var safe := DisplayServer.get_display_safe_area()
+	var scale_y := viewport_size.y / maxf(float(window_size.y), 1.0)
+	var scale_x := viewport_size.x / maxf(float(window_size.x), 1.0)
+	var top_inset := maxf(float(safe.position.y) * scale_y, 0.0)
+	var right_inset := maxf(float(window_size.x - safe.end.x) * scale_x, 0.0)
+	# Reserve enough space for camera cutouts even when Android reports an empty safe-area.
+	var top_margin := maxi(110, ceili(top_inset) + 20) if OS.has_feature("android") else 16
+	_safe_area.add_theme_constant_override("margin_top", top_margin)
+	_safe_area.add_theme_constant_override("margin_right", maxi(0, ceili(right_inset)))
+	print("ANDROID_SAFE_AREA: top=", top_margin, " right=", right_inset, " screen=", window_size)
 
 func _load_tabs() -> void:
 	var paths := {
@@ -103,6 +111,8 @@ func open_overlay(route_id: String, scene_path: String, payload: Dictionary = {}
 	node.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if node.has_method("setup"):
 		node.call("setup", payload)
+	if has_overlay():
+		_overlay_stack.back().hide()
 	_overlay_host.add_child(node)
 	_overlay_stack.append(node)
 	_update_chrome()
@@ -117,7 +127,10 @@ func close_overlay() -> void:
 	_blocker.visible = true
 	await _fade(true)
 	var n: Control = _overlay_stack.pop_back()
+	n.hide()
 	n.queue_free()
+	if has_overlay():
+		_overlay_stack.back().show()
 	_update_chrome()
 	await _fade(false)
 	_blocker.visible = false
@@ -191,8 +204,10 @@ func _on_toast(text: String, kind: String) -> void:
 		"error": color = LunexColors.TEXT_DANGER
 		_: color = LunexColors.CYAN
 	var p := UIFactory.panel(Color(0.07, 0.1, 0.16, 0.92))
+	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	p.add_theme_stylebox_override("panel", UIFactory.panel_style(Color(0.07, 0.1, 0.16, 0.92), color, 14, 2))
 	var l := UIFactory.label(text, 24, color)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	p.add_child(l)
 	_toast_host.add_child(p)

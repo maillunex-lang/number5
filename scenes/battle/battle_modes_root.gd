@@ -38,7 +38,7 @@ func _build() -> void:
 		b.pressed.connect(func(): ScreenRouter.go(route, payload))
 		_world.add_child(b)
 		if ThemeManager.parallax_enabled:
-			var tw := create_tween().set_loops()
+			var tw := b.create_tween().set_loops()
 			tw.tween_property(b, "modulate", Color(1.1, 1.05, 1.0), 1.0)
 			tw.tween_property(b, "modulate", Color.WHITE, 1.0)
 	$Header/Title.text = "Битва · режимы PvE / PvP"

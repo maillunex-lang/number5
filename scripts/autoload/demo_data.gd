@@ -7,6 +7,8 @@ signal squad_changed
 signal content_reloaded
 
 var heroes: Array[Dictionary] = []
+var _server_snapshot: Dictionary = {}
+var server_player_loaded: bool = false
 var equipment_pool: Array[Dictionary] = []
 var squad_slots: Array[String] = ["", "", "", "", ""]
 var squad_presets: Array[Dictionary] = []
@@ -18,10 +20,66 @@ var quest_ready: int = 3
 
 func _ready() -> void:
 	_apply_from_package()
+	clear_player_data()
 	ContentPackageLoader.package_loaded.connect(func(_v):
 		_apply_from_package()
-		content_reloaded.emit()
+		if _server_snapshot.is_empty():
+			clear_player_data()
+			content_reloaded.emit()
+		else:
+			apply_server_player(_server_snapshot.collection, _server_snapshot.progress, _server_snapshot.formation)
 	)
+
+func clear_player_data() -> void:
+	_server_snapshot = {}
+	server_player_loaded = false
+	heroes.clear()
+	squad_slots = ["", "", "", "", ""]
+	selected_hero_id = ""
+	campaign_progress["current_stage"] = ""
+	for stage in campaign_progress.get("stages", []):
+		stage["state"] = "locked"
+	heroes_changed.emit()
+	squad_changed.emit()
+
+func apply_server_player(collection: Dictionary, progress: Dictionary, formation: Dictionary) -> void:
+	_server_snapshot = {"collection": collection, "progress": progress, "formation": formation}
+	var catalog: Dictionary = {}
+	for raw in ContentPackageLoader.heroes_pack.get("heroes", []):
+		catalog[str(raw.get("id", ""))] = raw
+	_load_heroes()
+	var templates: Dictionary = {}
+	for h in heroes:
+		templates[str(h["id"])] = h
+	heroes.clear()
+	for owned in collection.get("heroes", []):
+		var hid := str(owned.get("hero_id", ""))
+		if not templates.has(hid):
+			continue
+		var h: Dictionary = templates[hid].duplicate(true)
+		h["level"] = int(owned.get("level", 1))
+		h["stars"] = int(owned.get("stars", 1))
+		h["power"] = 0 # no server-authoritative power stat yet
+		heroes.append(h)
+	selected_hero_id = str(heroes[0]["id"]) if not heroes.is_empty() else ""
+	var raw_slots: Array = formation.get("slots", [])
+	squad_slots = ["", "", "", "", ""]
+	for i in range(mini(5, raw_slots.size())):
+		var hid := str(raw_slots[i])
+		if templates.has(hid) and get_hero(hid) != {}:
+			squad_slots[i] = hid
+	_load_campaign()
+	campaign_progress["current_stage"] = str(progress.get("current_stage", ""))
+	var cleared: Dictionary = {}
+	for st in progress.get("cleared", []):
+		cleared[str(st.get("StageID", st.get("stage_id", "")))] = st
+	for st in campaign_progress.get("stages", []):
+		var sid := str(st.get("id", ""))
+		st["state"] = "cleared" if cleared.has(sid) else ("current" if sid == campaign_progress["current_stage"] else "locked")
+	server_player_loaded = true
+	heroes_changed.emit()
+	squad_changed.emit()
+	content_reloaded.emit()
 
 func reload_from_package() -> void:
 	ContentPackageLoader.reload()
@@ -185,6 +243,8 @@ func squad_power() -> int:
 	return p
 
 func set_squad_slot(index: int, hero_id: String) -> void:
+	push_warning("Local formation editing disabled; use server API")
+	return
 	if index < 0 or index >= 5:
 		return
 	for i in squad_slots.size():
@@ -194,6 +254,8 @@ func set_squad_slot(index: int, hero_id: String) -> void:
 	squad_changed.emit()
 
 func apply_preset(preset_id: String) -> void:
+	push_warning("Local formation presets disabled")
+	return
 	for p in squad_presets:
 		if p["id"] == preset_id:
 			for i in 5:

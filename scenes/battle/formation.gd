@@ -29,7 +29,7 @@ func _rebuild() -> void:
 	root.add_child(UIFactory.label("Сила отряда: %d" % sp, 28, LunexColors.GOLD))
 	var cmp_color := LunexColors.EMERALD if sp >= ep else LunexColors.AMBER
 	root.add_child(UIFactory.label("Сравнение: %d vs %d" % [sp, ep], 24, cmp_color))
-	root.add_child(UIFactory.muted("Локальная симуляция · не серверный бой", 20))
+	root.add_child(UIFactory.muted("Результат и награды определяются сервером", 20))
 	var row := UIFactory.hbox(8)
 	root.add_child(row)
 	for i in 5:
@@ -58,11 +58,30 @@ func _rebuild() -> void:
 	root.add_child(edit)
 	var start := UIFactory.gold_button("Начать бой")
 	start.pressed.connect(func():
-		if DemoData.ally_battle_units().size() == 0:
-			NotificationManager.warn("Соберите хотя бы одного героя")
+		if start.disabled:
+			return
+		if not ApiClient.online or not DemoData.server_player_loaded:
+			NotificationManager.warn("Нет подключения к игровому серверу")
+			return
+		start.disabled = true
+		start.text = "Сервер рассчитывает бой..."
+		var response: Dictionary = await ApiClient.battle_start(stage_id)
+		if not is_instance_valid(start):
+			return
+		if not response.get("ok", false):
+			start.disabled = false
+			start.text = "Начать бой"
+			NotificationManager.warn("Сервер не начал бой. Проверь доступность этапа и отряд.")
+			return
+		var data: Dictionary = response.get("data", {})
+		var battle_id := str(data.get("battle_id", ""))
+		if battle_id == "":
+			start.disabled = false
+			start.text = "Начать бой"
+			NotificationManager.warn("Сервер не вернул идентификатор боя")
 			return
 		UIStateManager.set_combat_context({"mode": mode, "stage_id": stage_id, "return_route": ctx.get("return_route", "ROOT-04")})
-		ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": mode})
+		ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": mode, "battle_id": battle_id, "server_victory": bool(data.get("victory", false))})
 	)
 	root.add_child(start)
 	var back := UIFactory.fantasy_button("Назад")

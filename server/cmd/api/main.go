@@ -44,7 +44,7 @@ func main() {
 		Config:   cfg,
 		Store:    st,
 		Auth:     &auth.Service{Store: st, StarterHeroes: starterHeroes},
-		Wallet:   &wallet.Service{Store: st, ConfigVersion: cfgVer, AllowTestGrant: cfg.AppEnv == "dev" || cfg.AppEnv == "test"},
+		Wallet:   &wallet.Service{Store: st, ConfigVersion: cfgVer, AllowTestGrant: cfg.AppEnv == "test"},
 		Heroes:   &heroes.Service{Store: st},
 		Campaign: &campaign.Service{Store: st},
 	}
@@ -65,6 +65,9 @@ func main() {
 
 func openStore(cfg config.Config) (store.Store, string) {
 	if cfg.DatabaseURL == "" {
+		if cfg.AppEnv == "prod" {
+			log.Fatal("production requires DATABASE_URL")
+		}
 		log.Printf("store: memory (set DATABASE_URL for postgres)")
 		return store.NewMemory(nil), "memory"
 	}
@@ -72,6 +75,9 @@ func openStore(cfg config.Config) (store.Store, string) {
 	defer cancel()
 	pg, err := postgres.Open(ctx, cfg.DatabaseURL, nil)
 	if err != nil {
+		if cfg.AppEnv == "prod" {
+			log.Fatalf("production postgres unavailable: %v", err)
+		}
 		log.Printf("store: postgres unavailable (%v) · falling back to memory", err)
 		return store.NewMemory(nil), "memory"
 	}
@@ -80,6 +86,9 @@ func openStore(cfg config.Config) (store.Store, string) {
 		mig = filepath.Join("..", "migrations", "0001_init.sql")
 	}
 	if err := pg.Migrate(ctx, mig); err != nil {
+		if cfg.AppEnv == "prod" {
+			log.Fatalf("production migration failed: %v", err)
+		}
 		log.Printf("store: migrate failed (%v) · falling back to memory", err)
 		pg.Close()
 		return store.NewMemory(nil), "memory"

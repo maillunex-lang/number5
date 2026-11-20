@@ -1,26 +1,39 @@
 extends Node
-## HTTP client for CORE-01 local/dev API. Falls back silently when offline.
+## HTTP client for CORE-01 online API. Never silently enters local demo.
 
 signal session_ready(token: String)
 signal request_failed(path: String, code: int, body: String)
 signal wallet_synced
+signal player_synced
 
-const DEFAULT_BASE := "http://127.0.0.1:8080"
+const DEFAULT_BASE := "https://rikagro.ru/afkgame"
 const TIMEOUT_SEC := 4.0
 
 var base_url: String = DEFAULT_BASE
 var access_token: String = ""
 var online: bool = false
 var last_error: String = ""
+var player_loaded: bool = false
 var _idem_seq: int = 0
 
-var _http: HTTPRequest
+var _presence_timer: Timer
+var _sync_timer: Timer
+var _sync_busy := false
+var _last_full_sync_msec := 0
 
 func _ready() -> void:
-	_http = HTTPRequest.new()
-	_http.timeout = TIMEOUT_SEC
-	add_child(_http)
+	_presence_timer = Timer.new()
+	_presence_timer.wait_time = 60.0
+	_presence_timer.one_shot = false
+	add_child(_presence_timer)
+	_presence_timer.timeout.connect(_presence_tick)
+	_sync_timer = Timer.new()
+	_sync_timer.wait_time = 30.0
+	add_child(_sync_timer)
+	_sync_timer.timeout.connect(_sync_tick)
 	var env_base := OS.get_environment("LUNEX_API_BASE")
+	if OS.has_feature("web"):
+		base_url = "https://rikagro.ru/afkgame"
 	if env_base != "":
 		base_url = env_base.rstrip("/")
 
@@ -30,6 +43,57 @@ func has_session() -> bool:
 func clear_session() -> void:
 	access_token = ""
 	online = false
+	player_loaded = false
+	DemoData.clear_player_data()
+	_presence_timer.stop()
+	_sync_timer.stop()
+	_sync_busy = false
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_RESUMED or what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		if online and player_loaded and Time.get_ticks_msec() - _last_full_sync_msec > 5000:
+			_refresh_after_resume()
+
+func _refresh_after_resume() -> void:
+	if _sync_busy:
+		return
+	_sync_busy = true
+	var me := await _authed("GET", "/api/v1/auth/me")
+	if me.get("ok", false):
+		_apply_account_identity(me.get("data", {}))
+		await sync_player()
+	else:
+		_mark_connection_issue(me)
+	_sync_busy = false
+
+func _mark_connection_issue(res: Dictionary) -> void:
+	if int(res.get("code", 0)) == 401:
+		clear_session()
+		forget_saved_session()
+	else:
+		last_error = str(res.get("error", "offline"))
+
+func _sync_tick() -> void:
+	if not online or not player_loaded or _sync_busy:
+		return
+	_sync_busy = true
+	var profile := await _authed("GET", "/api/v1/player/profile")
+	if profile.get("ok", false):
+		var pr: Dictionary = profile.get("data", {})
+		AppState.display_name = str(pr.get("nickname", AppState.display_name))
+		AppState.level = int(pr.get("level", AppState.level))
+		player_synced.emit()
+	else:
+		_mark_connection_issue(profile)
+	if online:
+		await sync_wallet()
+	_sync_busy = false
+
+func _presence_tick() -> void:
+	if online and player_loaded:
+		var hb := await _authed("POST", "/api/v1/player/heartbeat")
+		if not hb.get("ok", false):
+			_mark_connection_issue(hb)
 
 func new_idem(prefix: String = "c") -> String:
 	_idem_seq += 1
@@ -46,9 +110,125 @@ func guest_login() -> bool:
 	access_token = str(data.get("access_token", ""))
 	online = access_token != ""
 	if online:
+		AppState.is_guest = true
+		AppState.email_hint = ""
 		session_ready.emit(access_token)
-		await sync_wallet()
+		player_loaded = await sync_player()
+		if not player_loaded:
+			clear_session()
+			last_error = "player_sync_failed"
+			return false
+	if online:
+		_save_session()
 	return online
+
+const SESSION_PATH := "user://online_session.dat"
+const WEB_SESSION_KEY := "lunex-afk.online-session"
+
+func _web_session_storage() -> JavaScriptObject:
+	if OS.has_feature("web"):
+		return JavaScriptBridge.get_interface("localStorage")
+	return null
+
+func _save_session() -> void:
+	var storage := _web_session_storage()
+	if storage != null:
+		storage.setItem(WEB_SESSION_KEY, access_token)
+	var file := FileAccess.open(SESSION_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(access_token)
+		file.close()
+
+func forget_saved_session() -> void:
+	var storage := _web_session_storage()
+	if storage != null:
+		storage.setItem(WEB_SESSION_KEY, "")
+	if FileAccess.file_exists(SESSION_PATH):
+		var removed := DirAccess.remove_absolute(SESSION_PATH)
+		if removed == OK and OS.has_feature("web"):
+			JavaScriptBridge.force_fs_sync()
+
+func restore_session() -> bool:
+	var storage := _web_session_storage()
+	var saved = storage.getItem(WEB_SESSION_KEY) if storage != null else null
+	if saved is String:
+		access_token = saved.strip_edges()
+	else:
+		var file := FileAccess.open(SESSION_PATH, FileAccess.READ)
+		access_token = file.get_as_text().strip_edges() if file else ""
+	if access_token == "":
+		return false
+	var me := await _authed("GET", "/api/v1/auth/me")
+	if not me.get("ok", false):
+		clear_session()
+		if int(me.get("code", 0)) == 401:
+			forget_saved_session()
+		return false
+	online = true
+	_apply_account_identity(me.get("data", {}))
+	player_loaded = await sync_player()
+	if not player_loaded:
+		clear_session()
+		return false
+	return true
+
+func credentials_login(email: String, password: String, register_new: bool = false) -> bool:
+	var endpoint := "/api/v1/auth/register" if register_new else "/api/v1/auth/login"
+	var res := await _request("POST", endpoint, {"email": email, "password": password}, false)
+	if not res.get("ok", false):
+		return false
+	access_token = str(res.get("data", {}).get("access_token", ""))
+	online = access_token != ""
+	if not online:
+		return false
+	var me := await _authed("GET", "/api/v1/auth/me")
+	if not me.get("ok", false):
+		clear_session()
+		return false
+	_apply_account_identity(me.get("data", {}))
+	player_loaded = await sync_player()
+	if not player_loaded:
+		clear_session()
+		return false
+	_save_session()
+	return true
+
+func link_guest(email: String, password: String) -> bool:
+	var res := await _authed("POST", "/api/v1/auth/link", {"email": email, "password": password})
+	return res.get("ok", false)
+
+func _apply_account_identity(data: Dictionary) -> void:
+	AppState.is_guest = bool(data.get("is_guest", true))
+	AppState.email_hint = "" if AppState.is_guest else str(data.get("email", ""))
+
+func sync_player() -> bool:
+	if not online:
+		return false
+	var wallet := await get_wallet()
+	var owned := await get_heroes()
+	var campaign := await get_campaign()
+	var profile := await _authed("GET", "/api/v1/player/profile")
+	var formation := await _authed("GET", "/api/v1/formations/campaign")
+	if not wallet.get("ok", false) or not owned.get("ok", false) or not campaign.get("ok", false) or not profile.get("ok", false) or not formation.get("ok", false):
+		return false
+	var w: Dictionary = wallet.get("data", {})
+	var h: Dictionary = owned.get("data", {})
+	var c: Dictionary = campaign.get("data", {})
+	var f: Dictionary = formation.get("data", {})
+	if not h.has("heroes") or not c.has("current_stage") or not f.has("slots"):
+		return false
+	var pr: Dictionary = profile.get("data", {})
+	AppState.display_name = str(pr.get("nickname", "Командир"))
+	AppState.level = int(pr.get("level", 1))
+	_apply_wallet(w)
+	DemoData.apply_server_player(h, c, f)
+	player_loaded = true
+	player_synced.emit()
+	_presence_timer.start()
+	_sync_timer.start()
+	_last_full_sync_msec = Time.get_ticks_msec()
+	await _authed("POST", "/api/v1/player/heartbeat")
+	return true
 
 func sync_wallet() -> bool:
 	if not online:
@@ -173,12 +353,17 @@ func _request(method: String, path: String, body: Dictionary, use_auth: bool) ->
 		payload = JSON.stringify(body)
 	var url := base_url + path
 	var http_method := HTTPClient.METHOD_GET if method == "GET" else HTTPClient.METHOD_POST
-	var err := _http.request(url, headers, http_method, payload)
+	var http := HTTPRequest.new()
+	http.timeout = TIMEOUT_SEC
+	add_child(http)
+	var err := http.request(url, headers, http_method, payload)
 	if err != OK:
+		http.queue_free()
 		last_error = "request_error_%d" % err
 		request_failed.emit(path, 0, last_error)
 		return {"ok": false, "error": last_error, "code": 0}
-	var result: Array = await _http.request_completed
+	var result: Array = await http.request_completed
+	http.queue_free()
 	var http_result: int = result[0]
 	var code: int = result[1]
 	var response_body: String = (result[3] as PackedByteArray).get_string_from_utf8()

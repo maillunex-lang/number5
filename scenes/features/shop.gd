@@ -21,52 +21,118 @@ func _ready() -> void:
 				_offers = remote
 	_rebuild()
 
+func _shop_text(value: String, size: int = 23, color: Color = LunexColors.TEXT_PRIMARY) -> Label:
+	var node := UIFactory.label(value, size, color)
+	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	node.custom_minimum_size.x = 0
+	return node
+
+const CATEGORIES := ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
+var _selected_category := "Рекомендуем"
+
+func _category_of(offer: Dictionary) -> String:
+	var key := ("%s %s %s" % [str(offer.get("sku", offer.get("id", ""))), str(offer.get("title", offer.get("name", ""))), str(offer.get("category", ""))]).to_lower()
+	if "vip" in key or "вип" in key:
+		return "VIP"
+	if "pass" in key or "пропуск" in key:
+		return "Пропуск"
+	if "subscr" in key or "подпис" in key:
+		return "Подписки"
+	if "cosmetic" in key or "облик" in key:
+		return "Косметика"
+	if "diamond" in key or "алмаз" in key:
+		return "Алмазы"
+	return "Наборы"
+
 func _rebuild() -> void:
-	var root := $Safe/Scroll/VBox
-	for c in root.get_children():
-		c.queue_free()
-	root.add_child(UIFactory.section_header("Торговая площадь"))
-	var disclaimer := str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · 0 ₽"))
-	var mode := "ONLINE · VIRTUAL_FREE" if ApiClient.online else "DEMO"
-	root.add_child(UIFactory.muted("%s · %s · %s" % [ContentPackageLoader.package_label(), mode, disclaimer], 20))
-	root.add_child(UIFactory.label("Реальные деньги не списываются", 22, LunexColors.GOLD))
-
-	for o_raw in _offers:
-		var o: Dictionary = o_raw
-		var p := UIFactory.panel()
-		var v := UIFactory.vbox(8)
-		p.add_child(v)
-		var title := str(o.get("title", o.get("name", "")))
-		v.add_child(UIFactory.label(title, 28, LunexColors.GOLD))
-		var grants: Array = o.get("grants", [])
-		if grants.is_empty():
-			v.add_child(UIFactory.label(str(o.get("desc", "")), 22))
-		else:
-			var parts: PackedStringArray = []
-			for g in grants:
-				parts.append("%s ×%s" % [str(g.get("resource_id", "")), str(g.get("amount", 0))])
-			v.add_child(UIFactory.label(", ".join(parts), 22))
-		var nominal := int(o.get("nominal_price_rub", 0))
-		if nominal > 0:
-			v.add_child(UIFactory.muted("Номинал %d ₽ · к оплате 0 ₽" % nominal, 18))
-		v.add_child(UIFactory.muted("Лимит: %s · VIP XP +%s" % [str(o.get("limits", o.get("limit", ""))), str(o.get("vip_xp", 0))], 18))
-		var buy := UIFactory.gold_button(str(o.get("cta", "Получить бесплатно (тест)")))
-		var sku := str(o.get("sku", o.get("id", title)))
-		buy.pressed.connect(func(): _buy(sku, title, disclaimer, grants))
-		v.add_child(buy)
-		root.add_child(p)
-
-	var row := UIFactory.hbox(10)
-	root.add_child(row)
-	var vip := UIFactory.fantasy_button("VIP 0–11")
-	vip.pressed.connect(func(): ScreenRouter.go("HUB-07"))
-	row.add_child(vip)
-	var bp := UIFactory.fantasy_button("Пропуск")
-	bp.pressed.connect(func(): ScreenRouter.go("HUB-08"))
-	row.add_child(bp)
-	var back := UIFactory.fantasy_button("Назад")
+	var root: VBoxContainer = $Safe/Scroll/VBox
+	for child in root.get_children():
+		root.remove_child(child)
+		child.queue_free()
+	root.add_child(_shop_text("✦ ТОРГОВАЯ ПЛОЩАДЬ", 35, LunexColors.GOLD))
+	var mode := "ONLINE" if ApiClient.online else "DEMO"
+	root.add_child(_shop_text("Фэнтезийная лавка · %s · %s" % [ContentPackageLoader.package_label(), mode], 19, LunexColors.TEXT_MUTED))
+	var banner := UIFactory.panel(Color(0.15, 0.12, 0.22))
+	root.add_child(banner)
+	var banner_box := UIFactory.vbox(10)
+	banner.add_child(banner_box)
+	banner_box.add_child(_shop_text("✧ МАГИЧЕСКАЯ ВИТРИНА ✧", 31, LunexColors.GOLD))
+	banner_box.add_child(_shop_text("[ МЕСТО ДЛЯ ТЕМАТИЧЕСКОГО АРТА ]", 23))
+	banner_box.add_child(_shop_text("Все покупки бесплатны · Без списаний", 23, LunexColors.GOLD))
+	var tabs_scroll := ScrollContainer.new()
+	tabs_scroll.custom_minimum_size.y = 86
+	tabs_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	tabs_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	root.add_child(tabs_scroll)
+	var tabs := UIFactory.hbox(10)
+	tabs_scroll.add_child(tabs)
+	for category in CATEGORIES:
+		var tab := UIFactory.fantasy_button(category)
+		tab.custom_minimum_size = Vector2(160, 70)
+		tab.add_theme_font_size_override("font_size", 22)
+		tab.pressed.connect(func(): _selected_category = category; _rebuild())
+		tabs.add_child(tab)
+	root.add_child(_shop_text(_selected_category, 30, LunexColors.GOLD))
+	if _selected_category == "История":
+		root.add_child(_shop_text("История покупок: раздел оформления пока заглушка.", 23))
+	else:
+		var shown := 0
+		for raw in _offers:
+			if typeof(raw) != TYPE_DICTIONARY:
+				continue
+			var offer: Dictionary = raw
+			if _selected_category != "Рекомендуем" and _category_of(offer) != _selected_category:
+				continue
+			_add_offer(root, offer)
+			shown += 1
+		if shown == 0:
+			root.add_child(_shop_text("В этой категории пока нет предложений.", 23))
+	var links := UIFactory.hbox(10)
+	root.add_child(links)
+	for entry in [{"label":"VIP-центр", "route":"HUB-07"}, {"label":"Пропуск", "route":"HUB-08"}]:
+		var action := UIFactory.fantasy_button(str(entry["label"]))
+		action.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		action.custom_minimum_size.y = 78
+		var route := str(entry["route"])
+		action.pressed.connect(func(): ScreenRouter.go(route))
+		links.add_child(action)
+	var back := UIFactory.fantasy_button("← Назад")
+	back.custom_minimum_size.y = 80
 	back.pressed.connect(func(): ScreenRouter.handle_back())
 	root.add_child(back)
+
+func _add_offer(root: VBoxContainer, offer: Dictionary) -> void:
+	var title := str(offer.get("title", offer.get("name", "Предложение")))
+	var sku := str(offer.get("sku", offer.get("id", title)))
+	var grants: Array = offer.get("grants", [])
+	var panel := UIFactory.panel()
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	root.add_child(panel)
+	var card := UIFactory.vbox(12)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_child(card)
+	var art := PanelContainer.new()
+	art.custom_minimum_size = Vector2(0, 140)
+	art.add_theme_stylebox_override("panel", UIFactory.panel_style(Color(0.13, 0.18, 0.28), LunexColors.GOLD, 12, 1))
+	card.add_child(art)
+	var art_label := _shop_text("✦ ИЛЛЮСТРАЦИЯ НАБОРА ✦", 22, LunexColors.GOLD)
+	art_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	art_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	art.add_child(art_label)
+	card.add_child(_shop_text(title, 29, LunexColors.GOLD))
+	var parts: PackedStringArray = []
+	for grant in grants:
+		if typeof(grant) == TYPE_DICTIONARY:
+			parts.append("%s ×%s" % [str(grant.get("resource_id", "")), str(grant.get("amount", 0))])
+	card.add_child(_shop_text(", ".join(parts) if not parts.is_empty() else str(offer.get("desc", "Награды будут показаны здесь")), 22))
+	card.add_child(_shop_text("Лимит: %s · Номинал %s ₽ · К оплате 0 ₽" % [str(offer.get("limits", offer.get("limit", "—"))), str(offer.get("nominal_price_rub", 0))], 19, LunexColors.TEXT_MUTED))
+	var buy := UIFactory.gold_button("Получить бесплатно (тест)")
+	buy.custom_minimum_size = Vector2(0, 88)
+	buy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var disclaimer := str(ContentPackageLoader.economy.get("disclaimer", "Тестовый магазин · Без списаний"))
+	buy.pressed.connect(func(): _buy(sku, title, disclaimer, grants))
+	card.add_child(buy)
 
 func _buy(sku: String, title: String, disclaimer: String, grants: Array) -> void:
 	if _busy:

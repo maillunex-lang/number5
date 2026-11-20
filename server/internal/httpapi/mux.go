@@ -2,6 +2,7 @@ package httpapi
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -65,6 +66,129 @@ func NewMux(d Deps) http.Handler {
 			return
 		}
 		writeJSON(w, http.StatusOK, res)
+	})
+
+	// Credential endpoints are available only when the persistent PostgreSQL adapter is active.
+	mux.HandleFunc("POST /api/v1/auth/register", func(w http.ResponseWriter, r *http.Request) {
+		var p struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+		if json.NewDecoder(http.MaxBytesReader(w, r.Body, 4096)).Decode(&p) != nil || !validCredentials(p.Email, p.Password) {
+			writeErr(w, 400, "invalid_credentials", "Invalid email or password")
+			return
+		}
+		st, ok := d.Store.(interface {
+			RegisterAccount(string, string) (domain.Account, domain.Session, error)
+		})
+		if !ok {
+			writeErr(w, 503, "unavailable", "Registration unavailable")
+			return
+		}
+		acc, sess, err := st.RegisterAccount(p.Email, p.Password)
+		if err != nil {
+			writeErr(w, 409, "registration_failed", "Account could not be created")
+			return
+		}
+		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false})
+	})
+	mux.HandleFunc("POST /api/v1/auth/login", func(w http.ResponseWriter, r *http.Request) {
+		var p struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+		if json.NewDecoder(http.MaxBytesReader(w, r.Body, 4096)).Decode(&p) != nil {
+			writeErr(w, 400, "invalid_request", "Invalid request")
+			return
+		}
+		st, ok := d.Store.(interface {
+			LoginAccount(string, string) (domain.Account, domain.Session, error)
+		})
+		if !ok {
+			writeErr(w, 503, "unavailable", "Login unavailable")
+			return
+		}
+		acc, sess, err := st.LoginAccount(p.Email, p.Password)
+		if err != nil {
+			writeErr(w, 401, "invalid_credentials", "Invalid email or password")
+			return
+		}
+		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "access_token": sess.Token, "is_guest": false})
+	})
+	mux.HandleFunc("POST /api/v1/auth/link", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		if !acc.IsGuest {
+			writeErr(w, 409, "already_linked", "Already linked")
+			return
+		}
+		var p struct {
+			Email    string `json:"email"`
+			Password string `json:"password"`
+		}
+		if json.NewDecoder(http.MaxBytesReader(w, r.Body, 4096)).Decode(&p) != nil || !validCredentials(p.Email, p.Password) {
+			writeErr(w, 400, "invalid_credentials", "Invalid email or password")
+			return
+		}
+		st, ok := d.Store.(interface {
+			LinkGuest(domain.AccountID, string, string) error
+		})
+		if !ok {
+			writeErr(w, 503, "unavailable", "Link unavailable")
+			return
+		}
+		if err := st.LinkGuest(acc.ID, p.Email, p.Password); err != nil {
+			writeErr(w, 409, "link_failed", "Email already used or link unavailable")
+			return
+		}
+		writeJSON(w, 200, map[string]any{"ok": true, "is_guest": false})
+	})
+	mux.HandleFunc("GET /api/v1/auth/me", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		writeJSON(w, 200, map[string]any{"account_id": acc.ID, "is_guest": acc.IsGuest, "email": acc.Email})
+	})
+
+	mux.HandleFunc("GET /api/v1/player/profile", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		profiles, ok := d.Store.(interface {
+			ReadPlayerProfile(domain.AccountID) (string, int, int64, error)
+		})
+		if !ok {
+			writeErr(w, http.StatusServiceUnavailable, "profile_unavailable", "Profile storage unavailable")
+			return
+		}
+		nickname, level, xp, err := profiles.ReadPlayerProfile(acc.ID)
+		if err != nil {
+			log.Printf("player profile: %v", err)
+			writeErr(w, http.StatusInternalServerError, "profile_failed", "Profile unavailable")
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{"nickname": nickname, "level": level, "xp": xp, "account_id": string(acc.ID)})
+	})
+
+	mux.HandleFunc("POST /api/v1/player/heartbeat", func(w http.ResponseWriter, r *http.Request) {
+		acc, ok := requireAuth(w, r, d.Auth)
+		if !ok {
+			return
+		}
+		presence, ok := d.Store.(interface{ TouchPresence(domain.AccountID) error })
+		if !ok {
+			writeErr(w, http.StatusServiceUnavailable, "presence_unavailable", "Presence storage not supported")
+			return
+		}
+		if err := presence.TouchPresence(acc.ID); err != nil {
+			writeErr(w, http.StatusInternalServerError, "presence_failed", "Cannot update presence")
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 	})
 
 	mux.HandleFunc("GET /api/v1/wallet", func(w http.ResponseWriter, r *http.Request) {
@@ -360,6 +484,10 @@ func NewMux(d Deps) http.Handler {
 		writeJSON(w, http.StatusOK, o)
 	})
 	mux.HandleFunc("POST /api/v1/store/orders/{id}/confirm-test", func(w http.ResponseWriter, r *http.Request) {
+		if d.Config.AppEnv != "test" {
+			writeErr(w, http.StatusForbidden, "test_only", "disabled outside test environment")
+			return
+		}
 		acc, ok := requireAuth(w, r, d.Auth)
 		if !ok {
 			return
@@ -424,4 +552,9 @@ func writeErr(w http.ResponseWriter, status int, code, message string) {
 	writeJSON(w, status, map[string]any{
 		"error": map[string]string{"code": code, "message": message},
 	})
+}
+
+func validCredentials(email, password string) bool {
+	email = strings.TrimSpace(email)
+	return len(email) >= 5 && len(email) <= 254 && strings.Count(email, "@") == 1 && !strings.ContainsAny(email, " \n\r\t") && len(password) >= 10 && len(password) <= 128
 }

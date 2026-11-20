@@ -152,7 +152,7 @@ func _build_shop(root: VBoxContainer, g: Dictionary) -> void:
 		var parts: PackedStringArray = []
 		for r in o.get("grants", []):
 			parts.append("%s×%s" % [str(r.get("resource_id", "")), str(r.get("amount", 0))])
-		var lim := o.get("weekly_limit", o.get("lifetime_limit", "—"))
+		var lim: Variant = o.get("weekly_limit", o.get("lifetime_limit", "—"))
 		v.add_child(UIFactory.muted("%s · цена %s жетонов · лимит %s" % [
 			", ".join(parts),
 			str(o.get("price_guild_token", 0)),

@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import ServerMonitor from "./pages/ServerMonitor";
 import HubEditor from "./pages/HubEditor";
 import CampaignEditor from "./pages/CampaignEditor";
 import HeroesEditor from "./pages/HeroesEditor";
@@ -28,6 +29,7 @@ export default function App() {
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/" end>
             Обзор
           </NavLink>
+          <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/server">Сервер и профили</NavLink>
           <div className="nav-group">Дизайн</div>
           <NavLink className={({ isActive }) => `nav-link${isActive ? " active" : ""}`} to="/theme">
             Theme Studio
@@ -81,6 +83,7 @@ export default function App() {
         <main className="main">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/server" element={<ServerMonitor />} />
             <Route path="/theme" element={<ThemeStudio />} />
             <Route path="/shell" element={<ShellEditor />} />
             <Route path="/strings" element={<StringsEditor />} />

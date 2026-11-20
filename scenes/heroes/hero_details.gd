@@ -11,7 +11,11 @@ func _ready() -> void:
 	var hid: String = str(_payload.get("hero_id", UIStateManager.selected_hero_id))
 	_hero = DemoData.get_hero(hid)
 	if _hero.is_empty():
-		ScreenRouter.handle_back()
+		var box = $Safe/Scroll/VBox
+		box.add_child(UIFactory.section_header("Герой недоступен"))
+		var back := UIFactory.fantasy_button("Назад")
+		back.pressed.connect(ScreenRouter.handle_back)
+		box.add_child(back)
 		return
 	_rebuild()
 
@@ -61,22 +65,12 @@ func _build_info(root: VBoxContainer) -> void:
 	var row := UIFactory.hbox(10)
 	root.add_child(row)
 	var lvl := UIFactory.fantasy_button("Уровень +")
-	lvl.pressed.connect(func():
-		_hero.level += 1
-		_hero.power += 150
-		_hero.hp += 80
-		DemoData.heroes_changed.emit()
-		NotificationManager.success("Уровень повышен (локальное демо)")
-		_rebuild()
-	)
+	lvl.disabled = true
+	lvl.tooltip_text = "Повышение уровня будет доступно после подключения серверной операции"
 	row.add_child(lvl)
 	var auto := UIFactory.gold_button("Автоэкипировка")
-	auto.pressed.connect(func():
-		DemoData.auto_equip(_hero.id)
-		_hero = DemoData.get_hero(_hero.id)
-		NotificationManager.success("Экипированы лучшие предметы (демо)")
-		_rebuild()
-	)
+	auto.disabled = true
+	auto.tooltip_text = "Экипировка будет доступна после подключения серверной операции"
 	row.add_child(auto)
 	for panel_name in [["Таланты", "talents"], ["Артефакт", "artifact"], ["Связи", "bonds"]]:
 		var b := UIFactory.fantasy_button(panel_name[0])

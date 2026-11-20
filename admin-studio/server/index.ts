@@ -3,6 +3,8 @@ import express from "express";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -91,6 +93,88 @@ function updateManifestHashes(version: string) {
 function packageDir(version: string) {
   return path.join(PACKAGES, version);
 }
+
+// Read-only operational metrics. Session count is NOT a live presence count.
+const execFileAsync = promisify(execFile);
+async function sqlRead(query: string) {
+  const { stdout } = await execFileAsync("/usr/bin/docker", [
+    "exec", "lunex-afk-postgres-1", "psql", "-U", "lunex_afk", "-d", "lunex_afk",
+    "-X", "-A", "-t", "-c", query
+  ], { timeout: 5000, maxBuffer: 256000 });
+  return stdout.trim();
+}
+app.get("/api/operations/summary", async (_req, res) => {
+  try {
+    const [stats, players] = await Promise.all([
+      sqlRead(`SELECT json_build_object(
+        'accounts', (SELECT count(*) FROM accounts),
+        'guests', (SELECT count(*) FROM accounts WHERE is_guest),
+        'active_sessions', (SELECT count(*) FROM sessions WHERE expires_at > now() AND revoked_at IS NULL),
+        'online_2min', (SELECT count(*) FROM player_profiles WHERE last_seen_at > now() - interval '2 minutes'),
+        'sessions_24h', (SELECT count(*) FROM sessions WHERE expires_at > now() AND revoked_at IS NULL),
+        'db_time', now()
+      )::text`),
+      sqlRead(`SELECT coalesce(json_agg(row_to_json(t)), '[]'::json)::text FROM (
+        SELECT a.id, a.is_guest, a.status, a.created_at, a.email,
+          coalesce(pp.nickname,'') AS nickname, coalesce(pp.level,1) AS level, coalesce(pp.xp,0) AS xp, pp.last_seen_at,
+          coalesce((SELECT amount FROM wallet_balances w WHERE w.account_id=a.id AND resource_id='gold'),0) AS gold,
+          coalesce((SELECT amount FROM wallet_balances w WHERE w.account_id=a.id AND resource_id='diamonds'),0) AS diamonds,
+          (SELECT count(*) FROM heroes_owned h WHERE h.account_id=a.id) AS hero_count,
+          (SELECT current_stage FROM campaign_progress c WHERE c.account_id=a.id) AS stage
+        FROM accounts a LEFT JOIN player_profiles pp ON pp.account_id=a.id ORDER BY a.created_at DESC LIMIT 100
+      ) t`)
+    ]);
+    res.setHeader("Cache-Control", "no-store");
+    res.json({ ok: true, stats: JSON.parse(stats), profiles: JSON.parse(players),
+      online_note: "Онлайн = игроки с heartbeat за последние 2 минуты. Действующие сессии отдельно и не равны онлайн.",
+      edit_note: "Изменения сохраняются транзакционно с журналом аудита. Доступ защищён паролем админки." });
+  } catch (err) {
+    res.status(503).json({ ok: false, error: "metrics_unavailable" });
+  }
+});
+
+app.patch("/api/operations/profiles/:id", async (req, res) => {
+  const id = String(req.params.id || "");
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return res.status(400).json({error:"bad_id"});
+  const body = req.body ?? {};
+  const allowed = ["nickname","level","xp","gold","diamonds"];
+  if (Object.keys(body).length === 0 || Object.keys(body).some(k=>!allowed.includes(k)))
+    return res.status(400).json({error:"bad_fields"});
+  if (body.nickname !== undefined && (typeof body.nickname !== "string" || body.nickname.trim().length < 2 || body.nickname.length > 24 || /[\x00-\x1f]/.test(body.nickname)))
+    return res.status(400).json({error:"bad_nickname"});
+  for (const key of ["level","xp","gold","diamonds"]) {
+    if (body[key] !== undefined && (!Number.isSafeInteger(body[key]) || body[key] < (key==="level"?1:0) || body[key] > (key==="level"?200:1000000000000)))
+      return res.status(400).json({error:"bad_"+key});
+  }
+  const quote = (v: string) => "'" + v.replace(/'/g,"''") + "'";
+  const assignments: string[] = [];
+  for(const key of ["nickname","level","xp"]) if(body[key]!==undefined)
+    assignments.push(key+"="+(key==="nickname"?quote(body[key].trim()):String(body[key])));
+  const profileUpdate = assignments.length ? "UPDATE player_profiles SET "+assignments.join(",")+" WHERE account_id="+quote(id)+"::uuid;" : "";
+  const walletUpdates = ["gold","diamonds"].filter(k=>body[k]!==undefined).map(k=>
+    `INSERT INTO wallet_balances(account_id,resource_id,amount,version) VALUES (${quote(id)}::uuid,${quote(k)},${body[k]},1)
+     ON CONFLICT(account_id,resource_id) DO UPDATE SET amount=EXCLUDED.amount,version=wallet_balances.version+1;
+     INSERT INTO wallet_ledger(account_id,resource_id,delta,source_type,source_id,idempotency_key)
+     SELECT ${quote(id)}::uuid,${quote(k)},${body[k]}-coalesce((before_json->>'${k}')::bigint,0),'admin_adjustment','admin_studio',${quote(crypto.randomUUID())}
+     FROM admin_profile_audit WHERE id=(SELECT max(id) FROM admin_profile_audit WHERE account_id=${quote(id)}::uuid);`).join("\n");
+  // Transaction uses row lock to serialize administrative edits. The audit row captures both snapshots.
+  const before = `SELECT json_build_object('nickname',p.nickname,'level',p.level,'xp',p.xp,
+    'gold',coalesce((SELECT amount FROM wallet_balances WHERE account_id=p.account_id AND resource_id='gold'),0),
+    'diamonds',coalesce((SELECT amount FROM wallet_balances WHERE account_id=p.account_id AND resource_id='diamonds'),0)) FROM player_profiles p WHERE p.account_id=${quote(id)}::uuid`;
+  const after = before;
+  const sql = `BEGIN;
+    SELECT account_id FROM player_profiles WHERE account_id=${quote(id)}::uuid FOR UPDATE;
+    INSERT INTO admin_profile_audit(account_id,action,before_json,after_json) SELECT ${quote(id)}::uuid,'profile_edit',(${before}), '{}'::jsonb WHERE EXISTS(SELECT 1 FROM player_profiles WHERE account_id=${quote(id)}::uuid);
+    ${profileUpdate}
+    ${walletUpdates}
+    UPDATE admin_profile_audit SET after_json=(${after}) WHERE id=(SELECT max(id) FROM admin_profile_audit WHERE account_id=${quote(id)}::uuid);
+    COMMIT;`;
+  try {
+    const {stderr} = await execFileAsync("/usr/bin/docker",["exec","lunex-afk-postgres-1","psql","-v","ON_ERROR_STOP=1","-U","lunex_afk","-d","lunex_afk","-X","-q","-c",sql],{timeout:7000,maxBuffer:200000});
+    if(stderr && /ERROR:/.test(stderr)) throw Error("sql_error");
+    res.setHeader("Cache-Control","no-store");res.json({ok:true});
+  } catch {res.status(503).json({error:"edit_failed"});}
+});
 
 app.get("/api/health", (_req, res) => {
   res.json({

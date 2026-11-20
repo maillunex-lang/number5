@@ -22,7 +22,7 @@ func _build_filters() -> void:
 	var sorts := [["power", "Сила"], ["level", "Ур."], ["rarity", "Редк."], ["name", "Имя"]]
 	for s in sorts:
 		var b := UIFactory.fantasy_button(s[1], 44)
-		b.custom_minimum_size = Vector2(120, 44)
+		b.custom_minimum_size = Vector2(130, 72)
 		var key: String = s[0]
 		b.pressed.connect(func():
 			UIStateManager.hero_sort = key
@@ -35,7 +35,7 @@ func _build_filters() -> void:
 	if factions.size() == 1:
 		factions.append_array(["Стражи Клятвы", "Вольные Тропы", "Архив Предела", "Каменные Кузни", "Межвременные Тени", "Расколотые Хранители"])
 	var opt := OptionButton.new()
-	opt.custom_minimum_size = Vector2(260, 44)
+	opt.custom_minimum_size = Vector2(250, 72)
 	for f in factions:
 		opt.add_item("Все фракции" if f == "" else f)
 	opt.item_selected.connect(func(i):
@@ -53,13 +53,13 @@ func _refresh() -> void:
 	for c in _portrait_host.get_children():
 		c.queue_free()
 	if not hero.is_empty():
-		var port := UIFactory.hero_portrait(hero.tint, Vector2(220, 280))
+		var port := UIFactory.hero_portrait(hero.tint, Vector2(180, 240))
 		port.set_anchors_preset(Control.PRESET_CENTER)
-		port.position = Vector2(40, 10)
+		port.position = Vector2(22, 10)
 		_portrait_host.add_child(port)
 		# gentle idle bob
 		if ThemeManager.parallax_enabled:
-			var tw := create_tween().set_loops()
+			var tw := port.create_tween().set_loops()
 			tw.tween_property(port, "position:y", port.position.y - 6, 1.0)
 			tw.tween_property(port, "position:y", port.position.y, 1.0)
 		for c in _info.get_children():
@@ -69,16 +69,20 @@ func _refresh() -> void:
 		_info.add_child(UIFactory.label("Ур.%d  ★%d  Сила %d" % [hero.level, hero.stars, hero.power], 24, LunexColors.GOLD))
 	for c in _grid.get_children():
 		c.queue_free()
+	var available_width: float = maxf(_grid.size.x, get_viewport_rect().size.x - 24.0)
+	var cell_width: float = floorf((available_width - 24.0) / 3.0)
 	var list := DemoData.get_filtered_heroes(UIStateManager.hero_filter_faction, UIStateManager.hero_filter_rarity, UIStateManager.hero_filter_class, UIStateManager.hero_search, UIStateManager.hero_sort)
 	for h in list:
 		var cell := Button.new()
-		cell.custom_minimum_size = Vector2(200, 220)
+		cell.custom_minimum_size = Vector2(cell_width, 286)
 		cell.toggle_mode = true
 		cell.button_pressed = h.id == selected_id
 		var v := UIFactory.vbox(6)
 		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		v.alignment = BoxContainer.ALIGNMENT_CENTER
 		cell.add_child(v)
-		var mini := UIFactory.hero_portrait(h.tint, Vector2(120, 140))
+		var mini := UIFactory.hero_portrait(h.tint, Vector2(145, 165))
 		mini.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(mini)
 		var nm := UIFactory.label(str(h.name), 20, LunexColors.TEXT_PRIMARY)

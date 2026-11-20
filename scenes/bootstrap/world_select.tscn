@@ -64,9 +64,11 @@ text = "Мета"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="WorldBtn" type="Button" parent="Safe/VBox"]
+[node name="WorldBtn" type="Label" parent="Safe/VBox"]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 text = "Мир"
 
 [node name="EnterBtn" type="Button" parent="Safe/VBox"]

@@ -17,7 +17,7 @@ func _rebuild() -> void:
 		c.queue_free()
 	root.add_child(UIFactory.section_header("Менеджер отрядов"))
 	root.add_child(UIFactory.label("Сила отряда: %d" % DemoData.squad_power(), 28, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("Выберите слот, затем героя. Демо-пресеты локальные.", 22))
+	root.add_child(UIFactory.muted("Выберите слот, затем героя. Состав отряда хранится на сервере. Изменение состава пока недоступно.", 22))
 	var slots := UIFactory.hbox(8)
 	root.add_child(slots)
 	for i in 5:
@@ -41,10 +41,7 @@ func _rebuild() -> void:
 	for p in DemoData.squad_presets:
 		var pb := UIFactory.fantasy_button(str(p.name), 52)
 		var pid: String = p.id
-		pb.pressed.connect(func():
-			DemoData.apply_preset(pid)
-			NotificationManager.success("Пресет «%s» применён" % p.name)
-		)
+		pb.disabled = true
 		prow.add_child(pb)
 	root.add_child(UIFactory.title("Герои", 28))
 	var grid := GridContainer.new()
@@ -57,10 +54,7 @@ func _rebuild() -> void:
 		b.custom_minimum_size = Vector2(200, 100)
 		b.text = "%s\n%d" % [h.name, h.power]
 		var hid: String = h.id
-		b.pressed.connect(func():
-			DemoData.set_squad_slot(_selected_slot, hid)
-			NotificationManager.info("%s → слот %d" % [h.name, _selected_slot + 1])
-		)
+		b.disabled = true
 		grid.add_child(b)
 	var back := UIFactory.fantasy_button("Назад")
 	back.pressed.connect(func(): ScreenRouter.handle_back())

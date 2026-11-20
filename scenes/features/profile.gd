@@ -71,7 +71,7 @@ func _build_self(root: VBoxContainer, pack: Dictionary, demo: Dictionary) -> voi
 	if demo.has("guild_tag"):
 		root.add_child(UIFactory.label("Гильдия [%s]" % str(demo["guild_tag"]), 22, LunexColors.CYAN))
 	root.add_child(UIFactory.muted("Email / VIP / платежи скрыты по умолчанию", 16))
-	var nick := pack.get("nickname", {})
+	var nick: Dictionary = pack.get("nickname", {})
 	root.add_child(UIFactory.muted("Ник %s–%s · rename бесплатно раз в %s дн." % [
 		str(nick.get("min", 3)), str(nick.get("max", 18)), str(nick.get("free_renames_period_days", 30)),
 	], 16))

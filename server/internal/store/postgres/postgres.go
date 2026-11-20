@@ -86,6 +86,11 @@ func (s *Store) CreateGuest(starterHeroes []string) (domain.Account, domain.Sess
 	}
 	acc := domain.Account{ID: domain.AccountID(id), IsGuest: true, Status: "active", CreatedAt: now}
 
+	_, err = tx.Exec(ctx, `INSERT INTO player_profiles(account_id,nickname,level,xp) VALUES ($1::uuid,'Гость-' || left($1::text,6),1,0)`, id)
+	if err != nil {
+		return domain.Account{}, domain.Session{}, err
+	}
+
 	tok := store.NewID("tok")
 	exp := now.Add(30 * 24 * time.Hour)
 	_, err = tx.Exec(ctx,
@@ -152,22 +157,22 @@ func (s *Store) CreateGuest(starterHeroes []string) (domain.Account, domain.Sess
 
 func (s *Store) AccountBySession(token string) (domain.Account, error) {
 	ctx := context.Background()
-	var id, status string
+	var id, status, email string
 	var isGuest bool
 	var created time.Time
 	err := s.pool.QueryRow(ctx, `
-		SELECT a.id::text, a.is_guest, a.status, a.created_at
+		SELECT a.id::text, COALESCE(a.email, ''), a.is_guest, a.status, a.created_at
 		FROM sessions sess
 		JOIN accounts a ON a.id = sess.account_id
 		WHERE sess.refresh_hash = $1 AND sess.revoked_at IS NULL AND sess.expires_at > now()`,
-		token).Scan(&id, &isGuest, &status, &created)
+		token).Scan(&id, &email, &isGuest, &status, &created)
 	if err != nil {
 		return domain.Account{}, store.ErrUnauthorized
 	}
 	if status != "active" {
 		return domain.Account{}, store.ErrUnauthorized
 	}
-	return domain.Account{ID: domain.AccountID(id), IsGuest: isGuest, Status: status, CreatedAt: created}, nil
+	return domain.Account{ID: domain.AccountID(id), Email: email, IsGuest: isGuest, Status: status, CreatedAt: created}, nil
 }
 
 func (s *Store) WalletBalances(accountID domain.AccountID) ([]domain.Balance, error) {
@@ -609,4 +614,28 @@ func (s *Store) GetStoreOrder(id string) (domain.StoreOrder, error) {
 		o.ConfirmedAt = &t
 	}
 	return o, nil
+}
+
+// TouchPresence records last authenticated activity without changing gameplay data.
+func (s *Store) TouchPresence(accountID domain.AccountID) error {
+	_, err := s.pool.Exec(context.Background(),
+		`INSERT INTO player_profiles(account_id,nickname,last_seen_at)
+      VALUES ($1::uuid, 'Гость-' || left($1::text,6), now())
+      ON CONFLICT(account_id) DO UPDATE SET last_seen_at=now()`, string(accountID))
+	return err
+}
+
+// ReadPlayerProfile is the server-owned commander identity.
+func (s *Store) ReadPlayerProfile(accountID domain.AccountID) (string, int, int64, error) {
+	var nickname string
+	var level int
+	var xp int64
+	err := s.pool.QueryRow(context.Background(),
+		`SELECT COALESCE(p.nickname, (CASE WHEN a.is_guest THEN 'Гость-' ELSE 'Игрок-' END) || left(a.id::text, 6)),
+		        COALESCE(p.level, 1), COALESCE(p.xp, 0)
+		   FROM accounts a
+		   LEFT JOIN player_profiles p ON p.account_id=a.id
+		  WHERE a.id=$1::uuid`,
+		string(accountID)).Scan(&nickname, &level, &xp)
+	return nickname, level, xp, err
 }

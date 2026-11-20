@@ -71,7 +71,7 @@ func _register_routes() -> void:
 	}
 
 func go(route_id: String, payload: Dictionary = {}, push_history: bool = true) -> void:
-	if _transition_busy:
+	if _transition_busy or (_shell and _shell.has_overlay() and route_id == _current):
 		return
 	var target: String = _registry.get(route_id, "")
 	if target.begins_with("tab:"):
@@ -123,6 +123,8 @@ func history_depth() -> int:
 
 ## NAV-FINAL-001 C
 func handle_back() -> void:
+	if _transition_busy:
+		return
 	if ModalManager.is_open():
 		ModalManager.close_top()
 		return
@@ -133,12 +135,14 @@ func handle_back() -> void:
 			var prev_target: String = _registry.get(prev, "")
 			if prev_target.begins_with("tab:"):
 				if _shell.has_method("close_overlay"):
+					_transition_busy = true
 					await _shell.close_overlay()
+					_transition_busy = false
 				switch_tab(prev_target.substr(4))
 			else:
-				# reopen previous overlay without growing history
-				if _shell.has_method("open_overlay"):
-					await _shell.open_overlay(prev, prev_target, {})
+				_transition_busy = true
+				await _shell.close_overlay()
+				_transition_busy = false
 				_current = prev
 				route_changed.emit(prev)
 		else:
@@ -149,7 +153,7 @@ func handle_back() -> void:
 	# On root tab — confirm exit
 	ModalManager.push_confirm(
 		"Выход",
-		"Закрыть Lunex AFK?\n(локальный прототип)",
+		"Закрыть Lunex AFK?",
 		func(): get_tree().quit(),
 		Callable(),
 		"exit_game"
@@ -161,4 +165,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func enter_game_shell() -> void:
+	if not ApiClient.has_session() or not ApiClient.online:
+		get_tree().change_scene_to_file("res://scenes/bootstrap/auth.tscn")
+		return
 	get_tree().change_scene_to_file("res://scenes/shell/game_shell.tscn")

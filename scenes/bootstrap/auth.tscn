@@ -11,20 +11,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.035, 0.06, 0.11, 1)
+color = Color(0.032, 0.055, 0.108, 1)
 mouse_filter = 2
 
-[node name="Sky" type="ColorRect" parent="."]
+[node name="TopGlow" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.55
-color = Color(0.1, 0.18, 0.3, 1)
+anchor_bottom = 0.43
+color = Color(0.086, 0.155, 0.257, 1)
 mouse_filter = 2
 
 [node name="Safe" type="MarginContainer" parent="."]
@@ -32,83 +32,96 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 72
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 48
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 92
 
-[node name="Brand" type="Label" parent="Safe"]
+[node name="Layout" type="VBoxContainer" parent="Safe"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.91, 0.772, 0.416, 1)
-theme_override_font_sizes/font_size = 56
+theme_override_constants/separation = 0
+
+[node name="TopSpace" type="Control" parent="Safe/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Brand" type="Label" parent="Safe/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.99, 0.833, 0.511, 1)
+theme_override_font_sizes/font_size = 70
 text = "LUNEX AFK"
 horizontal_alignment = 1
 
-[node name="News" type="Label" parent="Safe"]
+[node name="Subtitle" type="Label" parent="Safe/Layout"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.722, 0.753, 0.816, 1)
-theme_override_font_sizes/font_size = 22
-text = "Новости"
+theme_override_colors/font_color = Color(0.75, 0.8, 0.91, 1)
+theme_override_font_sizes/font_size = 25
+text = "БАШКОРТОСТАН: РАЗЛОМ ЭПОХ"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Card" type="PanelContainer" parent="Safe"]
+[node name="GapOne" type="Control" parent="Safe/Layout"]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-size_flags_vertical = 8
 
-[node name="VBox" type="VBoxContainer" parent="Safe/Card"]
+[node name="Card" type="PanelContainer" parent="Safe/Layout"]
 layout_mode = 2
-theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Safe/Card/VBox"]
+[node name="CardMargin" type="MarginContainer" parent="Safe/Layout/Card"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.957, 0.941, 0.902, 1)
-theme_override_font_sizes/font_size = 34
-text = "Вход командира"
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 38
+
+[node name="VBox" type="VBoxContainer" parent="Safe/Layout/Card/CardMargin"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="Safe/Layout/Card/CardMargin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 37
+text = "Добро пожаловать"
 horizontal_alignment = 1
 
-[node name="Status" type="Label" parent="Safe/Card/VBox"]
+[node name="Hint" type="Label" parent="Safe/Layout/Card/CardMargin/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.369, 0.745, 0.561, 1)
-theme_override_font_sizes/font_size = 22
-text = "Статус"
+theme_override_colors/font_color = Color(0.72, 0.77, 0.86, 1)
+theme_override_font_sizes/font_size = 23
+text = "Продолжи путешествие в онлайн-мире"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Email" type="LineEdit" parent="Safe/Card/VBox"]
-custom_minimum_size = Vector2(0, 56)
+[node name="Status" type="Label" parent="Safe/Layout/Card/CardMargin/VBox"]
 layout_mode = 2
-placeholder_text = "Email"
-alignment = 1
+theme_override_colors/font_color = Color(0.93, 0.76, 0.48, 1)
+theme_override_font_sizes/font_size = 23
+text = "Проверяем подключение к серверу..."
+horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="Pass" type="LineEdit" parent="Safe/Card/VBox"]
-custom_minimum_size = Vector2(0, 56)
+[node name="GuestBtn" type="Button" parent="Safe/Layout/Card/CardMargin/VBox"]
+custom_minimum_size = Vector2(0, 112)
 layout_mode = 2
-placeholder_text = "Пароль (не сохраняется)"
-alignment = 1
-secret = true
+text = "ИГРАТЬ ОНЛАЙН"
 
-[node name="LoginBtn" type="Button" parent="Safe/Card/VBox"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-text = "Войти (локальное демо)"
-
-[node name="GuestBtn" type="Button" parent="Safe/Card/VBox"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-text = "Гостевой вход"
-
-[node name="SettingsBtn" type="Button" parent="Safe/Card/VBox"]
-custom_minimum_size = Vector2(0, 52)
+[node name="SettingsBtn" type="Button" parent="Safe/Layout/Card/CardMargin/VBox"]
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 text = "Настройки"
 
-[node name="Legal" type="Label" parent="Safe/Card/VBox"]
+[node name="GapTwo" type="Control" parent="Safe/Layout"]
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.478, 0.518, 0.6, 1)
-theme_override_font_sizes/font_size = 18
-text = "v0.1.0 · Пароли не хранятся · Без реальных платежей"
+
+[node name="Legal" type="Label" parent="Safe/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.59, 0.67, 0.8, 1)
+theme_override_font_sizes/font_size = 21
+text = "v0.4.3 · Онлайн-игра · Без реальных платежей"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="BottomSpace" type="Control" parent="Safe/Layout"]
+layout_mode = 2
+size_flags_vertical = 3

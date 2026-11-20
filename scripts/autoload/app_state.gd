@@ -5,8 +5,8 @@ signal guest_entered(display_name: String)
 signal graphics_changed(preset: String)
 signal currencies_changed
 
-const VERSION := "0.1.0"
-const BUILD_LABEL := "UI Prototype v0.1 (локальное демо)"
+const VERSION := "0.5.5"
+const BUILD_LABEL := "Lunex AFK v" + VERSION
 
 var is_guest: bool = true
 var display_name: String = "Странник"
@@ -14,11 +14,11 @@ var email_hint: String = "" # never store real passwords
 var world_id: String = "bashkortostan-razlom-1"
 var world_name: String = "Башкортостан: Разлом эпох"
 
-var level: int = 12
+var level: int = 1
 var vip_level: int = 0
-var gold: int = 12540
-var diamonds: int = 320
-var power: int = 48500
+var gold: int = 0
+var diamonds: int = 0
+var power: int = 0
 
 var session_active: bool = false
 var first_boot_done: bool = false
@@ -31,29 +31,15 @@ func enter_as_guest(name_override: String = "") -> void:
 	first_boot_done = true
 	guest_entered.emit(display_name)
 
-func enter_as_local_demo(email: String) -> void:
-	# Local prototype only — no real auth, no password storage.
-	is_guest = false
-	email_hint = email.strip_edges()
-	display_name = email_hint.split("@")[0] if "@" in email_hint else "Командир"
-	session_active = true
-	first_boot_done = true
-	guest_entered.emit(display_name)
-
 func logout() -> void:
 	session_active = false
 	is_guest = true
 	email_hint = ""
 	display_name = "Странник"
 
-func add_demo_rewards(g: int, d: int) -> void:
-	gold += g
-	diamonds += d
-	currencies_changed.emit()
+func add_demo_rewards(_g: int, _d: int) -> void:
+	push_warning("Local reward mutation disabled: server is authoritative")
 
-func spend_demo_gold(amount: int) -> bool:
-	if gold < amount:
-		return false
-	gold -= amount
-	currencies_changed.emit()
-	return true
+func spend_demo_gold(_amount: int) -> bool:
+	push_warning("Local wallet spending disabled: server is authoritative")
+	return false

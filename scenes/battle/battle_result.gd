@@ -1,5 +1,5 @@
 extends Control
-## COMBAT-03: итоги. Online → CORE-01 battle start/claim за награды; иначе демо.
+## COMBAT-03: итоги серверного боя, серверный claim по battle_id.
 
 var _payload: Dictionary = {}
 var _busy: bool = false
@@ -33,40 +33,24 @@ func _build() -> void:
 
 	root.add_child(UIFactory.title("Победа!", 48))
 
-	if ApiClient.online and sid != "":
-		root.add_child(UIFactory.label("Синхронизация наград с CORE-01…", 24, LunexColors.EMERALD))
-		var ok := await _claim_online(sid, root)
+	var bid := str(_payload.get("battle_id", ""))
+	if ApiClient.online and bid != "":
+		root.add_child(UIFactory.label("Подтверждение наград на сервере…", 24, LunexColors.EMERALD))
+		var ok := await _claim_online(bid, sid, root)
 		if ok:
 			_add_nav(root)
 			return
-		root.add_child(UIFactory.muted("Сервер недоступен · локальные демо-награды.", 20))
-
-	root.add_child(UIFactory.label("Отряд одержал победу в локальной симуляции.", 26, LunexColors.EMERALD))
-	var rewards := ["Золото ×1200", "Опыт героев", "Осколок ×5"]
-	AppState.add_demo_rewards(1200, 5)
-	for s in DemoData.campaign_progress["stages"]:
-		if s.id == sid:
-			s.state = "cleared"
-	ModalManager.push_rewards("Награды (DEMO)", rewards)
-	root.add_child(UIFactory.muted("Онлайн-награды — при сессии CORE-01.", 22))
+		root.add_child(UIFactory.muted("Не удалось подтвердить результат на сервере. Награды не выданы.", 22))
+	else:
+		root.add_child(UIFactory.muted("Нет онлайн-сессии. Награды не выданы.", 22))
 	_add_nav(root)
 
-func _claim_online(sid: String, root: VBoxContainer) -> bool:
+func _claim_online(bid: String, sid: String, root: VBoxContainer) -> bool:
 	if _busy:
 		return false
 	_busy = true
-	var start := await ApiClient.battle_start(sid)
-	if start.get("ok", false) != true:
-		_busy = false
-		return false
-	var data: Dictionary = start.get("data", {})
-	if not bool(data.get("victory", false)):
-		root.add_child(UIFactory.label("Сервер зафиксировал поражение — награды не выданы.", 22, LunexColors.TEXT_DANGER))
-		_busy = false
-		return true
-	var bid := str(data.get("battle_id", ""))
 	var claim := await ApiClient.battle_claim(bid)
-	if claim.get("ok", false) != true:
+	if not claim.get("ok", false):
 		_busy = false
 		return false
 	var crewards: Dictionary = claim.get("data", {}).get("rewards", {})
@@ -74,15 +58,19 @@ func _claim_online(sid: String, root: VBoxContainer) -> bool:
 	for k in crewards.keys():
 		lines.append("%s ×%s" % [str(k), str(crewards[k])])
 	if lines.is_empty():
-		lines.append("Повторная зачистка · без first-clear")
+		lines.append("Повторное прохождение")
 	await ApiClient.sync_wallet()
-	var prog: Dictionary = claim.get("data", {}).get("progress", {})
-	if prog.has("current_stage"):
-		DemoData.campaign_progress["current_stage"] = str(prog["current_stage"])
-	for s in DemoData.campaign_progress["stages"]:
-		if s.id == sid:
-			s.state = "cleared"
-	root.add_child(UIFactory.label("Награды с сервера (first-clear / claim).", 26, LunexColors.EMERALD))
+	var campaign := await ApiClient.get_campaign()
+	if campaign.get("ok", false):
+		var prog: Dictionary = campaign.get("data", {})
+		DemoData.campaign_progress["current_stage"] = str(prog.get("current_stage", ""))
+		var cleared: Dictionary = {}
+		for st in prog.get("cleared", []):
+			cleared[str(st.get("StageID", st.get("stage_id", "")))] = true
+		for st in DemoData.campaign_progress.get("stages", []):
+			var stage_key := str(st.get("id", ""))
+			st["state"] = "cleared" if cleared.has(stage_key) else ("current" if stage_key == DemoData.campaign_progress["current_stage"] else "locked")
+	root.add_child(UIFactory.label("Награды подтверждены сервером.", 26, LunexColors.EMERALD))
 	ModalManager.push_rewards("Награды (ONLINE)", lines)
 	root.add_child(UIFactory.muted("battle_id %s · CORE-01" % bid, 18))
 	_busy = false

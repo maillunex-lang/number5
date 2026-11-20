@@ -22,17 +22,17 @@
     "show_shell": true
   },
   "side_rail_layout": {
-    "offset_right": 12,
-    "offset_top": 12,
+    "offset_right": 25,
+    "offset_top": 90,
     "button_size": 64,
-    "gap": 10
+    "gap": 15
   },
   "buildings": [
     {
       "id": "summon",
       "name": "Алтарь призыва",
-      "x": 540,
-      "y": 380,
+      "x": 558,
+      "y": 1465,
       "route": "HUB-01",
       "locked": false,
       "req": "",
@@ -45,8 +45,8 @@
     {
       "id": "guild",
       "name": "Гильдия",
-      "x": 220,
-      "y": 280,
+      "x": 570,
+      "y": 854,
       "route": "HUB-05",
       "locked": false,
       "req": "",
@@ -59,8 +59,8 @@
     {
       "id": "shop",
       "name": "Торговая площадь",
-      "x": 780,
-      "y": 620,
+      "x": 555,
+      "y": 1134,
       "route": "HUB-06",
       "locked": false,
       "req": "",
@@ -73,8 +73,8 @@
     {
       "id": "tower",
       "name": "Башня испытаний",
-      "x": 820,
-      "y": 180,
+      "x": 598,
+      "y": 618,
       "route": "TOWER",
       "locked": false,
       "req": "",
@@ -90,8 +90,8 @@
     {
       "id": "quests",
       "name": "Доска заданий",
-      "x": 300,
-      "y": 760,
+      "x": 236,
+      "y": 650,
       "route": "HUB-03",
       "locked": false,
       "req": "",
@@ -104,8 +104,8 @@
     {
       "id": "afk",
       "name": "AFK-сокровищница",
-      "x": 540,
-      "y": 1100,
+      "x": 846,
+      "y": 1695,
       "route": "HUB-02",
       "locked": false,
       "req": "",
@@ -118,8 +118,8 @@
     {
       "id": "workshop",
       "name": "Мастерская",
-      "x": 240,
-      "y": 1280,
+      "x": 520,
+      "y": 1723,
       "route": "WORKSHOP",
       "locked": true,
       "req": "Откроется на 20 уровне командира",

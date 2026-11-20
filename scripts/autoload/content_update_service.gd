@@ -35,6 +35,7 @@ var _http: HTTPRequest
 var _queue: Array[Dictionary] = []
 var _current: Dictionary = {}
 var _pending_version: String = ""
+var _pending_slot: int = 0
 var _pending_meta: Dictionary = {}
 var _done: int = 0
 var _total: int = 0
@@ -141,13 +142,13 @@ func _on_request_completed(result: int, code: int, _headers: PackedStringArray, 
 	var kind := str(_current.get("kind", ""))
 	var optional := bool(_current.get("optional", false))
 	if result != HTTPRequest.RESULT_SUCCESS or code < 200 or code >= 300:
-		if optional and kind == "file":
+		if optional and kind == "file" and result == HTTPRequest.RESULT_SUCCESS and code == 404:
 			# Старые пакеты без schema 3/4 файлов — пустой объект, загрузчик терпит.
 			var opt_name := str(_current.get("file", "optional.json"))
-			_write_text(
-				"user://content_cache/packages/%s/%s" % [_pending_version, opt_name],
-				"{}\n"
-			)
+			var path := "%s/%s" % [_pending_cache_path(), opt_name]
+			if not _write_text(path, "{}\n"):
+				_fail("Не удалось записать %s" % path)
+				return
 			_done += 1
 			update_progress.emit(_done, _total, opt_name)
 			_pump()
@@ -180,12 +181,15 @@ func _handle_active(body: PackedByteArray) -> void:
 	var local_active := _read_json(CACHE_ACTIVE)
 	var same_ver := remote_version == ContentPackageLoader.version
 	var same_pub := str(data.get("published_at", "")) != "" and str(data.get("published_at", "")) == str(local_active.get("published_at", ""))
-	if same_ver and same_pub and ContentPackageLoader.from_cache:
+	# Re-download caches marked active by older clients after an incomplete write.
+	var cache_is_complete := bool(local_active.get("validated", false))
+	if same_ver and same_pub and ContentPackageLoader.from_cache and cache_is_complete:
 		_pending_version = ""
 		_finish_ok("Актуальный пакет %s" % remote_version)
 		return
-	_ensure_dir("user://content_cache/packages/%s" % remote_version)
 	_pending_version = remote_version
+	_pending_slot = 0 if int(local_active.get("slot", -1)) != 0 else 1
+	_ensure_dir(_pending_cache_path())
 	# Сначала manifest — из него список файлов (schema 2/3, в т.ч. enemies.json).
 	_done = 0
 	_total = 1
@@ -205,19 +209,25 @@ func _handle_manifest(body: PackedByteArray) -> void:
 	if typeof(data) != TYPE_DICTIONARY:
 		_fail("Некорректный manifest с CDN")
 		return
-	_write_text("user://content_cache/packages/%s/manifest.json" % _pending_version, raw + "\n")
+	var manifest_path := "%s/manifest.json" % _pending_cache_path()
+	if not _write_text(manifest_path, raw + "\n"):
+		_fail("Не удалось записать %s" % manifest_path)
+		return
 	var files: Array = DOC_FILES.duplicate()
 	var listed: Dictionary = data.get("files", {})
+	var required_files: Array[String] = []
 	for key in listed.keys():
 		var fname := str(key)
 		if not fname.ends_with(".json"):
 			fname = "%s.json" % fname
+		required_files.append(fname)
 		if fname not in files:
 			files.append(fname)
 	# integrity.hashes — полный список документов пакета
 	var hashes: Dictionary = data.get("integrity", {}).get("hashes", {})
 	for key in hashes.keys():
 		var fname := str(key)
+		required_files.append(fname)
 		if fname not in files:
 			files.append(fname)
 	files.erase("manifest.json")
@@ -228,7 +238,7 @@ func _handle_manifest(body: PackedByteArray) -> void:
 			"kind": "file",
 			"file": fname,
 			"url": "%s/packages/%s/%s" % [cdn_base, remote_version, fname],
-			"optional": fname in [
+			"optional": fname not in required_files and fname in [
 				"enemies.json", "economy.json", "progression.json", "equipment.json",
 				"loot_tables.json", "gacha.json", "liveops.json", "pve_modes.json", "guilds.json",
 				"mail.json", "login_calendars.json", "profile.json", "achievements.json",
@@ -240,21 +250,19 @@ func _handle_manifest(body: PackedByteArray) -> void:
 func _handle_file(body: PackedByteArray) -> void:
 	var fname := str(_current.get("file", "file.json"))
 	var raw := body.get_string_from_utf8().strip_edges()
-	if fname.ends_with(".json") and not raw.begins_with("{") and not raw.begins_with("["):
+	if fname.ends_with(".json") and typeof(JSON.parse_string(raw)) != TYPE_DICTIONARY:
 		_fail("CDN вернул не JSON для %s" % fname)
 		return
-	var dest := "user://content_cache/packages/%s/%s" % [_pending_version, fname]
-	var f := FileAccess.open(dest, FileAccess.WRITE)
-	if f == null:
+	var dest := "%s/%s" % [_pending_cache_path(), fname]
+	if not _write_text(dest, raw + "\n"):
 		_fail("Не удалось записать %s" % dest)
 		return
-	f.store_string(raw + "\n")
 	_done += 1
 	update_progress.emit(_done, _total, fname)
 	_pump()
 
 func _finish_apply() -> void:
-	var ok := ContentPackageLoader.apply_cached_active(_pending_version, _pending_meta)
+	var ok := ContentPackageLoader.apply_cached_active(_pending_version, _pending_meta, _pending_slot)
 	if not ok:
 		_fail("Пакет скачан, но не загрузился")
 		return
@@ -289,6 +297,9 @@ func _fail(msg: String) -> void:
 	NotificationManager.warn(msg)
 	push_warning("ContentUpdate: " + msg)
 
+func _pending_cache_path() -> String:
+	return "%s/%s-%d" % [ContentPackageLoader.CACHE_ROOT, _pending_version, _pending_slot]
+
 func _ensure_dir(user_path: String) -> void:
 	var abs := ProjectSettings.globalize_path(user_path)
 	DirAccess.make_dir_recursive_absolute(abs)
@@ -307,7 +318,10 @@ func _write_json(path: String, data: Dictionary) -> void:
 	if f:
 		f.store_string(JSON.stringify(data, "  ") + "\n")
 
-func _write_text(path: String, text: String) -> void:
+func _write_text(path: String, text: String) -> bool:
 	var f := FileAccess.open(path, FileAccess.WRITE)
-	if f:
-		f.store_string(text)
+	if f == null:
+		return false
+	var written := f.store_string(text)
+	f.close()
+	return written

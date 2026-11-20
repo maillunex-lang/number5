@@ -17,7 +17,7 @@ func _on_progress(done: int, total: int, label: String) -> void:
 func _on_done() -> void:
 	_label.text = "Готово"
 	await get_tree().create_timer(0.2).timeout
-	if AppState.session_active:
-		get_tree().change_scene_to_file("res://scenes/bootstrap/world_select.tscn")
+	if AppState.session_active and ApiClient.has_session() and ApiClient.online:
+		ScreenRouter.enter_game_shell()
 	else:
 		get_tree().change_scene_to_file("res://scenes/bootstrap/auth.tscn")

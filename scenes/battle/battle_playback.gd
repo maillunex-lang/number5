@@ -1,5 +1,5 @@
 extends Control
-## COMBAT-02: локальная демо-симуляция автобоя 5v5 (не серверная система)
+## COMBAT-02: клиентская анимация; результат и награды определяет сервер.
 
 var _payload: Dictionary = {}
 var _allies: Array[Dictionary] = []
@@ -50,12 +50,12 @@ func _ready() -> void:
 		_pause_btn.text = "▶" if _paused else "⏸"
 	)
 	$HUD/Controls/ExitBtn.pressed.connect(func():
-		ModalManager.push_confirm("Выйти из боя?", "Демо-бой будет прерван.", func():
+		ModalManager.push_confirm("Выйти из боя?", "Награды не будут получены.", func():
 			_finished = true
 			ScreenRouter.go("COMBAT-03", {"victory": false, "aborted": true})
 		)
 	)
-	_hud_top.text = "Демо-бой · %s · x%.0f" % [stage_id, _speed]
+	_hud_top.text = "Бой · %s · x%.0f" % [stage_id, _speed]
 
 func _spawn_units() -> void:
 	for c in _field.get_children():
@@ -129,7 +129,7 @@ func _cycle_speed() -> void:
 	else:
 		_speed = 1.0
 	_speed_btn.text = "x%.0f" % _speed
-	_hud_top.text = "Демо-бой · x%.0f" % _speed
+	_hud_top.text = "Бой · x%.0f" % _speed
 
 func _process(delta: float) -> void:
 	if _finished or _paused:
@@ -245,7 +245,8 @@ func _finish(victory: bool) -> void:
 	_finished = true
 	await get_tree().create_timer(0.6 / _speed).timeout
 	ScreenRouter.go("COMBAT-03", {
-		"victory": victory,
+		"victory": bool(_payload.get("server_victory", false)),
+		"battle_id": str(_payload.get("battle_id", "")),
 		"stage_id": _payload.get("stage_id", ""),
 		"mode": _payload.get("mode", "campaign"),
 	})

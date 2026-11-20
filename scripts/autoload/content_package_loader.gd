@@ -59,6 +59,9 @@ func load_active_package() -> bool:
 
 func load_package(ver: String) -> bool:
 	var cache_base := "%s/%s" % [CACHE_ROOT, ver]
+	var active := _read_json(CACHE_ACTIVE)
+	if str(active.get("version", "")) == ver and active.has("slot"):
+		cache_base = "%s/%s-%d" % [CACHE_ROOT, ver, int(active["slot"])]
 	var bundled_base := "%s/%s" % [BUNDLED_ROOT, ver]
 	var base := bundled_base
 	from_cache = false
@@ -78,7 +81,7 @@ func load_package(ver: String) -> bool:
 		print("ContentPackage loaded: ", version, " from ", base, (" (OTA cache)" if from_cache else " (bundled)"))
 	return loaded
 
-func apply_cached_active(ver: String, meta: Dictionary = {}) -> bool:
+func apply_cached_active(ver: String, meta: Dictionary, slot: int) -> bool:
 	## После успешной загрузки OTA — записать указатель и перечитать пакет.
 	var dir := DirAccess.open("user://")
 	if dir:
@@ -86,11 +89,20 @@ func apply_cached_active(ver: String, meta: Dictionary = {}) -> bool:
 	var payload := {
 		"version": ver,
 		"source": "ota",
+		"validated": true,
+		"slot": slot,
 		"note": "Скачан с CDN. Прогресс игрока сюда не пишется.",
 		"published_at": str(meta.get("published_at", Time.get_datetime_string_from_system(true))),
 	}
-	_write_json(CACHE_ACTIVE, payload)
-	return load_package(ver)
+	var pending := CACHE_ACTIVE + ".tmp"
+	var f := FileAccess.open(pending, FileAccess.WRITE)
+	if f == null:
+		return false
+	var written := f.store_string(JSON.stringify(payload, "  ") + "\n")
+	f.close()
+	if not written or DirAccess.rename_absolute(pending, CACHE_ACTIVE) != OK:
+		return false
+	return load_package(ver) and from_cache
 
 func _load_docs(base: String) -> void:
 	manifest = _read_json("%s/manifest.json" % base)
