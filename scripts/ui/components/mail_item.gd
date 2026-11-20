@@ -40,24 +40,26 @@ func _ready() -> void:
 
 func set_mail(data: Dictionary) -> void:
 	mail_id = str(data.get("id", ""))
-	var status := str(data.get("status", "unread"))
-	var cat := str(data.get("category", ""))
-	var subject := str(data.get("subject", data.get("title", "")))
-	var mark := "●" if status == "unread" else ("✓" if status == "claimed" else "○")
+	var status: String = str(data.get("status", "unread"))
+	var cat: String = str(data.get("category", ""))
+	var subject: String = str(data.get("subject", data.get("title", "")))
+	var mark: String = "●" if status == "unread" else ("✓" if status == "claimed" else "○")
 	if _subject:
 		_subject.text = "%s [%s] %s" % [mark, cat, subject]
 	if _body:
 		_body.text = str(data.get("body", ""))
-	var atts: Array = data.get("attachments", [])
+	var atts: Array = data.get("attachments", []) as Array
 	if _atts:
 		if atts.is_empty():
 			_atts.text = "Без вложений"
 		else:
 			var parts: PackedStringArray = []
 			for a in atts:
+				if typeof(a) != TYPE_DICTIONARY:
+					continue
 				parts.append("%s×%s" % [str(a.get("resource_id", "")), str(a.get("amount", 0))])
 			_atts.text = ", ".join(parts)
-	var can_claim := (not atts.is_empty()) and status != "claimed"
+	var can_claim: bool = (not atts.is_empty()) and status != "claimed"
 	if _claim:
 		_claim.visible = can_claim
 	if _status:

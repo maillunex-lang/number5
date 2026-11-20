@@ -30,7 +30,7 @@ signal cancelled
 @onready var dynamic_host: VBoxContainer = $Pad/Col/DynamicHost
 
 func _ready() -> void:
-	theme_type_variation = &"PopupPanel"
+	theme_type_variation = &"GamePopupPanel"
 	if _title:
 		_title.text = title_text
 	if _body:

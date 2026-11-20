@@ -42,22 +42,22 @@ func _ready() -> void:
 
 func _bootstrap() -> void:
 	var stage_id: String = str(_payload.get("stage_id", UIStateManager.last_combat_context.get("stage_id", "s1_3")))
-	var battle_id := str(_payload.get("battle_id", UIStateManager.last_combat_context.get("battle_id", "")))
-	_timeline = _payload.get("timeline", [])
+	var battle_id: String = str(_payload.get("battle_id", UIStateManager.last_combat_context.get("battle_id", "")))
+	_timeline = _payload.get("timeline", []) as Array
 	_server_victory = bool(_payload.get("server_victory", false))
 
 	if battle_id != "" and ApiClient.online:
 		_server_mode = true
 		if _timeline.is_empty():
 			_hud_top.text = "Восстановление боя…"
-			var fetched := await ApiClient.battle_get(battle_id)
+			var fetched: Dictionary = await ApiClient.battle_get(battle_id)
 			if not fetched.get("ok", false):
 				NotificationManager.warn("Не удалось восстановить бой с сервера")
 				_finished = true
 				ScreenRouter.go("COMBAT-03", {"victory": false, "aborted": true, "battle_id": battle_id, "stage_id": stage_id})
 				return
-			var data: Dictionary = fetched.get("data", {})
-			_timeline = data.get("timeline", [])
+			var data: Dictionary = fetched.get("data", {}) as Dictionary
+			_timeline = data.get("timeline", []) as Array
 			_server_victory = bool(data.get("victory", false))
 			_payload["server_victory"] = _server_victory
 			_payload["battle_id"] = battle_id
@@ -107,14 +107,15 @@ func _apply_server_start(stage_id: String) -> bool:
 		if str(_timeline[i].get("type", "")) == "start":
 			_event_i = i + 1
 			break
-	var end_ev := _timeline[_timeline.size() - 1]
+	var end_raw: Variant = _timeline[_timeline.size() - 1]
+	var end_ev: Dictionary = end_raw if typeof(end_raw) == TYPE_DICTIONARY else {}
 	if str(end_ev.get("type", "")) == "end":
 		_server_victory = bool(end_ev.get("victory", _server_victory))
 	return true
 
 func _unit_from_snapshot(raw: Variant, side: String) -> Dictionary:
 	var u: Dictionary = raw if typeof(raw) == TYPE_DICTIONARY else {}
-	var max_hp := float(u.get("max_hp", u.get("hp", 1000)))
+	var max_hp: float = float(u.get("max_hp", u.get("hp", 1000)))
 	return {
 		"id": str(u.get("id", "")),
 		"name": str(u.get("name", u.get("id", "?"))),
@@ -130,7 +131,7 @@ func _unit_from_snapshot(raw: Variant, side: String) -> Dictionary:
 func _parse_tint(v: Variant) -> Color:
 	if typeof(v) == TYPE_COLOR:
 		return v
-	var s := str(v)
+	var s: String = str(v)
 	if s.begins_with("#"):
 		return Color(s)
 	return Color("888888")
@@ -236,8 +237,9 @@ func _process(delta: float) -> void:
 
 func _playback_tick() -> void:
 	while _event_i < _timeline.size():
-		var ev: Dictionary = _timeline[_event_i]
-		var t := float(ev.get("t", 0))
+		var ev_raw: Variant = _timeline[_event_i]
+		var ev: Dictionary = ev_raw if typeof(ev_raw) == TYPE_DICTIONARY else {}
+		var t: float = float(ev.get("t", 0))
 		if t > _time_s:
 			break
 		_apply_event(ev)
@@ -245,14 +247,14 @@ func _playback_tick() -> void:
 	_refresh_ui()
 
 func _apply_event(ev: Dictionary) -> void:
-	var typ := str(ev.get("type", ""))
+	var typ: String = str(ev.get("type", ""))
 	match typ:
 		"hit":
-			var target_id := str(ev.get("target", ""))
-			var actor_id := str(ev.get("actor", ""))
-			var dmg := float(ev.get("damage", 0))
-			var is_skill := bool(ev.get("skill", false))
-			var unit := _find_unit(target_id)
+			var target_id: String = str(ev.get("target", ""))
+			var actor_id: String = str(ev.get("actor", ""))
+			var dmg: float = float(ev.get("damage", 0))
+			var is_skill: bool = bool(ev.get("skill", false))
+			var unit: Dictionary = _find_unit(target_id)
 			if not unit.is_empty():
 				if ev.has("hp"):
 					unit.hp = float(ev.get("hp"))
@@ -261,12 +263,12 @@ func _apply_event(ev: Dictionary) -> void:
 				if unit.hp <= 0.0:
 					unit.alive = false
 					if _units_ui.has(target_id):
-						var view = _units_ui[target_id].get("unit_view")
+						var view: Variant = (_units_ui[target_id] as Dictionary).get("unit_view")
 						if view is BattleUnit:
 							(view as BattleUnit).set_dead(true)
 						else:
-							_units_ui[target_id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
-			var actor := _find_unit(actor_id)
+							(_units_ui[target_id] as Dictionary).root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+			var actor: Dictionary = _find_unit(actor_id)
 			if not actor.is_empty() and ev.has("energy"):
 				actor.energy = float(ev.get("energy"))
 			elif not actor.is_empty() and is_skill:
@@ -279,17 +281,17 @@ func _apply_event(ev: Dictionary) -> void:
 				tw.tween_property(_portraits, "modulate:a", 1.0, 0.2)
 			AudioManager.play_battle_hit()
 		"death":
-			var uid := str(ev.get("unit", ""))
-			var unit2 := _find_unit(uid)
+			var uid: String = str(ev.get("unit", ""))
+			var unit2: Dictionary = _find_unit(uid)
 			if not unit2.is_empty():
 				unit2.hp = 0.0
 				unit2.alive = false
 				if _units_ui.has(uid):
-					var view2 = _units_ui[uid].get("unit_view")
+					var view2: Variant = (_units_ui[uid] as Dictionary).get("unit_view")
 					if view2 is BattleUnit:
 						(view2 as BattleUnit).set_dead(true)
 					else:
-						_units_ui[uid].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+						(_units_ui[uid] as Dictionary).root.modulate = Color(0.3, 0.3, 0.3, 0.5)
 		"end":
 			_server_victory = bool(ev.get("victory", _server_victory))
 			_finish(_server_victory)
@@ -397,8 +399,8 @@ func _check_end_demo() -> void:
 			enemies_alive = true
 	if allies_alive and enemies_alive:
 		if _time_s > 90.0:
-			var ap := DemoData.squad_power()
-			var stage := DemoData.get_stage(str(_payload.get("stage_id", "")))
+			var ap: int = DemoData.squad_power()
+			var stage: Dictionary = DemoData.get_stage(str(_payload.get("stage_id", "")))
 			_finish(ap >= int(stage.get("power", 0)))
 		return
 	_finish(allies_alive)
@@ -407,7 +409,7 @@ func _finish(victory: bool) -> void:
 	if _finished:
 		return
 	_finished = true
-	var final_victory := victory
+	var final_victory: bool = victory
 	if _server_mode:
 		final_victory = _server_victory
 	await get_tree().create_timer(0.6 / _speed).timeout

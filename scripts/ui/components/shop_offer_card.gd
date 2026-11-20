@@ -40,16 +40,18 @@ func set_offer(offer: Dictionary) -> void:
 	if _title:
 		_title.text = str(offer.get("title", offer.get("name", title_text)))
 	if _desc:
-		var grants: Array = offer.get("grants", [])
+		var grants: Array = offer.get("grants", []) as Array
 		if grants.is_empty():
 			_desc.text = str(offer.get("description", offer.get("cta", "")))
 		else:
 			var parts: PackedStringArray = []
 			for g in grants:
+				if typeof(g) != TYPE_DICTIONARY:
+					continue
 				parts.append("%s×%s" % [str(g.get("resource_id", g.get("id", ""))), str(g.get("amount", 0))])
 			_desc.text = ", ".join(parts)
-	var payable := offer.get("payable_price_rub", offer.get("price_rub", 0))
-	var nominal := offer.get("nominal_price_rub", payable)
+	var payable: int = int(offer.get("payable_price_rub", offer.get("price_rub", 0)))
+	var nominal: int = int(offer.get("nominal_price_rub", payable))
 	if _price:
 		_price.text = "%s ₽ · к оплате %s ₽" % [str(nominal), str(payable)]
 	if _buy:

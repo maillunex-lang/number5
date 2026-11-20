@@ -67,11 +67,12 @@ func set_building(def: Dictionary, glow_strength: float = 0.45) -> void:
 	if typeof(c) != TYPE_COLOR:
 		c = Color(str(c))
 	_apply_style(c, locked, glow_strength)
-	var symbols := {
+	var symbols: Dictionary = {
 		"summon": "events", "guild": "social", "shop": "shop", "tower": "tower",
 		"quests": "quests", "afk": "rewards", "workshop": "tools", "portal": "expeditions",
 	}
-	var icon_path := "res://assets/ui/navigation/%s.svg" % symbols.get(building_id, "map")
+	var icon_key: String = str(symbols.get(building_id, "map"))
+	var icon_path: String = "res://assets/ui/navigation/%s.svg" % icon_key
 	if _symbol and ResourceLoader.exists(icon_path):
 		_symbol.texture = load(icon_path)
 	if _lock:

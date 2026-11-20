@@ -41,5 +41,5 @@ GameButton/styles/normal = ExtResource("1_btn_n")
 GameButton/styles/pressed = ExtResource("3_btn_p")
 GamePanel/base_type = &"PanelContainer"
 GamePanel/styles/panel = ExtResource("8_panel")
-PopupPanel/base_type = &"PanelContainer"
-PopupPanel/styles/panel = ExtResource("9_modal")
+GamePopupPanel/base_type = &"PanelContainer"
+GamePopupPanel/styles/panel = ExtResource("9_modal")
