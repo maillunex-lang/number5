@@ -70,13 +70,18 @@ jobs:
           go-version: "1.22"
       - run: go test ./...
       - run: go build -o /tmp/lunex-api ./cmd/api
-      - name: Health + content/active smoke
+      - name: Health + guest wallet smoke
         run: |
-          CONTENT_PACKAGES_ROOT="$GITHUB_WORKSPACE/content/packages" HTTP_ADDR=127.0.0.1:8080 /tmp/lunex-api &
+          CONTENT_PACKAGES_ROOT="$GITHUB_WORKSPACE/content/packages" APP_ENV=dev HTTP_ADDR=127.0.0.1:8080 /tmp/lunex-api &
           for i in 1 2 3 4 5 6 7 8 9 10; do
             if curl -fsS http://127.0.0.1:8080/api/v1/health >/tmp/core-health.json; then
               cat /tmp/core-health.json
               curl -fsS http://127.0.0.1:8080/api/v1/content/active
+              TOK=$(curl -fsS -X POST http://127.0.0.1:8080/api/v1/auth/guest | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+              curl -fsS -H "Authorization: Bearer $TOK" http://127.0.0.1:8080/api/v1/wallet
+              curl -fsS -X POST -H "Authorization: Bearer $TOK" -H "Content-Type: application/json" \
+                -d '{"resource_id":"gold","amount":1,"idempotency_key":"ci-1"}' \
+                http://127.0.0.1:8080/api/v1/wallet/grant-test
               exit 0
             fi
             sleep 1

@@ -208,7 +208,7 @@ content_bindings(account_id PK, package_version, schema)
 | Keystore | позже для APK-03, не блокер API |
 | OTA-2 | HTTPS CDN — параллельно, не блокер wallet |
 
-Пока доступов нет: скелет `server/` компилируется, тесты на `testing` + SQLite **не** использовать как прод-путь (только unit без PG). Интеграционные тесты — с Testcontainers/PG в CI после секретов.
+Пока Docker/VPS нет: `server/` работает на **in-memory** `store.Memory` (guest + wallet + idempotency). Это dev/CI путь, не прод. Postgres adapter подключится к тому же `store.Store` без смены HTTP-контракта. SQLite как прод-путь **не** используем.
 
 ---
 

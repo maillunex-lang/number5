@@ -2,18 +2,21 @@
 
 Спека: [`docs/TZ_A_FOUNDATION.md`](../docs/TZ_A_FOUNDATION.md).
 
-**Сейчас:** компилируемый каркас + health + migrate stub.  
-**Не является** игровым сервером прогресса, пока нет PostgreSQL-доступов и реализации модулей §4 TZ-A.
-
-## Запуск (когда есть PG)
+**Сейчас (dev):** in-memory store — `POST /auth/guest`, `GET /wallet`, `POST /wallet/grant-test` (idempotent).  
+**Позже:** Postgres adapter по тому же `store.Store` (нужен Docker/VPS).
 
 ```bash
 cd server
-cp .env.example .env   # DATABASE_URL=…
-go run ./cmd/api
+go test ./...
+CONTENT_PACKAGES_ROOT=../content/packages APP_ENV=dev go run ./cmd/api
 ```
 
-Docker Compose (локально):
+```bash
+curl -X POST http://127.0.0.1:8080/api/v1/auth/guest
+curl -H "Authorization: Bearer $TOK" http://127.0.0.1:8080/api/v1/wallet
+```
+
+Docker Compose (когда Docker доступен):
 
 ```bash
 docker compose up -d postgres
@@ -23,11 +26,10 @@ DATABASE_URL=postgres://lunex:lunex@127.0.0.1:5432/lunex?sslmode=disable go run 
 ## Структура
 
 ```
-cmd/api/          — HTTP entry
-internal/config/  — env
-internal/httpapi/ — routes, middleware
-internal/modules/ — auth, wallet, battle… (stubs)
-migrations/       — SQL
+cmd/api/            — HTTP entry
+internal/store/     — Store interface + memory
+internal/modules/   — auth, wallet, content…
+migrations/         — SQL stub for PG
 ```
 
 Admin Studio Express **не** заменяется этим сервисом.
