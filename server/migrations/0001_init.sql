@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS campaign_stages (
 );
 
 CREATE TABLE IF NOT EXISTS battle_instances (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id TEXT PRIMARY KEY,
   account_id UUID NOT NULL REFERENCES accounts(id),
   mode TEXT NOT NULL,
   stage_id TEXT NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS battle_instances (
 CREATE INDEX IF NOT EXISTS battle_account_idx ON battle_instances(account_id);
 
 CREATE TABLE IF NOT EXISTS battle_claims (
-  battle_id UUID PRIMARY KEY REFERENCES battle_instances(id),
+  battle_id TEXT PRIMARY KEY REFERENCES battle_instances(id),
   account_id UUID NOT NULL REFERENCES accounts(id),
   grant_ids_json JSONB NOT NULL DEFAULT '[]',
   claimed_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS afk_state (
 );
 
 CREATE TABLE IF NOT EXISTS mail_messages (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id TEXT PRIMARY KEY,
   account_id UUID NOT NULL REFERENCES accounts(id),
   template_id TEXT NOT NULL DEFAULT '',
   category TEXT NOT NULL DEFAULT 'system',
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS mail_messages (
 CREATE INDEX IF NOT EXISTS mail_account_idx ON mail_messages(account_id);
 
 CREATE TABLE IF NOT EXISTS store_orders (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  id TEXT PRIMARY KEY,
   account_id UUID NOT NULL REFERENCES accounts(id),
   sku TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',

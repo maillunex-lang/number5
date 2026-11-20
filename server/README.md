@@ -2,7 +2,7 @@
 
 Спека: [`docs/TZ_A_FOUNDATION.md`](../docs/TZ_A_FOUNDATION.md).
 
-**Сейчас:** in-memory store — полный MVP-срез TZ-A §4 (без Docker/Postgres).
+**Store:** memory по умолчанию; Postgres при `DATABASE_URL` (`internal/store/postgres` + `migrations/0001_init.sql`).
 
 | Метод | Путь |
 |---|---|
@@ -12,19 +12,19 @@
 | GET | `/api/v1/heroes/collection` |
 | GET/PUT | `/api/v1/formations/{mode}` |
 | GET | `/api/v1/campaign/progress` |
-| POST/GET | `/api/v1/battle/start` · `/api/v1/battle/{id}` · `…/claim` |
+| POST/GET | `/api/v1/battle/start` · `/battle/{id}` · `…/claim` |
 | GET/POST | `/api/v1/summon/banners` · `/pity` · `/roll` |
-| GET/POST | `/api/v1/afk` · `/api/v1/afk/claim` |
+| GET/POST | `/api/v1/afk` · `/afk/claim` |
 | GET/POST | `/api/v1/mail` · `/mail/{id}/claim` · `/mail/claim-all` |
-| GET/POST | `/api/v1/store/catalog` · `/orders` · `/orders/{id}/confirm-test` |
-| GET | `/api/v1/content/active` · `/api/v1/health` |
+| GET/POST | `/api/v1/store/catalog` · `/orders` · `…/confirm-test` |
+| GET | `/api/v1/content/active` · `/health` |
 
 ```bash
 cd server
 go test ./...
 CONTENT_PACKAGES_ROOT=../content/packages APP_ENV=dev go run ./cmd/api
+# optional:
+# DATABASE_URL=postgres://user:pass@localhost:5432/lunex?sslmode=disable go run ./cmd/api
 ```
 
-Клиент Godot: `ApiClient` → `LUNEX_API_BASE` или `http://127.0.0.1:8080`.
-
-Postgres: `migrations/0001_init.sql` + adapter на `store.Store` — после Docker/VPS.
+Клиент Godot: `ApiClient` → `LUNEX_API_BASE` или `http://127.0.0.1:8080` (fallback DEMO).

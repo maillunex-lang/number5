@@ -15,6 +15,7 @@ func setup(shell: Node) -> void:
 	_shop.pressed.connect(func(): ScreenRouter.go("HUB-06"))
 	_settings.pressed.connect(func(): ScreenRouter.go("SETTINGS-01"))
 	AppState.currencies_changed.connect(refresh)
+	ApiClient.wallet_synced.connect(refresh)
 	ContentPackageLoader.package_loaded.connect(func(_v):
 		_apply_shell_chrome()
 		refresh()
@@ -38,7 +39,8 @@ func _apply_shell_chrome() -> void:
 func refresh() -> void:
 	if _profile_btn == null:
 		return
-	_profile_btn.text = "%s  Lv.%d" % [AppState.display_name, AppState.level]
+	var online_mark := " · online" if ApiClient.online else ""
+	_profile_btn.text = "%s  Lv.%d%s" % [AppState.display_name, AppState.level, online_mark]
 	_gold.text = "◈ %s" % _fmt(AppState.gold)
 	_dia.text = "◆ %s" % _fmt(AppState.diamonds)
 	_vip.text = "VIP %d" % AppState.vip_level

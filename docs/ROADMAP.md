@@ -19,8 +19,8 @@ UI + Studio + OTA (dev) **не** заменяют сервер.
 | CONTENT-C канон + данные C0–C6, E/P/G, M→V | **Готово** | `docs/content/`, пакет `0.9.0` |
 | TZ-A | **Готово** | `docs/TZ_A_FOUNDATION.md` |
 | CORE-01 memory (auth…store) | **Готово** | `server/` |
-| Клиент → API (`ApiClient`) | **Готово** (fallback офлайн) | `scripts/autoload/api_client.gd` |
-| CORE-01 Postgres | **Блокер** Docker/VPS | `migrations/0001_init.sql` готов |
+| Клиент → API (`ApiClient`) | **Готово** (summon/AFK/shop/mail/battle) | `scripts/autoload/api_client.gd` |
+| CORE-01 Postgres adapter | **Код ✓** · runtime ждёт Docker/VPS | `store/postgres` + `DATABASE_URL` |
 | OTA-2 HTTPS CDN | **Блокер** хост | — |
 | ART-05 бинарный арт | **Блокер** ассеты | слоты в `0.9.0` |
 
@@ -51,14 +51,14 @@ UI + Studio + OTA (dev) **не** заменяют сервер.
 | OTA-1 | Hot-reload (dev) | **Готово** | Save→Publish→клиент |
 | CONTENT-C | Данные C0–C6 | **Готово** | active `0.9.0` |
 | TZ-A | ТЗ фундамента | **Готово** | `TZ_A_FOUNDATION.md` |
-| CORE-01 | Go API MVP | **Memory ✓** | auth…store + CI; **PG next** |
-| UI-02 | UI на реальных API | Частично | `ApiClient` guest/wallet; полный UI kit позже |
+| CORE-01 | Go API MVP | **Memory ✓** · PG adapter в коде | auth…store + CI; runtime PG ждёт хост |
+| UI-02 | UI на реальных API | **Готово** (основные экраны) | guest/summon/AFK/shop/mail/battle claim |
 | OTA-2 | Прод CDN HTTPS | Блокер хост | Публичный `cdn_base` |
 | ART-05 | GLB/спрайты/атласы | Блокер ассеты | Idle/Attack/Skill/Hit/Death |
-| AUTH-04 | Email + upgrade guest | После PG | Сохранение прогресса |
-| BATTLE-06 | Автобой 5v5 (прод) | Memory ✓ · PG next | Авторитетный claim |
-| RPG-07 | Развитие / призыв (прод) | Memory ✓ · PG next | Звёзды/pity на PG |
-| WORLD-08 | Кампания + AFK (прод) | Memory ✓ · PG next | Полный цикл на PG |
+| AUTH-04 | Email + upgrade guest | После живого PG | Сохранение прогресса |
+| BATTLE-06 | Автобой 5v5 (прод) | Memory ✓ · PG runtime | Авторитетный claim |
+| RPG-07 | Развитие / призыв (прод) | Memory ✓ · UI online | Звёзды/pity на PG |
+| WORLD-08 | Кампания + AFK (прод) | Memory ✓ · UI online | Полный цикл на PG |
 | PVE-09 | Башня/боссы/данжи | Каталог ✓ · сервер later | После PG battle |
 | ADMIN-10 | Прод-админка | Studio ✓ | HTTPS publish |
 | OPT-11 | CI/CD / качество | Частично | Android + iPhone/PWA |
@@ -84,7 +84,7 @@ UI + Studio + OTA (dev) **не** заменяют сервер.
 
 ## Ближайший порядок
 
-1. **Postgres adapter** для CORE-01 (**блокер:** Docker/VPS).
+1. **Живой Postgres** — Docker/VPS + `DATABASE_URL` (адаптер уже в репо).
 2. **ART-05** — бинарные webp/атласы в слоты `0.9.0`.
 3. **OTA-2** — HTTPS CDN (**блокер:** хост).
 

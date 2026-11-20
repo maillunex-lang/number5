@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"time"
 
 	"github.com/maillunex-lang/number5/server/internal/config"
 	"github.com/maillunex-lang/number5/server/internal/httpapi"
@@ -18,6 +21,7 @@ import (
 	"github.com/maillunex-lang/number5/server/internal/modules/summon"
 	"github.com/maillunex-lang/number5/server/internal/modules/wallet"
 	"github.com/maillunex-lang/number5/server/internal/store"
+	"github.com/maillunex-lang/number5/server/internal/store/postgres"
 )
 
 func main() {
@@ -26,34 +30,60 @@ func main() {
 	if err != nil {
 		log.Printf("warning: content catalog: %v (some modules may fail)", err)
 	}
-	mem := store.NewMemory(nil)
-	starter := []string{"H01", "H02", "H03", "H04", "H05"}
+	starterHeroes := []string{"H01", "H02", "H03", "H04", "H05"}
 	if cat != nil && len(cat.Heroes.DefaultSquad) > 0 {
-		starter = cat.Heroes.DefaultSquad
+		starterHeroes = cat.Heroes.DefaultSquad
 	}
 	cfgVer := "unknown"
 	if cat != nil {
 		cfgVer = cat.Version
 	}
+
+	st, storeName := openStore(cfg)
 	deps := httpapi.Deps{
-		Config: cfg,
-		Store:  mem,
-		Auth:   &auth.Service{Store: mem, StarterHeroes: starter},
-		Wallet: &wallet.Service{Store: mem, ConfigVersion: cfgVer, AllowTestGrant: cfg.AppEnv == "dev" || cfg.AppEnv == "test"},
-		Heroes: &heroes.Service{Store: mem},
-		Campaign: &campaign.Service{Store: mem},
+		Config:   cfg,
+		Store:    st,
+		Auth:     &auth.Service{Store: st, StarterHeroes: starterHeroes},
+		Wallet:   &wallet.Service{Store: st, ConfigVersion: cfgVer, AllowTestGrant: cfg.AppEnv == "dev" || cfg.AppEnv == "test"},
+		Heroes:   &heroes.Service{Store: st},
+		Campaign: &campaign.Service{Store: st},
 	}
 	if cat != nil {
-		deps.Battle = &battle.Service{Store: mem, Catalog: cat}
-		deps.Summon = &summon.Service{Store: mem, Catalog: cat}
-		deps.AFK = &afk.Service{Store: mem, Catalog: cat}
-		deps.Mail = &mail.Service{Store: mem, Catalog: cat}
-		deps.Shop = &shop.Service{Store: mem, Catalog: cat}
+		deps.Battle = &battle.Service{Store: st, Catalog: cat}
+		deps.Summon = &summon.Service{Store: st, Catalog: cat}
+		deps.AFK = &afk.Service{Store: st, Catalog: cat}
+		deps.Mail = &mail.Service{Store: st, Catalog: cat}
+		deps.Shop = &shop.Service{Store: st, Catalog: cat}
 	}
 	mux := httpapi.NewMux(deps)
-	log.Printf("lunex-api listening on %s (env=%s store=memory config=%s)", cfg.HTTPAddr, cfg.AppEnv, cfgVer)
+	log.Printf("lunex-api listening on %s (env=%s store=%s config=%s)", cfg.HTTPAddr, cfg.AppEnv, storeName, cfgVer)
 	if err := http.ListenAndServe(cfg.HTTPAddr, mux); err != nil {
 		log.Println(err)
 		os.Exit(1)
 	}
+}
+
+func openStore(cfg config.Config) (store.Store, string) {
+	if cfg.DatabaseURL == "" {
+		log.Printf("store: memory (set DATABASE_URL for postgres)")
+		return store.NewMemory(nil), "memory"
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 8*time.Second)
+	defer cancel()
+	pg, err := postgres.Open(ctx, cfg.DatabaseURL, nil)
+	if err != nil {
+		log.Printf("store: postgres unavailable (%v) · falling back to memory", err)
+		return store.NewMemory(nil), "memory"
+	}
+	mig := filepath.Join("migrations", "0001_init.sql")
+	if _, err := os.Stat(mig); err != nil {
+		mig = filepath.Join("..", "migrations", "0001_init.sql")
+	}
+	if err := pg.Migrate(ctx, mig); err != nil {
+		log.Printf("store: migrate failed (%v) · falling back to memory", err)
+		pg.Close()
+		return store.NewMemory(nil), "memory"
+	}
+	log.Printf("store: postgres")
+	return pg, "postgres"
 }

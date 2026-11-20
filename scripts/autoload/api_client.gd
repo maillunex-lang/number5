@@ -3,6 +3,7 @@ extends Node
 
 signal session_ready(token: String)
 signal request_failed(path: String, code: int, body: String)
+signal wallet_synced
 
 const DEFAULT_BASE := "http://127.0.0.1:8080"
 const TIMEOUT_SEC := 4.0
@@ -11,6 +12,7 @@ var base_url: String = DEFAULT_BASE
 var access_token: String = ""
 var online: bool = false
 var last_error: String = ""
+var _idem_seq: int = 0
 
 var _http: HTTPRequest
 
@@ -29,6 +31,10 @@ func clear_session() -> void:
 	access_token = ""
 	online = false
 
+func new_idem(prefix: String = "c") -> String:
+	_idem_seq += 1
+	return "%s_%d_%d_%d" % [prefix, Time.get_ticks_msec(), randi() % 100000, _idem_seq]
+
 ## Guest auth against CORE-01. Returns true on success.
 func guest_login() -> bool:
 	var res := await _request("POST", "/api/v1/auth/guest", {}, false)
@@ -41,7 +47,37 @@ func guest_login() -> bool:
 	online = access_token != ""
 	if online:
 		session_ready.emit(access_token)
+		await sync_wallet()
 	return online
+
+func sync_wallet() -> bool:
+	if not online:
+		return false
+	var res := await get_wallet()
+	if res.get("ok", false) != true:
+		return false
+	_apply_wallet(res.get("data", {}))
+	wallet_synced.emit()
+	return true
+
+func _apply_wallet(data: Variant) -> void:
+	if typeof(data) != TYPE_DICTIONARY:
+		return
+	var balances: Array = data.get("balances", [])
+	for b in balances:
+		if typeof(b) != TYPE_DICTIONARY:
+			continue
+		var rid := str(b.get("resource_id", ""))
+		var amt := int(b.get("amount", 0))
+		match rid:
+			"gold":
+				AppState.gold = amt
+			"diamonds":
+				AppState.diamonds = amt
+			"vip_xp":
+				# rough VIP display from xp buckets later; keep level if present
+				pass
+	AppState.currencies_changed.emit()
 
 func get_wallet() -> Dictionary:
 	return await _authed("GET", "/api/v1/wallet")
@@ -52,29 +88,75 @@ func get_heroes() -> Dictionary:
 func get_campaign() -> Dictionary:
 	return await _authed("GET", "/api/v1/campaign/progress")
 
-func battle_start(stage_id: String, idem: String) -> Dictionary:
+func battle_start(stage_id: String, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("bat")
 	return await _authed("POST", "/api/v1/battle/start", {
 		"stage_id": stage_id,
 		"idempotency_key": idem,
 	})
 
-func battle_claim(battle_id: String, idem: String) -> Dictionary:
+func battle_claim(battle_id: String, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("bcl")
 	return await _authed("POST", "/api/v1/battle/%s/claim" % battle_id, {
 		"idempotency_key": idem,
 	})
 
-func summon_roll(banner_id: String, count: int, idem: String) -> Dictionary:
+func summon_roll(banner_id: String, count: int, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("sum")
 	return await _authed("POST", "/api/v1/summon/roll", {
 		"banner_id": banner_id,
 		"count": count,
 		"idempotency_key": idem,
 	})
 
-func afk_claim(idem: String) -> Dictionary:
+func summon_pity() -> Dictionary:
+	return await _authed("GET", "/api/v1/summon/pity")
+
+func afk_status() -> Dictionary:
+	return await _authed("GET", "/api/v1/afk")
+
+func afk_claim(idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("afk")
 	return await _authed("POST", "/api/v1/afk/claim", {"idempotency_key": idem})
+
+func mail_list() -> Dictionary:
+	return await _authed("GET", "/api/v1/mail")
+
+func mail_claim(mail_id: String, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("mail")
+	return await _authed("POST", "/api/v1/mail/%s/claim" % mail_id, {
+		"idempotency_key": idem,
+	})
+
+func mail_claim_all(idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("mall")
+	return await _authed("POST", "/api/v1/mail/claim-all", {
+		"idempotency_key": idem,
+	})
 
 func store_catalog() -> Dictionary:
 	return await _authed("GET", "/api/v1/store/catalog")
+
+func store_order(sku: String, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("ord")
+	return await _authed("POST", "/api/v1/store/orders", {
+		"sku": sku,
+		"idempotency_key": idem,
+	})
+
+func store_confirm(order_id: String, idem: String = "") -> Dictionary:
+	if idem == "":
+		idem = new_idem("ocf")
+	return await _authed("POST", "/api/v1/store/orders/%s/confirm-test" % order_id, {
+		"idempotency_key": idem,
+	})
 
 func health() -> Dictionary:
 	return await _request("GET", "/api/v1/health", {}, false)
@@ -90,7 +172,8 @@ func _request(method: String, path: String, body: Dictionary, use_auth: bool) ->
 	if method != "GET" and not body.is_empty():
 		payload = JSON.stringify(body)
 	var url := base_url + path
-	var err := _http.request(url, headers, HTTPClient.METHOD_GET if method == "GET" else HTTPClient.METHOD_POST, payload)
+	var http_method := HTTPClient.METHOD_GET if method == "GET" else HTTPClient.METHOD_POST
+	var err := _http.request(url, headers, http_method, payload)
 	if err != OK:
 		last_error = "request_error_%d" % err
 		request_failed.emit(path, 0, last_error)

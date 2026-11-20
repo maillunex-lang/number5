@@ -1,5 +1,5 @@
 extends Control
-## HUB-01: алтарь призыва. DEMO sandbox по gacha.json; авторитетный RNG — только сервер.
+## HUB-01: алтарь призыва. Online → CORE-01 summon/roll; иначе локальный DEMO.
 
 var _payload: Dictionary = {}
 var _busy: bool = false
@@ -20,6 +20,9 @@ func _banner() -> Dictionary:
 		return banners[0]
 	return {}
 
+func _mode_label() -> String:
+	return "ONLINE · CORE-01" if ApiClient.online else "DEMO · локальный RNG"
+
 func _rebuild() -> void:
 	var root := $Safe/Scroll/VBox
 	for c in root.get_children():
@@ -28,10 +31,7 @@ func _rebuild() -> void:
 	var name := str(banner.get("name", ContentPackageLoader.features.get("summon", {}).get("banner", "Баннер")))
 	root.add_child(UIFactory.section_header(ContentPackageLoader.tr_key("summon.altar", "Алтарь призыва")))
 	root.add_child(UIFactory.label("Баннер: %s" % name, 26, LunexColors.GOLD))
-	root.add_child(UIFactory.muted("%s · %s" % [
-		ContentPackageLoader.package_label(),
-		str(ContentPackageLoader.gacha.get("disclaimer", "локальная демо-симуляция")),
-	], 18))
+	root.add_child(UIFactory.muted("%s · %s" % [ContentPackageLoader.package_label(), _mode_label()], 18))
 
 	var row_b := UIFactory.hbox(8)
 	root.add_child(row_b)
@@ -60,29 +60,17 @@ func _rebuild() -> void:
 		c1 = "%s ×%s" % [str(cost1[0].get("resource_id", "")), str(cost1[0].get("amount", 1))]
 	if cost10.size() > 0:
 		c10 = "%s ×%s" % [str(cost10[0].get("resource_id", "")), str(cost10[0].get("amount", 8))]
-	root.add_child(UIFactory.muted("×1: %s · ×10: %s (скидка 10→8)" % [c1, c10], 20))
+	root.add_child(UIFactory.muted("×1: %s · ×10: %s" % [c1, c10], 20))
 
 	var row := UIFactory.hbox(12)
 	root.add_child(row)
 	var info := UIFactory.fantasy_button("Шансы и pity")
-	info.pressed.connect(func():
-		ModalManager.push_info(
-			"Правила · %s" % name,
-			"N %s%% · R %s%% · SR %s%% · SSR %s%% · UR %s%%\nPity: %s\nГарантия ×10: SR+\nДемо — серверный RNG позже." % [
-				str((rates.get("N", 0) as int) / 100.0),
-				str((rates.get("R", 0) as int) / 100.0),
-				str((rates.get("SR", 0) as int) / 100.0),
-				str((rates.get("SSR", 0) as int) / 100.0),
-				str((rates.get("UR", 0) as int) / 100.0),
-				str(banner.get("pity", {})),
-			]
-		)
-	)
+	info.pressed.connect(_show_pity)
 	row.add_child(info)
 	var x1 := UIFactory.gold_button("Призыв ×1")
 	x1.pressed.connect(func(): _do_summon(1))
 	row.add_child(x1)
-	var x10 := UIFactory.gold_button("Призыв ×10 (за 8)")
+	var x10 := UIFactory.gold_button("Призыв ×10")
 	x10.pressed.connect(func(): _do_summon(10))
 	root.add_child(x10)
 
@@ -97,10 +85,59 @@ func _rebuild() -> void:
 	back.pressed.connect(func(): ScreenRouter.handle_back())
 	root.add_child(back)
 
+func _show_pity() -> void:
+	var banner := _banner()
+	var rates: Dictionary = banner.get("rates_bp", {})
+	var pity_txt := str(banner.get("pity", {}))
+	if ApiClient.online:
+		var res := await ApiClient.summon_pity()
+		if res.get("ok", false):
+			pity_txt = str(res.get("data", {}).get("pity", pity_txt))
+	ModalManager.push_info(
+		"Правила · %s" % str(banner.get("name", "")),
+		"N %s%% · R %s%% · SR %s%% · SSR %s%% · UR %s%%\nPity: %s\nРежим: %s" % [
+			str((rates.get("N", 0) as int) / 100.0),
+			str((rates.get("R", 0) as int) / 100.0),
+			str((rates.get("SR", 0) as int) / 100.0),
+			str((rates.get("SSR", 0) as int) / 100.0),
+			str((rates.get("UR", 0) as int) / 100.0),
+			pity_txt,
+			_mode_label(),
+		]
+	)
+
 func _do_summon(count: int) -> void:
 	if _busy:
 		return
 	_busy = true
+	if ApiClient.online:
+		await _do_summon_online(count)
+	else:
+		await _do_summon_demo(count)
+	_busy = false
+
+func _do_summon_online(count: int) -> void:
+	NotificationManager.info("Призыв… (сервер)")
+	var res := await ApiClient.summon_roll(_banner_id, count)
+	if res.get("ok", false) != true:
+		NotificationManager.warn("Призыв недоступен · %s" % str(res.get("error", "")))
+		await _do_summon_demo(count)
+		return
+	var data: Dictionary = res.get("data", {})
+	var results: Array = []
+	for r in data.get("results", []):
+		if typeof(r) != TYPE_DICTIONARY:
+			continue
+		var hid := str(r.get("hero_id", ""))
+		var rarity := str(r.get("rarity", ""))
+		var h := DemoData.get_hero(hid)
+		var nm := str(h.get("name", hid)) if not h.is_empty() else hid
+		var tag := "новый" if bool(r.get("is_new", false)) else ("осколки ×%s" % str(r.get("shards_gained", 0)))
+		results.append("%s (%s) · %s" % [nm, rarity, tag])
+	await ApiClient.sync_wallet()
+	ModalManager.push_rewards("Результаты ×%d · ONLINE" % count, results)
+
+func _do_summon_demo(count: int) -> void:
 	var banner := _banner()
 	var rates: Dictionary = banner.get("rates_bp", {"N": 5000, "R": 3500, "SR": 1200, "SSR": 300, "UR": 0})
 	NotificationManager.info("Призыв… (демо)")
@@ -115,8 +152,7 @@ func _do_summon(count: int) -> void:
 			got_sr_plus = true
 		var hero := _pick_hero(banner, rarity)
 		results.append("%s (%s)" % [hero, rarity])
-	ModalManager.push_rewards("Результаты ×%d · %s" % [count, str(banner.get("name", ""))], results)
-	_busy = false
+	ModalManager.push_rewards("Результаты ×%d · DEMO" % count, results)
 
 func _roll_rarity(rates: Dictionary) -> String:
 	var order := ["N", "R", "SR", "SSR", "UR"]
@@ -159,7 +195,6 @@ func _pick_hero(banner: Dictionary, rarity: String) -> String:
 			pools = by_f["F01"]
 	var ids: Array = pools.get(rarity, [])
 	if ids.is_empty():
-		# fallback any rarity
 		for k in pools.keys():
 			if (pools[k] as Array).size() > 0:
 				ids = pools[k]

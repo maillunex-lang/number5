@@ -41,11 +41,11 @@ func NewMux(d Deps) http.Handler {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"ok":      true,
 			"service": "lunex-core-api",
-			"note":    "CORE-01 memory slice · auth…mail + store VIRTUAL_FREE",
+			"note":    "CORE-01 · auth…store VIRTUAL_FREE",
 			"env":     d.Config.AppEnv,
 			"time":    time.Now().UTC().Format(time.RFC3339),
 			"db":      d.Config.DatabaseURL != "",
-			"store":   "memory",
+			"store":   storeKind(d.Store),
 			"modules": []string{"auth", "wallet", "heroes", "campaign", "battle", "summon", "afk", "mail", "shop", "content"},
 		})
 	})
@@ -381,6 +381,13 @@ func NewMux(d Deps) http.Handler {
 	})
 
 	return mux
+}
+
+func storeKind(st store.Store) string {
+	if _, ok := st.(*store.Memory); ok {
+		return "memory"
+	}
+	return "postgres"
 }
 
 func writeRaw(w http.ResponseWriter, status int, body []byte, err error) {
