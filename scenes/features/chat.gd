@@ -1,12 +1,18 @@
 extends Control
-## Auto-generated demo feature screen
+## SOCIAL-02 chat: chrome в .tscn; DynamicHost — без DemoScreenBuilder.
 
 var _payload: Dictionary = {}
-const CONFIG := {
-	"title": "Fantasy Messenger",
-	"status": "Демо",
-	"subtitle": "Мировой / гильдейский / личный",
-	"sections": [
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _host: VBoxContainer = $Safe/Scroll/VBox/DynamicHost
+
+func setup(payload: Dictionary = {}) -> void:
+	_payload = payload
+
+func _ready() -> void:
+	$Safe/Scroll/VBox/BackBtn.pressed.connect(func(): ScreenRouter.handle_back())
+	_title.text = str(_payload.get("title_override", "Fantasy Messenger"))
+	FeatureSectionHost.fill(_host, [
 		{
 			"title": "Каналы",
 			"lines": [
@@ -14,26 +20,8 @@ const CONFIG := {
 				"[Система] Демо-чат без сервера",
 			],
 			"actions": [
-				{
-					"label": "Отправить (демо)",
-					"kind": "toast",
-					"msg": "Сообщение не отправлено на сервер",
-				},
-				{
-					"label": "Открыть профиль",
-					"kind": "route",
-					"route": "PROFILE-02",
-				},
+				{"label": "Отправить (демо)", "kind": "toast", "msg": "Сообщение не отправлено на сервер"},
+				{"label": "Открыть профиль", "kind": "route", "route": "PROFILE-02"},
 			],
 		},
-	],
-}
-
-func setup(payload: Dictionary = {}) -> void:
-	_payload = payload
-
-func _ready() -> void:
-	var cfg := CONFIG.duplicate(true)
-	if _payload.has("title_override"):
-		cfg["title"] = _payload["title_override"]
-	DemoScreenBuilder.build($Safe/Scroll/VBox, cfg)
+	])

@@ -57,7 +57,10 @@
 | Shop / Summon / AFK / Mail / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки/кнопки | списки |
 | VIP | `features/vip.tscn` | ~12 | низкая | пакет | MED* | Title/Status/Back/DynamicHost | секции в host | низкий |
 | Social hub | `features/social_hub.tscn` | ~10 | низкая | демо | MED* | Title/Back/DynamicHost | route-кнопки | низкий |
-| Chat / Friends / Rankings / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
+| Chat | `features/chat.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
+| Friends | `features/friends.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
+| Rankings | `features/rankings.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
+| Battle pass / PvP / … | `features/*` + DemoScreenBuilder | 5 | через builder | пакет/демо | HIGH* | скелет | секции builder → шаблоны | низкий |
 | PvE / Guild / Events / Profile | `features/*` | 5 | высокая | пакет | CODE_HEAVY | скелет | карточки/рейды | средний |
 
 \*HIGH по `.tscn`, но наполнение DEMO всё равно в коде через `DemoScreenBuilder`.
@@ -95,6 +98,7 @@
 | Wave3 | Formation chrome+slots; Settings tabs; Map landscape+MapRegionButton; StageListItem; stage_card Theme |
 | Wave4 | Hero details chrome+tabs; Squad FormationSlot+HeroCard; Auth form Theme; settings account Theme buttons |
 | Wave5 | BattleResult ClaimProgress/Status; VIP + SocialHub off DemoScreenBuilder |
+| Wave5+ | Chat / Friends / Rankings Theme hosts; FeatureSectionHost helper |
 
 ## 7. Критерии «экран модернизирован»
 
