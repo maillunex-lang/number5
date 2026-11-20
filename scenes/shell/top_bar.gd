@@ -1,12 +1,51 @@
+@tool
 extends PanelContainer
+## Верхняя панель. Layout в .tscn; валюты обновляет runtime.
+
+@export_category("Lunex Top Bar")
+@export_group("Layout")
+@export var bar_min_height: float = 158.0:
+	set(v):
+		bar_min_height = v
+		custom_minimum_size.y = v
+@export var pad_left: int = 18:
+	set(v):
+		pad_left = v
+		_apply_pad()
+@export var pad_right: int = 18:
+	set(v):
+		pad_right = v
+		_apply_pad()
+@export var pad_top: int = 8:
+	set(v):
+		pad_top = v
+		_apply_pad()
+@export var pad_bottom: int = 8:
+	set(v):
+		pad_bottom = v
+		_apply_pad()
+
+@export_group("Preview (editor only)")
+@export var preview_profile: String = "Командир"
+@export var preview_gold: String = "Золото 12.4K"
+@export var preview_dia: String = "Алмазы 320"
+@export var preview_vip: String = "VIP 1"
 
 var _shell: Node
+@onready var _pad: MarginContainer = $Pad
 @onready var _profile_btn: Button = $Pad/Rows/Primary/ProfileBtn
 @onready var _gold: Label = $Pad/Rows/Secondary/Gold
 @onready var _dia: Label = $Pad/Rows/Secondary/Dia
 @onready var _vip: Label = $Pad/Rows/Secondary/Vip
 @onready var _shop: Button = $Pad/Rows/Secondary/ShopBtn
 @onready var _settings: Button = $Pad/Rows/Primary/SettingsBtn
+
+func _ready() -> void:
+	custom_minimum_size.y = bar_min_height
+	_apply_pad()
+	if Engine.is_editor_hint():
+		_apply_preview()
+		return
 
 func setup(shell: Node) -> void:
 	_shell = shell
@@ -22,9 +61,27 @@ func setup(shell: Node) -> void:
 	)
 	refresh()
 
+func _apply_pad() -> void:
+	if _pad == null:
+		return
+	_pad.add_theme_constant_override("margin_left", pad_left)
+	_pad.add_theme_constant_override("margin_right", pad_right)
+	_pad.add_theme_constant_override("margin_top", pad_top)
+	_pad.add_theme_constant_override("margin_bottom", pad_bottom)
+
+func _apply_preview() -> void:
+	if _profile_btn:
+		_profile_btn.text = preview_profile
+	if _gold:
+		_gold.text = preview_gold
+	if _dia:
+		_dia.text = preview_dia
+	if _vip:
+		_vip.text = preview_vip
+
 func _apply_shell_chrome() -> void:
 	var tb: Dictionary = ContentPackageLoader.shell.get("top_bar", {})
-	custom_minimum_size.y = maxf(float(tb.get("height", 96)), 158.0)
+	custom_minimum_size.y = maxf(float(tb.get("height", 96)), bar_min_height)
 	var bg := Color(str(tb.get("bg", "#132038")))
 	var border := Color(str(tb.get("border", "#3A4A68")))
 	add_theme_stylebox_override("panel", UIFactory.panel_style(bg, border, ThemeManager.radius("md"), 2))

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexgamepanel"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/game_panel.gd" id="1"]
+
+[node name="GamePanel" type="PanelContainer"]
+theme_type_variation = &"GamePanel"
+script = ExtResource("1")
+
+[node name="Pad" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Content" type="VBoxContainer" parent="Pad"]
+layout_mode = 2
+theme_override_constants/separation = 10

@@ -67,13 +67,27 @@ static func button_styles() -> Dictionary:
 	var d := panel_style(LunexColors.BUTTON_DISABLED, _c("frame_outer", LunexColors.FRAME_OUTER), rad, 1)
 	return {"normal": n, "hover": h, "pressed": p, "disabled": d}
 
+const GAME_BUTTON_SCENE := "res://scenes/ui/components/game_button.tscn"
+const GOLD_BUTTON_SCENE := "res://scenes/ui/components/gold_button.tscn"
+
+## Предпочитает визуальный GameButton.tscn; fallback — программный стиль.
 static func fantasy_button(text: String, min_h: int = 64) -> Button:
 	var h := min_h
-	if not Engine.is_editor_hint() and ThemeManager.components.has("button_height"):
+	if not Engine.is_editor_hint() and ThemeManager and ThemeManager.components.has("button_height"):
 		h = int(ThemeManager.components["button_height"]) if min_h == 64 else min_h
+	if ResourceLoader.exists(GAME_BUTTON_SCENE):
+		var inst: Button = (load(GAME_BUTTON_SCENE) as PackedScene).instantiate()
+		inst.text = text
+		inst.custom_minimum_size.y = float(h)
+		if inst is GameButton:
+			(inst as GameButton).min_height = h
+			(inst as GameButton).gold_style = false
+		inst.focus_mode = Control.FOCUS_NONE
+		return inst
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size = Vector2(0, h)
+	b.theme_type_variation = &"GameButton"
 	var st := button_styles()
 	b.add_theme_stylebox_override("normal", st.normal)
 	b.add_theme_stylebox_override("hover", st.hover)
@@ -91,9 +105,19 @@ static func fantasy_button(text: String, min_h: int = 64) -> Button:
 
 static func gold_button(text: String, min_h: int = 72) -> Button:
 	var hh := min_h
-	if not Engine.is_editor_hint() and ThemeManager.components.has("gold_button_height"):
+	if not Engine.is_editor_hint() and ThemeManager and ThemeManager.components.has("gold_button_height"):
 		hh = int(ThemeManager.components["gold_button_height"]) if min_h == 72 else min_h
+	if ResourceLoader.exists(GOLD_BUTTON_SCENE):
+		var inst: Button = (load(GOLD_BUTTON_SCENE) as PackedScene).instantiate()
+		inst.text = text
+		inst.custom_minimum_size.y = float(hh)
+		if inst is GameButton:
+			(inst as GameButton).min_height = hh
+			(inst as GameButton).gold_style = true
+		inst.focus_mode = Control.FOCUS_NONE
+		return inst
 	var b := fantasy_button(text, hh)
+	b.theme_type_variation = &"GoldButton"
 	var rad := _r("lg", 16)
 	var n := panel_style(Color("5A4318"), _c("gold_bright", LunexColors.GOLD_BRIGHT), rad, 2)
 	var h := panel_style(Color("6E5420"), Color("FFF0C0"), rad, 2)

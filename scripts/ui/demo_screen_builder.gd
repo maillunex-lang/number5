@@ -1,6 +1,6 @@
 class_name DemoScreenBuilder
 extends RefCounted
-## Собирает оформленные демо-экраны с статусом «Демо», действиями и возвратом.
+## Собирает оформленные демо-экраны. Кнопки — из visual GameButton.tscn через UIFactory.
 
 static func build(root: VBoxContainer, config: Dictionary) -> void:
 	for c in root.get_children():
