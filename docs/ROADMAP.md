@@ -6,7 +6,7 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | UI-VISUAL Events | Events chrome Theme/ListHost (как guild/quests) |
+| P1 | Events device | HUB-04 вкладки + скролл на APK после wave12 |
 | P2 | game_shell | safe-area / CODE_HEAVY → MED |
 
 ## Закрыто в этом срезе
@@ -33,6 +33,7 @@
 | UI-VISUAL wave11 guild | Guild Theme chrome + Tabs/ListHost |
 | Shop scroll + copy | ListHost Scroll + PASS; VIRTUAL_FREE copy; **device OK** |
 | UX hang-fix #28 device | **Владелец: Все ок** |
+| UI-VISUAL wave12 events | Events Header/Tabs + ListHost Scroll |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
 | mail ClaimAll atomic | ClaimAll в одной TX |

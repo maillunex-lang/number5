@@ -12,7 +12,7 @@
 | Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | **Владелец: повторные награды не выдаются** |
 | ART-05 | Procedural portrait/atlas webp; AssetLoader; BattleUnit clips; HUD/cards | **ART-05 device OK** (владелец, 20.11) |
 | MAP-01 list | StageListItem bind + scroll + squad power estimate | **MAP-01 device OK** — имена этапов, сила ≠ 0, скролл (владелец, 20.11) |
-| UI visual-edit | Theme + wave2–11; shop scroll fix | **Shop device OK** (скролл + выдача); Events / game_shell |
+| UI visual-edit | Theme + wave2–12: **Events** Header/Tabs/ListHost; shop scroll fix | Device: HUB-04 Events; game_shell |
 | Shop VIRTUAL_FREE | Online order/confirm; copy VIRTUAL_FREE | **Shop device OK** (владелец, 20.11) |
 | UX hang-fix #28 | Parallel sync + auth watchdog | **Device OK** (владелец: «Все ок») |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy OK** | — |
