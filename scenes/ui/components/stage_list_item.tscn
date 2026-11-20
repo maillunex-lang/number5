@@ -43,17 +43,22 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="OpenBtn" type="Button" parent="Pad/Col/Row"]
-custom_minimum_size = Vector2(0, 52)
+[node name="DragPad" type="Control" parent="Pad/Col/Row"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="OpenBtn" type="Button" parent="Pad/Col/Row"]
+custom_minimum_size = Vector2(168, 52)
+layout_mode = 2
+size_flags_horizontal = 0
 theme_type_variation = &"GameButton"
 text = "Карточка"
 
 [node name="FightBtn" type="Button" parent="Pad/Col/Row"]
 visible = false
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(140, 52)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_type_variation = &"GoldButton"
 text = "В бой"

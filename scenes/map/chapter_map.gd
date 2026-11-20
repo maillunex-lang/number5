@@ -27,7 +27,8 @@ func _ready() -> void:
 
 func _rebuild() -> void:
 	for c in _list.get_children():
-		c.queue_free()
+		_list.remove_child(c)
+		c.free()
 	var region := str(_payload.get("region_id", DemoData.campaign_progress.get("chapter_id", "CH01")))
 	var stages: Array = DemoData.campaign_progress["stages"]
 	var item_scene: PackedScene = load(STAGE_ITEM)
@@ -37,12 +38,11 @@ func _rebuild() -> void:
 		if cid != "" and cid != region and not str(s.get("id", "")).begins_with(region):
 			continue
 		var item: StageListItem = item_scene.instantiate()
-		item.set_stage(s)
-		var sid: String = str(s.id)
-		var state: String = str(s.state)
+		var sid: String = str(s.get("id", ""))
+		var state: String = str(s.get("state", "locked"))
 		item.open_pressed.connect(func(id):
 			if state == "locked":
-				ModalManager.push_locked(str(s.name), str(s.get("reveal_hint", "Пройдите предыдущие этапы")))
+				ModalManager.push_locked(str(s.get("name", "")), str(s.get("reveal_hint", "Пройдите предыдущие этапы")))
 				return
 			ScreenRouter.go("MAP-02", {"stage_id": id if id != "" else sid})
 		)
@@ -50,6 +50,7 @@ func _rebuild() -> void:
 			ScreenRouter.go("MAP-02", {"stage_id": id if id != "" else sid})
 		)
 		_list.add_child(item)
+		item.set_stage(s)
 
 func _continue() -> void:
 	var cur: String = DemoData.campaign_progress["current_stage"]

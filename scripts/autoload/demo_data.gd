@@ -47,26 +47,20 @@ func apply_server_player(collection: Dictionary, progress: Dictionary, formation
 	var catalog: Dictionary = {}
 	for raw in ContentPackageLoader.heroes_pack.get("heroes", []):
 		catalog[str(raw.get("id", ""))] = raw
-	_load_heroes()
-	var templates: Dictionary = {}
-	for h in heroes:
-		templates[str(h["id"])] = h
 	heroes.clear()
 	for owned in collection.get("heroes", []):
 		var hid := str(owned.get("hero_id", ""))
-		if not templates.has(hid):
+		if not catalog.has(hid):
 			continue
-		var h: Dictionary = templates[hid].duplicate(true)
-		h["level"] = int(owned.get("level", 1))
-		h["stars"] = int(owned.get("stars", 1))
-		h["power"] = 0 # no server-authoritative power stat yet
-		heroes.append(h)
+		var level := int(owned.get("level", 1))
+		var stars := int(owned.get("stars", 1))
+		heroes.append(_build_hero(catalog[hid], level, stars))
 	selected_hero_id = str(heroes[0]["id"]) if not heroes.is_empty() else ""
 	var raw_slots: Array = formation.get("slots", [])
 	squad_slots = ["", "", "", "", ""]
 	for i in range(mini(5, raw_slots.size())):
 		var hid := str(raw_slots[i])
-		if templates.has(hid) and get_hero(hid) != {}:
+		if catalog.has(hid) and get_hero(hid) != {}:
 			squad_slots[i] = hid
 	_load_campaign()
 	campaign_progress["current_stage"] = str(progress.get("current_stage", ""))
@@ -111,42 +105,55 @@ func _load_heroes() -> void:
 	var raw: Array = ContentPackageLoader.heroes_pack.get("heroes", [])
 	for item in raw:
 		var h: Dictionary = item
-		var level := int(h.get("level", 1))
-		var stars := int(h.get("stars", 1))
-		var tint := Color(str(h.get("tint", "#888888")))
-		var base: Dictionary = h.get("base_stats", {})
-		var hp := int(base.get("hp", 1000 + level * 80 + stars * 200))
-		var atk := int(base.get("atk", 120 + level * 12 + stars * 30))
-		var defense := int(base.get("def", 80 + level * 8))
-		# Масштаб L1 → текущий уровень (формулы канона, предварительные).
-		if base.has("hp"):
-			hp = int(round(float(base["hp"]) * (1.0 + 0.075 * float(level - 1))))
-			atk = int(round(float(base["atk"]) * (1.0 + 0.060 * float(level - 1))))
-			defense = int(round(float(base["def"]) * (1.0 + 0.055 * float(level - 1))))
-		heroes.append({
-			"id": str(h.get("id", "")),
-			"name": str(h.get("name", "")),
-			"class": str(h.get("class", "")),
-			"role": str(h.get("role", "")),
-			"faction": str(h.get("faction", "")),
-			"faction_id": str(h.get("faction_id", "")),
-			"rarity": str(h.get("rarity", "common")),
-			"tint": tint,
-			"level": level,
-			"stars": stars,
-			"power": int(h.get("power", 1000)),
-			"hp": hp,
-			"atk": atk,
-			"def": defense,
-			"spd": int(base.get("spd", 80)),
-			"energy": int(base.get("energy", 0)),
-			"favorite": bool(h.get("favorite", false)),
-			"skills": h.get("skills", []),
-			"quote": str(h.get("quote", "")),
-			"personality": str(h.get("personality", "")),
-			"equip": {"weapon": "", "armor": "", "acc": ""},
-		})
+		heroes.append(_build_hero(h, int(h.get("level", 1)), int(h.get("stars", 1))))
 
+func _build_hero(raw: Dictionary, level: int, stars: int) -> Dictionary:
+	var tint := Color(str(raw.get("tint", "#888888")))
+	var base: Dictionary = raw.get("base_stats", {})
+	var hp := int(base.get("hp", 1000 + level * 80 + stars * 200))
+	var atk := int(base.get("atk", 120 + level * 12 + stars * 30))
+	var defense := int(base.get("def", 80 + level * 8))
+	# Масштаб L1 → текущий уровень (формулы канона, предварительные).
+	if base.has("hp"):
+		hp = int(round(float(base["hp"]) * (1.0 + 0.075 * float(level - 1))))
+		atk = int(round(float(base["atk"]) * (1.0 + 0.060 * float(level - 1))))
+		defense = int(round(float(base["def"]) * (1.0 + 0.055 * float(level - 1))))
+	var pkg_level := maxi(1, int(raw.get("level", 1)))
+	var pkg_stars := maxi(1, int(raw.get("stars", 1)))
+	var pkg_power := int(raw.get("power", 0))
+	var power := pkg_power
+	if pkg_power > 0:
+		# Клиентская оценка: сервер пока не отдаёт power.
+		power = maxi(1, int(round(
+			float(pkg_power)
+			* (1.0 + 0.05 * float(level - pkg_level))
+			* (1.0 + 0.04 * float(stars - pkg_stars))
+		)))
+	else:
+		power = int(hp / 10.0) + atk * 2 + defense
+	return {
+		"id": str(raw.get("id", "")),
+		"name": str(raw.get("name", "")),
+		"class": str(raw.get("class", "")),
+		"role": str(raw.get("role", "")),
+		"faction": str(raw.get("faction", "")),
+		"faction_id": str(raw.get("faction_id", "")),
+		"rarity": str(raw.get("rarity", "common")),
+		"tint": tint,
+		"level": level,
+		"stars": stars,
+		"power": power,
+		"hp": hp,
+		"atk": atk,
+		"def": defense,
+		"spd": int(base.get("spd", 80)),
+		"energy": int(base.get("energy", 0)),
+		"favorite": bool(raw.get("favorite", false)),
+		"skills": raw.get("skills", []),
+		"quote": str(raw.get("quote", "")),
+		"personality": str(raw.get("personality", "")),
+		"equip": {"weapon": "", "armor": "", "acc": ""},
+	}
 func _load_equipment() -> void:
 	equipment_pool.clear()
 	for e in ContentPackageLoader.heroes_pack.get("equipment", []):
