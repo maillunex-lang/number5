@@ -9,8 +9,11 @@ const PAGES := {
 	"TopBar": "_show_top_bar",
 	"BottomNav": "_show_bottom_nav",
 	"Battle Result": "_show_battle_result",
+	"Battle Unit": "_show_battle_unit",
+	"Hub Building": "_show_hub_building",
 	"Feature Screen": "_show_feature_screen",
 	"Hero Card": "_show_hero_card",
+	"Mail / Shop": "_show_mail_shop",
 	"Settings scaffold": "_show_settings",
 }
 
@@ -100,6 +103,53 @@ func _show_hero_card() -> void:
 		var card: HeroCard = (load("res://scenes/ui/components/hero_card.tscn") as PackedScene).instantiate()
 		card.set_hero(sample)
 		row.add_child(card)
+
+func _show_battle_unit() -> void:
+	_clear_host()
+	_hint.text = "BattleUnit template"
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 40)
+	_host.add_child(row)
+	for sample in [
+		{"id": "H01", "name": "Айлэрис", "side": "ally", "hp": 2000, "max_hp": 2500, "energy": 40, "tint": Color("5EC8E8")},
+		{"id": "E01", "name": "Враг", "side": "enemy", "hp": 800, "max_hp": 1200, "energy": 10, "tint": Color("8A4A5A")},
+	]:
+		var u: BattleUnit = (load("res://scenes/ui/components/battle_unit.tscn") as PackedScene).instantiate()
+		u.set_unit(sample)
+		row.add_child(u)
+
+func _show_hub_building() -> void:
+	_clear_host()
+	_hint.text = "HubBuilding template · позиция в игре из hub.json"
+	var b: HubBuilding = (load("res://scenes/ui/components/hub_building.tscn") as PackedScene).instantiate()
+	b.set_building({
+		"id": "shop", "name": "Лавка", "x": 200, "y": 200, "w": 200, "h": 160,
+		"color": Color("E8C56A"), "locked": false, "route": "HUB-06",
+	}, 0.5)
+	b.position = Vector2(40, 40)
+	_host.add_child(b)
+
+func _show_mail_shop() -> void:
+	_clear_host()
+	_hint.text = "MailItem + ShopOfferCard"
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 12)
+	col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(col)
+	var mail: MailItem = (load("res://scenes/ui/components/mail_item.tscn") as PackedScene).instantiate()
+	mail.set_mail({
+		"id": "m1", "category": "reward", "status": "unread",
+		"subject": "Ежедневная награда", "body": "Заберите золото",
+		"attachments": [{"resource_id": "gold", "amount": 500}],
+	})
+	col.add_child(mail)
+	var offer: ShopOfferCard = (load("res://scenes/ui/components/shop_offer_card.tscn") as PackedScene).instantiate()
+	offer.set_offer({
+		"sku": "diamond_s", "title": "Горсть алмазов",
+		"grants": [{"resource_id": "diamonds", "amount": 100}],
+		"nominal_price_rub": 99, "payable_price_rub": 0, "cta": "Получить бесплатно",
+	})
+	col.add_child(offer)
 
 func _show_settings() -> void:
 	_clear_host()

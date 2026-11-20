@@ -42,6 +42,10 @@
 | Итог боя (кнопки «В хаб») | `scenes/battle/battle_result.tscn` |
 | Настройки (каркас) | `scenes/features/settings.tscn` |
 | Общие кнопки/панели | `scenes/ui/components/` |
+| Карточка героя (сетка) | `scenes/ui/components/hero_card.tscn` |
+| Здание хаба | `scenes/ui/components/hub_building.tscn` (позиции из `hub.json`) |
+| Юнит боя | `scenes/ui/components/battle_unit.tscn` |
+| Письмо / оффер магазина | `mail_item.tscn` / `shop_offer_card.tscn` |
 | Цвета кнопок (на всех экранах) | `theme/styles/*.tres` и `theme/lunex_theme.tres` |
 | Предпросмотр без сервера | `scenes/ui/preview/ui_preview_root.tscn` |
 

@@ -167,32 +167,20 @@ func _spawn_units() -> void:
 	for i in _enemies.size():
 		_create_unit_visual(_enemies[i], Vector2(780, enemy_y[i] if i < enemy_y.size() else 200 + i * 160))
 
+const BATTLE_UNIT_SCENE := "res://scenes/ui/components/battle_unit.tscn"
+
 func _create_unit_visual(unit: Dictionary, pos: Vector2) -> void:
-	var root := Control.new()
+	var root: BattleUnit = (load(BATTLE_UNIT_SCENE) as PackedScene).instantiate()
 	root.position = pos
-	root.custom_minimum_size = Vector2(140, 160)
-	var body := UIFactory.hero_portrait(unit.tint if unit.has("tint") else Color("888888"), Vector2(120, 140))
-	root.add_child(body)
-	var name_l := UIFactory.label(str(unit.name), 16)
-	name_l.position = Vector2(0, 130)
-	root.add_child(name_l)
-	var hp := ProgressBar.new()
-	hp.max_value = unit.max_hp
-	hp.value = unit.hp
-	hp.size = Vector2(120, 12)
-	hp.position = Vector2(0, -8)
-	hp.show_percentage = false
-	root.add_child(hp)
-	var en := ProgressBar.new()
-	en.max_value = 100
-	en.value = 0
-	en.size = Vector2(120, 8)
-	en.position = Vector2(0, 6)
-	en.show_percentage = false
-	en.modulate = LunexColors.ENERGY
-	root.add_child(en)
+	root.set_unit(unit)
 	_field.add_child(root)
-	_units_ui[unit.id] = {"root": root, "hp": hp, "energy": en, "body": body}
+	_units_ui[unit.id] = {
+		"root": root,
+		"hp": root.hp_bar(),
+		"energy": root.energy_bar(),
+		"body": root.body_node(),
+		"unit_view": root,
+	}
 
 func _build_portraits() -> void:
 	for c in _portraits.get_children():
@@ -273,7 +261,11 @@ func _apply_event(ev: Dictionary) -> void:
 				if unit.hp <= 0.0:
 					unit.alive = false
 					if _units_ui.has(target_id):
-						_units_ui[target_id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+						var view = _units_ui[target_id].get("unit_view")
+						if view is BattleUnit:
+							(view as BattleUnit).set_dead(true)
+						else:
+							_units_ui[target_id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
 			var actor := _find_unit(actor_id)
 			if not actor.is_empty() and ev.has("energy"):
 				actor.energy = float(ev.get("energy"))
@@ -293,7 +285,11 @@ func _apply_event(ev: Dictionary) -> void:
 				unit2.hp = 0.0
 				unit2.alive = false
 				if _units_ui.has(uid):
-					_units_ui[uid].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+					var view2 = _units_ui[uid].get("unit_view")
+					if view2 is BattleUnit:
+						(view2 as BattleUnit).set_dead(true)
+					else:
+						_units_ui[uid].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
 		"end":
 			_server_victory = bool(ev.get("victory", _server_victory))
 			_finish(_server_victory)
@@ -347,7 +343,11 @@ func _sim_tick_demo() -> void:
 		if target.hp <= 0.0:
 			target.alive = false
 			if _units_ui.has(target.id):
-				_units_ui[target.id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
+				var dv = _units_ui[target.id].get("unit_view")
+				if dv is BattleUnit:
+					(dv as BattleUnit).set_dead(true)
+				else:
+					_units_ui[target.id].root.modulate = Color(0.3, 0.3, 0.3, 0.5)
 		AudioManager.play_battle_hit()
 
 func _spawn_fx(unit_id: String, big: bool) -> void:

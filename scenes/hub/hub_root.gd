@@ -121,70 +121,22 @@ func _build_parallax() -> void:
 		_vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		_fx.add_child(_vignette)
 
+const HUB_BUILDING_SCENE := "res://scenes/ui/components/hub_building.tscn"
+
 func _build_buildings() -> void:
 	_clear(_buildings)
 	_pulse_nodes.clear()
 	var glow_str := float(_look.get("glow", 0.45))
+	var packed: PackedScene = load(HUB_BUILDING_SCENE)
 	for def in _building_defs:
-		var bw: float = maxf(def.w * 1.30, 240.0)
-		var bh: float = maxf(def.h * 1.25, 210.0)
-		var btn := Button.new()
-		btn.custom_minimum_size = Vector2(bw, bh)
-		btn.position = Vector2(float(def.x) - bw * 0.5, float(def.y) - bh * 0.5)
-		btn.text = ""
-		btn.flat = true
-		btn.focus_mode = Control.FOCUS_NONE
-		var panel := Panel.new()
-		panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		var st := StyleBoxFlat.new()
-		var c: Color = def.color
-		st.bg_color = Color(0.055, 0.087, 0.14, 0.92)
-		st.border_color = c if not def.locked else LunexColors.TEXT_MUTED
-		st.set_border_width_all(2)
-		st.set_corner_radius_all(18)
-		st.shadow_color = Color(c.r, c.g, c.b, 0.25 + glow_str * 0.35)
-		st.shadow_size = int(3 + glow_str * 4)
-		panel.add_theme_stylebox_override("panel", st)
-		btn.add_child(panel)
-		var symbols := {"summon":"events","guild":"social","shop":"shop","tower":"tower","quests":"quests","afk":"rewards","workshop":"tools","portal":"expeditions"}
-		var symbol := TextureRect.new()
-		symbol.texture = load("res://assets/ui/navigation/%s.svg" % symbols.get(def.id, "map"))
-		symbol.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		symbol.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-		symbol.offset_left = -36
-		symbol.offset_right = 36
-		symbol.offset_top = 24
-		symbol.offset_bottom = 96
-		symbol.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		btn.add_child(symbol)
-		var title := Label.new()
-		title.text = str(def.name)
-		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		title.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-		title.offset_top = -95
-		title.add_theme_font_size_override("font_size", 28)
-		title.add_theme_color_override("font_color", LunexColors.TEXT_PRIMARY if not def.locked else LunexColors.TEXT_MUTED)
-		title.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		btn.add_child(title)
-		if def.locked:
-			var lock := Label.new()
-			lock.text = "Закрыто"
-			lock.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-			lock.offset_left = -20
-			lock.offset_right = 20
-			lock.offset_top = -30
-			lock.offset_bottom = 10
-			lock.add_theme_font_size_override("font_size", 36)
-			lock.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			btn.add_child(lock)
-		else:
-			_pulse_nodes.append(panel)
+		var btn: HubBuilding = packed.instantiate()
+		btn.set_building(def, glow_str)
 		var captured := def
-		btn.pressed.connect(func(): _on_building(captured))
+		btn.activated.connect(func(_id): _on_building(captured))
 		_buildings.add_child(btn)
+		if not def.locked:
+			_pulse_nodes.append(btn.pulse_target())
+		var c: Color = def.color
 		var glow := TextureRect.new()
 		glow.texture = AssetLoader.make_radial_glow(c, 96)
 		glow.position = Vector2(float(def.x) - 90, float(def.y) - 90)

@@ -1,6 +1,6 @@
 class_name DemoScreenBuilder
 extends RefCounted
-## Собирает оформленные демо-экраны. Кнопки — из visual GameButton.tscn через UIFactory.
+## Собирает демо-экраны на visual-компонентах (GamePanel / GameButton).
 
 static func build(root: VBoxContainer, config: Dictionary) -> void:
 	for c in root.get_children():
@@ -11,10 +11,15 @@ static func build(root: VBoxContainer, config: Dictionary) -> void:
 	root.add_child(UIFactory.label("Статус: %s" % status, 22, LunexColors.AMBER))
 	root.add_child(UIFactory.muted(str(config.get("blurb", "Интерактивная демонстрация интерфейса. Серверные операции не выполняются.")), 22))
 	root.add_child(UIFactory.spacer(8))
+	var panel_scene: PackedScene = load("res://scenes/ui/components/game_panel.tscn")
 	for section in config.get("sections", []):
-		root.add_child(UIFactory.title(str(section.get("title", "")), 28))
+		var panel: GamePanel = panel_scene.instantiate()
+		panel.panel_kind = "GamePanel"
+		root.add_child(panel)
+		var content: VBoxContainer = panel.get_node("Pad/Content")
+		content.add_child(UIFactory.title(str(section.get("title", "")), 28))
 		for line in section.get("lines", []):
-			root.add_child(UIFactory.label("• %s" % str(line), 22, LunexColors.TEXT_SECONDARY))
+			content.add_child(UIFactory.label("• %s" % str(line), 22, LunexColors.TEXT_SECONDARY))
 		for action in section.get("actions", []):
 			var b := UIFactory.fantasy_button(str(action.get("label", "Действие")))
 			var kind: String = str(action.get("kind", "info"))
@@ -35,7 +40,7 @@ static func build(root: VBoxContainer, config: Dictionary) -> void:
 					_:
 						ModalManager.push_info(str(action.get("label", "Инфо")), msg)
 			)
-			root.add_child(b)
+			content.add_child(b)
 		root.add_child(UIFactory.spacer(6))
 	var back := UIFactory.fantasy_button("Назад")
 	back.pressed.connect(func(): ScreenRouter.handle_back())
