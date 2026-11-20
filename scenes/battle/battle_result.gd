@@ -76,15 +76,28 @@ func _build() -> void:
 	_subtitle.text = ""
 	var bid := str(_payload.get("battle_id", ""))
 	if ApiClient.online and bid != "":
-		_dynamic.add_child(UIFactory.label("Подтверждение наград на сервере…", 24, LunexColors.EMERALD))
+		_subtitle.text = "Подтверждение наград на сервере…"
+		_subtitle.add_theme_color_override("font_color", LunexColors.EMERALD)
+		var bar := ProgressBar.new()
+		bar.custom_minimum_size = Vector2(0, 18)
+		bar.max_value = 1.0
+		bar.value = 0.35
+		bar.show_percentage = false
+		_dynamic.add_child(bar)
+		var tw := create_tween().set_loops()
+		tw.tween_property(bar, "value", 0.9, 1.2)
+		tw.tween_property(bar, "value", 0.35, 1.2)
 		var ok := await _claim_online(bid, sid)
+		if tw.is_valid():
+			tw.kill()
 		if ok:
 			return
+		_subtitle.text = ""
 		_dynamic.add_child(UIFactory.muted("Не удалось подтвердить результат на сервере. Награды не выданы.", 22))
 	else:
 		_dynamic.add_child(UIFactory.muted("Нет онлайн-сессии. Награды не выданы.", 22))
 
-func _claim_online(bid: String, _sid: String) -> bool:
+func _claim_online(bid: String, sid: String) -> bool:
 	if _busy:
 		return false
 	_busy = true
@@ -100,18 +113,10 @@ func _claim_online(bid: String, _sid: String) -> bool:
 		lines.append("%s ×%s" % [str(k), str(crewards[k])])
 	if lines.is_empty():
 		lines.append("Тренировка — без наград")
-	await ApiClient.sync_wallet()
-	var campaign := await ApiClient.get_campaign()
-	if campaign.get("ok", false):
-		var prog: Dictionary = campaign.get("data", {})
-		DemoData.campaign_progress["current_stage"] = str(prog.get("current_stage", ""))
-		var cleared: Dictionary = {}
-		for st in prog.get("cleared", []):
-			cleared[str(st.get("StageID", st.get("stage_id", "")))] = true
-		for st in DemoData.campaign_progress.get("stages", []):
-			var stage_key := str(st.get("id", ""))
-			st["state"] = "cleared" if cleared.has(stage_key) else ("current" if stage_key == DemoData.campaign_progress["current_stage"] else "locked")
+	# Apply campaign tip from claim immediately; wallet refresh in background.
+	_apply_claim_progress(cdata, sid)
 	_clear_dynamic()
+	_subtitle.text = ""
 	if first_clear and not crewards.is_empty():
 		_dynamic.add_child(UIFactory.label("Награды подтверждены сервером.", 26, LunexColors.EMERALD))
 		ModalManager.push_rewards("Награды (ONLINE)", lines)
@@ -120,4 +125,34 @@ func _claim_online(bid: String, _sid: String) -> bool:
 		ModalManager.push_info("Повтор этапа", "Этот бой уже был пройден.\nНаграды за first clear не выдаются повторно.")
 	_dynamic.add_child(UIFactory.muted("battle_id %s · CORE-01" % bid, 18))
 	_busy = false
+	_refresh_economy_bg()
 	return true
+
+func _apply_claim_progress(cdata: Dictionary, sid: String) -> void:
+	var prog: Dictionary = cdata.get("progress", {})
+	var next_stage := str(prog.get("current_stage", ""))
+	if next_stage != "":
+		DemoData.campaign_progress["current_stage"] = next_stage
+	for st in DemoData.campaign_progress.get("stages", []):
+		var stage_key := str(st.get("id", ""))
+		if stage_key == sid:
+			st["state"] = "cleared"
+		elif next_stage != "" and stage_key == next_stage:
+			st["state"] = "current"
+		elif str(st.get("state", "")) == "current" and stage_key != next_stage:
+			st["state"] = "cleared"
+
+func _refresh_economy_bg() -> void:
+	# Non-blocking: top bar wallet + full campaign cleared list.
+	await ApiClient.sync_wallet()
+	var campaign := await ApiClient.get_campaign()
+	if not campaign.get("ok", false):
+		return
+	var prog: Dictionary = campaign.get("data", {})
+	DemoData.campaign_progress["current_stage"] = str(prog.get("current_stage", DemoData.campaign_progress.get("current_stage", "")))
+	var cleared: Dictionary = {}
+	for st in prog.get("cleared", []):
+		cleared[str(st.get("StageID", st.get("stage_id", "")))] = true
+	for st in DemoData.campaign_progress.get("stages", []):
+		var stage_key := str(st.get("id", ""))
+		st["state"] = "cleared" if cleared.has(stage_key) else ("current" if stage_key == DemoData.campaign_progress["current_stage"] else "locked")

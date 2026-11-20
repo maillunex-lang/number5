@@ -5,6 +5,7 @@ signal session_ready(token: String)
 signal request_failed(path: String, code: int, body: String)
 signal wallet_synced
 signal player_synced
+signal sync_progress(step: String)
 
 const DEFAULT_BASE := "https://rikagro.ru/afkgame"
 const TIMEOUT_SEC := 4.0
@@ -219,14 +220,34 @@ func _apply_account_identity(data: Dictionary) -> void:
 	AppState.is_guest = bool(data.get("is_guest", true))
 	AppState.email_hint = "" if AppState.is_guest else str(data.get("email", ""))
 
+func has_saved_token() -> bool:
+	var storage := _web_session_storage()
+	if storage != null:
+		var saved = storage.getItem(WEB_SESSION_KEY)
+		if saved is String and str(saved).strip_edges() != "":
+			return true
+	return FileAccess.file_exists(SESSION_PATH)
+
 func sync_player() -> bool:
 	if not online:
 		return false
-	var wallet := await get_wallet()
-	var owned := await get_heroes()
-	var campaign := await get_campaign()
-	var profile := await _authed("GET", "/api/v1/player/profile")
-	var formation := await _authed("GET", "/api/v1/formations/campaign")
+	# Parallel fan-out via raw HTTPRequest (Godot 4.7 forbids calling coroutines without await).
+	sync_progress.emit("Загружаем кошелёк, героев, кампанию…")
+	var paths := PackedStringArray([
+		"/api/v1/wallet",
+		"/api/v1/heroes/collection",
+		"/api/v1/campaign/progress",
+		"/api/v1/player/profile",
+		"/api/v1/formations/campaign",
+	])
+	var batch: Array = await _parallel_authed_gets(paths)
+	if batch.size() != paths.size():
+		return false
+	var wallet: Dictionary = batch[0]
+	var owned: Dictionary = batch[1]
+	var campaign: Dictionary = batch[2]
+	var profile: Dictionary = batch[3]
+	var formation: Dictionary = batch[4]
 	if not wallet.get("ok", false) or not owned.get("ok", false) or not campaign.get("ok", false) or not profile.get("ok", false) or not formation.get("ok", false):
 		return false
 	var w: Dictionary = wallet.get("data", {})
@@ -235,6 +256,7 @@ func sync_player() -> bool:
 	var f: Dictionary = formation.get("data", {})
 	if not h.has("heroes") or not c.has("current_stage") or not f.has("slots"):
 		return false
+	sync_progress.emit("Собираем профиль…")
 	var pr: Dictionary = profile.get("data", {})
 	AppState.display_name = str(pr.get("nickname", "Командир"))
 	AppState.level = int(pr.get("level", 1))
@@ -245,8 +267,58 @@ func sync_player() -> bool:
 	_presence_timer.start()
 	_sync_timer.start()
 	_last_full_sync_msec = Time.get_ticks_msec()
-	await _authed("POST", "/api/v1/player/heartbeat")
+	# Heartbeat off the critical path — shell can open immediately.
+	_heartbeat_after_sync()
 	return true
+
+func _heartbeat_after_sync() -> void:
+	if not online or access_token == "":
+		return
+	await _authed("POST", "/api/v1/player/heartbeat")
+
+func _parallel_authed_gets(paths: PackedStringArray) -> Array:
+	var n := paths.size()
+	var results: Array = []
+	results.resize(n)
+	var pending := n
+	var gate := { "done": false }
+	for i in n:
+		var idx := i
+		var path := paths[i]
+		var headers := PackedStringArray(["Content-Type: application/json", "Accept: application/json"])
+		if access_token != "":
+			headers.append("Authorization: Bearer %s" % access_token)
+		var http := HTTPRequest.new()
+		http.timeout = TIMEOUT_SEC
+		add_child(http)
+		http.request_completed.connect(func(http_result: int, code: int, _headers: PackedStringArray, body: PackedByteArray):
+			var response_body := body.get_string_from_utf8()
+			var parsed: Variant = {}
+			if response_body != "":
+				parsed = JSON.parse_string(response_body)
+				if parsed == null:
+					parsed = {"raw": response_body}
+			if http_result != HTTPRequest.RESULT_SUCCESS or code < 200 or code >= 300:
+				last_error = "http_%d" % code if http_result == HTTPRequest.RESULT_SUCCESS else "http_result_%d" % http_result
+				request_failed.emit(path, code, last_error)
+				results[idx] = {"ok": false, "error": last_error, "code": code, "data": parsed}
+			else:
+				results[idx] = {"ok": true, "code": code, "data": parsed}
+			http.queue_free()
+			pending -= 1
+			if pending <= 0:
+				gate["done"] = true
+		)
+		var err := http.request(base_url + path, headers, HTTPClient.METHOD_GET, "")
+		if err != OK:
+			http.queue_free()
+			results[idx] = {"ok": false, "error": "request_error_%d" % err, "code": 0}
+			pending -= 1
+			if pending <= 0:
+				gate["done"] = true
+	while not gate["done"]:
+		await get_tree().process_frame
+	return results
 
 func sync_wallet() -> bool:
 	if not online:
