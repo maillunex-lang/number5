@@ -11,7 +11,7 @@
 - Главный хаб: вертикальный 2.5D-скролл, параллакс, здания, быстрые кнопки
 - Карта мира → глава → карточка этапа → подготовка
 - Герои: коллекция, фильтры, карточка, автоэкипировка, отряд (локальный DemoData; server collection ещё не sync)
-- Битва: карта входов → подготовка → **локальный** автобой 5v5 → результат; при online победе — серверный start/claim (целевой H6: server timeline → playback — ещё не внедрён)
+- Битва: карта входов → подготовка → серверный бой 5v5 (timeline) → клиентский playback → claim; без battle_id остаётся DEMO-локальный бой
 - Контент: пакеты `0.1.0`…`0.9.0`, OTA hot-reload (dev CDN Studio)
 - Графика: пресеты Низкая / Средняя / Высокая / Ультра
 - Back: модалка → оверлей → вкладка → выход
@@ -21,7 +21,7 @@
 | Область | Режим |
 |---|---|
 | Summon / AFK / shop / mail | ONLINE при guest API, иначе DEMO |
-| Battle rewards online | PARTIAL (desync с локальной симуляцией; H6 в TECH_DEBT) |
+| Battle rewards online | H6 code: server timeline → playback → claim; device verify pending |
 | Heroes / campaign sync | DEMO локально |
 | Guild / PvE modes / quests / events / VIP / BP / social / PvP | DEMO или stub |
 

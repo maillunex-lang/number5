@@ -116,11 +116,13 @@ type DemoMail struct {
 }
 
 type EnemiesDoc struct {
-	Encounters []Encounter `json:"encounters"`
+	Encounters []Encounter     `json:"encounters"`
+	Enemies    []map[string]any `json:"enemies"`
+	Bosses     []map[string]any `json:"bosses"`
 }
 
 type Encounter struct {
-	StageID string          `json:"stage_id"`
+	StageID string           `json:"stage_id"`
 	Slots   []map[string]any `json:"slots"`
 }
 
@@ -206,6 +208,43 @@ func (c *Catalog) Encounter(stageID string) (Encounter, bool) {
 		}
 	}
 	return Encounter{}, false
+}
+
+func (c *Catalog) StagePower(stageID string) int {
+	for _, s := range c.Campaign.Stages {
+		if id, _ := s["id"].(string); id == stageID {
+			switch v := s["power"].(type) {
+			case float64:
+				return int(v)
+			case int:
+				return v
+			}
+		}
+	}
+	return 10000
+}
+
+func (c *Catalog) HeroByID(heroID string) (map[string]any, bool) {
+	for _, h := range c.Heroes.Heroes {
+		if fmt.Sprint(h["id"]) == heroID {
+			return h, true
+		}
+	}
+	return nil, false
+}
+
+func (c *Catalog) EnemyMeta(enemyID string) map[string]any {
+	for _, e := range c.Enemies.Enemies {
+		if fmt.Sprint(e["id"]) == enemyID {
+			return e
+		}
+	}
+	for _, e := range c.Enemies.Bosses {
+		if fmt.Sprint(e["id"]) == enemyID {
+			return e
+		}
+	}
+	return map[string]any{"id": enemyID, "name": enemyID, "rig_id": "RIG-GUARD"}
 }
 
 func (c *Catalog) NextStage(stageID string) string {

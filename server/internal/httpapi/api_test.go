@@ -117,10 +117,32 @@ func TestFullLoopBattleSummonAfkMail(t *testing.T) {
 	if bat["victory"] != true {
 		t.Fatalf("expected victory for starter squad, got %#v", bat)
 	}
+	tl, _ := bat["timeline"].([]any)
+	if len(tl) < 3 {
+		t.Fatalf("H6 timeline too short: %#v", bat["timeline"])
+	}
+	first, _ := tl[0].(map[string]any)
+	if first["type"] != "start" {
+		t.Fatalf("timeline start missing: %#v", first)
+	}
+	last, _ := tl[len(tl)-1].(map[string]any)
+	if last["type"] != "end" {
+		t.Fatalf("timeline end missing: %#v", last)
+	}
 	bid, _ := bat["battle_id"].(string)
 	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"bc1"}`))
 	if rr.Code != 200 {
 		t.Fatalf("claim %d %s", rr.Code, rr.Body.String())
+	}
+	// Replayed claim with same idempotency key must succeed and mark replayed.
+	rr = authH(http.MethodPost, "/api/v1/battle/"+bid+"/claim", []byte(`{"idempotency_key":"bc1"}`))
+	if rr.Code != 200 {
+		t.Fatalf("claim replay %d %s", rr.Code, rr.Body.String())
+	}
+	var claimReplay map[string]any
+	_ = json.Unmarshal(rr.Body.Bytes(), &claimReplay)
+	if claimReplay["replayed"] != true {
+		t.Fatalf("expected replayed claim, got %#v", claimReplay)
 	}
 
 	rr = authH(http.MethodPost, "/api/v1/summon/roll", []byte(`{"banner_id":"standard","count":1,"idempotency_key":"s1"}`))

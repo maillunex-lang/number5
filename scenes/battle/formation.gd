@@ -80,8 +80,22 @@ func _rebuild() -> void:
 			start.text = "Начать бой"
 			NotificationManager.warn("Сервер не вернул идентификатор боя")
 			return
-		UIStateManager.set_combat_context({"mode": mode, "stage_id": stage_id, "return_route": ctx.get("return_route", "ROOT-04")})
-		ScreenRouter.go("COMBAT-02", {"stage_id": stage_id, "mode": mode, "battle_id": battle_id, "server_victory": bool(data.get("victory", false))})
+		var timeline: Array = data.get("timeline", [])
+		UIStateManager.set_combat_context({
+			"mode": mode,
+			"stage_id": stage_id,
+			"return_route": ctx.get("return_route", "ROOT-04"),
+			"battle_id": battle_id,
+		})
+		ScreenRouter.go("COMBAT-02", {
+			"stage_id": stage_id,
+			"mode": mode,
+			"battle_id": battle_id,
+			"server_victory": bool(data.get("victory", false)),
+			"timeline": timeline,
+			"seed": data.get("seed", 0),
+			"config_version": str(data.get("config_version", "")),
+		})
 	)
 	root.add_child(start)
 	var back := UIFactory.fantasy_button("Назад")
