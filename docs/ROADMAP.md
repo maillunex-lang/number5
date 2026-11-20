@@ -23,6 +23,7 @@
 | mail ClaimAll atomic | ClaimAll: ledger → SaveMail в одной TX (без «claimed без награды») |
 | AUTH-04 code | Memory+PG credentials, logout, link sync, device checklist | |
 | Battle replay farm | Повтор cleared-этапа без валюты (training until loot caps) | |
+| UI-VISUAL wave3 | Formation/Settings/Map chrome + FormationSlot/StageListItem/MapRegionButton | |
 
 ## Реализовано и проверено
 

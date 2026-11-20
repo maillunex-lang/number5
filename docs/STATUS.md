@@ -9,7 +9,7 @@
 | Аккаунт и прогресс | Гостевой вход, загрузка профиля, героев, отряда и кошелька. После боя CH01-01 открывался CH01-02, повтор получения награды сохранял баланс, перезапуск сохранял этап | Шесть исторических HTTP 500 профиля наблюдались 20 ноября. Точная причина не установлена |
 | Бой H6 | Server timeline + playback + GET reconnect + stable `claim:{battle_id}`; API/CI контракт покрыт | **Device verify** по `docs/H6_DEVICE_VERIFY.md` на свежем APK — ждём подтверждение владельца |
 | Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | Нужен деплой API; полный replay-loot/daily cap — позже по канону |
-| UI visual-edit | Theme + компоненты; HubBuilding/BattleUnit/HeroCard/MailItem/ShopOfferCard; DemoScreenBuilder на GamePanel; preview F6 | Formation/settings/map nodes ещё частично code; см. `docs/UI_VISUAL_AUDIT.md` |
+| UI visual-edit | Theme + wave2 + **wave3**: FormationSlot, Settings chrome/tabs, MapRegionButton, StageListItem, stage_card Theme | Hero details / squad_manager / auth form ещё CODE_HEAVY |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |
 | AUTH-04 | Memory+PG register/login/link; logout revoke; link_guest sync heroes; settings bind; Go tests + device checklist | Device verify: `docs/AUTH_04_DEVICE_VERIFY.md` — ждём владельца |

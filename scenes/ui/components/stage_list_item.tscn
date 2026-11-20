@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://lunexstagelistitem"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/stage_list_item.gd" id="1"]
+
+[node name="StageListItem" type="PanelContainer"]
+theme_type_variation = &"GamePanel"
+script = ExtResource("1")
+
+[node name="Pad" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="Col" type="VBoxContainer" parent="Pad"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Pad/Col"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.909804, 0.772549, 0.415686, 1)
+theme_override_font_sizes/font_size = 28
+text = "Основной · Этап"
+autowrap_mode = 3
+
+[node name="Meta" type="Label" parent="Pad/Col"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.478431, 0.517647, 0.6, 1)
+theme_override_font_sizes/font_size = 22
+text = "Сила: 1000 · Награды: золото"
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Pad/Col"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.478431, 0.517647, 0.6, 1)
+theme_override_font_sizes/font_size = 20
+text = "Подсказка"
+autowrap_mode = 3
+
+[node name="Row" type="HBoxContainer" parent="Pad/Col"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OpenBtn" type="Button" parent="Pad/Col/Row"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "Карточка"
+
+[node name="FightBtn" type="Button" parent="Pad/Col/Row"]
+visible = false
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GoldButton"
+text = "В бой"

@@ -1,24 +1,37 @@
 extends Control
-## SETTINGS-01: вкладки; графика только пресеты; звук; аккаунт; контент OTA
+## SETTINGS-01: chrome в .tscn; DynamicHost — содержимое вкладок.
 
 var _tab: String = "graphics"
-
-func setup(_payload: Dictionary = {}) -> void:
-	pass
-
-func _ready() -> void:
-	ContentUpdateService.status_changed.connect(_rebuild)
-	ContentUpdateService.update_finished.connect(func(_ok, _msg): _rebuild())
-	_selected_preset = ThemeManager.preset
-	_selected_fps = Engine.max_fps if Engine.max_fps in [30, 60, 90, 120] else 60
-	_rebuild()
-
 const GOLD := Color("#ffcc70")
 const BLUE := Color("#142b49")
 const INK := Color("#071426")
 const LINE := Color("#bd8a39")
 var _selected_preset: String = ""
 var _selected_fps: int = 60
+
+@onready var _host: VBoxContainer = $Safe/Layout/Scroll/ContentPanel/Pad/DynamicHost
+@onready var _tab_btns: Dictionary = {
+	"graphics": $Safe/Layout/Tabs/TabGraphics,
+	"audio": $Safe/Layout/Tabs/TabAudio,
+	"content": $Safe/Layout/Tabs/TabContent,
+	"account": $Safe/Layout/Tabs/TabAccount,
+	"general": $Safe/Layout/Tabs/TabGeneral,
+}
+
+func setup(_payload: Dictionary = {}) -> void:
+	pass
+
+func _ready() -> void:
+	ContentUpdateService.status_changed.connect(_rebuild_content)
+	ContentUpdateService.update_finished.connect(func(_ok, _msg): _rebuild_content())
+	_selected_preset = ThemeManager.preset
+	_selected_fps = Engine.max_fps if Engine.max_fps in [30, 60, 90, 120] else 60
+	$Safe/Layout/Header/CloseBtn.pressed.connect(func(): ScreenRouter.handle_back())
+	for key in _tab_btns.keys():
+		var k: String = key
+		_tab_btns[k].pressed.connect(_select_tab.bind(k))
+	_style_tabs()
+	_rebuild_content()
 
 func _panel(bg: Color = INK, edge: Color = LINE, radius: int = 18) -> StyleBoxFlat:
 	var st := StyleBoxFlat.new()
@@ -53,49 +66,26 @@ func _label(value: String, font_size: int = 24, color: Color = Color.WHITE) -> L
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return l
 
-func _rebuild() -> void:
-	var root: VBoxContainer = $Safe/Layout/Scroll/VBox
-	for c in root.get_children():
-		root.remove_child(c)
-		c.queue_free()
-	root.add_theme_constant_override("separation", 15)
-	var head: HBoxContainer = $Safe/Layout/Header
-	for c in head.get_children():
-		head.remove_child(c)
-		c.queue_free()
-	head.add_theme_constant_override("separation", 12)
-	var title := _label("⚙ Настройки", 39, GOLD)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	head.add_child(title)
-	var close := _button("✕", false, 64)
-	close.custom_minimum_size.x = 70
-	close.size_flags_horizontal = Control.SIZE_SHRINK_END
-	close.pressed.connect(func(): ScreenRouter.handle_back())
-	head.add_child(close)
-	var tabs: HBoxContainer = $Safe/Layout/Tabs
-	for c in tabs.get_children():
-		tabs.remove_child(c)
-		c.queue_free()
-	tabs.add_theme_constant_override("separation", 5)
-	for t in [["graphics", "▣\nГрафика"], ["audio", "♫\nЗвук"], ["content", "▧\nКонтент"], ["account", "♙\nАккаунт"], ["general", "☷\nОбщие"]]:
-		var key: String = t[0]
-		var b := _button(t[1], key == _tab, 95)
+func _style_tabs() -> void:
+	for key in _tab_btns.keys():
+		var b: Button = _tab_btns[key]
+		var active: bool = key == _tab
 		b.add_theme_font_size_override("font_size", 18)
-		b.pressed.connect(_select_tab.bind(key))
-		tabs.add_child(b)
-	var content := PanelContainer.new()
-	content.add_theme_stylebox_override("panel", _panel(Color("#081a30"), LINE, 22))
-	root.add_child(content)
-	var body := VBoxContainer.new()
-	body.add_theme_constant_override("separation", 17)
-	content.add_child(body)
+		b.add_theme_stylebox_override("normal", _panel(Color("#714510") if active else BLUE, GOLD if active else Color("#47749b"), 18))
+		b.add_theme_stylebox_override("hover", _panel(Color("#94601b"), GOLD, 18))
+		b.add_theme_stylebox_override("pressed", _panel(Color("#513109"), GOLD, 18))
+
+func _rebuild_content() -> void:
+	for c in _host.get_children():
+		_host.remove_child(c)
+		c.queue_free()
 	match _tab:
 		"graphics":
-			_build_graphics(body)
+			_build_graphics(_host)
 		"audio":
-			body.add_child(_label("♫ Звук", 31, GOLD))
+			_host.add_child(_label("♫ Звук", 31, GOLD))
 			for spec in [["Музыка", ThemeManager.music_volume, true], ["Звуковые эффекты", ThemeManager.sfx_volume, false]]:
-				body.add_child(_label(spec[0]))
+				_host.add_child(_label(spec[0]))
 				var slider := HSlider.new()
 				slider.min_value = 0
 				slider.max_value = 1
@@ -106,42 +96,42 @@ func _rebuild() -> void:
 					slider.value_changed.connect(func(v): ThemeManager.set_music_volume(v))
 				else:
 					slider.value_changed.connect(func(v): ThemeManager.set_sfx_volume(v))
-				body.add_child(slider)
+				_host.add_child(slider)
 		"content":
-			body.add_child(_label("▧ Обновление контента", 31, GOLD))
-			body.add_child(_label(ContentPackageLoader.package_label(), 22))
-			body.add_child(_label("Статус: " + ContentUpdateService.last_status, 20))
+			_host.add_child(_label("▧ Обновление контента", 31, GOLD))
+			_host.add_child(_label(ContentPackageLoader.package_label(), 22))
+			_host.add_child(_label("Статус: " + ContentUpdateService.last_status, 20))
 			var check := _button("Проверить обновления")
 			check.disabled = ContentUpdateService.busy
 			check.pressed.connect(func(): ContentUpdateService.check_for_updates(false))
-			body.add_child(check)
+			_host.add_child(check)
 			var reload := _button("Перечитать локальный пакет")
 			reload.pressed.connect(func(): ContentUpdateService.force_reload_current())
-			body.add_child(reload)
+			_host.add_child(reload)
 			var toggle := _button("Автообновление: " + ("Вкл" if ContentUpdateService.enabled else "Выкл"))
 			toggle.pressed.connect(func():
 				ContentUpdateService.set_enabled(not ContentUpdateService.enabled)
-				_rebuild()
+				_rebuild_content()
 			)
-			body.add_child(toggle)
+			_host.add_child(toggle)
 		"account":
-			body.add_child(_label("♙ Аккаунт", 31, GOLD))
-			body.add_child(_label("Игрок: " + AppState.display_name, 23))
-			body.add_child(_label("Тип: " + ("Гостевой" if AppState.is_guest else "Зарегистрированный"), 21))
-			body.add_child(_label("Email: " + (AppState.email_hint if AppState.email_hint != "" else ("Не привязан" if AppState.is_guest else "Не получен от сервера")), 21))
+			_host.add_child(_label("♙ Аккаунт", 31, GOLD))
+			_host.add_child(_label("Игрок: " + AppState.display_name, 23))
+			_host.add_child(_label("Тип: " + ("Гостевой" if AppState.is_guest else "Зарегистрированный"), 21))
+			_host.add_child(_label("Email: " + (AppState.email_hint if AppState.email_hint != "" else ("Не привязан" if AppState.is_guest else "Не получен от сервера")), 21))
 			if AppState.is_guest:
-				body.add_child(_label("Привязать email — прогресс гостя сохранится", 20, GOLD))
+				_host.add_child(_label("Привязать email — прогресс гостя сохранится", 20, GOLD))
 				var email := LineEdit.new()
 				email.placeholder_text = "email@example.com"
 				email.custom_minimum_size.y = 56
 				email.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				body.add_child(email)
+				_host.add_child(email)
 				var pass := LineEdit.new()
 				pass.placeholder_text = "Пароль (от 10 символов)"
 				pass.secret = true
 				pass.custom_minimum_size.y = 56
 				pass.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				body.add_child(pass)
+				_host.add_child(pass)
 				var link := _button("Привязать аккаунт")
 				link.pressed.connect(func():
 					link.disabled = true
@@ -150,22 +140,21 @@ func _rebuild() -> void:
 					pass.clear()
 					if ok:
 						NotificationManager.success("Аккаунт привязан")
-						_rebuild()
+						_rebuild_content()
 					else:
 						NotificationManager.warn("Не удалось привязать · проверь email/пароль")
 				)
-				body.add_child(link)
+				_host.add_child(link)
 			var logout := _button("Выйти из аккаунта")
 			logout.pressed.connect(func():
 				ModalManager.push_confirm("Выйти из аккаунта?", "Вернуться на экран входа. Сессия на сервере будет отозвана.", _logout_confirmed)
 			)
-			body.add_child(logout)
+			_host.add_child(logout)
 		"general":
-			body.add_child(_label("☷ Общие", 31, GOLD))
-			body.add_child(_label("Версия клиента: " + AppState.VERSION, 22))
-			body.add_child(_label("Контент: " + ContentPackageLoader.version, 22))
-			body.add_child(_label("Другие настройки появятся по мере разработки.", 21))
-	root.add_child(_label("LUNEX AFK  •  ONLINE", 18, GOLD))
+			_host.add_child(_label("☷ Общие", 31, GOLD))
+			_host.add_child(_label("Версия клиента: " + AppState.VERSION, 22))
+			_host.add_child(_label("Контент: " + ContentPackageLoader.version, 22))
+			_host.add_child(_label("Другие настройки появятся по мере разработки.", 21))
 
 func _build_graphics(body: VBoxContainer) -> void:
 	body.add_child(_label("▣ Графика", 34, GOLD))
@@ -189,7 +178,7 @@ func _build_graphics(body: VBoxContainer) -> void:
 		var b := _button(("✓  " if selected else "") + ThemeManager.preset_label(key), selected, 92)
 		b.pressed.connect(func():
 			_selected_preset = key
-			_rebuild()
+			_rebuild_content()
 		)
 		grid.add_child(b)
 	body.add_child(_label("Частота кадров (FPS)", 25, GOLD))
@@ -201,7 +190,7 @@ func _build_graphics(body: VBoxContainer) -> void:
 		var b := _button(str(f), f == _selected_fps, 60)
 		b.pressed.connect(func():
 			_selected_fps = f
-			_rebuild()
+			_rebuild_content()
 		)
 		fps_row.add_child(b)
 	body.add_child(_label("Дополнительные эффекты", 25, GOLD))
@@ -215,7 +204,7 @@ func _build_graphics(body: VBoxContainer) -> void:
 	reset.pressed.connect(func():
 		_selected_preset = "medium"
 		_selected_fps = 60
-		_rebuild()
+		_rebuild_content()
 	)
 	actions.add_child(reset)
 	var apply := _button("✓ Применить", true, 76)
@@ -223,7 +212,7 @@ func _build_graphics(body: VBoxContainer) -> void:
 		ThemeManager.apply_preset(_selected_preset)
 		Engine.max_fps = _selected_fps
 		NotificationManager.success("Графика: " + ThemeManager.preset_label() + " • " + str(_selected_fps) + " FPS")
-		_rebuild()
+		_rebuild_content()
 	)
 	actions.add_child(apply)
 
@@ -236,4 +225,5 @@ func _select_tab(tab_name: String) -> void:
 	if tab_name == _tab:
 		return
 	_tab = tab_name
-	_rebuild()
+	_style_tabs()
+	_rebuild_content()

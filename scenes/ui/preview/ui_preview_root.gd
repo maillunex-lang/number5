@@ -14,6 +14,7 @@ const PAGES := {
 	"Feature Screen": "_show_feature_screen",
 	"Hero Card": "_show_hero_card",
 	"Mail / Shop": "_show_mail_shop",
+	"Formation / Map": "_show_wave3",
 	"Settings scaffold": "_show_settings",
 }
 
@@ -151,9 +152,40 @@ func _show_mail_shop() -> void:
 	})
 	col.add_child(offer)
 
+func _show_wave3() -> void:
+	_clear_host()
+	_hint.text = "Wave3: FormationSlot · StageListItem · MapRegionButton"
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 14)
+	col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_host.add_child(col)
+	var slots := HBoxContainer.new()
+	slots.add_theme_constant_override("separation", 8)
+	col.add_child(slots)
+	for sample in [
+		{"name": "Айлэрис", "tint": Color("5EC8E8")},
+		{},
+		{"name": "Герой 3", "tint": Color("E8C56A")},
+	]:
+		var slot: FormationSlot = (load("res://scenes/ui/components/formation_slot.tscn") as PackedScene).instantiate()
+		if sample.is_empty():
+			slot.clear_slot()
+		else:
+			slot.set_hero(sample)
+		slots.add_child(slot)
+	var stage: StageListItem = (load("res://scenes/ui/components/stage_list_item.tscn") as PackedScene).instantiate()
+	stage.set_stage({
+		"id": "CH01-01", "name": "Первый шаг", "type": "main", "state": "available",
+		"power": 1200, "rewards": ["gold", "hero_xp"],
+	})
+	col.add_child(stage)
+	var region: MapRegionButton = (load("res://scenes/ui/components/map_region_button.tscn") as PackedScene).instantiate()
+	region.set_region({"id": "CH01", "name": "Уфимский разлом", "unlocked": true, "x": 0, "y": 0})
+	col.add_child(region)
+
 func _show_settings() -> void:
 	_clear_host()
-	_hint.text = "Settings scaffold (.tscn) — без заполнения вкладок"
+	_hint.text = "Settings chrome (.tscn) · вкладки в сцене, DynamicHost"
 	var sc: Control = (load("res://scenes/features/settings.tscn") as PackedScene).instantiate()
 	sc.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_host.add_child(sc)

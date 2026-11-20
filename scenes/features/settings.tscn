@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://lunexsettings01"]
 
 [ext_resource type="Script" path="res://scenes/features/settings.gd" id="1"]
 
@@ -33,17 +33,90 @@ theme_override_constants/separation = 12
 
 [node name="Header" type="HBoxContainer" parent="Safe/Layout"]
 layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Safe/Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.909804, 0.772549, 0.415686, 1)
+theme_override_font_sizes/font_size = 39
+text = "⚙ Настройки"
+
+[node name="CloseBtn" type="Button" parent="Safe/Layout/Header"]
+custom_minimum_size = Vector2(70, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"GameButton"
+text = "✕"
 
 [node name="Tabs" type="HBoxContainer" parent="Safe/Layout"]
 layout_mode = 2
 theme_override_constants/separation = 5
+
+[node name="TabGraphics" type="Button" parent="Safe/Layout/Tabs"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "▣
+Графика"
+
+[node name="TabAudio" type="Button" parent="Safe/Layout/Tabs"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "♫
+Звук"
+
+[node name="TabContent" type="Button" parent="Safe/Layout/Tabs"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "▧
+Контент"
+
+[node name="TabAccount" type="Button" parent="Safe/Layout/Tabs"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "♙
+Аккаунт"
+
+[node name="TabGeneral" type="Button" parent="Safe/Layout/Tabs"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"GameButton"
+text = "☷
+Общие"
 
 [node name="Scroll" type="ScrollContainer" parent="Safe/Layout"]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="VBox" type="VBoxContainer" parent="Safe/Layout/Scroll"]
+[node name="ContentPanel" type="PanelContainer" parent="Safe/Layout/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
+theme_type_variation = &"GamePanel"
+
+[node name="Pad" type="MarginContainer" parent="Safe/Layout/Scroll/ContentPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="DynamicHost" type="VBoxContainer" parent="Safe/Layout/Scroll/ContentPanel/Pad"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Footer" type="Label" parent="Safe/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.909804, 0.772549, 0.415686, 1)
+theme_override_font_sizes/font_size = 18
+text = "LUNEX AFK  •  ONLINE"
+horizontal_alignment = 1
