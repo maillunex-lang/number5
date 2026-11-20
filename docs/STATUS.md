@@ -12,7 +12,7 @@
 | Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | **Владелец: повторные награды не выдаются** |
 | ART-05 | Procedural portrait/atlas webp; AssetLoader; BattleUnit clips; HUD/cards | **ART-05 device OK** (владелец, 20.11) |
 | MAP-01 list | StageListItem bind + scroll + squad power estimate | **MAP-01 device OK** — имена этапов, сила ≠ 0, скролл (владелец, 20.11) |
-| UI visual-edit | Theme + wave2–9: Summon + Mail/Shop/AFK chrome; shell HIGH* | game_shell CODE_HEAVY; quests/guild |
+| UI visual-edit | Theme + wave2–10: Quests/Expeditions + Summon/Mail/Shop/AFK; shell HIGH* | Guild/Events; game_shell |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy OK** | — |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |
 | AUTH-04 | Memory+PG register/login/link; logout revoke; link_guest sync; settings bind | **AUTH-04 device OK** (владелец, 20.11) |
