@@ -25,6 +25,9 @@
 
 ```
 scenes/ scripts/     — Godot UI
+scenes/ui/components — визуальные UI-компоненты (GameButton, HeroCard, …)
+theme/styles         — StyleBox для кнопок/панелей (править мышкой)
+scenes/ui/preview    — предпросмотр UI без сервера
 content/packages/    — игровые данные (не прогресс игрока)
 server/              — CORE-01 API
 admin-studio/        — редакторы + CDN dev
@@ -46,8 +49,19 @@ AGENTS.md            — этот файл
 | UI навигация | **4 вкладки** — `docs/STRUCTURE.md`, `docs/GDD.md` NAV-001 |
 | Аудит / долг | `docs/AUDIT_REPORT.md`, `docs/TECH_DEBT.md` |
 | Проверки | `docs/QUALITY_GATES.md` |
+| UI visual-edit | `docs/UI_VISUAL_AUDIT.md`, `docs/UI_DEVELOPMENT_RULES.md`, `docs/HOW_TO_EDIT_UI_IN_GODOT.md` |
 
 Приоритет при конфликте: **решение пользователя** → канон GDD/content → поведение кода → ТЗ → исторические docs.
+
+### UI · visual-first (обязательно)
+
+- Новые экраны: сначала `.tscn` + Theme/компоненты, потом логика в `.gd`.
+- Не собирать статический chrome целиком через `UIFactory` / `Control.new()` без причины в аудите.
+- Кнопки/панели — `scenes/ui/components/` и `theme/styles/*.tres`; `UIFactory.fantasy_button`/`gold_button` инстанцируют эти сцены.
+- Динамические списки — шаблон PackedScene + код наполнения (`DynamicHost`).
+- Не ломать `@onready`/`$NodePath` имена при визуальном редактировании.
+- Preview без сервера: `scenes/ui/preview/ui_preview_root.tscn` (F6).
+- Полные правила: `docs/UI_DEVELOPMENT_RULES.md`.
 
 ## 5. Запрещено без согласования
 

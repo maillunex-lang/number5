@@ -1,7 +1,44 @@
+@tool
 extends PanelContainer
+## Нижняя навигация (4 вкладки). Кнопки и отступы — в .tscn.
+
+@export_category("Lunex Bottom Nav")
+@export var bar_min_height: float = 156.0:
+	set(v):
+		bar_min_height = v
+		custom_minimum_size.y = v
+@export var pad_left: int = 8:
+	set(v):
+		pad_left = v
+		_apply_pad()
+@export var pad_right: int = 8:
+	set(v):
+		pad_right = v
+		_apply_pad()
+@export var pad_top: int = 10:
+	set(v):
+		pad_top = v
+		_apply_pad()
+@export var pad_bottom: int = 18:
+	set(v):
+		pad_bottom = v
+		_apply_pad()
 
 var _shell: Node
 var _buttons: Dictionary = {}
+@onready var _pad: MarginContainer = $Pad
+
+func _ready() -> void:
+	custom_minimum_size.y = bar_min_height
+	_apply_pad()
+	_buttons = {
+		"map": $Pad/Row/Map,
+		"heroes": $Pad/Row/Heroes,
+		"hub": $Pad/Row/Hub,
+		"battle": $Pad/Row/Battle,
+	}
+	if Engine.is_editor_hint():
+		return
 
 func setup(shell: Node) -> void:
 	_shell = shell
@@ -23,10 +60,18 @@ func setup(shell: Node) -> void:
 		_apply_tab_labels()
 	)
 
+func _apply_pad() -> void:
+	if _pad == null:
+		return
+	_pad.add_theme_constant_override("margin_left", pad_left)
+	_pad.add_theme_constant_override("margin_right", pad_right)
+	_pad.add_theme_constant_override("margin_top", pad_top)
+	_pad.add_theme_constant_override("margin_bottom", pad_bottom)
+
 func _apply_shell_chrome() -> void:
 	var bn: Dictionary = ContentPackageLoader.shell.get("bottom_nav", {})
 	var h := float(bn.get("height", 110))
-	custom_minimum_size.y = maxf(h, 156.0)
+	custom_minimum_size.y = maxf(h, bar_min_height)
 	var bg := Color(str(bn.get("bg", "#101A2C")))
 	var border := Color(str(bn.get("border", "#3A4A68")))
 	add_theme_stylebox_override("panel", UIFactory.panel_style(bg, border, ThemeManager.radius("lg"), 2))
@@ -48,8 +93,8 @@ func _apply_tab_labels() -> void:
 		b.visible = bool(conf.get("enabled", true)) if not conf.is_empty() else true
 
 func set_active(tab: String) -> void:
-	var active_c := ThemeManager.color("nav_active", LunexColors.NAV_ACTIVE)
-	var idle_c := ThemeManager.color("nav_idle", LunexColors.NAV_IDLE)
+	var active_c := ThemeManager.color("nav_active", LunexColors.NAV_ACTIVE) if ThemeManager else LunexColors.NAV_ACTIVE
+	var idle_c := ThemeManager.color("nav_idle", LunexColors.NAV_IDLE) if ThemeManager else LunexColors.NAV_IDLE
 	for k in _buttons:
 		var b: Button = _buttons[k]
 		var on: bool = (str(k) == tab)

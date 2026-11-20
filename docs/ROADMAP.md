@@ -17,6 +17,7 @@
 |---|---|
 | P0 APK device | Приёмка на физическом Android подтверждена владельцем |
 | H6 code | Серверная timeline + клиентский playback + GET reconnect + claim replay (тесты Go) |
+| UI-VISUAL foundation | Аудит, Theme styles, component library, preview, docs; частичная миграция chrome |
 
 ## Реализовано и проверено
 

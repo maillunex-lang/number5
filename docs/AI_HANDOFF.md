@@ -1,18 +1,26 @@
-# Передача проекта · Android 0.5.5 + H6 code
+# Передача проекта · UI visual-editor + H6
 
-Срез от 20 ноября 2026. Исходники клиента, API и Studio синхронизированы с версией VPS, плюс ветка H6 (серверная timeline → COMBAT-02 playback). Рабочие документы — [статус](STATUS.md) и [приоритеты с критериями приёмки](ROADMAP.md).
+Срез от 20 ноября 2026. Ветка работы UI: `cursor/godot-visual-editor-ready-d5fe` (мержится в `main` после CI).
 
-**P0 приёмка APK на физическом телефоне подтверждена владельцем.** H6 code смержен в `main` (PR #8). Фикс «В хаб» после боя: не rewind стека оверлеев (`clear_overlays` / `switch_tab`). Следующий шаг: APK с H6+fix и device verify playback.
+**Сделано ранее:** P0 device OK · H6 code · фикс rewind «В хаб».
 
-**Процесс:** владелец поручил после зелёного CI **всегда merge PR в `main` по умолчанию**.
+**Сделано в visual-editor PR:**
 
-Версионные SQL-файлы встроены в API. Для повторной проверки на отдельной PostgreSQL 16 используется tools/check_postgres_startup.py и задание postgres-startup в GitHub Actions.
+- Аудит `docs/UI_VISUAL_AUDIT.md`
+- Theme StyleBox в `theme/styles/` + обновлённый `theme/lunex_theme.tres` (GameButton/GoldButton/GamePanel)
+- Библиотека `scenes/ui/components/*`
+- `UIFactory` → инстанс визуальных кнопок
+- COMBAT-03 chrome в `.tscn`; TopBar/BottomNav `@export`
+- Preview `scenes/ui/preview/ui_preview_root.tscn`
+- `docs/HOW_TO_EDIT_UI_IN_GODOT.md`, `docs/UI_DEVELOPMENT_RULES.md`, правила в `AGENTS.md`
 
-Публичный Web отключён. При изменениях клиента сохранять раздачу Android APK, API и HTTPS CDN. Исторические отчёты прототипа относятся к своим версиям.
+**Процесс:** после зелёного CI **merge в `main` по умолчанию**.
 
-## Next для другого ИИ
+## Next
 
-1. Device verify H6 (после APK с новым `battle_playback.gd`).
-2. ATOMIC-ECONOMY / TD-PG-RACE.
-3. AUTH-04 + UI-SYNC-HEROES на Android.
-4. ART-05.
+1. APK с H6 + visual chrome → device verify playback и «В хаб».
+2. Продолжить миграцию CODE_HEAVY экранов (hub buildings остаются из JSON; списки → HeroCard/RewardCard).
+3. ATOMIC-ECONOMY / TD-PG-RACE.
+4. AUTH-04, ART-05.
+
+Godot headless в cloud-агенте может отсутствовать — проверять локально F6 preview + export по `docs/ANDROID_BUILD.md`.
