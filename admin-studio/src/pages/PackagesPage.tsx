@@ -68,6 +68,11 @@ export default function PackagesPage() {
               Клонировать
             </button>
           </div>
+          <p className="muted" style={{ marginBottom: 10 }}>
+            После «Опубликовать» клиенты с OTA сами скачают пакет с{" "}
+            <code>/cdn/active.json</code> (без новой APK). Нужен доступный{" "}
+            <code>cdn_base</code> в <code>content/update_config.json</code>.
+          </p>
           <div className="toolbar">
             <button
               className="btn"
@@ -79,7 +84,7 @@ export default function PackagesPage() {
                 setHistory(h.history || []);
               }}
             >
-              Опубликовать {version}
+              Опубликовать {version} → CDN
             </button>
             <button
               className="btn danger"

@@ -16,6 +16,7 @@ config/icon="res://assets/ui/icon.svg"
 
 AppState="*res://scripts/autoload/app_state.gd"
 ContentPackageLoader="*res://scripts/autoload/content_package_loader.gd"
+ContentUpdateService="*res://scripts/autoload/content_update_service.gd"
 DemoData="*res://scripts/autoload/demo_data.gd"
 UIStateManager="*res://scripts/autoload/ui_state_manager.gd"
 ThemeManager="*res://scripts/autoload/theme_manager.gd"

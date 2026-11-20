@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "cdn_base": "http://127.0.0.1:8787/cdn",
+  "check_on_boot": true,
+  "check_interval_sec": 90,
+  "timeout_sec": 20,
+  "note": "Локальный CDN Admin Studio. Для APK на телефоне замените cdn_base на HTTPS хост (user://update_config.json перекрывает)."
+}

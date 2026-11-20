@@ -16,7 +16,7 @@ godot --path .
 
 Требуется Godot **4.7.2**. Портрет 1080×1920 (9:16).
 
-Контент читается только из `content/packages/{version}/` (указатель `active.json`). Клиент рисует UI; прогресс сессии локальный и не является сервером.
+Контент читается из `content/packages/{version}/` или OTA-кеша `user://content_cache` (после Publish в Studio CDN). Клиент рисует UI; прогресс сессии локальный. Подробности: `docs/CONTENT_OTA.md`.
 
 ## Lunex Admin Studio
 

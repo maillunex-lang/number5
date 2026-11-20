@@ -16,6 +16,7 @@ const WORLD_W := 1080.0
 
 var _building_defs: Array[Dictionary] = []
 var _pulse_nodes: Array[Control] = []
+var _ambient_tweens: Array[Tween] = []
 var _look: Dictionary = {}
 var _parallax: Dictionary = {}
 var _rail_layout: Dictionary = {}
@@ -266,13 +267,22 @@ func _on_building(def: Dictionary) -> void:
 	ScreenRouter.go(route, payload)
 
 func _start_ambient() -> void:
+	for tw in _ambient_tweens:
+		if tw != null and is_instance_valid(tw):
+			tw.kill()
+	_ambient_tweens.clear()
+	if DisplayServer.get_name() == "headless":
+		return
 	if ThemeManager.max_active_fx <= 0 or not ThemeManager.hub_pulse:
 		return
 	var sec := ThemeManager.hub_pulse_sec
 	for p in _pulse_nodes:
+		if p == null or not is_instance_valid(p):
+			continue
 		var tw := create_tween().set_loops()
 		tw.tween_property(p, "modulate", Color(1.15, 1.1, 1.0, 1), sec)
 		tw.tween_property(p, "modulate", Color(1, 1, 1, 1), sec)
+		_ambient_tweens.append(tw)
 
 func _apply_quality() -> void:
 	_fx.visible = ThemeManager.hub_decor_layers >= 2

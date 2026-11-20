@@ -4,6 +4,7 @@ extends Control
 @onready var _regions: Control = $Scroll/World/Regions
 @onready var _scroll: ScrollContainer = $Scroll
 @onready var _title: Label = $Header/Title
+var _float_tweens: Array[Tween] = []
 
 func _ready() -> void:
 	_title.text = ContentPackageLoader.tr_key("map.title", "Карта мира · Элиориан")
@@ -13,6 +14,10 @@ func _ready() -> void:
 	DemoData.content_reloaded.connect(_build)
 
 func _build() -> void:
+	for tw in _float_tweens:
+		if tw != null and is_instance_valid(tw):
+			tw.kill()
+	_float_tweens.clear()
 	for c in _regions.get_children():
 		c.queue_free()
 	for c in $Scroll/World/Parallax.get_children():
@@ -43,10 +48,11 @@ func _build() -> void:
 			ScreenRouter.go("MAP-01", {"region_id": rid})
 		)
 		_regions.add_child(b)
-		if ThemeManager.parallax_enabled and unlocked:
+		if ThemeManager.parallax_enabled and unlocked and DisplayServer.get_name() != "headless":
 			var tw := create_tween().set_loops()
 			tw.tween_property(b, "position:y", b.position.y - 8, 1.4).set_trans(Tween.TRANS_SINE)
 			tw.tween_property(b, "position:y", b.position.y, 1.4).set_trans(Tween.TRANS_SINE)
+			_float_tweens.append(tw)
 
 func _on_continue() -> void:
 	ScreenRouter.go("MAP-01", {"region_id": "r1", "focus_current": true})

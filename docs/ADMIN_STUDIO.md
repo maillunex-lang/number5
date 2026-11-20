@@ -28,4 +28,6 @@ npm run dev
 
 Клиент: `ContentPackageLoader` → `ThemeManager` / Shell / экраны **только читают**.
 
+**OTA:** Publish → CDN `/cdn/*` → `ContentUpdateService` на клиенте качает в `user://` без новой APK. См. `docs/CONTENT_OTA.md`.
+
 Схема: `docs/CONTENT_PACKAGE_SCHEMA.md`. Проверка: `tools/validate_content_package.sh`.

@@ -80,7 +80,35 @@ app.get("/api/health", (_req, res) => {
     ok: true,
     service: "lunex-admin-studio",
     note: "Контент/дизайн комбайн. Не игровой сервер прогресса/платежей.",
+    cdn: "http://127.0.0.1:8787/cdn",
   });
+});
+
+/** OTA CDN: клиент качает active + JSON пакета без переустановки APK */
+app.get("/cdn/active.json", (_req, res) => {
+  const fp = path.join(PACKAGES, "active.json");
+  if (!fs.existsSync(fp)) return res.status(404).json({ error: "no active" });
+  res.type("json").send(fs.readFileSync(fp, "utf8"));
+});
+
+app.get("/cdn/packages/:version/:file", (req, res) => {
+  const version = req.params.version;
+  const file = req.params.file;
+  if (!/^\d+\.\d+\.\d+$/.test(version)) return res.status(400).json({ error: "bad version" });
+  if (file.includes("..") || file.includes("/") || file.includes("\\")) {
+    return res.status(400).json({ error: "bad file" });
+  }
+  const fp = path.join(packageDir(version), file);
+  if (!fs.existsSync(fp)) return res.status(404).json({ error: "not found" });
+  if (file.endsWith(".json")) res.type("json");
+  res.sendFile(fp);
+});
+
+app.get("/cdn/packages/:version", (req, res) => {
+  const dir = packageDir(req.params.version);
+  if (!fs.existsSync(dir)) return res.status(404).json({ error: "not found" });
+  const files = fs.readdirSync(dir).filter((f) => !f.startsWith("."));
+  res.json({ version: req.params.version, files });
 });
 
 app.get("/api/packages", (_req, res) => {
@@ -161,8 +189,10 @@ app.post("/api/packages/:version/publish", (req, res) => {
     active: version,
     previous: prev.version,
     path: dir,
+    cdn_active: "http://127.0.0.1:8787/cdn/active.json",
+    cdn_package: `http://127.0.0.1:8787/cdn/packages/${version}/`,
     manifest,
-    message: `Пакет ${version} опубликован. Godot читает res://content/packages.`,
+    message: `Пакет ${version} опубликован в CDN. Клиенты подтянут OTA без переустановки APK (cdn_base в update_config).`,
   });
 });
 

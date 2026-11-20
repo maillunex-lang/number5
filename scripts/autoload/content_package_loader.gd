@@ -1,15 +1,18 @@
 extends Node
 ## Версионные контент-пакеты. Клиент только читает и рисует.
-## Не является сервером прогресса / валют / боя.
+## Приоритет: user://content_cache (OTA) → res://content/packages (вшитый в APK).
 
 signal package_loaded(version: String)
 signal package_error(message: String)
 
 const BUNDLED_ROOT := "res://content/packages"
 const CACHE_ROOT := "user://content_cache/packages"
-const ACTIVE_FILE := "res://content/packages/active.json"
+const BUNDLED_ACTIVE := "res://content/packages/active.json"
+const CACHE_ACTIVE := "user://content_cache/active.json"
 
 var version: String = "0.1.0"
+var source_path: String = ""
+var from_cache: bool = false
 var manifest: Dictionary = {}
 var hub: Dictionary = {}
 var campaign: Dictionary = {}
@@ -27,7 +30,9 @@ func _ready() -> void:
 	load_active_package()
 
 func load_active_package() -> bool:
-	var active := _read_json(ACTIVE_FILE)
+	var active := _read_json(CACHE_ACTIVE)
+	if active.is_empty():
+		active = _read_json(BUNDLED_ACTIVE)
 	if not active.is_empty() and active.has("version"):
 		version = str(active["version"])
 	var ok := load_package(version)
@@ -36,20 +41,39 @@ func load_active_package() -> bool:
 	return ok
 
 func load_package(ver: String) -> bool:
-	var base := "%s/%s" % [BUNDLED_ROOT, ver]
 	var cache_base := "%s/%s" % [CACHE_ROOT, ver]
+	var bundled_base := "%s/%s" % [BUNDLED_ROOT, ver]
+	var base := bundled_base
+	from_cache = false
 	if DirAccess.open(cache_base) != null and FileAccess.file_exists("%s/hub.json" % cache_base):
 		base = cache_base
+		from_cache = true
 	_load_docs(base)
 	if hub.is_empty() or heroes_pack.is_empty() or campaign.is_empty():
-		base = "%s/%s" % [BUNDLED_ROOT, ver]
+		base = bundled_base
+		from_cache = false
 		_load_docs(base)
 	loaded = not hub.is_empty() and not heroes_pack.is_empty() and not campaign.is_empty()
 	if loaded:
 		version = ver
+		source_path = base
 		package_loaded.emit(version)
-		print("ContentPackage loaded: ", version, " from ", base)
+		print("ContentPackage loaded: ", version, " from ", base, (" (OTA cache)" if from_cache else " (bundled)"))
 	return loaded
+
+func apply_cached_active(ver: String, meta: Dictionary = {}) -> bool:
+	## После успешной загрузки OTA — записать указатель и перечитать пакет.
+	var dir := DirAccess.open("user://")
+	if dir:
+		dir.make_dir_recursive("content_cache")
+	var payload := {
+		"version": ver,
+		"source": "ota",
+		"note": "Скачан с CDN. Прогресс игрока сюда не пишется.",
+		"published_at": str(meta.get("published_at", Time.get_datetime_string_from_system(true))),
+	}
+	_write_json(CACHE_ACTIVE, payload)
+	return load_package(ver)
 
 func _load_docs(base: String) -> void:
 	manifest = _read_json("%s/manifest.json" % base)
@@ -68,7 +92,8 @@ func reload() -> bool:
 	return load_active_package()
 
 func package_label() -> String:
-	return "Пакет %s · только чтение" % version
+	var src := "OTA" if from_cache else "APK"
+	return "Пакет %s · %s · только чтение" % [version, src]
 
 func tr_key(key: String, fallback: String = "") -> String:
 	var entries: Dictionary = strings.get("entries", {})
@@ -97,6 +122,12 @@ func _read_json(path: String) -> Dictionary:
 	if typeof(data) != TYPE_DICTIONARY:
 		return {}
 	return data
+
+func _write_json(path: String, data: Dictionary) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify(data, "  ") + "\n")
 
 func get_hub_buildings() -> Array:
 	return hub.get("buildings", [])

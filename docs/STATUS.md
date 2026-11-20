@@ -6,7 +6,7 @@
 
 - Godot **4.7.2** клиентский UI-прототип (локальные демо-данные).
 - Версионные пакеты `content/packages/0.1.0/` + `ContentPackageLoader` (клиент только читает).
-- Lunex Admin Studio (`admin-studio/`) — комбайн: Theme / Shell / Strings / Motion / Assets + Hub 2.0 + publish/diff/rollback.
+- Lunex Admin Studio (`admin-studio/`) — комбайн + **OTA CDN** (`/cdn`): Save→Publish → клиент качает пакет без новой APK.
 - Документы: GDD, MVP, STRUCTURE, ARCHITECTURE, CONTENT-01, ROADMAP, ADMIN_STUDIO.
 
 ## Сейчас нет (и это ожидаемо)
