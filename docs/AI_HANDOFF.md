@@ -1,11 +1,13 @@
-# Передача · UI-VISUAL wave4
+# Передача · device OK + wave4 merged
 
-Срез 20 ноября 2026. Ветка: `cursor/ui-visual-wave4-d5fe`.
+Срез 20 ноября 2026. `main` @ merge #25 (UI wave4).
 
-**Сделано:** HERO-01 chrome (portrait/tabs/TabContentHost); HERO-02 FormationSlot + HeroCard grid; Auth form в `.tscn` + Theme (без inline StyleBox); settings account → Theme buttons; preview «Wave4 Heroes/Auth».
+**Владелец на APK:** H6 / AUTH-04 / ART-05 / MAP-01 / replay-farm — **OK**.
+
+**Код:** wave4 влит (HeroDetails, SquadManager, Auth Theme). Нужен следующий VPS APK для device-проверки wave4 chrome.
 
 ## Next
 
-1. Merge → APK: проверить auth guest/login, HERO-01/02, MAP-01 (предыдущий фикс).
-2. Владелец: ART-05 / H6 / AUTH-04 / MAP-01 device OK.
-3. Wave5 кандидаты: battle_result chrome, feature DemoScreenBuilder screens, TopBar/BottomNav MED→HIGH.
+1. VPS APK после #25 → владелец: auth / HERO-01 / HERO-02.
+2. Wave5: `battle_result` chrome, DemoScreenBuilder features, TopBar/BottomNav.
+3. Опционально: серверный power/formation mutate API.

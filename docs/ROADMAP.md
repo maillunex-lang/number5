@@ -6,36 +6,35 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | H6 — device verify | Чеклист `docs/H6_DEVICE_VERIFY.md` на свежем APK; API-контракт уже зелёный. Закрыть после «H6 device OK» от владельца |
-| P1 | AUTH-04 и UI-SYNC-HEROES | Код: Memory+PG register/login/link/logout, link_guest sync, settings bind; API tests + `docs/AUTH_04_DEVICE_VERIFY.md`. Закрыть после «AUTH-04 device OK» |
-| P1 | ART-05 | Код: placeholder webp + BattleUnit atlas clips + HUD/HeroCard portraits; `docs/ART_05_DEVICE_VERIFY.md`. Закрыть после «ART-05 device OK» |
-| P1 | MAP-01 list bind/scroll/power | StageListItem bind + DragPad scroll + client squad power; device: имена этапов, сила ≠ 0, скролл |
+| P1 | UI-VISUAL wave4 device | Свежий APK после #25: auth guest/login, HERO-01/02 chrome |
+| P2 | UI-VISUAL wave5 | battle_result chrome; DemoScreenBuilder features → Theme; TopBar/BottomNav MED→HIGH |
 
 ## Закрыто в этом срезе
 
 | ID | Результат |
 |---|---|
 | P0 APK device | Приёмка на физическом Android подтверждена владельцем |
-| H6 code | Серверная timeline + клиентский playback + GET reconnect + claim replay (тесты Go) |
-| UI-VISUAL foundation | Аудит, Theme styles, component library, preview, docs; частичная миграция chrome |
-| UI-VISUAL wave2 | HubBuilding, BattleUnit, HeroCard grid, MailItem, ShopOfferCard, DemoScreenBuilder→GamePanel |
-| FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK (owner confirmed) |
-| ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic`: ledger+side-effects в одной TX; PG FOR UPDATE + advisory lock; concurrent debit tests |
-| mail ClaimAll atomic | ClaimAll: ledger → SaveMail в одной TX (без «claimed без награды») |
-| AUTH-04 code | Memory+PG credentials, logout, link sync, device checklist | |
-| Battle replay farm | Повтор cleared-этапа без валюты (training until loot caps) | |
-| UI-VISUAL wave3 | Formation/Settings/Map chrome + FormationSlot/StageListItem/MapRegionButton | |
-| UI-VISUAL wave4 | HeroDetails + SquadManager + Auth form Theme; settings account Theme | |
-| settings pass keyword | GDScript reserved `pass` → email_edit/password_edit; Godot Android export OK | |
+| H6 code + device | Серверная timeline + playback; **H6 device OK** |
+| AUTH-04 code + device | Memory+PG credentials/link; **AUTH-04 device OK** |
+| ART-05 code + device | Placeholder portraits/atlases + BattleUnit; **ART-05 device OK** |
+| MAP-01 list fix + device | Stage bind/scroll/power; **MAP-01 device OK** |
+| Battle replay farm | Повтор cleared-этапа без валюты; владелец подтвердил |
+| UI-VISUAL foundation | Аудит, Theme styles, component library, preview, docs |
+| UI-VISUAL wave2 | HubBuilding, BattleUnit, HeroCard, MailItem, ShopOfferCard |
+| UI-VISUAL wave3 | Formation/Settings/Map chrome + FormationSlot/StageListItem/MapRegionButton |
+| UI-VISUAL wave4 code | HeroDetails + SquadManager + Auth form Theme (merge #25) |
+| FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
+| ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
+| mail ClaimAll atomic | ClaimAll в одной TX |
+| settings pass keyword | `pass` → email_edit/password_edit |
 
 ## Реализовано и проверено
 
 - Миграции встроены в API. На пустой PostgreSQL 16 проверены создание гостя, регистрация, вход, профиль, heartbeat и восстановление сессии после перезапуска.
-
 - CORE-PG-DEPLOY и OTA-2 работают на VPS. API использует PostgreSQL и отдаёт состояние через HTTPS. CDN публикует пакет 0.9.0.
-- H4 реализован в запуске API: при ошибке PostgreSQL в prod процесс завершается. H5 ограничивает тестовые операции окружением test.
-- Клиент загружает профиль, кошелёк, коллекцию и отряд. Бой start/claim и воспроизведение timeline — в коде; device verify остаётся P1.
-- Общая тема, навигация четырёх вкладок и обновление OTA проверены в Godot. Подписанный debug APK опубликован.
+- H4: при ошибке PostgreSQL в prod процесс завершается. H5 ограничивает тестовые операции окружением test.
+- Клиент: профиль, кошелёк, коллекция, отряд, бой start/claim + playback — device OK.
+- Общая тема, навигация четырёх вкладок и OTA проверены. Подписанный debug APK опубликован.
 
 ### P2 — контент / Studio / онлайн-системы
 
@@ -49,4 +48,4 @@
 
 ## Платформы и закрытая альфа
 
-Публичная Web/PWA-версия отключена по решению владельца. Возврат Web требует отдельного решения. Для закрытой Android-альфы остаются проверка H6 на устройстве, экономические гонки и auth/sync. Критерии описаны выше.
+Публичная Web/PWA-версия отключена по решению владельца. Возврат Web требует отдельного решения. Для закрытой Android-альфы device-verify H6/AUTH/ART/MAP закрыты владельцем 20.11; следующий APK — wave4 chrome.
