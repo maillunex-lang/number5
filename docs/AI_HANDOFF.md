@@ -1,13 +1,14 @@
-# Передача · AUTH-04 prep (+ H6 device parallel)
+# Передача · battle replay no-farm (+ H6 device)
 
-Срез 20 ноября 2026. Ветка: `cursor/auth-04-prep-d5fe`.
+Срез 20 ноября 2026. Ветка: `cursor/battle-no-replay-farm-d5fe`. AUTH-04 смержен в `main` (#18).
 
-**Параллельно:** владелец тестирует H6 на устройстве (`docs/H6_DEVICE_VERIFY.md`).
+**Баг владельца:** повтор уже пройденного этапа кампании снова давал награду (hardcoded 500 gold / 200 xp).
 
-**Сделано:** AUTH-04 prep — credentials на Memory (CI) + Postgres; `POST /auth/logout`; client `link_guest` → me/sync/save; settings «Привязать»; auth API tests; `docs/AUTH_04_DEVICE_VERIFY.md`; `tools/auth_04_verify_api.sh`.
+**Фикс:** claim без first-clear → пустые rewards; UI «тренировка»; тест `TestBattleClearedStageClaimGivesNoRewards`.
 
 ## Next
 
-1. Ждать **H6 device OK** → закрыть H6 в STATUS.
-2. После merge AUTH-04 + новый APK → **AUTH-04 device OK** по чеклисту.
-3. ART-05; visual wave3.
+1. Merge + деплой API → владелец перепроверит повтор боя без награды.
+2. Ждать **H6 device OK** / **AUTH-04 device OK**.
+3. Позже: replay loot + daily cap по `PROGRESSION_EQUIPMENT_LOOT.md`.
+4. ART-05; visual wave3.

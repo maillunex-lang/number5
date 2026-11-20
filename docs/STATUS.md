@@ -8,6 +8,7 @@
 | Интерфейс | В портретном тесте Godot проверены 42 состояния. Все 269 доступных кнопок в 37 игровых меню приняли нажатие. Колесо прокрутило 8 из 8 переполненных областей | Только доступные тестовому профилю действия. Серверный эффект каждой операции этим тестом не проверялся |
 | Аккаунт и прогресс | Гостевой вход, загрузка профиля, героев, отряда и кошелька. После боя CH01-01 открывался CH01-02, повтор получения награды сохранял баланс, перезапуск сохранял этап | Шесть исторических HTTP 500 профиля наблюдались 20 ноября. Точная причина не установлена |
 | Бой H6 | Server timeline + playback + GET reconnect + stable `claim:{battle_id}`; API/CI контракт покрыт | **Device verify** по `docs/H6_DEVICE_VERIFY.md` на свежем APK — ждём подтверждение владельца |
+| Battle replay farm | Claim на уже `FirstClearClaimed` этап: пустые rewards (без hardcoded 500 gold) | Нужен деплой API; полный replay-loot/daily cap — позже по канону |
 | UI visual-edit | Theme + компоненты; HubBuilding/BattleUnit/HeroCard/MailItem/ShopOfferCard; DemoScreenBuilder на GamePanel; preview F6 | Formation/settings/map nodes ещё частично code; см. `docs/UI_VISUAL_AUDIT.md` |
 | FIX-GODOT-DEPLOY-002 | Theme `GamePopupPanel`; typed battle/shop GDScript; headless import clean; **VPS auto-deploy подтверждён владельцем без ошибок** | Следующий APK — H6 device verify |
 | ATOMIC-ECONOMY | `RunAtomic`: claim/summon/shop/afk/mail(+claim-all) + ledger в одной TX; PG row lock | device smoke после деплоя API |

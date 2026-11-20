@@ -92,12 +92,14 @@ func _claim_online(bid: String, _sid: String) -> bool:
 	if not claim.get("ok", false):
 		_busy = false
 		return false
-	var crewards: Dictionary = claim.get("data", {}).get("rewards", {})
+	var cdata: Dictionary = claim.get("data", {})
+	var crewards: Dictionary = cdata.get("rewards", {})
+	var first_clear := bool(cdata.get("first_clear", crewards.size() > 0))
 	var lines: Array = []
 	for k in crewards.keys():
 		lines.append("%s ×%s" % [str(k), str(crewards[k])])
 	if lines.is_empty():
-		lines.append("Повторное прохождение")
+		lines.append("Тренировка — без наград")
 	await ApiClient.sync_wallet()
 	var campaign := await ApiClient.get_campaign()
 	if campaign.get("ok", false):
@@ -110,8 +112,12 @@ func _claim_online(bid: String, _sid: String) -> bool:
 			var stage_key := str(st.get("id", ""))
 			st["state"] = "cleared" if cleared.has(stage_key) else ("current" if stage_key == DemoData.campaign_progress["current_stage"] else "locked")
 	_clear_dynamic()
-	_dynamic.add_child(UIFactory.label("Награды подтверждены сервером.", 26, LunexColors.EMERALD))
-	ModalManager.push_rewards("Награды (ONLINE)", lines)
+	if first_clear and not crewards.is_empty():
+		_dynamic.add_child(UIFactory.label("Награды подтверждены сервером.", 26, LunexColors.EMERALD))
+		ModalManager.push_rewards("Награды (ONLINE)", lines)
+	else:
+		_dynamic.add_child(UIFactory.label("Повтор: тренировка без наград.", 26, LunexColors.GOLD))
+		ModalManager.push_info("Повтор этапа", "Этот бой уже был пройден.\nНаграды за first clear не выдаются повторно.")
 	_dynamic.add_child(UIFactory.muted("battle_id %s · CORE-01" % bid, 18))
 	_busy = false
 	return true
