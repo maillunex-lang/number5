@@ -1,18 +1,34 @@
 extends Control
-## SOCIAL-04: почта. Online → CORE-01 /mail; иначе demo_inbox.
+## SOCIAL-04: chrome в .tscn; ListHost — MailItem; claim API без изменений.
 
 var _payload: Dictionary = {}
 var _filter: String = "all"
 var _busy: bool = false
 var _messages: Array = []
 var _from_server: bool = false
+var _nav_bound: bool = false
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _subtitle: Label = $Safe/Scroll/VBox/Subtitle
+@onready var _tabs: HBoxContainer = $Safe/Scroll/VBox/TabsHost
+@onready var _list: VBoxContainer = $Safe/Scroll/VBox/ListHost
+@onready var _claim_all: Button = $Safe/Scroll/VBox/ClaimAllBtn
+@onready var _back: Button = $Safe/Scroll/VBox/BackBtn
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
+	_bind_nav()
 	await _load_inbox()
 	_rebuild()
+
+func _bind_nav() -> void:
+	if _nav_bound:
+		return
+	_nav_bound = true
+	_claim_all.pressed.connect(_claim_all_pressed)
+	_back.pressed.connect(func(): ScreenRouter.handle_back())
 
 func _pack() -> Dictionary:
 	return ContentPackageLoader.mail_pack
@@ -31,31 +47,30 @@ func _load_inbox() -> void:
 		_messages.append(m_raw)
 
 func _rebuild() -> void:
-	var root := $Safe/Scroll/VBox
-	for c in root.get_children():
-		c.queue_free()
 	var pack := _pack()
 	var mode := "ONLINE" if _from_server else "DEMO"
-	root.add_child(UIFactory.section_header(ContentPackageLoader.tr_key("mail.title", "Почта")))
-	root.add_child(UIFactory.muted("%s · %s · %s" % [
+	_title.text = ContentPackageLoader.tr_key("mail.title", "Почта")
+	_subtitle.text = "%s · %s · %s" % [
 		ContentPackageLoader.package_label(),
 		mode,
 		str(pack.get("disclaimer", ContentPackageLoader.tr_key("meta.demo", "DEMO"))),
-	], 18))
-	root.add_child(UIFactory.muted("Не переписка игроков · чтение ≠ claim", 16))
-
-	var tabs := UIFactory.hbox(8)
-	root.add_child(tabs)
+	]
+	for c in _tabs.get_children():
+		c.queue_free()
 	for t in [["all", "Все"], ["reward", "Награды"], ["system", "Система"]]:
-		var b := UIFactory.fantasy_button(t[1])
+		var b := Button.new()
+		b.text = t[1]
 		b.custom_minimum_size = Vector2(140, 44)
+		b.theme_type_variation = &"GameButton"
 		var key: String = t[0]
 		b.pressed.connect(func():
 			_filter = key
 			_rebuild()
 		)
-		tabs.add_child(b)
+		_tabs.add_child(b)
 
+	for c in _list.get_children():
+		c.queue_free()
 	var shown := 0
 	var item_scene: PackedScene = load("res://scenes/ui/components/mail_item.tscn")
 	for m_raw in _messages:
@@ -74,18 +89,15 @@ func _rebuild() -> void:
 			parts.append("%s×%s" % [str(a.get("resource_id", "")), str(a.get("amount", 0))])
 		var mid := str(m.get("id", ""))
 		item.claim_pressed.connect(func(_id): _claim_one(mid, parts))
-		root.add_child(item)
+		_list.add_child(item)
 
 	if shown == 0:
-		root.add_child(UIFactory.muted("Пусто", 20))
-
-	var claim_all := UIFactory.fantasy_button("Забрать всё")
-	claim_all.pressed.connect(_claim_all)
-	root.add_child(claim_all)
-
-	var back := UIFactory.fantasy_button("Назад")
-	back.pressed.connect(func(): ScreenRouter.handle_back())
-	root.add_child(back)
+		var empty := Label.new()
+		empty.text = "Пусто"
+		empty.add_theme_font_size_override("font_size", 20)
+		empty.add_theme_color_override("font_color", LunexColors.TEXT_MUTED)
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_list.add_child(empty)
 
 func _claim_one(mail_id: String, parts: PackedStringArray) -> void:
 	if _busy:
@@ -110,7 +122,7 @@ func _claim_one(mail_id: String, parts: PackedStringArray) -> void:
 	ModalManager.push_rewards("Почта (DEMO)", parts)
 	_busy = false
 
-func _claim_all() -> void:
+func _claim_all_pressed() -> void:
 	if _busy:
 		return
 	_busy = true

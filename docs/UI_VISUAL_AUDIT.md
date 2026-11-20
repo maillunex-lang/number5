@@ -54,7 +54,10 @@
 | Playback | `battle/battle_playback.tscn` | 12 | высокая | timeline | MED* | Field/HUD/Controls | юниты через `BattleUnit` + timeline | полный экран |
 | Result | `battle/battle_result.tscn` | ~12 | низкая | claim | MED* | Title/ClaimProgress/Status/Meta/Nav Theme | claim API + тексты | низкий |
 | Settings | `features/settings.tscn` | ~18 | средняя | local | MED* | Title/Close/5 Tabs/ContentPanel | DynamicHost вкладок | средний |
-| Shop / Summon / AFK / Mail / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки/кнопки | списки |
+| Mail | `features/mail.tscn` | ~14 | средняя | API | MED* | Title/Tabs/ListHost/ClaimAll | MailItem + claim | средний |
+| Shop | `features/shop.tscn` | ~18 | средняя | API | MED* | Title/Banner/Tabs/ListHost | ShopOfferCard + buy | средний |
+| AFK | `features/afk_rewards.tscn` | ~14 | низкая | API | MED* | Title/Accum/Chest/Collect | status/claim | низкий |
+| Summon / … | `features/*.tscn` | ~5 | высокая | API/пакет | CODE_HEAVY | Safe/Scroll/VBox | списки | списки |
 | VIP | `features/vip.tscn` | ~12 | низкая | пакет | MED* | Title/Status/Back/DynamicHost | секции в host | низкий |
 | Social hub | `features/social_hub.tscn` | ~10 | низкая | демо | MED* | Title/Back/DynamicHost | route-кнопки | низкий |
 | Chat | `features/chat.tscn` | ~12 | низкая | демо | MED* | Title/Back/DynamicHost | FeatureSectionHost | низкий |
@@ -101,6 +104,7 @@
 | Wave5+ | Chat / Friends / Rankings Theme hosts; FeatureSectionHost helper |
 | Wave6 | BattlePass/PvP/Profile/Rewards/Sys off DemoScreenBuilder (builder unused) |
 | Wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
+| Wave8 lists | Mail/Shop/AFK Theme chrome + ListHost (claim/buy API intact) |
 
 ## 7. Критерии «экран модернизирован»
 

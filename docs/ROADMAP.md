@@ -6,8 +6,8 @@
 
 | Приоритет | Задача | Критерий завершения |
 |---|---|---|
-| P1 | UX hang-fix + wave4–7 device | APK после #28: вход; shell currency bar + demos |
-| P2 | UI-VISUAL online lists | Shop/Mail/AFK card templates; game_shell safe-area |
+| P1 | UX hang-fix + wave4–8 device | APK после #28: вход; mail/shop/AFK + shell |
+| P2 | UI-VISUAL remainder | Summon lists; game_shell safe-area |
 
 ## Закрыто в этом срезе
 
@@ -27,6 +27,7 @@
 | UI-VISUAL wave5+ code | Chat/Friends/Rankings Theme + FeatureSectionHost |
 | UI-VISUAL wave6 demos | BattlePass/PvP/Profile/Rewards/Sys Theme hosts; DemoScreenBuilder unused |
 | UI-VISUAL wave7 shell | TopBar ResourceCounter + BottomNav exports; DemoScreenBuilder removed |
+| UI-VISUAL wave8 lists | Mail/Shop/AFK Theme chrome + ListHost |
 | FIX-GODOT-DEPLOY-002 | Godot 4.7.2 build unblocked; VPS auto-deploy OK |
 | ATOMIC-ECONOMY / TD-PG-RACE | `store.RunAtomic` + PG locks |
 | mail ClaimAll atomic | ClaimAll в одной TX |

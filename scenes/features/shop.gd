@@ -1,14 +1,27 @@
 extends Control
-## HUB-06: VIRTUAL_FREE магазин. Online → store orders/confirm-test; иначе демо.
+## HUB-06: chrome/banner в .tscn; ListHost — ShopOfferCard; buy API без изменений.
 
 var _payload: Dictionary = {}
 var _busy: bool = false
 var _offers: Array = []
+var _nav_bound: bool = false
+
+const CATEGORIES: Array[String] = ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
+var _selected_category: String = "Рекомендуем"
+
+@onready var _title: Label = $Safe/Scroll/VBox/Title
+@onready var _subtitle: Label = $Safe/Scroll/VBox/Subtitle
+@onready var _tabs: HBoxContainer = $Safe/Scroll/VBox/TabsScroll/TabsHost
+@onready var _category: Label = $Safe/Scroll/VBox/CategoryLabel
+@onready var _list: VBoxContainer = $Safe/Scroll/VBox/ListHost
+@onready var _links: HBoxContainer = $Safe/Scroll/VBox/LinksHost
+@onready var _back: Button = $Safe/Scroll/VBox/BackBtn
 
 func setup(payload: Dictionary = {}) -> void:
 	_payload = payload
 
 func _ready() -> void:
+	_bind_nav()
 	_offers = ContentPackageLoader.economy.get("offers", [])
 	if _offers.is_empty():
 		_offers = ContentPackageLoader.features.get("shop_offers", [])
@@ -21,15 +34,20 @@ func _ready() -> void:
 				_offers = remote
 	_rebuild()
 
-func _shop_text(value: String, size: int = 23, color: Color = LunexColors.TEXT_PRIMARY) -> Label:
-	var node: Label = UIFactory.label(value, size, color)
-	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	node.custom_minimum_size.x = 0
-	return node
-
-const CATEGORIES: Array[String] = ["Рекомендуем", "Алмазы", "Наборы", "Подписки", "VIP", "Пропуск", "Косметика", "История"]
-var _selected_category: String = "Рекомендуем"
+func _bind_nav() -> void:
+	if _nav_bound:
+		return
+	_nav_bound = true
+	_back.pressed.connect(func(): ScreenRouter.handle_back())
+	for entry in [{"label": "VIP-центр", "route": "HUB-07"}, {"label": "Пропуск", "route": "HUB-08"}]:
+		var action := Button.new()
+		action.text = str(entry["label"])
+		action.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		action.custom_minimum_size.y = 78
+		action.theme_type_variation = &"GameButton"
+		var route := str(entry["route"])
+		action.pressed.connect(func(): ScreenRouter.go(route))
+		_links.add_child(action)
 
 func _category_of(offer: Dictionary) -> String:
 	var key: String = ("%s %s %s" % [str(offer.get("sku", offer.get("id", ""))), str(offer.get("title", offer.get("name", ""))), str(offer.get("category", ""))]).to_lower()
@@ -46,36 +64,34 @@ func _category_of(offer: Dictionary) -> String:
 	return "Наборы"
 
 func _rebuild() -> void:
-	var root: VBoxContainer = $Safe/Scroll/VBox
-	for child in root.get_children():
-		root.remove_child(child)
-		child.queue_free()
-	root.add_child(_shop_text("✦ ТОРГОВАЯ ПЛОЩАДЬ", 35, LunexColors.GOLD))
 	var mode := "ONLINE" if ApiClient.online else "DEMO"
-	root.add_child(_shop_text("Фэнтезийная лавка · %s · %s" % [ContentPackageLoader.package_label(), mode], 19, LunexColors.TEXT_MUTED))
-	var banner := UIFactory.panel(Color(0.15, 0.12, 0.22))
-	root.add_child(banner)
-	var banner_box := UIFactory.vbox(10)
-	banner.add_child(banner_box)
-	banner_box.add_child(_shop_text("✧ МАГИЧЕСКАЯ ВИТРИНА ✧", 31, LunexColors.GOLD))
-	banner_box.add_child(_shop_text("[ МЕСТО ДЛЯ ТЕМАТИЧЕСКОГО АРТА ]", 23))
-	banner_box.add_child(_shop_text("Все покупки бесплатны · Без списаний", 23, LunexColors.GOLD))
-	var tabs_scroll := ScrollContainer.new()
-	tabs_scroll.custom_minimum_size.y = 86
-	tabs_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	tabs_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	root.add_child(tabs_scroll)
-	var tabs := UIFactory.hbox(10)
-	tabs_scroll.add_child(tabs)
+	_title.text = "✦ ТОРГОВАЯ ПЛОЩАДЬ"
+	_subtitle.text = "Фэнтезийная лавка · %s · %s" % [ContentPackageLoader.package_label(), mode]
+	_category.text = _selected_category
+
+	for child in _tabs.get_children():
+		child.queue_free()
 	for category in CATEGORIES:
-		var tab := UIFactory.fantasy_button(category)
+		var tab := Button.new()
+		tab.text = category
 		tab.custom_minimum_size = Vector2(160, 70)
+		tab.theme_type_variation = &"GameButton"
 		tab.add_theme_font_size_override("font_size", 22)
-		tab.pressed.connect(func(): _selected_category = category; _rebuild())
-		tabs.add_child(tab)
-	root.add_child(_shop_text(_selected_category, 30, LunexColors.GOLD))
+		tab.pressed.connect(func():
+			_selected_category = category
+			_rebuild()
+		)
+		_tabs.add_child(tab)
+
+	for child in _list.get_children():
+		child.queue_free()
 	if _selected_category == "История":
-		root.add_child(_shop_text("История покупок: раздел оформления пока заглушка.", 23))
+		var hist := Label.new()
+		hist.text = "История покупок: раздел оформления пока заглушка."
+		hist.add_theme_font_size_override("font_size", 23)
+		hist.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		hist.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_list.add_child(hist)
 	else:
 		var shown := 0
 		for raw in _offers:
@@ -84,25 +100,16 @@ func _rebuild() -> void:
 			var offer: Dictionary = raw
 			if _selected_category != "Рекомендуем" and _category_of(offer) != _selected_category:
 				continue
-			_add_offer(root, offer)
+			_add_offer(offer)
 			shown += 1
 		if shown == 0:
-			root.add_child(_shop_text("В этой категории пока нет предложений.", 23))
-	var links := UIFactory.hbox(10)
-	root.add_child(links)
-	for entry in [{"label":"VIP-центр", "route":"HUB-07"}, {"label":"Пропуск", "route":"HUB-08"}]:
-		var action := UIFactory.fantasy_button(str(entry["label"]))
-		action.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		action.custom_minimum_size.y = 78
-		var route := str(entry["route"])
-		action.pressed.connect(func(): ScreenRouter.go(route))
-		links.add_child(action)
-	var back := UIFactory.fantasy_button("← Назад")
-	back.custom_minimum_size.y = 80
-	back.pressed.connect(func(): ScreenRouter.handle_back())
-	root.add_child(back)
+			var empty := Label.new()
+			empty.text = "В этой категории пока нет предложений."
+			empty.add_theme_font_size_override("font_size", 23)
+			empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			_list.add_child(empty)
 
-func _add_offer(root: VBoxContainer, offer: Dictionary) -> void:
+func _add_offer(offer: Dictionary) -> void:
 	var title: String = str(offer.get("title", offer.get("name", "Предложение")))
 	var sku: String = str(offer.get("sku", offer.get("id", title)))
 	var grants: Array = offer.get("grants", []) as Array
@@ -113,7 +120,7 @@ func _add_offer(root: VBoxContainer, offer: Dictionary) -> void:
 	card.buy_pressed.connect(func(_sku: String) -> void:
 		_buy(sku, title, disclaimer, grants)
 	)
-	root.add_child(card)
+	_list.add_child(card)
 
 func _buy(sku: String, title: String, disclaimer: String, grants: Array) -> void:
 	if _busy:
