@@ -6,7 +6,7 @@
 |---|---|---|
 | `F01`…`F06` | Фракции | `FACTIONS_45_HEROES.md` → `heroes.json` |
 | `H01`…`H45` | Герои | то же |
-| `CH01-01`…`CH06-30` | Этапы кампании (180) | `STORY_6_CHAPTERS.md` → `campaign.json` (CH01 в данных) |
+| `CH01-01`…`CH06-30` | Этапы кампании (180) | `STORY_6_CHAPTERS.md` → `campaign.json` (CH01–CH06 ×30 в `0.9.0`) |
 | `E**` / `B**` | Враги / боссы | `BESTIARY_6_CHAPTERS.md` → `enemies.json` |
 | `RIG-*` | Риги врагов | `enemies.json` |
 | `SET*` | Сеты экипировки | `PROGRESSION_EQUIPMENT_LOOT.md` → `equipment.json` |

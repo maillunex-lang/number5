@@ -1,12 +1,20 @@
 # Lunex AFK
 
-Мобильная онлайн AFK/Idle RPG. Godot **4.7.2** UI Prototype v0.1, контент-пакеты, Admin Studio, CORE-01 API.
+Мобильная онлайн AFK/Idle RPG «Башкортостан: Разлом эпох».  
+Стек: **Godot 4.7.2** · **Go CORE-01** · **PostgreSQL 16** (цель) · **Admin Studio** · контент-пакеты.
 
-## Статус
+## С чего начать
 
-Активный пакет **`0.9.0`**. Memory API + UI online-wiring; живой Postgres / HTTPS / бинарный арт — блокеры.
+| Файл | Зачем |
+|---|---|
+| [`docs/STATUS.md`](docs/STATUS.md) | Что реально есть / блокеры |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Задачи и приоритеты |
+| [`docs/AI_HANDOFF.md`](docs/AI_HANDOFF.md) | Передача следующему ИИ |
+| [`AGENTS.md`](AGENTS.md) | Правила для ИИ-исполнителей |
+| [`docs/DOCS_INDEX.md`](docs/DOCS_INDEX.md) | Навигация по docs |
+| [`docs/AUDIT_REPORT.md`](docs/AUDIT_REPORT.md) | Итог master audit |
 
-Документы: [`docs/STATUS.md`](docs/STATUS.md) · [`docs/ROADMAP.md`](docs/ROADMAP.md) · [`docs/TZ_A_FOUNDATION.md`](docs/TZ_A_FOUNDATION.md).
+Активный пакет: **`0.9.0`**. UI-навигация: **4 вкладки**.
 
 ## Клиент
 
@@ -16,7 +24,7 @@ tools/validate_content_package.sh
 python3 tools/check_repo_refs.py
 ```
 
-Портрет 1080×1920. `ApiClient`: guest / summon / AFK / shop / mail / battle claim → `127.0.0.1:8080` (иначе DEMO).
+`ApiClient` → `LUNEX_API_BASE` или `http://127.0.0.1:8080` (иначе DEMO).
 
 ## Admin Studio
 
@@ -24,22 +32,22 @@ python3 tools/check_repo_refs.py
 cd admin-studio && npm install && npm run dev
 ```
 
-UI http://127.0.0.1:5173 · API http://127.0.0.1:8787 — `docs/ADMIN_STUDIO.md`.
+UI :5173 · API :8787 — `docs/ADMIN_STUDIO.md`.
 
 ## CORE-01
 
 ```bash
 cd server && go test ./... && go run ./cmd/api
-# optional: DATABASE_URL=postgres://… go run ./cmd/api
+# DATABASE_URL=…  # Postgres; без URL — memory (dev)
 ```
 
-Memory по умолчанию; Postgres adapter в `internal/store/postgres` при `DATABASE_URL`.
+Утверждено: в **prod** memory fallback запрещён (H4); test-grant только `APP_ENV=test` (H5) — см. TECH_DEBT.
 
-## Включено
+## Блокеры
 
-- GameShell, хаб / кампания / герои / DEMO-бой
-- Пакеты `0.1.0`…`0.9.0` + Studio economy/meta/catalog
-- TZ-A + CORE-01 + `ApiClient` (UI-02)
+1. Изолированный Lunex Postgres (+ CDN HTTPS). VPS есть; БД Nexus AI **не** использовать.  
+2. ART-05 бинарный арт.  
+3. H6 server battle pipeline (пока local sim ≠ авторитет).
 
 ## Лицензии
 

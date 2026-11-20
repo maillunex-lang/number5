@@ -1,5 +1,7 @@
 # Lunex AFK - Architecture
-Статус: утверждённая целевая архитектура. Локальный UI-прототип и файловая Admin Studio уже на `main`; Go API / PostgreSQL / HTTPS-пакеты — ещё не реализованы (см. `docs/ROADMAP.md`).
+Статус: целевая архитектура + факт на `main` (аудит 2026-11-20).  
+**Есть:** Godot UI, Admin Studio, контент-пакеты OTA (dev HTTP), CORE-01 Go API (memory + код Postgres adapter).  
+**Нет / блокер:** изолированный production Lunex (отдельная БД, CDN HTTPS), бинарный арт. Живой VPS существует, но не считается готовым Lunex-продом. Детали: `docs/STATUS.md`, `docs/ROADMAP.md`.
 
 ## Общая схема
 Godot 4.7.2 (Android APK / Web-PWA) -> HTTPS API -> Go modular monolith -> PostgreSQL.
