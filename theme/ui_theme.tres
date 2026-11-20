@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://theme001number5"]
+
+[ext_resource type="FontFile" uid="uid://crugw7qnc4234" path="res://fonts/OpenSans-Regular.ttf" id="1_sans"]
+[ext_resource type="FontFile" uid="uid://c6o7lnovnf061" path="res://fonts/Cinzel-Bold.ttf" id="2_cinzel"]
+
+[resource]
+default_font = ExtResource("1_sans")
+default_font_size = 20
+Button/colors/font_color = Color(0.91, 0.933, 0.965, 1)
+Button/colors/font_hover_color = Color(0.91, 0.933, 0.965, 1)
+Button/fonts/font = ExtResource("1_sans")
+Button/font_sizes/font_size = 22
+Label/colors/font_color = Color(0.91, 0.933, 0.965, 1)
+Label/fonts/font = ExtResource("1_sans")
+Label/font_sizes/font_size = 20
+LineEdit/colors/font_color = Color(0.91, 0.933, 0.965, 1)
+LineEdit/fonts/font = ExtResource("1_sans")
+LineEdit/font_sizes/font_size = 22

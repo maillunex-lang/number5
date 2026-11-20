@@ -1,0 +1,36 @@
+; Engine configuration file.
+; Godot 4.x — Number5 AFK Arena-like shell
+
+config_version=5
+
+[application]
+
+config/name="Number5"
+config/description="AFK Arena-like MMO client shell (UI framework)"
+run/main_scene="res://scenes/boot/boot.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://assets/ui/icon.svg"
+
+[autoload]
+
+AppState="*res://scripts/autoload/app_state.gd"
+ScreenRouter="*res://scripts/autoload/screen_router.gd"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=540
+window/size/window_height_override=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[gui]
+
+theme/custom="res://theme/ui_theme.tres"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

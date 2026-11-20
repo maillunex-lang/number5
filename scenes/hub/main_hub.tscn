@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://mainhub001n5"]
+
+[ext_resource type="Script" path="res://scenes/hub/main_hub.gd" id="1_hub"]
+[ext_resource type="PackedScene" uid="uid://topbar001n5" path="res://scenes/hub/top_bar.tscn" id="2_top"]
+[ext_resource type="PackedScene" uid="uid://botnav001n5" path="res://scenes/hub/bottom_nav.tscn" id="3_nav"]
+
+[node name="MainHub" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hub")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043, 0.071, 0.11, 1)
+
+[node name="RootVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopBar" parent="RootVBox" instance=ExtResource("2_top")]
+layout_mode = 2
+
+[node name="ContentHost" type="Control" parent="RootVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomNav" parent="RootVBox" instance=ExtResource("3_nav")]
+layout_mode = 2
+
+[node name="OverlayHost" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
