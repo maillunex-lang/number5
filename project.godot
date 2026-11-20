@@ -24,6 +24,7 @@ NotificationManager="*res://scripts/autoload/notification_manager.gd"
 ModalManager="*res://scripts/autoload/modal_manager.gd"
 ScreenRouter="*res://scripts/autoload/screen_router.gd"
 SmokeRunner="*res://scripts/autoload/smoke_runner.gd"
+ScreenshotRunner="*res://scripts/autoload/screenshot_runner.gd"
 
 [display]
 
